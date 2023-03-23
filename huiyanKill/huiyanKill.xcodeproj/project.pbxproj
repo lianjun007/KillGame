@@ -1,0 +1,747 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DA0EF63129C9E7DE00A9A0C3 /* RuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0EF63029C9E7DE00A9A0C3 /* RuleViewController.swift */; };
+		DA25F99529CAAD3E00A06665 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25F99429CAAD3E00A06665 /* SettingViewController.swift */; };
+		DA25F99729CAB66800A06665 /* RoleDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25F99629CAB66700A06665 /* RoleDate.swift */; };
+		DA25F99929CAB71E00A06665 /* SizeFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25F99829CAB71E00A06665 /* SizeFile.swift */; };
+		DA25F9A529CC4BAE00A06665 /* rolePreview.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DA25F9A429CC4BAE00A06665 /* rolePreview.jpeg */; };
+		DA7F4CA529C74DD100017FC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CA429C74DD100017FC1 /* AppDelegate.swift */; };
+		DA7F4CA729C74DD100017FC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CA629C74DD100017FC1 /* SceneDelegate.swift */; };
+		DA7F4CA929C74DD100017FC1 /* SingleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CA829C74DD100017FC1 /* SingleViewController.swift */; };
+		DA7F4CAC29C74DD100017FC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7F4CAA29C74DD100017FC1 /* Main.storyboard */; };
+		DA7F4CAF29C74DD100017FC1 /* huiyanKill.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CAD29C74DD100017FC1 /* huiyanKill.xcdatamodeld */; };
+		DA7F4CB129C74DD200017FC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA7F4CB029C74DD200017FC1 /* Assets.xcassets */; };
+		DA7F4CB429C74DD200017FC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7F4CB229C74DD200017FC1 /* LaunchScreen.storyboard */; };
+		DA7F4CBF29C74DD200017FC1 /* huiyanKillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CBE29C74DD200017FC1 /* huiyanKillTests.swift */; };
+		DA7F4CC929C74DD200017FC1 /* huiyanKillUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CC829C74DD200017FC1 /* huiyanKillUITests.swift */; };
+		DA7F4CCB29C74DD200017FC1 /* huiyanKillUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CCA29C74DD200017FC1 /* huiyanKillUITestsLaunchTests.swift */; };
+		DA83E7E429C7F73600F96FDC /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83E7E329C7F73600F96FDC /* GameViewController.swift */; };
+		DA83E7FE29C88C7400F96FDC /* dilin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7E629C88C7300F96FDC /* dilin.jpg */; };
+		DA83E7FF29C88C7600F96FDC /* dilin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7E629C88C7300F96FDC /* dilin.jpg */; };
+		DA83E80029C88C7600F96FDC /* dilin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7E629C88C7300F96FDC /* dilin.jpg */; };
+		DA83E80729C88C7800F96FDC /* qhy_wangjue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EA29C88C7300F96FDC /* qhy_wangjue.jpg */; };
+		DA83E80829C88C7800F96FDC /* qhy_wangjue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EA29C88C7300F96FDC /* qhy_wangjue.jpg */; };
+		DA83E80929C88C7800F96FDC /* qhy_wangjue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EA29C88C7300F96FDC /* qhy_wangjue.jpg */; };
+		DA83E80A29C88C7800F96FDC /* qhy_wuyue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EB29C88C7300F96FDC /* qhy_wuyue.jpg */; };
+		DA83E80B29C88C7900F96FDC /* qhy_wuyue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EB29C88C7300F96FDC /* qhy_wuyue.jpg */; };
+		DA83E80C29C88C7900F96FDC /* qhy_wuyue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EB29C88C7300F96FDC /* qhy_wuyue.jpg */; };
+		DA83E80D29C88C7900F96FDC /* qhy_suhuan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EC29C88C7300F96FDC /* qhy_suhuan.jpg */; };
+		DA83E80E29C88C7900F96FDC /* qhy_suhuan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EC29C88C7300F96FDC /* qhy_suhuan.jpg */; };
+		DA83E80F29C88C7900F96FDC /* qhy_suhuan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EC29C88C7300F96FDC /* qhy_suhuan.jpg */; };
+		DA83E81029C88C7900F96FDC /* qhy_yagebu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7ED29C88C7300F96FDC /* qhy_yagebu.jpg */; };
+		DA83E81129C88C7A00F96FDC /* qhy_yagebu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7ED29C88C7300F96FDC /* qhy_yagebu.jpg */; };
+		DA83E81229C88C7A00F96FDC /* qhy_yagebu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7ED29C88C7300F96FDC /* qhy_yagebu.jpg */; };
+		DA83E82E29C88C8400F96FDC /* qihuiyan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7F829C88C7400F96FDC /* qihuiyan.jpg */; };
+		DA83E82F29C88C8500F96FDC /* qihuiyan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7F829C88C7400F96FDC /* qihuiyan.jpg */; };
+		DA83E83029C88C8500F96FDC /* qihuiyan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7F829C88C7400F96FDC /* qihuiyan.jpg */; };
+		DA83E83129C88C8500F96FDC /* qinzheng.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7F929C88C7400F96FDC /* qinzheng.jpg */; };
+		DA83E83229C88C8500F96FDC /* qinzheng.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7F929C88C7400F96FDC /* qinzheng.jpg */; };
+		DA83E83329C88C8500F96FDC /* qinzheng.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7F929C88C7400F96FDC /* qinzheng.jpg */; };
+		DA83E83429C88C8500F96FDC /* huizhu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7FA29C88C7400F96FDC /* huizhu.jpg */; };
+		DA83E83529C88C8600F96FDC /* huizhu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7FA29C88C7400F96FDC /* huizhu.jpg */; };
+		DA83E83629C88C8600F96FDC /* huizhu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7FA29C88C7400F96FDC /* huizhu.jpg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DA7F4CBB29C74DD200017FC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA7F4C9929C74DD100017FC1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA7F4CA029C74DD100017FC1;
+			remoteInfo = huiyanKill;
+		};
+		DA7F4CC529C74DD200017FC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA7F4C9929C74DD100017FC1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA7F4CA029C74DD100017FC1;
+			remoteInfo = huiyanKill;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DA0EF63029C9E7DE00A9A0C3 /* RuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleViewController.swift; sourceTree = "<group>"; };
+		DA25F99429CAAD3E00A06665 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		DA25F99629CAB66700A06665 /* RoleDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleDate.swift; sourceTree = "<group>"; };
+		DA25F99829CAB71E00A06665 /* SizeFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeFile.swift; sourceTree = "<group>"; };
+		DA25F9A429CC4BAE00A06665 /* rolePreview.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rolePreview.jpeg; sourceTree = "<group>"; };
+		DA7F4CA129C74DD100017FC1 /* huiyanKill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = huiyanKill.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA7F4CA429C74DD100017FC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DA7F4CA629C74DD100017FC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		DA7F4CA829C74DD100017FC1 /* SingleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleViewController.swift; sourceTree = "<group>"; };
+		DA7F4CAB29C74DD100017FC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DA7F4CAE29C74DD100017FC1 /* huiyanKill.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = huiyanKill.xcdatamodel; sourceTree = "<group>"; };
+		DA7F4CB029C74DD200017FC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DA7F4CB329C74DD200017FC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DA7F4CB529C74DD200017FC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA7F4CBA29C74DD200017FC1 /* huiyanKillTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = huiyanKillTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA7F4CBE29C74DD200017FC1 /* huiyanKillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = huiyanKillTests.swift; sourceTree = "<group>"; };
+		DA7F4CC429C74DD200017FC1 /* huiyanKillUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = huiyanKillUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA7F4CC829C74DD200017FC1 /* huiyanKillUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = huiyanKillUITests.swift; sourceTree = "<group>"; };
+		DA7F4CCA29C74DD200017FC1 /* huiyanKillUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = huiyanKillUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DA83E7E329C7F73600F96FDC /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		DA83E7E629C88C7300F96FDC /* dilin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dilin.jpg; sourceTree = "<group>"; };
+		DA83E7EA29C88C7300F96FDC /* qhy_wangjue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qhy_wangjue.jpg; sourceTree = "<group>"; };
+		DA83E7EB29C88C7300F96FDC /* qhy_wuyue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qhy_wuyue.jpg; sourceTree = "<group>"; };
+		DA83E7EC29C88C7300F96FDC /* qhy_suhuan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qhy_suhuan.jpg; sourceTree = "<group>"; };
+		DA83E7ED29C88C7300F96FDC /* qhy_yagebu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qhy_yagebu.jpg; sourceTree = "<group>"; };
+		DA83E7F829C88C7400F96FDC /* qihuiyan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qihuiyan.jpg; sourceTree = "<group>"; };
+		DA83E7F929C88C7400F96FDC /* qinzheng.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qinzheng.jpg; sourceTree = "<group>"; };
+		DA83E7FA29C88C7400F96FDC /* huizhu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = huizhu.jpg; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DA7F4C9E29C74DD100017FC1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA7F4CB729C74DD200017FC1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA7F4CC129C74DD200017FC1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DA25F99A29CAB88000A06665 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DA25F99B29CAB8AA00A06665 /* Universal */,
+				DA7F4CA829C74DD100017FC1 /* SingleViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		DA25F99B29CAB8AA00A06665 /* Universal */ = {
+			isa = PBXGroup;
+			children = (
+				DA25F99429CAAD3E00A06665 /* SettingViewController.swift */,
+				DA0EF63029C9E7DE00A9A0C3 /* RuleViewController.swift */,
+				DA83E7E329C7F73600F96FDC /* GameViewController.swift */,
+			);
+			path = Universal;
+			sourceTree = "<group>";
+		};
+		DA25F9A329CC4BAE00A06665 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				DA25F9A429CC4BAE00A06665 /* rolePreview.jpeg */,
+			);
+			name = Image;
+			path = huiyanKill/Image;
+			sourceTree = SOURCE_ROOT;
+		};
+		DA7F4C9829C74DD100017FC1 = {
+			isa = PBXGroup;
+			children = (
+				DA7F4CA329C74DD100017FC1 /* huiyanKill */,
+				DA7F4CBD29C74DD200017FC1 /* huiyanKillTests */,
+				DA7F4CC729C74DD200017FC1 /* huiyanKillUITests */,
+				DA7F4CA229C74DD100017FC1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DA7F4CA229C74DD100017FC1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DA7F4CA129C74DD100017FC1 /* huiyanKill.app */,
+				DA7F4CBA29C74DD200017FC1 /* huiyanKillTests.xctest */,
+				DA7F4CC429C74DD200017FC1 /* huiyanKillUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DA7F4CA329C74DD100017FC1 /* huiyanKill */ = {
+			isa = PBXGroup;
+			children = (
+				DA25F99A29CAB88000A06665 /* ViewController */,
+				DA83E7E729C88C7300F96FDC /* Data */,
+				DA7F4CA429C74DD100017FC1 /* AppDelegate.swift */,
+				DA7F4CA629C74DD100017FC1 /* SceneDelegate.swift */,
+				DA7F4CB029C74DD200017FC1 /* Assets.xcassets */,
+				DA7F4CAA29C74DD100017FC1 /* Main.storyboard */,
+				DA7F4CB229C74DD200017FC1 /* LaunchScreen.storyboard */,
+				DA7F4CB529C74DD200017FC1 /* Info.plist */,
+				DA7F4CAD29C74DD100017FC1 /* huiyanKill.xcdatamodeld */,
+			);
+			path = huiyanKill;
+			sourceTree = "<group>";
+		};
+		DA7F4CBD29C74DD200017FC1 /* huiyanKillTests */ = {
+			isa = PBXGroup;
+			children = (
+				DA7F4CBE29C74DD200017FC1 /* huiyanKillTests.swift */,
+			);
+			path = huiyanKillTests;
+			sourceTree = "<group>";
+		};
+		DA7F4CC729C74DD200017FC1 /* huiyanKillUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DA7F4CC829C74DD200017FC1 /* huiyanKillUITests.swift */,
+				DA7F4CCA29C74DD200017FC1 /* huiyanKillUITestsLaunchTests.swift */,
+			);
+			path = huiyanKillUITests;
+			sourceTree = "<group>";
+		};
+		DA83E7E529C88C7300F96FDC /* rolePicture */ = {
+			isa = PBXGroup;
+			children = (
+				DA83E7E629C88C7300F96FDC /* dilin.jpg */,
+				DA83E7F929C88C7400F96FDC /* qinzheng.jpg */,
+				DA83E7F829C88C7400F96FDC /* qihuiyan.jpg */,
+				DA83E7FA29C88C7400F96FDC /* huizhu.jpg */,
+				DA83E7EA29C88C7300F96FDC /* qhy_wangjue.jpg */,
+				DA83E7EB29C88C7300F96FDC /* qhy_wuyue.jpg */,
+				DA83E7EC29C88C7300F96FDC /* qhy_suhuan.jpg */,
+				DA83E7ED29C88C7300F96FDC /* qhy_yagebu.jpg */,
+			);
+			path = rolePicture;
+			sourceTree = "<group>";
+		};
+		DA83E7E729C88C7300F96FDC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DA25F9A329CC4BAE00A06665 /* Image */,
+				DA83E7E529C88C7300F96FDC /* rolePicture */,
+				DA25F99829CAB71E00A06665 /* SizeFile.swift */,
+				DA25F99629CAB66700A06665 /* RoleDate.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DA7F4CA029C74DD100017FC1 /* huiyanKill */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA7F4CCE29C74DD200017FC1 /* Build configuration list for PBXNativeTarget "huiyanKill" */;
+			buildPhases = (
+				DA7F4C9D29C74DD100017FC1 /* Sources */,
+				DA7F4C9E29C74DD100017FC1 /* Frameworks */,
+				DA7F4C9F29C74DD100017FC1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = huiyanKill;
+			productName = huiyanKill;
+			productReference = DA7F4CA129C74DD100017FC1 /* huiyanKill.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DA7F4CB929C74DD200017FC1 /* huiyanKillTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA7F4CD129C74DD200017FC1 /* Build configuration list for PBXNativeTarget "huiyanKillTests" */;
+			buildPhases = (
+				DA7F4CB629C74DD200017FC1 /* Sources */,
+				DA7F4CB729C74DD200017FC1 /* Frameworks */,
+				DA7F4CB829C74DD200017FC1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA7F4CBC29C74DD200017FC1 /* PBXTargetDependency */,
+			);
+			name = huiyanKillTests;
+			productName = huiyanKillTests;
+			productReference = DA7F4CBA29C74DD200017FC1 /* huiyanKillTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DA7F4CC329C74DD200017FC1 /* huiyanKillUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA7F4CD429C74DD200017FC1 /* Build configuration list for PBXNativeTarget "huiyanKillUITests" */;
+			buildPhases = (
+				DA7F4CC029C74DD200017FC1 /* Sources */,
+				DA7F4CC129C74DD200017FC1 /* Frameworks */,
+				DA7F4CC229C74DD200017FC1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA7F4CC629C74DD200017FC1 /* PBXTargetDependency */,
+			);
+			name = huiyanKillUITests;
+			productName = huiyanKillUITests;
+			productReference = DA7F4CC429C74DD200017FC1 /* huiyanKillUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DA7F4C9929C74DD100017FC1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					DA7F4CA029C74DD100017FC1 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					DA7F4CB929C74DD200017FC1 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = DA7F4CA029C74DD100017FC1;
+					};
+					DA7F4CC329C74DD200017FC1 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = DA7F4CA029C74DD100017FC1;
+					};
+				};
+			};
+			buildConfigurationList = DA7F4C9C29C74DD100017FC1 /* Build configuration list for PBXProject "huiyanKill" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DA7F4C9829C74DD100017FC1;
+			productRefGroup = DA7F4CA229C74DD100017FC1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DA7F4CA029C74DD100017FC1 /* huiyanKill */,
+				DA7F4CB929C74DD200017FC1 /* huiyanKillTests */,
+				DA7F4CC329C74DD200017FC1 /* huiyanKillUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DA7F4C9F29C74DD100017FC1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA7F4CB429C74DD200017FC1 /* LaunchScreen.storyboard in Resources */,
+				DA83E7FE29C88C7400F96FDC /* dilin.jpg in Resources */,
+				DA83E83129C88C8500F96FDC /* qinzheng.jpg in Resources */,
+				DA25F9A529CC4BAE00A06665 /* rolePreview.jpeg in Resources */,
+				DA83E80729C88C7800F96FDC /* qhy_wangjue.jpg in Resources */,
+				DA83E83429C88C8500F96FDC /* huizhu.jpg in Resources */,
+				DA83E80A29C88C7800F96FDC /* qhy_wuyue.jpg in Resources */,
+				DA83E82E29C88C8400F96FDC /* qihuiyan.jpg in Resources */,
+				DA7F4CB129C74DD200017FC1 /* Assets.xcassets in Resources */,
+				DA83E80D29C88C7900F96FDC /* qhy_suhuan.jpg in Resources */,
+				DA7F4CAC29C74DD100017FC1 /* Main.storyboard in Resources */,
+				DA83E81029C88C7900F96FDC /* qhy_yagebu.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA7F4CB829C74DD200017FC1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA83E80829C88C7800F96FDC /* qhy_wangjue.jpg in Resources */,
+				DA83E83229C88C8500F96FDC /* qinzheng.jpg in Resources */,
+				DA83E80B29C88C7900F96FDC /* qhy_wuyue.jpg in Resources */,
+				DA83E82F29C88C8500F96FDC /* qihuiyan.jpg in Resources */,
+				DA83E7FF29C88C7600F96FDC /* dilin.jpg in Resources */,
+				DA83E83529C88C8600F96FDC /* huizhu.jpg in Resources */,
+				DA83E80E29C88C7900F96FDC /* qhy_suhuan.jpg in Resources */,
+				DA83E81129C88C7A00F96FDC /* qhy_yagebu.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA7F4CC229C74DD200017FC1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA83E80929C88C7800F96FDC /* qhy_wangjue.jpg in Resources */,
+				DA83E83329C88C8500F96FDC /* qinzheng.jpg in Resources */,
+				DA83E80C29C88C7900F96FDC /* qhy_wuyue.jpg in Resources */,
+				DA83E83029C88C8500F96FDC /* qihuiyan.jpg in Resources */,
+				DA83E80029C88C7600F96FDC /* dilin.jpg in Resources */,
+				DA83E83629C88C8600F96FDC /* huizhu.jpg in Resources */,
+				DA83E80F29C88C7900F96FDC /* qhy_suhuan.jpg in Resources */,
+				DA83E81229C88C7A00F96FDC /* qhy_yagebu.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DA7F4C9D29C74DD100017FC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA83E7E429C7F73600F96FDC /* GameViewController.swift in Sources */,
+				DA25F99729CAB66800A06665 /* RoleDate.swift in Sources */,
+				DA7F4CA929C74DD100017FC1 /* SingleViewController.swift in Sources */,
+				DA25F99929CAB71E00A06665 /* SizeFile.swift in Sources */,
+				DA0EF63129C9E7DE00A9A0C3 /* RuleViewController.swift in Sources */,
+				DA7F4CAF29C74DD100017FC1 /* huiyanKill.xcdatamodeld in Sources */,
+				DA7F4CA529C74DD100017FC1 /* AppDelegate.swift in Sources */,
+				DA25F99529CAAD3E00A06665 /* SettingViewController.swift in Sources */,
+				DA7F4CA729C74DD100017FC1 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA7F4CB629C74DD200017FC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA7F4CBF29C74DD200017FC1 /* huiyanKillTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA7F4CC029C74DD200017FC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA7F4CCB29C74DD200017FC1 /* huiyanKillUITestsLaunchTests.swift in Sources */,
+				DA7F4CC929C74DD200017FC1 /* huiyanKillUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DA7F4CBC29C74DD200017FC1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA7F4CA029C74DD100017FC1 /* huiyanKill */;
+			targetProxy = DA7F4CBB29C74DD200017FC1 /* PBXContainerItemProxy */;
+		};
+		DA7F4CC629C74DD200017FC1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA7F4CA029C74DD100017FC1 /* huiyanKill */;
+			targetProxy = DA7F4CC529C74DD200017FC1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DA7F4CAA29C74DD100017FC1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA7F4CAB29C74DD100017FC1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DA7F4CB229C74DD200017FC1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA7F4CB329C74DD200017FC1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DA7F4CCC29C74DD200017FC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DA7F4CCD29C74DD200017FC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DA7F4CCF29C74DD200017FC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = huiyanKill/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.huiyanKill;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DA7F4CD029C74DD200017FC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = huiyanKill/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.huiyanKill;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DA7F4CD229C74DD200017FC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.huiyanKillTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/huiyanKill.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/huiyanKill";
+			};
+			name = Debug;
+		};
+		DA7F4CD329C74DD200017FC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.huiyanKillTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/huiyanKill.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/huiyanKill";
+			};
+			name = Release;
+		};
+		DA7F4CD529C74DD200017FC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.huiyanKillUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = huiyanKill;
+			};
+			name = Debug;
+		};
+		DA7F4CD629C74DD200017FC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.huiyanKillUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = huiyanKill;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DA7F4C9C29C74DD100017FC1 /* Build configuration list for PBXProject "huiyanKill" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA7F4CCC29C74DD200017FC1 /* Debug */,
+				DA7F4CCD29C74DD200017FC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA7F4CCE29C74DD200017FC1 /* Build configuration list for PBXNativeTarget "huiyanKill" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA7F4CCF29C74DD200017FC1 /* Debug */,
+				DA7F4CD029C74DD200017FC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA7F4CD129C74DD200017FC1 /* Build configuration list for PBXNativeTarget "huiyanKillTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA7F4CD229C74DD200017FC1 /* Debug */,
+				DA7F4CD329C74DD200017FC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA7F4CD429C74DD200017FC1 /* Build configuration list for PBXNativeTarget "huiyanKillUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA7F4CD529C74DD200017FC1 /* Debug */,
+				DA7F4CD629C74DD200017FC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DA7F4CAD29C74DD100017FC1 /* huiyanKill.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DA7F4CAE29C74DD100017FC1 /* huiyanKill.xcdatamodel */,
+			);
+			currentVersion = DA7F4CAE29C74DD100017FC1 /* huiyanKill.xcdatamodel */;
+			path = huiyanKill.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = DA7F4C9929C74DD100017FC1 /* Project object */;
+}
