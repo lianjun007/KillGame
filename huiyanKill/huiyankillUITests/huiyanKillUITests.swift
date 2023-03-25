@@ -1,13 +1,13 @@
 //
-//  huiyanKillUITests.swift
-//  huiyanKillUITests
+//  HuiYanKillUITests.swift
+//  HuiYanKillUITests
 //
-//  Created by QHuiYan on 2023/3/19.
+//  Created by QHuiYan on 2023/3/24.
 //
 
 import XCTest
 
-final class huiyanKillUITests: XCTestCase {
+final class HuiYanKillUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

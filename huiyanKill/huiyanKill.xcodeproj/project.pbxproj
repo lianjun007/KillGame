@@ -7,112 +7,80 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA0EF63129C9E7DE00A9A0C3 /* RuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0EF63029C9E7DE00A9A0C3 /* RuleViewController.swift */; };
-		DA25F99529CAAD3E00A06665 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25F99429CAAD3E00A06665 /* SettingViewController.swift */; };
-		DA25F99729CAB66800A06665 /* RoleDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25F99629CAB66700A06665 /* RoleDate.swift */; };
-		DA25F99929CAB71E00A06665 /* SizeFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25F99829CAB71E00A06665 /* SizeFile.swift */; };
-		DA25F9A529CC4BAE00A06665 /* rolePreview.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DA25F9A429CC4BAE00A06665 /* rolePreview.jpeg */; };
-		DA7F4CA529C74DD100017FC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CA429C74DD100017FC1 /* AppDelegate.swift */; };
-		DA7F4CA729C74DD100017FC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CA629C74DD100017FC1 /* SceneDelegate.swift */; };
-		DA7F4CA929C74DD100017FC1 /* SingleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CA829C74DD100017FC1 /* SingleViewController.swift */; };
-		DA7F4CAC29C74DD100017FC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7F4CAA29C74DD100017FC1 /* Main.storyboard */; };
-		DA7F4CAF29C74DD100017FC1 /* huiyanKill.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CAD29C74DD100017FC1 /* huiyanKill.xcdatamodeld */; };
-		DA7F4CB129C74DD200017FC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA7F4CB029C74DD200017FC1 /* Assets.xcassets */; };
-		DA7F4CB429C74DD200017FC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7F4CB229C74DD200017FC1 /* LaunchScreen.storyboard */; };
-		DA7F4CBF29C74DD200017FC1 /* huiyanKillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CBE29C74DD200017FC1 /* huiyanKillTests.swift */; };
-		DA7F4CC929C74DD200017FC1 /* huiyanKillUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CC829C74DD200017FC1 /* huiyanKillUITests.swift */; };
-		DA7F4CCB29C74DD200017FC1 /* huiyanKillUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F4CCA29C74DD200017FC1 /* huiyanKillUITestsLaunchTests.swift */; };
-		DA83E7E429C7F73600F96FDC /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83E7E329C7F73600F96FDC /* GameViewController.swift */; };
-		DA83E7FE29C88C7400F96FDC /* dilin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7E629C88C7300F96FDC /* dilin.jpg */; };
-		DA83E7FF29C88C7600F96FDC /* dilin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7E629C88C7300F96FDC /* dilin.jpg */; };
-		DA83E80029C88C7600F96FDC /* dilin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7E629C88C7300F96FDC /* dilin.jpg */; };
-		DA83E80729C88C7800F96FDC /* qhy_wangjue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EA29C88C7300F96FDC /* qhy_wangjue.jpg */; };
-		DA83E80829C88C7800F96FDC /* qhy_wangjue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EA29C88C7300F96FDC /* qhy_wangjue.jpg */; };
-		DA83E80929C88C7800F96FDC /* qhy_wangjue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EA29C88C7300F96FDC /* qhy_wangjue.jpg */; };
-		DA83E80A29C88C7800F96FDC /* qhy_wuyue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EB29C88C7300F96FDC /* qhy_wuyue.jpg */; };
-		DA83E80B29C88C7900F96FDC /* qhy_wuyue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EB29C88C7300F96FDC /* qhy_wuyue.jpg */; };
-		DA83E80C29C88C7900F96FDC /* qhy_wuyue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EB29C88C7300F96FDC /* qhy_wuyue.jpg */; };
-		DA83E80D29C88C7900F96FDC /* qhy_suhuan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EC29C88C7300F96FDC /* qhy_suhuan.jpg */; };
-		DA83E80E29C88C7900F96FDC /* qhy_suhuan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EC29C88C7300F96FDC /* qhy_suhuan.jpg */; };
-		DA83E80F29C88C7900F96FDC /* qhy_suhuan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7EC29C88C7300F96FDC /* qhy_suhuan.jpg */; };
-		DA83E81029C88C7900F96FDC /* qhy_yagebu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7ED29C88C7300F96FDC /* qhy_yagebu.jpg */; };
-		DA83E81129C88C7A00F96FDC /* qhy_yagebu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7ED29C88C7300F96FDC /* qhy_yagebu.jpg */; };
-		DA83E81229C88C7A00F96FDC /* qhy_yagebu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7ED29C88C7300F96FDC /* qhy_yagebu.jpg */; };
-		DA83E82E29C88C8400F96FDC /* qihuiyan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7F829C88C7400F96FDC /* qihuiyan.jpg */; };
-		DA83E82F29C88C8500F96FDC /* qihuiyan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7F829C88C7400F96FDC /* qihuiyan.jpg */; };
-		DA83E83029C88C8500F96FDC /* qihuiyan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7F829C88C7400F96FDC /* qihuiyan.jpg */; };
-		DA83E83129C88C8500F96FDC /* qinzheng.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7F929C88C7400F96FDC /* qinzheng.jpg */; };
-		DA83E83229C88C8500F96FDC /* qinzheng.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7F929C88C7400F96FDC /* qinzheng.jpg */; };
-		DA83E83329C88C8500F96FDC /* qinzheng.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7F929C88C7400F96FDC /* qinzheng.jpg */; };
-		DA83E83429C88C8500F96FDC /* huizhu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7FA29C88C7400F96FDC /* huizhu.jpg */; };
-		DA83E83529C88C8600F96FDC /* huizhu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7FA29C88C7400F96FDC /* huizhu.jpg */; };
-		DA83E83629C88C8600F96FDC /* huizhu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA83E7FA29C88C7400F96FDC /* huizhu.jpg */; };
+		DA4655F529CDC1FF0051F420 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4655F429CDC1FF0051F420 /* AppDelegate.swift */; };
+		DA4655F729CDC1FF0051F420 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4655F629CDC1FF0051F420 /* SceneDelegate.swift */; };
+		DA4655F929CDC1FF0051F420 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4655F829CDC1FF0051F420 /* MainViewController.swift */; };
+		DA4655FC29CDC1FF0051F420 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA4655FA29CDC1FF0051F420 /* Main.storyboard */; };
+		DA4655FF29CDC1FF0051F420 /* HuiYanKill.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA4655FD29CDC1FF0051F420 /* HuiYanKill.xcdatamodeld */; };
+		DA46560129CDC2000051F420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA46560029CDC2000051F420 /* Assets.xcassets */; };
+		DA46560429CDC2000051F420 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA46560229CDC2000051F420 /* LaunchScreen.storyboard */; };
+		DA46560F29CDC2010051F420 /* HuiYanKillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46560E29CDC2010051F420 /* HuiYanKillTests.swift */; };
+		DA46561929CDC2010051F420 /* HuiYanKillUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46561829CDC2010051F420 /* HuiYanKillUITests.swift */; };
+		DA46561B29CDC2010051F420 /* HuiYanKillUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46561A29CDC2010051F420 /* HuiYanKillUITestsLaunchTests.swift */; };
+		DA46562829CDC5290051F420 /* LayoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46562729CDC5290051F420 /* LayoutData.swift */; };
+		DA46562B29CDC5E50051F420 /* RoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46562A29CDC5E50051F420 /* RoleViewController.swift */; };
+		DA46562E29CDC64C0051F420 /* ModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46562D29CDC64C0051F420 /* ModeViewController.swift */; };
+		DA625EC829CEDC5B00C50163 /* singlePlayerMode.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DA625EC729CEDC5B00C50163 /* singlePlayerMode.jpeg */; };
+		DA625ECF29CEE0E800C50163 /* stayTunedMode.png in Resources */ = {isa = PBXBuildFile; fileRef = DA625ECE29CEE0E800C50163 /* stayTunedMode.png */; };
+		DA625ED129CF427A00C50163 /* SingleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA625ED029CF427A00C50163 /* SingleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		DA7F4CBB29C74DD200017FC1 /* PBXContainerItemProxy */ = {
+		DA46560B29CDC2010051F420 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = DA7F4C9929C74DD100017FC1 /* Project object */;
+			containerPortal = DA4655E929CDC1FF0051F420 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DA7F4CA029C74DD100017FC1;
-			remoteInfo = huiyanKill;
+			remoteGlobalIDString = DA4655F029CDC1FF0051F420;
+			remoteInfo = HuiYanKill;
 		};
-		DA7F4CC529C74DD200017FC1 /* PBXContainerItemProxy */ = {
+		DA46561529CDC2010051F420 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = DA7F4C9929C74DD100017FC1 /* Project object */;
+			containerPortal = DA4655E929CDC1FF0051F420 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DA7F4CA029C74DD100017FC1;
-			remoteInfo = huiyanKill;
+			remoteGlobalIDString = DA4655F029CDC1FF0051F420;
+			remoteInfo = HuiYanKill;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DA0EF63029C9E7DE00A9A0C3 /* RuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleViewController.swift; sourceTree = "<group>"; };
-		DA25F99429CAAD3E00A06665 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		DA25F99629CAB66700A06665 /* RoleDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleDate.swift; sourceTree = "<group>"; };
-		DA25F99829CAB71E00A06665 /* SizeFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeFile.swift; sourceTree = "<group>"; };
-		DA25F9A429CC4BAE00A06665 /* rolePreview.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rolePreview.jpeg; sourceTree = "<group>"; };
-		DA7F4CA129C74DD100017FC1 /* huiyanKill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = huiyanKill.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA7F4CA429C74DD100017FC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DA7F4CA629C74DD100017FC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DA7F4CA829C74DD100017FC1 /* SingleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleViewController.swift; sourceTree = "<group>"; };
-		DA7F4CAB29C74DD100017FC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DA7F4CAE29C74DD100017FC1 /* huiyanKill.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = huiyanKill.xcdatamodel; sourceTree = "<group>"; };
-		DA7F4CB029C74DD200017FC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DA7F4CB329C74DD200017FC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		DA7F4CB529C74DD200017FC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DA7F4CBA29C74DD200017FC1 /* huiyanKillTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = huiyanKillTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA7F4CBE29C74DD200017FC1 /* huiyanKillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = huiyanKillTests.swift; sourceTree = "<group>"; };
-		DA7F4CC429C74DD200017FC1 /* huiyanKillUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = huiyanKillUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA7F4CC829C74DD200017FC1 /* huiyanKillUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = huiyanKillUITests.swift; sourceTree = "<group>"; };
-		DA7F4CCA29C74DD200017FC1 /* huiyanKillUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = huiyanKillUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		DA83E7E329C7F73600F96FDC /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		DA83E7E629C88C7300F96FDC /* dilin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dilin.jpg; sourceTree = "<group>"; };
-		DA83E7EA29C88C7300F96FDC /* qhy_wangjue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qhy_wangjue.jpg; sourceTree = "<group>"; };
-		DA83E7EB29C88C7300F96FDC /* qhy_wuyue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qhy_wuyue.jpg; sourceTree = "<group>"; };
-		DA83E7EC29C88C7300F96FDC /* qhy_suhuan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qhy_suhuan.jpg; sourceTree = "<group>"; };
-		DA83E7ED29C88C7300F96FDC /* qhy_yagebu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qhy_yagebu.jpg; sourceTree = "<group>"; };
-		DA83E7F829C88C7400F96FDC /* qihuiyan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qihuiyan.jpg; sourceTree = "<group>"; };
-		DA83E7F929C88C7400F96FDC /* qinzheng.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qinzheng.jpg; sourceTree = "<group>"; };
-		DA83E7FA29C88C7400F96FDC /* huizhu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = huizhu.jpg; sourceTree = "<group>"; };
+		DA4655F129CDC1FF0051F420 /* HuiYanKill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuiYanKill.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA4655F429CDC1FF0051F420 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DA4655F629CDC1FF0051F420 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		DA4655F829CDC1FF0051F420 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		DA4655FB29CDC1FF0051F420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DA4655FE29CDC1FF0051F420 /* HuiYanKill.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HuiYanKill.xcdatamodel; sourceTree = "<group>"; };
+		DA46560029CDC2000051F420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DA46560329CDC2000051F420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DA46560529CDC2000051F420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA46560A29CDC2010051F420 /* HuiYanKillTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuiYanKillTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA46560E29CDC2010051F420 /* HuiYanKillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuiYanKillTests.swift; sourceTree = "<group>"; };
+		DA46561429CDC2010051F420 /* HuiYanKillUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuiYanKillUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA46561829CDC2010051F420 /* HuiYanKillUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuiYanKillUITests.swift; sourceTree = "<group>"; };
+		DA46561A29CDC2010051F420 /* HuiYanKillUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuiYanKillUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DA46562729CDC5290051F420 /* LayoutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutData.swift; sourceTree = "<group>"; };
+		DA46562A29CDC5E50051F420 /* RoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleViewController.swift; sourceTree = "<group>"; };
+		DA46562D29CDC64C0051F420 /* ModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeViewController.swift; sourceTree = "<group>"; };
+		DA625EC729CEDC5B00C50163 /* singlePlayerMode.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = singlePlayerMode.jpeg; sourceTree = "<group>"; };
+		DA625ECE29CEE0E800C50163 /* stayTunedMode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stayTunedMode.png; sourceTree = "<group>"; };
+		DA625ED029CF427A00C50163 /* SingleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		DA7F4C9E29C74DD100017FC1 /* Frameworks */ = {
+		DA4655EE29CDC1FF0051F420 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DA7F4CB729C74DD200017FC1 /* Frameworks */ = {
+		DA46560729CDC2010051F420 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DA7F4CC129C74DD200017FC1 /* Frameworks */ = {
+		DA46561129CDC2010051F420 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,193 +90,184 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DA25F99A29CAB88000A06665 /* ViewController */ = {
+		DA4655E829CDC1FF0051F420 = {
 			isa = PBXGroup;
 			children = (
-				DA25F99B29CAB8AA00A06665 /* Universal */,
-				DA7F4CA829C74DD100017FC1 /* SingleViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		DA25F99B29CAB8AA00A06665 /* Universal */ = {
-			isa = PBXGroup;
-			children = (
-				DA25F99429CAAD3E00A06665 /* SettingViewController.swift */,
-				DA0EF63029C9E7DE00A9A0C3 /* RuleViewController.swift */,
-				DA83E7E329C7F73600F96FDC /* GameViewController.swift */,
-			);
-			path = Universal;
-			sourceTree = "<group>";
-		};
-		DA25F9A329CC4BAE00A06665 /* Image */ = {
-			isa = PBXGroup;
-			children = (
-				DA25F9A429CC4BAE00A06665 /* rolePreview.jpeg */,
-			);
-			name = Image;
-			path = huiyanKill/Image;
-			sourceTree = SOURCE_ROOT;
-		};
-		DA7F4C9829C74DD100017FC1 = {
-			isa = PBXGroup;
-			children = (
-				DA7F4CA329C74DD100017FC1 /* huiyanKill */,
-				DA7F4CBD29C74DD200017FC1 /* huiyanKillTests */,
-				DA7F4CC729C74DD200017FC1 /* huiyanKillUITests */,
-				DA7F4CA229C74DD100017FC1 /* Products */,
+				DA4655F329CDC1FF0051F420 /* HuiYanKill */,
+				DA46560D29CDC2010051F420 /* HuiYanKillTests */,
+				DA46561729CDC2010051F420 /* HuiYanKillUITests */,
+				DA4655F229CDC1FF0051F420 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		DA7F4CA229C74DD100017FC1 /* Products */ = {
+		DA4655F229CDC1FF0051F420 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA7F4CA129C74DD100017FC1 /* huiyanKill.app */,
-				DA7F4CBA29C74DD200017FC1 /* huiyanKillTests.xctest */,
-				DA7F4CC429C74DD200017FC1 /* huiyanKillUITests.xctest */,
+				DA4655F129CDC1FF0051F420 /* HuiYanKill.app */,
+				DA46560A29CDC2010051F420 /* HuiYanKillTests.xctest */,
+				DA46561429CDC2010051F420 /* HuiYanKillUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DA7F4CA329C74DD100017FC1 /* huiyanKill */ = {
+		DA4655F329CDC1FF0051F420 /* HuiYanKill */ = {
 			isa = PBXGroup;
 			children = (
-				DA25F99A29CAB88000A06665 /* ViewController */,
-				DA83E7E729C88C7300F96FDC /* Data */,
-				DA7F4CA429C74DD100017FC1 /* AppDelegate.swift */,
-				DA7F4CA629C74DD100017FC1 /* SceneDelegate.swift */,
-				DA7F4CB029C74DD200017FC1 /* Assets.xcassets */,
-				DA7F4CAA29C74DD100017FC1 /* Main.storyboard */,
-				DA7F4CB229C74DD200017FC1 /* LaunchScreen.storyboard */,
-				DA7F4CB529C74DD200017FC1 /* Info.plist */,
-				DA7F4CAD29C74DD100017FC1 /* huiyanKill.xcdatamodeld */,
+				DA46562C29CDC5EF0051F420 /* Interface */,
+				DA46562929CDC5310051F420 /* Data */,
+				DA4655F429CDC1FF0051F420 /* AppDelegate.swift */,
+				DA4655F629CDC1FF0051F420 /* SceneDelegate.swift */,
+				DA4655FA29CDC1FF0051F420 /* Main.storyboard */,
+				DA46560029CDC2000051F420 /* Assets.xcassets */,
+				DA46560229CDC2000051F420 /* LaunchScreen.storyboard */,
+				DA46560529CDC2000051F420 /* Info.plist */,
+				DA4655FD29CDC1FF0051F420 /* HuiYanKill.xcdatamodeld */,
 			);
-			path = huiyanKill;
+			path = HuiYanKill;
 			sourceTree = "<group>";
 		};
-		DA7F4CBD29C74DD200017FC1 /* huiyanKillTests */ = {
+		DA46560D29CDC2010051F420 /* HuiYanKillTests */ = {
 			isa = PBXGroup;
 			children = (
-				DA7F4CBE29C74DD200017FC1 /* huiyanKillTests.swift */,
+				DA46560E29CDC2010051F420 /* HuiYanKillTests.swift */,
 			);
-			path = huiyanKillTests;
+			path = HuiYanKillTests;
 			sourceTree = "<group>";
 		};
-		DA7F4CC729C74DD200017FC1 /* huiyanKillUITests */ = {
+		DA46561729CDC2010051F420 /* HuiYanKillUITests */ = {
 			isa = PBXGroup;
 			children = (
-				DA7F4CC829C74DD200017FC1 /* huiyanKillUITests.swift */,
-				DA7F4CCA29C74DD200017FC1 /* huiyanKillUITestsLaunchTests.swift */,
+				DA46561829CDC2010051F420 /* HuiYanKillUITests.swift */,
+				DA46561A29CDC2010051F420 /* HuiYanKillUITestsLaunchTests.swift */,
 			);
-			path = huiyanKillUITests;
+			path = HuiYanKillUITests;
 			sourceTree = "<group>";
 		};
-		DA83E7E529C88C7300F96FDC /* rolePicture */ = {
+		DA46562929CDC5310051F420 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				DA83E7E629C88C7300F96FDC /* dilin.jpg */,
-				DA83E7F929C88C7400F96FDC /* qinzheng.jpg */,
-				DA83E7F829C88C7400F96FDC /* qihuiyan.jpg */,
-				DA83E7FA29C88C7400F96FDC /* huizhu.jpg */,
-				DA83E7EA29C88C7300F96FDC /* qhy_wangjue.jpg */,
-				DA83E7EB29C88C7300F96FDC /* qhy_wuyue.jpg */,
-				DA83E7EC29C88C7300F96FDC /* qhy_suhuan.jpg */,
-				DA83E7ED29C88C7300F96FDC /* qhy_yagebu.jpg */,
-			);
-			path = rolePicture;
-			sourceTree = "<group>";
-		};
-		DA83E7E729C88C7300F96FDC /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				DA25F9A329CC4BAE00A06665 /* Image */,
-				DA83E7E529C88C7300F96FDC /* rolePicture */,
-				DA25F99829CAB71E00A06665 /* SizeFile.swift */,
-				DA25F99629CAB66700A06665 /* RoleDate.swift */,
+				DA625ECA29CEDC8400C50163 /* Image */,
+				DA46562729CDC5290051F420 /* LayoutData.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		DA46562C29CDC5EF0051F420 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				DA4655F829CDC1FF0051F420 /* MainViewController.swift */,
+				DA46562A29CDC5E50051F420 /* RoleViewController.swift */,
+				DA46562D29CDC64C0051F420 /* ModeViewController.swift */,
+				DA625ED229CF42A000C50163 /* ModeChange */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		DA625ECA29CEDC8400C50163 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				DA625ECB29CEDCAE00C50163 /* Mode */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		DA625ECB29CEDCAE00C50163 /* Mode */ = {
+			isa = PBXGroup;
+			children = (
+				DA625ECE29CEE0E800C50163 /* stayTunedMode.png */,
+				DA625EC729CEDC5B00C50163 /* singlePlayerMode.jpeg */,
+			);
+			path = Mode;
+			sourceTree = "<group>";
+		};
+		DA625ED229CF42A000C50163 /* ModeChange */ = {
+			isa = PBXGroup;
+			children = (
+				DA625ED029CF427A00C50163 /* SingleViewController.swift */,
+			);
+			path = ModeChange;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DA7F4CA029C74DD100017FC1 /* huiyanKill */ = {
+		DA4655F029CDC1FF0051F420 /* HuiYanKill */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA7F4CCE29C74DD200017FC1 /* Build configuration list for PBXNativeTarget "huiyanKill" */;
+			buildConfigurationList = DA46561E29CDC2010051F420 /* Build configuration list for PBXNativeTarget "HuiYanKill" */;
 			buildPhases = (
-				DA7F4C9D29C74DD100017FC1 /* Sources */,
-				DA7F4C9E29C74DD100017FC1 /* Frameworks */,
-				DA7F4C9F29C74DD100017FC1 /* Resources */,
+				DA4655ED29CDC1FF0051F420 /* Sources */,
+				DA4655EE29CDC1FF0051F420 /* Frameworks */,
+				DA4655EF29CDC1FF0051F420 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = huiyanKill;
-			productName = huiyanKill;
-			productReference = DA7F4CA129C74DD100017FC1 /* huiyanKill.app */;
+			name = HuiYanKill;
+			productName = HuiYanKill;
+			productReference = DA4655F129CDC1FF0051F420 /* HuiYanKill.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DA7F4CB929C74DD200017FC1 /* huiyanKillTests */ = {
+		DA46560929CDC2010051F420 /* HuiYanKillTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA7F4CD129C74DD200017FC1 /* Build configuration list for PBXNativeTarget "huiyanKillTests" */;
+			buildConfigurationList = DA46562129CDC2010051F420 /* Build configuration list for PBXNativeTarget "HuiYanKillTests" */;
 			buildPhases = (
-				DA7F4CB629C74DD200017FC1 /* Sources */,
-				DA7F4CB729C74DD200017FC1 /* Frameworks */,
-				DA7F4CB829C74DD200017FC1 /* Resources */,
+				DA46560629CDC2010051F420 /* Sources */,
+				DA46560729CDC2010051F420 /* Frameworks */,
+				DA46560829CDC2010051F420 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DA7F4CBC29C74DD200017FC1 /* PBXTargetDependency */,
+				DA46560C29CDC2010051F420 /* PBXTargetDependency */,
 			);
-			name = huiyanKillTests;
-			productName = huiyanKillTests;
-			productReference = DA7F4CBA29C74DD200017FC1 /* huiyanKillTests.xctest */;
+			name = HuiYanKillTests;
+			productName = HuiYanKillTests;
+			productReference = DA46560A29CDC2010051F420 /* HuiYanKillTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		DA7F4CC329C74DD200017FC1 /* huiyanKillUITests */ = {
+		DA46561329CDC2010051F420 /* HuiYanKillUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA7F4CD429C74DD200017FC1 /* Build configuration list for PBXNativeTarget "huiyanKillUITests" */;
+			buildConfigurationList = DA46562429CDC2010051F420 /* Build configuration list for PBXNativeTarget "HuiYanKillUITests" */;
 			buildPhases = (
-				DA7F4CC029C74DD200017FC1 /* Sources */,
-				DA7F4CC129C74DD200017FC1 /* Frameworks */,
-				DA7F4CC229C74DD200017FC1 /* Resources */,
+				DA46561029CDC2010051F420 /* Sources */,
+				DA46561129CDC2010051F420 /* Frameworks */,
+				DA46561229CDC2010051F420 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DA7F4CC629C74DD200017FC1 /* PBXTargetDependency */,
+				DA46561629CDC2010051F420 /* PBXTargetDependency */,
 			);
-			name = huiyanKillUITests;
-			productName = huiyanKillUITests;
-			productReference = DA7F4CC429C74DD200017FC1 /* huiyanKillUITests.xctest */;
+			name = HuiYanKillUITests;
+			productName = HuiYanKillUITests;
+			productReference = DA46561429CDC2010051F420 /* HuiYanKillUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		DA7F4C9929C74DD100017FC1 /* Project object */ = {
+		DA4655E929CDC1FF0051F420 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					DA7F4CA029C74DD100017FC1 = {
+					DA4655F029CDC1FF0051F420 = {
 						CreatedOnToolsVersion = 14.2;
 					};
-					DA7F4CB929C74DD200017FC1 = {
+					DA46560929CDC2010051F420 = {
 						CreatedOnToolsVersion = 14.2;
-						TestTargetID = DA7F4CA029C74DD100017FC1;
+						TestTargetID = DA4655F029CDC1FF0051F420;
 					};
-					DA7F4CC329C74DD200017FC1 = {
+					DA46561329CDC2010051F420 = {
 						CreatedOnToolsVersion = 14.2;
-						TestTargetID = DA7F4CA029C74DD100017FC1;
+						TestTargetID = DA4655F029CDC1FF0051F420;
 					};
 				};
 			};
-			buildConfigurationList = DA7F4C9C29C74DD100017FC1 /* Build configuration list for PBXProject "huiyanKill" */;
+			buildConfigurationList = DA4655EC29CDC1FF0051F420 /* Build configuration list for PBXProject "HuiYanKill" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -316,132 +275,108 @@
 				en,
 				Base,
 			);
-			mainGroup = DA7F4C9829C74DD100017FC1;
-			productRefGroup = DA7F4CA229C74DD100017FC1 /* Products */;
+			mainGroup = DA4655E829CDC1FF0051F420;
+			productRefGroup = DA4655F229CDC1FF0051F420 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DA7F4CA029C74DD100017FC1 /* huiyanKill */,
-				DA7F4CB929C74DD200017FC1 /* huiyanKillTests */,
-				DA7F4CC329C74DD200017FC1 /* huiyanKillUITests */,
+				DA4655F029CDC1FF0051F420 /* HuiYanKill */,
+				DA46560929CDC2010051F420 /* HuiYanKillTests */,
+				DA46561329CDC2010051F420 /* HuiYanKillUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		DA7F4C9F29C74DD100017FC1 /* Resources */ = {
+		DA4655EF29CDC1FF0051F420 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA7F4CB429C74DD200017FC1 /* LaunchScreen.storyboard in Resources */,
-				DA83E7FE29C88C7400F96FDC /* dilin.jpg in Resources */,
-				DA83E83129C88C8500F96FDC /* qinzheng.jpg in Resources */,
-				DA25F9A529CC4BAE00A06665 /* rolePreview.jpeg in Resources */,
-				DA83E80729C88C7800F96FDC /* qhy_wangjue.jpg in Resources */,
-				DA83E83429C88C8500F96FDC /* huizhu.jpg in Resources */,
-				DA83E80A29C88C7800F96FDC /* qhy_wuyue.jpg in Resources */,
-				DA83E82E29C88C8400F96FDC /* qihuiyan.jpg in Resources */,
-				DA7F4CB129C74DD200017FC1 /* Assets.xcassets in Resources */,
-				DA83E80D29C88C7900F96FDC /* qhy_suhuan.jpg in Resources */,
-				DA7F4CAC29C74DD100017FC1 /* Main.storyboard in Resources */,
-				DA83E81029C88C7900F96FDC /* qhy_yagebu.jpg in Resources */,
+				DA46560429CDC2000051F420 /* LaunchScreen.storyboard in Resources */,
+				DA625ECF29CEE0E800C50163 /* stayTunedMode.png in Resources */,
+				DA625EC829CEDC5B00C50163 /* singlePlayerMode.jpeg in Resources */,
+				DA46560129CDC2000051F420 /* Assets.xcassets in Resources */,
+				DA4655FC29CDC1FF0051F420 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DA7F4CB829C74DD200017FC1 /* Resources */ = {
+		DA46560829CDC2010051F420 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA83E80829C88C7800F96FDC /* qhy_wangjue.jpg in Resources */,
-				DA83E83229C88C8500F96FDC /* qinzheng.jpg in Resources */,
-				DA83E80B29C88C7900F96FDC /* qhy_wuyue.jpg in Resources */,
-				DA83E82F29C88C8500F96FDC /* qihuiyan.jpg in Resources */,
-				DA83E7FF29C88C7600F96FDC /* dilin.jpg in Resources */,
-				DA83E83529C88C8600F96FDC /* huizhu.jpg in Resources */,
-				DA83E80E29C88C7900F96FDC /* qhy_suhuan.jpg in Resources */,
-				DA83E81129C88C7A00F96FDC /* qhy_yagebu.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DA7F4CC229C74DD200017FC1 /* Resources */ = {
+		DA46561229CDC2010051F420 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA83E80929C88C7800F96FDC /* qhy_wangjue.jpg in Resources */,
-				DA83E83329C88C8500F96FDC /* qinzheng.jpg in Resources */,
-				DA83E80C29C88C7900F96FDC /* qhy_wuyue.jpg in Resources */,
-				DA83E83029C88C8500F96FDC /* qihuiyan.jpg in Resources */,
-				DA83E80029C88C7600F96FDC /* dilin.jpg in Resources */,
-				DA83E83629C88C8600F96FDC /* huizhu.jpg in Resources */,
-				DA83E80F29C88C7900F96FDC /* qhy_suhuan.jpg in Resources */,
-				DA83E81229C88C7A00F96FDC /* qhy_yagebu.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		DA7F4C9D29C74DD100017FC1 /* Sources */ = {
+		DA4655ED29CDC1FF0051F420 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA83E7E429C7F73600F96FDC /* GameViewController.swift in Sources */,
-				DA25F99729CAB66800A06665 /* RoleDate.swift in Sources */,
-				DA7F4CA929C74DD100017FC1 /* SingleViewController.swift in Sources */,
-				DA25F99929CAB71E00A06665 /* SizeFile.swift in Sources */,
-				DA0EF63129C9E7DE00A9A0C3 /* RuleViewController.swift in Sources */,
-				DA7F4CAF29C74DD100017FC1 /* huiyanKill.xcdatamodeld in Sources */,
-				DA7F4CA529C74DD100017FC1 /* AppDelegate.swift in Sources */,
-				DA25F99529CAAD3E00A06665 /* SettingViewController.swift in Sources */,
-				DA7F4CA729C74DD100017FC1 /* SceneDelegate.swift in Sources */,
+				DA46562829CDC5290051F420 /* LayoutData.swift in Sources */,
+				DA4655F929CDC1FF0051F420 /* MainViewController.swift in Sources */,
+				DA46562B29CDC5E50051F420 /* RoleViewController.swift in Sources */,
+				DA4655FF29CDC1FF0051F420 /* HuiYanKill.xcdatamodeld in Sources */,
+				DA46562E29CDC64C0051F420 /* ModeViewController.swift in Sources */,
+				DA4655F529CDC1FF0051F420 /* AppDelegate.swift in Sources */,
+				DA625ED129CF427A00C50163 /* SingleViewController.swift in Sources */,
+				DA4655F729CDC1FF0051F420 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DA7F4CB629C74DD200017FC1 /* Sources */ = {
+		DA46560629CDC2010051F420 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA7F4CBF29C74DD200017FC1 /* huiyanKillTests.swift in Sources */,
+				DA46560F29CDC2010051F420 /* HuiYanKillTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DA7F4CC029C74DD200017FC1 /* Sources */ = {
+		DA46561029CDC2010051F420 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA7F4CCB29C74DD200017FC1 /* huiyanKillUITestsLaunchTests.swift in Sources */,
-				DA7F4CC929C74DD200017FC1 /* huiyanKillUITests.swift in Sources */,
+				DA46561B29CDC2010051F420 /* HuiYanKillUITestsLaunchTests.swift in Sources */,
+				DA46561929CDC2010051F420 /* HuiYanKillUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		DA7F4CBC29C74DD200017FC1 /* PBXTargetDependency */ = {
+		DA46560C29CDC2010051F420 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DA7F4CA029C74DD100017FC1 /* huiyanKill */;
-			targetProxy = DA7F4CBB29C74DD200017FC1 /* PBXContainerItemProxy */;
+			target = DA4655F029CDC1FF0051F420 /* HuiYanKill */;
+			targetProxy = DA46560B29CDC2010051F420 /* PBXContainerItemProxy */;
 		};
-		DA7F4CC629C74DD200017FC1 /* PBXTargetDependency */ = {
+		DA46561629CDC2010051F420 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DA7F4CA029C74DD100017FC1 /* huiyanKill */;
-			targetProxy = DA7F4CC529C74DD200017FC1 /* PBXContainerItemProxy */;
+			target = DA4655F029CDC1FF0051F420 /* HuiYanKill */;
+			targetProxy = DA46561529CDC2010051F420 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		DA7F4CAA29C74DD100017FC1 /* Main.storyboard */ = {
+		DA4655FA29CDC1FF0051F420 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DA7F4CAB29C74DD100017FC1 /* Base */,
+				DA4655FB29CDC1FF0051F420 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		DA7F4CB229C74DD200017FC1 /* LaunchScreen.storyboard */ = {
+		DA46560229CDC2000051F420 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DA7F4CB329C74DD200017FC1 /* Base */,
+				DA46560329CDC2000051F420 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -449,7 +384,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		DA7F4CCC29C74DD200017FC1 /* Debug */ = {
+		DA46561C29CDC2010051F420 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -509,7 +444,7 @@
 			};
 			name = Debug;
 		};
-		DA7F4CCD29C74DD200017FC1 /* Release */ = {
+		DA46561D29CDC2010051F420 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -563,7 +498,7 @@
 			};
 			name = Release;
 		};
-		DA7F4CCF29C74DD200017FC1 /* Debug */ = {
+		DA46561F29CDC2010051F420 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -571,18 +506,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = huiyanKill/Info.plist;
+				INFOPLIST_FILE = HuiYanKill/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.huiyanKill;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.HuiYanKill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -590,7 +525,7 @@
 			};
 			name = Debug;
 		};
-		DA7F4CD029C74DD200017FC1 /* Release */ = {
+		DA46562029CDC2010051F420 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -598,18 +533,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = huiyanKill/Info.plist;
+				INFOPLIST_FILE = HuiYanKill/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.huiyanKill;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.HuiYanKill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -617,7 +552,7 @@
 			};
 			name = Release;
 		};
-		DA7F4CD229C74DD200017FC1 /* Debug */ = {
+		DA46562229CDC2010051F420 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -627,16 +562,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.huiyanKillTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.HuiYanKillTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/huiyanKill.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/huiyanKill";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HuiYanKill.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HuiYanKill";
 			};
 			name = Debug;
 		};
-		DA7F4CD329C74DD200017FC1 /* Release */ = {
+		DA46562329CDC2010051F420 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -646,16 +581,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.huiyanKillTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.HuiYanKillTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/huiyanKill.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/huiyanKill";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HuiYanKill.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HuiYanKill";
 			};
 			name = Release;
 		};
-		DA7F4CD529C74DD200017FC1 /* Debug */ = {
+		DA46562529CDC2010051F420 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -663,16 +598,16 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.huiyanKillUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.HuiYanKillUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = huiyanKill;
+				TEST_TARGET_NAME = HuiYanKill;
 			};
 			name = Debug;
 		};
-		DA7F4CD629C74DD200017FC1 /* Release */ = {
+		DA46562629CDC2010051F420 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -680,50 +615,50 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.huiyanKillUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhuiyan.HuiYanKillUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = huiyanKill;
+				TEST_TARGET_NAME = HuiYanKill;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DA7F4C9C29C74DD100017FC1 /* Build configuration list for PBXProject "huiyanKill" */ = {
+		DA4655EC29CDC1FF0051F420 /* Build configuration list for PBXProject "HuiYanKill" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DA7F4CCC29C74DD200017FC1 /* Debug */,
-				DA7F4CCD29C74DD200017FC1 /* Release */,
+				DA46561C29CDC2010051F420 /* Debug */,
+				DA46561D29CDC2010051F420 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA7F4CCE29C74DD200017FC1 /* Build configuration list for PBXNativeTarget "huiyanKill" */ = {
+		DA46561E29CDC2010051F420 /* Build configuration list for PBXNativeTarget "HuiYanKill" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DA7F4CCF29C74DD200017FC1 /* Debug */,
-				DA7F4CD029C74DD200017FC1 /* Release */,
+				DA46561F29CDC2010051F420 /* Debug */,
+				DA46562029CDC2010051F420 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA7F4CD129C74DD200017FC1 /* Build configuration list for PBXNativeTarget "huiyanKillTests" */ = {
+		DA46562129CDC2010051F420 /* Build configuration list for PBXNativeTarget "HuiYanKillTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DA7F4CD229C74DD200017FC1 /* Debug */,
-				DA7F4CD329C74DD200017FC1 /* Release */,
+				DA46562229CDC2010051F420 /* Debug */,
+				DA46562329CDC2010051F420 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA7F4CD429C74DD200017FC1 /* Build configuration list for PBXNativeTarget "huiyanKillUITests" */ = {
+		DA46562429CDC2010051F420 /* Build configuration list for PBXNativeTarget "HuiYanKillUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DA7F4CD529C74DD200017FC1 /* Debug */,
-				DA7F4CD629C74DD200017FC1 /* Release */,
+				DA46562529CDC2010051F420 /* Debug */,
+				DA46562629CDC2010051F420 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -731,17 +666,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		DA7F4CAD29C74DD100017FC1 /* huiyanKill.xcdatamodeld */ = {
+		DA4655FD29CDC1FF0051F420 /* HuiYanKill.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				DA7F4CAE29C74DD100017FC1 /* huiyanKill.xcdatamodel */,
+				DA4655FE29CDC1FF0051F420 /* HuiYanKill.xcdatamodel */,
 			);
-			currentVersion = DA7F4CAE29C74DD100017FC1 /* huiyanKill.xcdatamodel */;
-			path = huiyanKill.xcdatamodeld;
+			currentVersion = DA4655FE29CDC1FF0051F420 /* HuiYanKill.xcdatamodel */;
+			path = HuiYanKill.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
 	};
-	rootObject = DA7F4C9929C74DD100017FC1 /* Project object */;
+	rootObject = DA4655E929CDC1FF0051F420 /* Project object */;
 }

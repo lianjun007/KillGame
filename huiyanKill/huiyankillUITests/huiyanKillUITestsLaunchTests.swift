@@ -1,13 +1,13 @@
 //
-//  huiyanKillUITestsLaunchTests.swift
-//  huiyanKillUITests
+//  HuiYanKillUITestsLaunchTests.swift
+//  HuiYanKillUITests
 //
-//  Created by QHuiYan on 2023/3/19.
+//  Created by QHuiYan on 2023/3/24.
 //
 
 import XCTest
 
-final class huiyanKillUITestsLaunchTests: XCTestCase {
+final class HuiYanKillUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
