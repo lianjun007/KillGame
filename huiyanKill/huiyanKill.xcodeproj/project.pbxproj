@@ -23,7 +23,16 @@
 		DA625EC829CEDC5B00C50163 /* singlePlayerMode.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DA625EC729CEDC5B00C50163 /* singlePlayerMode.jpeg */; };
 		DA625ECF29CEE0E800C50163 /* stayTunedMode.png in Resources */ = {isa = PBXBuildFile; fileRef = DA625ECE29CEE0E800C50163 /* stayTunedMode.png */; };
 		DA87BE6229D094270078C679 /* RoleChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA87BE6129D094270078C679 /* RoleChooseViewController.swift */; };
-		DA87BE6529D096940078C679 /* DefaultRole.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DA87BE6429D096940078C679 /* DefaultRole.jpeg */; };
+		DA87BE6729D0AB1C0078C679 /* RoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA87BE6629D0AB1C0078C679 /* RoleData.swift */; };
+		DA87BE9529D0B6DF0078C679 /* huizhu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA87BE8C29D0B6DF0078C679 /* huizhu.jpg */; };
+		DA87BE9629D0B6DF0078C679 /* wangjue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA87BE8D29D0B6DF0078C679 /* wangjue.jpg */; };
+		DA87BE9729D0B6DF0078C679 /* wuyue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA87BE8E29D0B6DF0078C679 /* wuyue.jpg */; };
+		DA87BE9829D0B6DF0078C679 /* qinzheng.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA87BE8F29D0B6DF0078C679 /* qinzheng.jpg */; };
+		DA87BE9929D0B6DF0078C679 /* DefaultRole.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DA87BE9029D0B6DF0078C679 /* DefaultRole.jpeg */; };
+		DA87BE9A29D0B6DF0078C679 /* yagebu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA87BE9129D0B6DF0078C679 /* yagebu.jpg */; };
+		DA87BE9B29D0B6DF0078C679 /* dilin.png in Resources */ = {isa = PBXBuildFile; fileRef = DA87BE9229D0B6DF0078C679 /* dilin.png */; };
+		DA87BE9C29D0B6DF0078C679 /* suhuan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA87BE9329D0B6DF0078C679 /* suhuan.jpg */; };
+		DA87BE9D29D0B6DF0078C679 /* qihuiyan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA87BE9429D0B6DF0078C679 /* qihuiyan.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +73,16 @@
 		DA625EC729CEDC5B00C50163 /* singlePlayerMode.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = singlePlayerMode.jpeg; sourceTree = "<group>"; };
 		DA625ECE29CEE0E800C50163 /* stayTunedMode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stayTunedMode.png; sourceTree = "<group>"; };
 		DA87BE6129D094270078C679 /* RoleChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoleChooseViewController.swift; path = HuiYanKill/Interface/PersentView/RoleChooseViewController.swift; sourceTree = SOURCE_ROOT; };
-		DA87BE6429D096940078C679 /* DefaultRole.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DefaultRole.jpeg; sourceTree = "<group>"; };
+		DA87BE6629D0AB1C0078C679 /* RoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoleData.swift; path = HuiYanKill/Data/RoleData.swift; sourceTree = SOURCE_ROOT; };
+		DA87BE8C29D0B6DF0078C679 /* huizhu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = huizhu.jpg; sourceTree = "<group>"; };
+		DA87BE8D29D0B6DF0078C679 /* wangjue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wangjue.jpg; sourceTree = "<group>"; };
+		DA87BE8E29D0B6DF0078C679 /* wuyue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wuyue.jpg; sourceTree = "<group>"; };
+		DA87BE8F29D0B6DF0078C679 /* qinzheng.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qinzheng.jpg; sourceTree = "<group>"; };
+		DA87BE9029D0B6DF0078C679 /* DefaultRole.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DefaultRole.jpeg; sourceTree = "<group>"; };
+		DA87BE9129D0B6DF0078C679 /* yagebu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yagebu.jpg; sourceTree = "<group>"; };
+		DA87BE9229D0B6DF0078C679 /* dilin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dilin.png; sourceTree = "<group>"; };
+		DA87BE9329D0B6DF0078C679 /* suhuan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = suhuan.jpg; sourceTree = "<group>"; };
+		DA87BE9429D0B6DF0078C679 /* qihuiyan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qihuiyan.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +168,7 @@
 			children = (
 				DA625ECA29CEDC8400C50163 /* Image */,
 				DA46562729CDC5290051F420 /* LayoutData.swift */,
+				DA87BE6629D0AB1C0078C679 /* RoleData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -167,7 +186,7 @@
 		DA625ECA29CEDC8400C50163 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				DA87BE6329D096670078C679 /* RoleImage */,
+				DA87BE8B29D0B6DF0078C679 /* RoleImage */,
 				DA625ECB29CEDCAE00C50163 /* Mode */,
 			);
 			path = Image;
@@ -191,10 +210,18 @@
 			path = PersentView;
 			sourceTree = "<group>";
 		};
-		DA87BE6329D096670078C679 /* RoleImage */ = {
+		DA87BE8B29D0B6DF0078C679 /* RoleImage */ = {
 			isa = PBXGroup;
 			children = (
-				DA87BE6429D096940078C679 /* DefaultRole.jpeg */,
+				DA87BE8C29D0B6DF0078C679 /* huizhu.jpg */,
+				DA87BE8D29D0B6DF0078C679 /* wangjue.jpg */,
+				DA87BE8E29D0B6DF0078C679 /* wuyue.jpg */,
+				DA87BE8F29D0B6DF0078C679 /* qinzheng.jpg */,
+				DA87BE9029D0B6DF0078C679 /* DefaultRole.jpeg */,
+				DA87BE9129D0B6DF0078C679 /* yagebu.jpg */,
+				DA87BE9229D0B6DF0078C679 /* dilin.png */,
+				DA87BE9329D0B6DF0078C679 /* suhuan.jpg */,
+				DA87BE9429D0B6DF0078C679 /* qihuiyan.jpg */,
 			);
 			path = RoleImage;
 			sourceTree = "<group>";
@@ -304,11 +331,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA46560429CDC2000051F420 /* LaunchScreen.storyboard in Resources */,
-				DA87BE6529D096940078C679 /* DefaultRole.jpeg in Resources */,
+				DA87BE9A29D0B6DF0078C679 /* yagebu.jpg in Resources */,
 				DA625ECF29CEE0E800C50163 /* stayTunedMode.png in Resources */,
+				DA87BE9D29D0B6DF0078C679 /* qihuiyan.jpg in Resources */,
+				DA87BE9629D0B6DF0078C679 /* wangjue.jpg in Resources */,
+				DA87BE9829D0B6DF0078C679 /* qinzheng.jpg in Resources */,
+				DA87BE9C29D0B6DF0078C679 /* suhuan.jpg in Resources */,
+				DA87BE9729D0B6DF0078C679 /* wuyue.jpg in Resources */,
+				DA87BE9B29D0B6DF0078C679 /* dilin.png in Resources */,
+				DA87BE9929D0B6DF0078C679 /* DefaultRole.jpeg in Resources */,
 				DA625EC829CEDC5B00C50163 /* singlePlayerMode.jpeg in Resources */,
 				DA46560129CDC2000051F420 /* Assets.xcassets in Resources */,
 				DA4655FC29CDC1FF0051F420 /* Main.storyboard in Resources */,
+				DA87BE9529D0B6DF0078C679 /* huizhu.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +370,7 @@
 			files = (
 				DA46562829CDC5290051F420 /* LayoutData.swift in Sources */,
 				DA4655F929CDC1FF0051F420 /* MainViewController.swift in Sources */,
+				DA87BE6729D0AB1C0078C679 /* RoleData.swift in Sources */,
 				DA46562B29CDC5E50051F420 /* RoleViewController.swift in Sources */,
 				DA4655FF29CDC1FF0051F420 /* HuiYanKill.xcdatamodeld in Sources */,
 				DA46562E29CDC64C0051F420 /* ModeViewController.swift in Sources */,

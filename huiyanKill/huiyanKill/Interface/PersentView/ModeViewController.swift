@@ -20,7 +20,7 @@ class ModeViewController: UIViewController {
         let boxContent = [["单人模式", "剧情模式", "军团模式", "BOSS模式"], ["singlePlayerMode.jpeg"]]
         
         // Mode Interface 创建滚动视图
-        displayBoxView.showsHorizontalScrollIndicator = true
+        displayBoxView.showsHorizontalScrollIndicator = false
         displayBoxView.contentSize = CGSize(width: CGFloat(boxCount) * (roleBoxLargeSize.width + controlSpaced) - controlSpaced, height: displayBoxView.frame.size.height)
         view.addSubview(displayBoxView)
         
@@ -82,7 +82,7 @@ class ModeViewController: UIViewController {
         
     }
     
-    let displayBoxView = UIScrollView(frame: CGRect(origin: CGPoint(x: 0, y: safePoint.y + buttonSize.height + controlSpaced), size: CGSize(width: screenWidth, height: safeSize.width - controlSpaced - buttonSize.height)))
+    let displayBoxView = UIScrollView(frame: CGRect(origin: CGPoint(x: 0, y: safePoint.y + buttonSize.height + controlSpaced), size: CGSize(width: screenWidth, height: safeSize.height - controlSpaced - buttonSize.height)))
     var modeBoxArray: Array<UIButton> = []
     
     @objc func scrollToView(sender: UIButton) {
