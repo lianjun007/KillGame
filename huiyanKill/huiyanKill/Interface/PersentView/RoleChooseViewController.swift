@@ -1,31 +1,28 @@
 //
-//  ModeViewController.swift
+//  RoleChooseViewController.swift
 //  HuiYanKill
 //
-//  Created by QHuiYan on 2023/3/24.
+//  Created by QHuiYan on 2023/3/26.
 //
 
 import UIKit
 
-class ModeViewController: UIViewController {
-    
+class RoleChooseViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 初始化视图
-        self.navigationController?.isNavigationBarHidden = true
-        view.backgroundColor = backgroundColor
+        
+        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: 1, buttonContent: [["person"], ["角色选择"]], bounce: false)
+        navButtonArray[0].frame.origin.x += CGFloat(buttonSize.width + controlSpaced)
+        navButtonArray[0].addTarget(self, action: #selector(clickEvents), for: .touchUpInside)
+        
         
         let boxCount = 5
         let boxContent = [["单人模式", "剧情模式", "军团模式", "BOSS模式"], ["singlePlayerMode.jpeg"]]
         
-        // Mode Interface
-        
-        let displayBoxSize = CGSize(width: safeSize.height * 2 / 3, height: safeSize.height)
-        
-        // 创建滚动视图
-        displayBoxView.backgroundColor = UIColor(cgColor: CGColor(red: 1, green: 1, blue: 1, alpha: 0))
-        displayBoxView.showsHorizontalScrollIndicator = false
-        displayBoxView.contentSize = CGSize(width: (displayBoxSize.width + controlSpaced) * CGFloat(boxCount) - controlSpaced, height: displayBoxView.frame.height)
+        // Role Interface 创建滚动视图
+        displayBoxView.showsHorizontalScrollIndicator = true
+        displayBoxView.contentSize = CGSize(width: CGFloat(boxCount) * (roleBoxLargeSize.width + controlSpaced) - controlSpaced, height: displayBoxView.frame.size.height)
         view.addSubview(displayBoxView)
         
         // 创建ModeBox
@@ -44,8 +41,8 @@ class ModeViewController: UIViewController {
                 }
             }
             
-            let modeBox = UIButton(frame: CGRect(origin: CGPointZero, size: displayBoxSize))
-            modeBox.frame.origin.x += CGFloat(i) * (screenSpaced + safeSize.height * 2 / 3)
+            let modeBox = UIButton(frame: CGRect(origin: displayMode == 0 ? CGPoint(x: 0, y: 0): CGPoint(x: screenSpaced, y: 0), size: roleBoxSize))
+            modeBox.frame.origin.x += CGFloat(i) * (controlSpaced + modeBox.frame.width)
             modeBoxArray.append(modeBox)
             modeBox.layer.cornerRadius = controlRoundSize
             let borderWidth = CGFloat(7)
@@ -66,10 +63,10 @@ class ModeViewController: UIViewController {
             modeBox.addSubview(modeLabel)
             modeLabel.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                modeLabel.topAnchor.constraint(equalTo: modeBox.topAnchor, constant: displayBoxSize.height / 4 * 3),
+                modeLabel.topAnchor.constraint(equalTo: modeBox.topAnchor, constant: modeBox.frame.size.height / 4 * 3),
                 modeLabel.leadingAnchor.constraint(equalTo: modeBox.leadingAnchor, constant: borderWidth),
                 modeLabel.trailingAnchor.constraint(equalTo: modeBox.trailingAnchor, constant: -borderWidth),
-                modeLabel.bottomAnchor.constraint(equalTo: modeBox.bottomAnchor, constant: -(displayBoxSize.height / 8))
+                modeLabel.bottomAnchor.constraint(equalTo: modeBox.bottomAnchor, constant: -(modeBox.frame.size.height / 8))
             ])
             
         }
@@ -86,26 +83,15 @@ class ModeViewController: UIViewController {
         
     }
     
-    let displayBoxView = UIScrollView(frame: CGRect(origin: safePoint, size: safeSize))
+    let displayBoxView = UIScrollView(frame: CGRect(origin: CGPoint(x: 0, y: safePoint.y + buttonSize.height + controlSpaced), size: CGSize(width: screenWidth, height: safeSize.width - controlSpaced - buttonSize.height)))
     var modeBoxArray: Array<UIButton> = []
+    
     @objc func scrollToView(sender: UIButton) {
-        displayBoxView.setContentOffset(CGPoint(x: modeBoxArray[sender.tag].frame.origin.x, y: 0), animated: true)
+        displayBoxView.setContentOffset(CGPoint(x: modeBoxArray[sender.tag].frame.origin.x - safePoint.x, y: 0), animated: true)
     }
     
-    @objc func singlePlayerMode() {
-        let button1 = ButtonBuild(image: "person", title: "选择人数", piont: CGPointZero, view: modeBoxArray[0])
-        button1.center = modeBoxArray[0].center
-        ButtonBuild(image: "slider.horizontal.2.square.on.square", title: "选择难度", piont: CGPointZero, view: modeBoxArray[0])
-        
+    @objc func clickEvents() {
+        self.dismiss(animated: true)
     }
-    
-    @objc func stayTuned() {
-        print(#function)
-        let alertController = UIAlertController(title: "敬请期待", message: "该功能正在制作中......", preferredStyle: .alert)
-        let knownAction = UIAlertAction(title: "知道了", style: .cancel) { (action) in
-        }
-        alertController.addAction(knownAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
+
 }

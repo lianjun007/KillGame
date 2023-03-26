@@ -22,7 +22,8 @@
 		DA46562E29CDC64C0051F420 /* ModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46562D29CDC64C0051F420 /* ModeViewController.swift */; };
 		DA625EC829CEDC5B00C50163 /* singlePlayerMode.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DA625EC729CEDC5B00C50163 /* singlePlayerMode.jpeg */; };
 		DA625ECF29CEE0E800C50163 /* stayTunedMode.png in Resources */ = {isa = PBXBuildFile; fileRef = DA625ECE29CEE0E800C50163 /* stayTunedMode.png */; };
-		DA625ED129CF427A00C50163 /* SingleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA625ED029CF427A00C50163 /* SingleViewController.swift */; };
+		DA87BE6229D094270078C679 /* RoleChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA87BE6129D094270078C679 /* RoleChooseViewController.swift */; };
+		DA87BE6529D096940078C679 /* DefaultRole.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DA87BE6429D096940078C679 /* DefaultRole.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +63,8 @@
 		DA46562D29CDC64C0051F420 /* ModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeViewController.swift; sourceTree = "<group>"; };
 		DA625EC729CEDC5B00C50163 /* singlePlayerMode.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = singlePlayerMode.jpeg; sourceTree = "<group>"; };
 		DA625ECE29CEE0E800C50163 /* stayTunedMode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stayTunedMode.png; sourceTree = "<group>"; };
-		DA625ED029CF427A00C50163 /* SingleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleViewController.swift; sourceTree = "<group>"; };
+		DA87BE6129D094270078C679 /* RoleChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoleChooseViewController.swift; path = HuiYanKill/Interface/PersentView/RoleChooseViewController.swift; sourceTree = SOURCE_ROOT; };
+		DA87BE6429D096940078C679 /* DefaultRole.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DefaultRole.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,8 +159,7 @@
 			children = (
 				DA4655F829CDC1FF0051F420 /* MainViewController.swift */,
 				DA46562A29CDC5E50051F420 /* RoleViewController.swift */,
-				DA46562D29CDC64C0051F420 /* ModeViewController.swift */,
-				DA625ED229CF42A000C50163 /* ModeChange */,
+				DA625ED229CF42A000C50163 /* PersentView */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -166,6 +167,7 @@
 		DA625ECA29CEDC8400C50163 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				DA87BE6329D096670078C679 /* RoleImage */,
 				DA625ECB29CEDCAE00C50163 /* Mode */,
 			);
 			path = Image;
@@ -180,12 +182,21 @@
 			path = Mode;
 			sourceTree = "<group>";
 		};
-		DA625ED229CF42A000C50163 /* ModeChange */ = {
+		DA625ED229CF42A000C50163 /* PersentView */ = {
 			isa = PBXGroup;
 			children = (
-				DA625ED029CF427A00C50163 /* SingleViewController.swift */,
+				DA87BE6129D094270078C679 /* RoleChooseViewController.swift */,
+				DA46562D29CDC64C0051F420 /* ModeViewController.swift */,
 			);
-			path = ModeChange;
+			path = PersentView;
+			sourceTree = "<group>";
+		};
+		DA87BE6329D096670078C679 /* RoleImage */ = {
+			isa = PBXGroup;
+			children = (
+				DA87BE6429D096940078C679 /* DefaultRole.jpeg */,
+			);
+			path = RoleImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,7 +278,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DA4655EC29CDC1FF0051F420 /* Build configuration list for PBXProject "HuiYanKill" */;
+			buildConfigurationList = DA4655EC29CDC1FF0051F420 /* Build configuration list for PBXProject "huiyanKill" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -293,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA46560429CDC2000051F420 /* LaunchScreen.storyboard in Resources */,
+				DA87BE6529D096940078C679 /* DefaultRole.jpeg in Resources */,
 				DA625ECF29CEE0E800C50163 /* stayTunedMode.png in Resources */,
 				DA625EC829CEDC5B00C50163 /* singlePlayerMode.jpeg in Resources */,
 				DA46560129CDC2000051F420 /* Assets.xcassets in Resources */,
@@ -326,8 +338,8 @@
 				DA46562B29CDC5E50051F420 /* RoleViewController.swift in Sources */,
 				DA4655FF29CDC1FF0051F420 /* HuiYanKill.xcdatamodeld in Sources */,
 				DA46562E29CDC64C0051F420 /* ModeViewController.swift in Sources */,
+				DA87BE6229D094270078C679 /* RoleChooseViewController.swift in Sources */,
 				DA4655F529CDC1FF0051F420 /* AppDelegate.swift in Sources */,
-				DA625ED129CF427A00C50163 /* SingleViewController.swift in Sources */,
 				DA4655F729CDC1FF0051F420 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -627,7 +639,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DA4655EC29CDC1FF0051F420 /* Build configuration list for PBXProject "HuiYanKill" */ = {
+		DA4655EC29CDC1FF0051F420 /* Build configuration list for PBXProject "huiyanKill" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA46561C29CDC2010051F420 /* Debug */,

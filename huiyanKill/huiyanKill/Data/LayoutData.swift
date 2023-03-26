@@ -20,7 +20,7 @@ var safeAreaInsets = window?.safeAreaInsets ?? UIEdgeInsets.zero
 // 判定显示模式
 var displayMode = safeAreaInsets.left >= screenSpaced ? 0: 3
 
-var safePoint = CGPoint(x: safeAreaInsets.left, y: screenSpaced)
+var safePoint = displayMode == 0 ? CGPoint(x: safeAreaInsets.left, y: screenSpaced): CGPoint(x: screenSpaced, y: screenSpaced)
 var safeSize = displayMode == 0 ? CGSize(width: screenWidth - (safeAreaInsets.left + safeAreaInsets.right), height: screenHeight - screenSpaced * 2): CGSize(width: screenWidth - screenSpaced * 2, height: screenHeight - screenSpaced * 2)
 
 func safeDataAdaptation() -> (CGSize, CGPoint) {
@@ -47,8 +47,8 @@ func safeDataAdaptation() -> (CGSize, CGPoint) {
 // Size
 let buttonSize = CGSize(width: screenHeight * 3 / 10, height: screenHeight / 10)
 let buttonSmallSize = CGSize(width: screenHeight / 10, height: screenHeight / 10)
-let roleBoxSize = CGSize(width: 0, height: 0) // 暂未设置
-let roleBoxLargeSize = CGSize(width: (screenHeight - controlSpaced - screenSpaced / 5) / 3 * 2, height: screenHeight - controlSpaced - screenSpaced / 5)
+let roleBoxSize = CGSize(width: (safeSize.width - controlSpaced * 5) / 6, height: (safeSize.width - controlSpaced * 5) / 4) // 暂未设置
+let roleBoxLargeSize = CGSize(width: (safeSize.height - controlSpaced - buttonSize.height) / 3 * 2, height: safeSize.height - controlSpaced - buttonSize.height)
 let roleBoxSmallSize = CGSize(width: (screenWidth - safeAreaInsets.left - safeAreaInsets.right - controlSpaced * 6) / 7, height: (screenWidth - safeAreaInsets.left - safeAreaInsets.right - controlSpaced * 6) * 3 / 14)
 let controlRoundSize = screenHeight / 20
 // color
@@ -60,12 +60,12 @@ let fontColor = UIColor.black
 let menuBtnPoint = CGPoint(x: safePoint.x + safeSize.width - screenHeight * 3 / 10, y: safePoint.y)
 let gameStartBtnPoint = CGPoint(x: safePoint.x + safeSize.width - screenHeight * 3 / 10, y: safePoint.y + safeSize.height - screenHeight / 10)
 let roleImagePoint = CGPoint(x: safePoint.x, y: safePoint.y + controlSpaced + screenHeight / 10)
-let roleTextPoint = CGPoint(x: safePoint.x + controlSpaced + (screenHeight - controlSpaced - screenSpaced / 5) / 3 * 2, y: safePoint.y + screenHeight - controlSpaced - screenSpaced / 5)
+let roleTextPoint = CGPoint(x: safePoint.x + controlSpaced + roleBoxLargeSize.width, y: safePoint.y + controlSpaced + buttonSize.height)
 
-let roleTextSize = CGSize(width: safeSize.width - roleBoxLargeSize.width - controlSpaced, height: screenHeight - controlSpaced - screenSpaced / 5)
+let roleTextSize = CGSize(width: safeSize.width - roleBoxLargeSize.width - controlSpaced, height: safeSize.height - buttonSize.height - controlSpaced)
 
 // Navigation Bar
-func navigationBarBuild(view: UIView, direction: Bool, buttonCount num: Int, buttonContent: Array<Array<String>>) -> Array<UIButton> {
+func navigationBarBuild(view: UIView, direction: Bool, buttonCount num: Int, buttonContent: Array<Array<String>>, bounce: Bool) -> Array<UIButton> {
     // direction为true则在顶部创建一个水平滑动导航栏，为false则在左侧创建一个垂直滑动导航栏
     
     let navBarSize = direction ? CGSize(width: safeSize.width, height: buttonSize.height): CGSize(width: buttonSize.width, height: safeSize.height)
@@ -75,6 +75,13 @@ func navigationBarBuild(view: UIView, direction: Bool, buttonCount num: Int, but
     navigationBar.showsHorizontalScrollIndicator = false
     navigationBar.contentSize = direction ? CGSize(width: (buttonSize.width + controlSpaced) * CGFloat(num) - controlSpaced, height: navigationBar.frame.height): CGSize(width: navigationBar.frame.width, height: (buttonSize.height + controlSpaced) * CGFloat(num) - controlSpaced)
     view.addSubview(navigationBar)
+    
+    // 强制界面可以反弹
+    if direction {
+        navigationBar.alwaysBounceHorizontal = bounce
+    } else {
+        navigationBar.alwaysBounceVertical = bounce
+    }
     
     // 往导航栏内添加按钮，buttonContent的第一个数组包含了图片内容，第二个数组包含了标题内容
     var image = buttonContent[0]
@@ -119,6 +126,7 @@ func ButtonBuild(image: String, title: String, piont: CGPoint, view: UIView) -> 
     
     let button = UIButton(frame: CGRect(origin: piont, size: buttonSize))
     button.layer.cornerRadius = controlRoundSize
+    button.tintColor = fontColor
     button.setImage(UIImage(systemName: image), for: .normal)
     button.setTitle(title, for: .normal)
     button.backgroundColor = controlColor
@@ -128,87 +136,4 @@ func ButtonBuild(image: String, title: String, piont: CGPoint, view: UIView) -> 
     return button
     
 }
-
-
-
-
-
-
-
-// roleChooseButton是角色选择按钮
-//let roleChooseButton = UIButton(frame: CGRect(origin: firstButtonPoint, size: buttonSize))
-//roleChooseButton.layer.cornerRadius = buttonRadius
-//roleChooseButton.tintColor = fontColor
-//roleChooseButton.setImage(UIImage(systemName: "person.fill.questionmark.rtl"), for: .normal)
-//roleChooseButton.setTitle("角色", for: .normal)
-//let fontRoChBtnSize = Int(fontSize) * 2 / (roleChooseButton.titleLabel?.text?.count ?? 2)
-//roleChooseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: CGFloat(fontRoChBtnSize))
-//roleChooseButton.titleLabel?.adjustsFontSizeToFitWidth = true
-//roleChooseButton.setTitleColor(fontColor, for: .normal)
-//roleChooseButton.backgroundColor = groundColor
-//view.addSubview(roleChooseButton)
-//
-//// 给roleChooseButton按钮添加菜单
-//var roleChooseArray: [UIAction] = []
-//for i in 0 ..< roleDate.count {
-//    let roleChooseAction = UIAction(title: roleDate[i]?["角色"] ?? "未知", image: UIImage(systemName: "person")) { [self] _ in
-//        roleChoose = i
-//        roleIsChoose = true
-//        roleChooseButton.setTitle("\(roleDate[i]?["角色"] ?? "未知")", for: .normal)
-//        roleChooseButton.setImage(UIImage(systemName: "person.fill.checkmark.rtl"), for: .normal)
-//        // 改变角色插画显示区域的图片
-//        let roleImageName = roleDate[i]?["插画"] ?? ""
-//        let roleImage = UIImage(named: roleImageName)
-//        roleImageBox.image = roleImage
-//        // 改变信息预览区域的文本
-//        roleDataLabel[0].text = "角色：\(roleDate[i]?["角色"] ?? "未知")"
-//        roleDataLabel[1].text = "生命：\(roleDate[i]?["生命"] ?? "未知")"
-//        roleDataLabel[2].text = "体力：\(roleDate[i]?["体力"] ?? "未知")"
-//        roleDataLabel[3].text = "攻击：\(roleDate[i]?["攻击"] ?? "未知")"
-//        roleDataLabel[4].text = "防御：\(roleDate[i]?["防御"] ?? "未知")"
-//    }
-//    roleChooseArray.append(roleChooseAction)
-//}
-//let roleChooseMenu = UIMenu(title: "选择本局游戏你要使用的角色", children: roleChooseArray)
-//roleChooseButton.menu = roleChooseMenu
-//roleChooseButton.showsMenuAsPrimaryAction = true
-//
-//// roleCountButton是人数选择按钮
-//let roleCountButton = UIButton(frame: CGRect(origin: secondButtonPoint, size: buttonSize))
-//roleCountButton.layer.cornerRadius = buttonRadius
-//roleCountButton.setImage(UIImage(systemName: "person.fill.checkmark.rtl"), for: .normal)
-//roleCountButton.setTitle("设定", for: .normal)
-//roleCountButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSize)
-//roleCountButton.setTitleColor(fontColor, for: .normal)
-//roleCountButton.tintColor = fontColor
-//roleCountButton.backgroundColor = groundColor
-//view.addSubview(roleCountButton)
-//
-//// 给roleCountButton按钮添加菜单
-//var roleCountArray: [UIAction] = []
-//for i in 0 ... 6 {
-//    let roleCountAction = UIAction(title: "游戏人数：\(i + 2)", image: UIImage(systemName: "person")) { [self] _ in
-//        roleIsCount = true
-//        roleCount = i + 2
-//        // 改变roleCountButton的显示内容
-//        roleCountButton.setTitle("人数:\(i + 2)", for: .normal)
-//        roleCountButton.backgroundColor = .darkText
-//    }
-//    roleCountArray.append(roleCountAction)
-//}
-//let roleCountMenu = UIMenu(title: "选择本局游戏的参与人数", children: roleCountArray)
-//roleCountButton.menu = roleCountMenu
-//roleCountButton.showsMenuAsPrimaryAction = true
-
-
-
-
-
-
-//let rlPrBoxHt = safeSizeAll.height - controlSpaced - btnSizeHt // rolePreviewBox的标准高度
-//let btnSizeHt = safeSizeAll.height / 10
-//
-//let rolePreviewBoxSize = CGSize(width: rlPrBoxHt * 2 / 3, height: rlPrBoxHt) // 角色框大尺寸
-
-
 

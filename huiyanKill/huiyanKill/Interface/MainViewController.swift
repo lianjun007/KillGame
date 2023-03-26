@@ -20,15 +20,16 @@ class MainViewController: UIViewController {
         let enterGameButton = ButtonBuild(image: "", title: "进入游戏", piont: enterGameBtnPoint, view: view)
         enterGameButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         
-        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: 3, buttonContent: [["unknown", "unknown", "unknown"], ["登录", "公告", "官网"]])
-        navButtonArray[0].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
-        navButtonArray[1].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
-        navButtonArray[2].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
+        let buttonCount = 5
+        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: buttonCount, buttonContent: [["rectangle.portrait.and.arrow.right", "doc.richtext.ar", "macwindow.on.rectangle", "terminal", "gearshape"], ["登录", "公告", "官网", "日志", "设置"]], bounce: false)
+        for i in 0 ..< buttonCount {
+            navButtonArray[i].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
+        }
         
     }
     
     @objc func buttonTapped() {
-        self.navigationController?.pushViewController(ModeViewController(), animated: true)
+        self.navigationController?.pushViewController(RoleViewController(), animated: true)
     }
     
     @objc func stayTuned() {
