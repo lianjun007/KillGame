@@ -65,11 +65,16 @@ let roleTextPoint = CGPoint(x: safePoint.x + controlSpaced + roleBoxLargeSize.wi
 let roleTextSize = CGSize(width: safeSize.width - roleBoxLargeSize.width - controlSpaced, height: safeSize.height - buttonSize.height - controlSpaced)
 
 // Navigation Bar
-func navigationBarBuild(view: UIView, direction: Bool, buttonCount num: Int, buttonContent: Array<Array<String>>, bounce: Bool) -> Array<UIButton> {
-    // direction为true则在顶部创建一个水平滑动导航栏，为false则在左侧创建一个垂直滑动导航栏
+func navigationBarBuild(view: UIView, direction: Bool, buttonCount num: Int, buttonContent: Array<Array<String>>, bounce: Bool, boxAlpha: Double) -> Array<UIButton> {
     
+    let navigationBarBox = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: screenWidth, height: safePoint.y + buttonSize.height + controlSpaced / 2)))
+    navigationBarBox.backgroundColor = backgroundColor.withAlphaComponent(boxAlpha)
+    view.addSubview(navigationBarBox)
+    
+    // direction为true则在顶部创建一个水平滑动导航栏，为false则在左侧创建一个垂直滑动导航栏
     let navBarSize = direction ? CGSize(width: safeSize.width, height: buttonSize.height): CGSize(width: buttonSize.width, height: safeSize.height)
     let navigationBar = UIScrollView(frame: CGRect(origin: safePoint, size: navBarSize))
+    navigationBar.layer.cornerRadius = controlRoundSize
     navigationBar.backgroundColor = UIColor(cgColor: CGColor(red: 1, green: 1, blue: 1, alpha: 0))
     navigationBar.showsVerticalScrollIndicator = false
     navigationBar.showsHorizontalScrollIndicator = false

@@ -27,6 +27,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="HuiYanKill" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
@@ -36,129 +37,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="1Ez-yf-t1b"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-430" y="-129"/>
-        </scene>
-        <!--Setting View Controller-->
-        <scene sceneID="moh-Bk-TkD">
-            <objects>
-                <viewController id="S7o-cK-Lpu" customClass="SettingViewController" customModule="HuiYanKill" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dpT-nc-EcB">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Ez4-7k-NH6"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iLP-O1-eJe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3056" y="587"/>
-        </scene>
-        <!--Mode View Controller-->
-        <scene sceneID="UjO-a0-W7U">
-            <objects>
-                <viewController storyboardIdentifier="ModeViewController" id="G9j-gC-OWj" customClass="ModeViewController" customModule="HuiYanKill" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8mW-RU-Pmf">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="fE8-tM-7W9"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Shv-O6-Oso" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="468" y="587"/>
-        </scene>
-        <!--Role View Controller-->
-        <scene sceneID="HIS-OI-cPI">
-            <objects>
-                <viewController id="sAg-dz-dQc" customClass="RoleViewController" customModule="HuiYanKill" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rQF-ck-u5U">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="b7T-A3-Kf0"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DPT-iW-TaB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="469" y="-130"/>
-        </scene>
-        <!--Role Choose View Controller-->
-        <scene sceneID="Zoi-ay-hK8">
-            <objects>
-                <viewController id="7Fa-lZ-J0j" customClass="RoleChooseViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="h3d-nl-LjY">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="A55-KG-z32"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dAi-Mp-md0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="468" y="-830"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="aw6-rY-lWS">
-            <objects>
-                <viewController id="nmD-d6-dYT" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9LK-4D-C1e">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="YrM-1l-fzg"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SlI-oC-8nC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2207" y="-845"/>
-        </scene>
-        <!--Single View Controller-->
-        <scene sceneID="VFQ-iN-leB">
-            <objects>
-                <viewController id="Jgu-cO-iZm" customClass="SingleViewController" customModule="HuiYanKill" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9mf-3N-e2d">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="yAr-2w-eKT"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AbG-Bj-vbd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2207" y="-130"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="bdR-1o-sgf">
-            <objects>
-                <viewController id="7VN-aI-ZQM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="OBh-mF-U5N">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="ANK-Qe-NFR"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jba-fU-51A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2207" y="587"/>
-        </scene>
-        <!--Game View Controller-->
-        <scene sceneID="duz-bd-hyS">
-            <objects>
-                <viewController id="gxx-su-J0c" customClass="GameViewController" customModule="HuiYanKill" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="FHT-3n-3TX">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="LcM-dG-v3u"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h5n-fa-wOK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3083" y="-130"/>
         </scene>
     </scenes>
     <resources>

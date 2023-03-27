@@ -14,7 +14,7 @@ let screenSpaced = screenHeight / 20 // 与屏幕的边距
 
 var displayAdaptationData = 0 // 显示模式适配模式码
 // 获取窗口和安全视图指南
-let window = UIApplication.shared.windows.first //
+let window = UIApplication.shared.windows.first
 var safeArea = window?.safeAreaInsets ?? UIEdgeInsets.zero
 // 默认模式下的安全尺寸和安全原点
 var safeSizeAll = CGSize(width: screenWidth - (safeArea.left + safeArea.right), height: screenHeight - screenSpaced * 2)

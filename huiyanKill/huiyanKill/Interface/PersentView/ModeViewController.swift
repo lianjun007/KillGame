@@ -12,7 +12,7 @@ class ModeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: 1, buttonContent: [["figure.softball"], ["模式选择"]], bounce: false)
+        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: 1, buttonContent: [["figure.softball"], ["模式选择"]], bounce: false, boxAlpha: 1)
         navButtonArray[0].frame.origin.x += CGFloat((buttonSize.width + controlSpaced) * 2)
         navButtonArray[0].addTarget(self, action: #selector(clickEvents), for: .touchUpInside)
         

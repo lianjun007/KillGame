@@ -16,7 +16,7 @@ class RoleViewController: UIViewController {
         view.backgroundColor = backgroundColor
         
         let buttonCount = 8
-        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: buttonCount, buttonContent: [["arrowshape.backward", "person", "figure.softball", "person.2", "unknown", "unknown", "unknown", "unknown"], ["返回首页", "角色选择", "模式选择", "角色图鉴"]], bounce: true)
+        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: buttonCount, buttonContent: [["arrowshape.backward", "person", "figure.softball", "person.2", "unknown", "unknown", "unknown", "unknown"], ["返回首页", "角色选择", "模式选择", "角色图鉴"]], bounce: true, boxAlpha: 1)
         for i in 0 ..< buttonCount {
             navButtonArray[i].addTarget(self, action: #selector(clickEvents), for: .touchUpInside)
             navButtonArray[i].tag = i

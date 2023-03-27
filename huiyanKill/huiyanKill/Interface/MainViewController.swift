@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
         enterGameButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         
         let buttonCount = 5
-        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: buttonCount, buttonContent: [["rectangle.portrait.and.arrow.right", "doc.richtext.ar", "macwindow.on.rectangle", "terminal", "gearshape"], ["登录", "公告", "官网", "日志", "设置"]], bounce: false)
+        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: buttonCount, buttonContent: [["rectangle.portrait.and.arrow.right", "doc.richtext.ar", "macwindow.on.rectangle", "terminal", "gearshape"], ["登录", "公告", "官网", "日志", "设置"]], bounce: false, boxAlpha: 1)
         for i in 0 ..< buttonCount {
             navButtonArray[i].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
         }
