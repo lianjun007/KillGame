@@ -47,7 +47,7 @@ func safeDataAdaptation() -> (CGSize, CGPoint) {
 // Size
 let buttonSize = CGSize(width: screenHeight * 3 / 10, height: screenHeight / 10)
 let buttonSmallSize = CGSize(width: screenHeight / 10, height: screenHeight / 10)
-let roleBoxSize = CGSize(width: (safeSize.width - controlSpaced * 5) / 6, height: (safeSize.width - controlSpaced * 5) / 4) // 暂未设置
+let roleBoxSize = CGSize(width: (safeSize.width - controlSpaced * 5) / 6, height: (safeSize.width - controlSpaced * 5) / 4)
 let roleBoxLargeSize = CGSize(width: (safeSize.height - controlSpaced - buttonSize.height) / 3 * 2, height: safeSize.height - controlSpaced - buttonSize.height)
 let roleBoxSmallSize = CGSize(width: (screenWidth - safeAreaInsets.left - safeAreaInsets.right - controlSpaced * 6) / 7, height: (screenWidth - safeAreaInsets.left - safeAreaInsets.right - controlSpaced * 6) * 3 / 14)
 let controlRoundSize = screenHeight / 20

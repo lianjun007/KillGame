@@ -16,9 +16,10 @@ class RoleChooseViewController: UIViewController {
         navButtonArray[0].frame.origin.x += CGFloat(buttonSize.width + controlSpaced)
         navButtonArray[0].addTarget(self, action: #selector(clickEvents), for: .touchUpInside)
         
+        
         // Role Interface 创建滚动视图
         displayBoxView.showsHorizontalScrollIndicator = true
-        displayBoxView.contentSize = CGSize(width: CGFloat(roleData.count) * (roleBoxLargeSize.width + controlSpaced) - controlSpaced, height: displayBoxView.frame.size.height)
+        displayBoxView.contentSize = CGSize(width: safeSize.width, height: CGFloat((safeSize.width - controlSpaced * 5) / 4 + controlSpaced) * CGFloat((roleData.count - roleData.count % 6) / 6 + 1))
         view.addSubview(displayBoxView)
         
         // 创建ModeBox
@@ -34,7 +35,21 @@ class RoleChooseViewController: UIViewController {
             }
             
             let modeBox = UIButton(frame: CGRect(origin: displayMode == 0 ? CGPoint(x: 0, y: 0): CGPoint(x: screenSpaced, y: 0), size: roleBoxSize))
-            modeBox.frame.origin.x += CGFloat(i) * (controlSpaced + modeBox.frame.width)
+            
+            switch i % 6 {
+            case 0: modeBox.frame.origin.x += CGFloat(0) * (controlSpaced + modeBox.frame.width)
+            case 1: modeBox.frame.origin.x += CGFloat(1) * (controlSpaced + modeBox.frame.width)
+            case 2: modeBox.frame.origin.x += CGFloat(2) * (controlSpaced + modeBox.frame.width)
+            case 3: modeBox.frame.origin.x += CGFloat(3) * (controlSpaced + modeBox.frame.width)
+            case 4: modeBox.frame.origin.x += CGFloat(4) * (controlSpaced + modeBox.frame.width)
+            case 5: modeBox.frame.origin.x += CGFloat(5) * (controlSpaced + modeBox.frame.width)
+            default:
+                break
+            }
+            let num = (i - i % 6) / 6
+            modeBox.frame.origin.y += CGFloat(modeBox.frame.size.height + controlSpaced) * CGFloat(num)
+
+            // modeBox.frame.origin.x += CGFloat(i) * (controlSpaced + modeBox.frame.width)
             modeBoxArray.append(modeBox)
             modeBox.layer.cornerRadius = controlRoundSize
             let borderWidth = CGFloat(3)
@@ -69,11 +84,11 @@ class RoleChooseViewController: UIViewController {
         
     }
     
-    let displayBoxView = UIScrollView(frame: CGRect(origin: CGPoint(x: 0, y: safePoint.y + buttonSize.height + controlSpaced), size: CGSize(width: screenWidth, height: safeSize.height - controlSpaced - buttonSize.height)))
+    let displayBoxView = UIScrollView(frame: CGRect(origin: CGPoint(x: safePoint.x, y: safePoint.y + buttonSize.height + controlSpaced), size: CGSize(width: safeSize.width, height: safeSize.height - controlSpaced - buttonSize.height)))
     var modeBoxArray: Array<UIButton> = []
     
     @objc func scrollToView(sender: UIButton) {
-        displayBoxView.setContentOffset(CGPoint(x: modeBoxArray[sender.tag].frame.origin.x - safePoint.x, y: 0), animated: true)
+        self.dismiss(animated: true)
     }
     
     @objc func clickEvents() {
