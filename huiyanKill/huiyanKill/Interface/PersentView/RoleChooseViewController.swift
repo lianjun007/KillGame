@@ -8,7 +8,7 @@
 import UIKit
 
 class RoleChooseViewController: UIViewController, UIScrollViewDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor.withAlphaComponent(0.8)
@@ -20,7 +20,7 @@ class RoleChooseViewController: UIViewController, UIScrollViewDelegate {
         displayBoxView.contentSize = CGSize(width: safeSize.width, height: CGFloat((safeSize.width - controlSpaced * 5) / 4 + controlSpaced) * CGFloat((roleData.count - roleData.count % 6) / 6 + 1) + buttonSize.height + safePoint.y)
         view.addSubview(displayBoxView)
         
-//        ButtonBuild(image: "", title: "", piont: CGPoint(x: buttonSize.width + controlSpaced, y: safePoint.y), view: displayBoxView)
+        //        ButtonBuild(image: "", title: "", piont: CGPoint(x: buttonSize.width + controlSpaced, y: safePoint.y), view: displayBoxView)
         
         // 创建ModeBox
         for i in 0 ..< roleData.count {
@@ -36,6 +36,8 @@ class RoleChooseViewController: UIViewController, UIScrollViewDelegate {
             
             let modeBox = UIButton(frame: CGRect(origin: displayMode == 0 ? CGPoint(x: 0, y: safePoint.y + buttonSize.height + controlSpaced): CGPoint(x: 0, y: safePoint.y + buttonSize.height + controlSpaced), size: roleBoxSize))
             
+            modeBox.alpha = 0
+            
             switch i % 6 {
             case 0: modeBox.frame.origin.x += CGFloat(0) * (controlSpaced + modeBox.frame.width)
             case 1: modeBox.frame.origin.x += CGFloat(1) * (controlSpaced + modeBox.frame.width)
@@ -48,7 +50,7 @@ class RoleChooseViewController: UIViewController, UIScrollViewDelegate {
             }
             let num = (i - i % 6) / 6
             modeBox.frame.origin.y += CGFloat(modeBox.frame.size.height + controlSpaced) * CGFloat(num)
-
+            
             // modeBox.frame.origin.x += CGFloat(i) * (controlSpaced + modeBox.frame.width)
             modeBoxArray.append(modeBox)
             modeBox.layer.cornerRadius = controlRoundSize
@@ -78,30 +80,85 @@ class RoleChooseViewController: UIViewController, UIScrollViewDelegate {
             
         }
         
+//        for i in 0 ..< modeBoxArray.count {
+//            UIView.animate(withDuration: 0.05, delay: Double(i) * 0.05, options: [], animations: {
+//                self.modeBoxArray[i].alpha = 1
+//                self.modeBoxArray[i].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//            }, completion: nil)
+//        }
+//        
+        UIView.animate(withDuration: 0.05, animations: {
+            self.modeBoxArray[0].alpha = 1
+            self.modeBoxArray[0].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.05, animations: {
+                self.modeBoxArray[1].alpha = 1
+                self.modeBoxArray[1].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.05, animations: {
+                    self.modeBoxArray[2].alpha = 1
+                    self.modeBoxArray[2].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                }, completion: { _ in
+                    UIView.animate(withDuration: 0.05, animations: {
+                        self.modeBoxArray[3].alpha = 1
+                        self.modeBoxArray[3].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    }, completion: { _ in
+                        UIView.animate(withDuration: 0.05, animations: {
+                            self.modeBoxArray[4].alpha = 1
+                            self.modeBoxArray[4].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                        }, completion: { _ in
+                            UIView.animate(withDuration: 0.05, animations: {
+                                self.modeBoxArray[5].alpha = 1
+                                self.modeBoxArray[5].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                            }, completion: { _ in
+                                UIView.animate(withDuration: 0.05, animations: {
+                                    self.modeBoxArray[6].alpha = 1
+                                    self.modeBoxArray[6].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                                }, completion: { _ in
+                                    UIView.animate(withDuration: 0.05, animations: {
+                                        self.modeBoxArray[7].alpha = 1
+                                        self.modeBoxArray[7].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                                    }, completion: { _ in
+                                        UIView.animate(withDuration: 0.05, animations: {
+                                            self.modeBoxArray[8].alpha = 1
+                                            self.modeBoxArray[8].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                                        }, completion: { _ in
+                                            UIView.animate(withDuration: 0.05, animations: {
+                                                self.modeBoxArray[9].alpha = 1
+                                                self.modeBoxArray[9].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                                            }, completion: { _ in
+                                            })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
+        
         for i in 0 ..< roleData.count {
             modeBoxArray[i].addTarget(self, action: #selector(scrollToView), for: .touchUpInside)
         }
         
         navButtonArray = navigationBarBuild(view: view, direction: true, buttonCount: buttonCount, buttonContent: [["arrowshape.backward", "person", "figure.softball", "person.2", "unknown", "unknown", "unknown", "unknown"], ["返回首页", "角色选择", "模式选择", "角色图鉴"]], bounce: true, boxAlpha: 0.8)
-        for i in 0 ..< buttonCount {
-            navButtonArray[i].backgroundColor = frameColor
-        }
-        navButtonArray[1].backgroundColor = controlColor
+        navButtonArray[1].backgroundColor = frameColor
         // navButtonArray[0].frame.origin.x += CGFloat(buttonSize.width + controlSpaced)
         navButtonArray[1].addTarget(self, action: #selector(clickEvents), for: .touchUpInside)
         // navButtonArray[0].isHidden = modeBoxArray[1].frame.intersects(navButtonArray[0].frame)
-
+        
     }
     
     let displayBoxView = UIScrollView(frame: CGRect(origin: CGPoint(x: safePoint.x, y: 0), size: CGSize(width: safeSize.width, height: screenHeight)))
     var modeBoxArray: Array<UIButton> = []
     
     @objc func scrollToView(sender: UIButton) {
-        self.dismiss(animated: true)
+        self.dismiss(animated: false)
     }
     
     @objc func clickEvents() {
-        self.dismiss(animated: true)
+        self.dismiss(animated: false)
     }
     
     var navButtonArray: Array<UIButton> = []
@@ -111,14 +168,18 @@ class RoleChooseViewController: UIViewController, UIScrollViewDelegate {
         let offsetY = displayBoxView.contentOffset.y
         let alpha = (offsetY - (controlSpaced + buttonSize.height / 2)) / navButtonArray[1].frame.height
         if offsetY >= controlSpaced + buttonSize.height / 2 {
-            for i in 0 ..< buttonCount{
+            for i in 0 ... buttonCount {
                 navButtonArray[i].alpha = 1 - alpha
+                navButtonArray[i].isUserInteractionEnabled = false
+                navigationBar.isUserInteractionEnabled = false
             }
         } else {
-            for i in 0 ..< buttonCount{
+            for i in 0 ... buttonCount {
                 navButtonArray[i].alpha = 1
+                navButtonArray[i].isUserInteractionEnabled = true
+                navigationBar.isUserInteractionEnabled = true
             }
         }
     }
-
+    
 }

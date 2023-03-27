@@ -47,7 +47,7 @@ class RoleViewController: UIViewController {
     @objc func clickEvents(sender: UIButton) {
         switch sender.tag {
         case 0: self.navigationController?.popViewController(animated: true)
-        case 1: self.present(RoleChooseViewController(), animated: true)
+        case 1: self.present(RoleChooseViewController(), animated: false)
         case 2: self.present(ModeViewController(), animated: true)
         default:
             break
