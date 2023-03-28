@@ -55,6 +55,7 @@ let controlRoundSize = screenHeight / 20
 let backgroundColor = UIColor.systemGray6
 let controlColor = UIColor.systemGray4
 let frameColor = UIColor.systemGray
+let buttonColor = UIColor.systemGray2
 let fontColor = UIColor.black
 // Point
 let menuBtnPoint = CGPoint(x: safePoint.x + safeSize.width - screenHeight * 3 / 10, y: safePoint.y)
@@ -66,10 +67,10 @@ let roleTextSize = CGSize(width: safeSize.width - roleBoxLargeSize.width - contr
 
 // Navigation Bar
 var navigationBar = UIScrollView()
-func navigationBarBuild(view: UIView, direction: Bool, buttonCount num: Int, buttonContent: Array<Array<String>>, bounce: Bool, boxAlpha: Double) -> Array<UIButton> {
+func navigationBarBuild(view: UIView, direction: Bool, buttonCount num: Int, buttonContent: Array<Array<String>>, bounce: Bool) -> Array<UIButton> {
     
     let navigationBarBox = UIButton(frame: CGRect(origin: CGPointZero, size: CGSize(width: screenWidth, height: safePoint.y + buttonSize.height + controlSpaced / 2)))
-    navigationBarBox.backgroundColor = backgroundColor.withAlphaComponent(boxAlpha)
+    navigationBarBox.backgroundColor = backgroundColor
     view.addSubview(navigationBarBox)
     
     // direction为true则在顶部创建一个水平滑动导航栏，为false则在左侧创建一个垂直滑动导航栏

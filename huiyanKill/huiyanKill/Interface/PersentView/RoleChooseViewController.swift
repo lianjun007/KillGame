@@ -11,16 +11,15 @@ class RoleChooseViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = backgroundColor.withAlphaComponent(0.8)
+        view.backgroundColor = backgroundColor.withAlphaComponent(1.0)
         
         displayBoxView.delegate = self
         
         // Role Interface 创建滚动视图
-        displayBoxView.showsHorizontalScrollIndicator = true
-        displayBoxView.contentSize = CGSize(width: safeSize.width, height: CGFloat((safeSize.width - controlSpaced * 5) / 4 + controlSpaced) * CGFloat((roleData.count - roleData.count % 6) / 6 + 1) + buttonSize.height + safePoint.y)
+        displayBoxView.showsVerticalScrollIndicator = false
+        let num = roleData.count % 6 == 0 ? 0: 1
+        displayBoxView.contentSize = CGSize(width: safeSize.width, height: CGFloat((safeSize.width - controlSpaced * 5) / 4 + controlSpaced) * CGFloat((roleData.count - roleData.count % 6) / 6 + num) + buttonSize.height + safePoint.y)
         view.addSubview(displayBoxView)
-        
-        //        ButtonBuild(image: "", title: "", piont: CGPoint(x: buttonSize.width + controlSpaced, y: safePoint.y), view: displayBoxView)
         
         // 创建ModeBox
         for i in 0 ..< roleData.count {
@@ -36,7 +35,9 @@ class RoleChooseViewController: UIViewController, UIScrollViewDelegate {
             
             let modeBox = UIButton(frame: CGRect(origin: displayMode == 0 ? CGPoint(x: 0, y: safePoint.y + buttonSize.height + controlSpaced): CGPoint(x: 0, y: safePoint.y + buttonSize.height + controlSpaced), size: roleBoxSize))
             
-            modeBox.alpha = 0
+            if i < 12 {
+                modeBox.alpha = 0
+            }
             
             switch i % 6 {
             case 0: modeBox.frame.origin.x += CGFloat(0) * (controlSpaced + modeBox.frame.width)
@@ -80,99 +81,128 @@ class RoleChooseViewController: UIViewController, UIScrollViewDelegate {
             
         }
         
-//        for i in 0 ..< modeBoxArray.count {
-//            UIView.animate(withDuration: 0.05, delay: Double(i) * 0.05, options: [], animations: {
-//                self.modeBoxArray[i].alpha = 1
-//                self.modeBoxArray[i].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-//            }, completion: nil)
-//        }
-//        
-        UIView.animate(withDuration: 0.05, animations: {
-            self.modeBoxArray[0].alpha = 1
-            self.modeBoxArray[0].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.05, animations: {
-                self.modeBoxArray[1].alpha = 1
-                self.modeBoxArray[1].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.05, animations: {
-                    self.modeBoxArray[2].alpha = 1
-                    self.modeBoxArray[2].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                }, completion: { _ in
-                    UIView.animate(withDuration: 0.05, animations: {
-                        self.modeBoxArray[3].alpha = 1
-                        self.modeBoxArray[3].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                    }, completion: { _ in
-                        UIView.animate(withDuration: 0.05, animations: {
-                            self.modeBoxArray[4].alpha = 1
-                            self.modeBoxArray[4].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                        }, completion: { _ in
-                            UIView.animate(withDuration: 0.05, animations: {
-                                self.modeBoxArray[5].alpha = 1
-                                self.modeBoxArray[5].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                            }, completion: { _ in
-                                UIView.animate(withDuration: 0.05, animations: {
-                                    self.modeBoxArray[6].alpha = 1
-                                    self.modeBoxArray[6].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                                }, completion: { _ in
-                                    UIView.animate(withDuration: 0.05, animations: {
-                                        self.modeBoxArray[7].alpha = 1
-                                        self.modeBoxArray[7].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                                    }, completion: { _ in
-                                        UIView.animate(withDuration: 0.05, animations: {
-                                            self.modeBoxArray[8].alpha = 1
-                                            self.modeBoxArray[8].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                                        }, completion: { _ in
-                                            UIView.animate(withDuration: 0.05, animations: {
-                                                self.modeBoxArray[9].alpha = 1
-                                                self.modeBoxArray[9].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                                            }, completion: { _ in
-                                            })
-                                        })
-                                    })
-                                })
-                            })
-                        })
-                    })
-                })
-            })
-        })
-        
         for i in 0 ..< roleData.count {
-            modeBoxArray[i].addTarget(self, action: #selector(scrollToView), for: .touchUpInside)
+            modeBoxArray[i].addTarget(self, action: #selector(clickEvents), for: .touchUpInside)
         }
         
-        navButtonArray = navigationBarBuild(view: view, direction: true, buttonCount: buttonCount, buttonContent: [["arrowshape.backward", "person", "figure.softball", "person.2", "unknown", "unknown", "unknown", "unknown"], ["返回首页", "角色选择", "模式选择", "角色图鉴"]], bounce: true, boxAlpha: 0.8)
-        navButtonArray[1].backgroundColor = frameColor
-        // navButtonArray[0].frame.origin.x += CGFloat(buttonSize.width + controlSpaced)
-        navButtonArray[1].addTarget(self, action: #selector(clickEvents), for: .touchUpInside)
-        // navButtonArray[0].isHidden = modeBoxArray[1].frame.intersects(navButtonArray[0].frame)
+        navButtonArray = navigationBarBuild(view: view, direction: true, buttonCount: buttonCount, buttonContent: [["arrowshape.backward", "person"], ["返回首页", "角色选择"]], bounce: false)
+        navButtonArray[0].addTarget(self, action: #selector(clickEvents), for: .touchUpInside)
+        navButtonArray[1].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
         
+        UIView.animate(withDuration: 0, animations: {
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.5,delay: 0, options: [], animations: { [self] in
+                navButtonArray[0].backgroundColor = buttonColor
+                navButtonArray[0].setTitle("取消", for: .normal)
+                navButtonArray[1].backgroundColor = buttonColor
+                navButtonArray[1].setTitle("选择扩展", for: .normal)
+                navButtonArray[1].frame.size.width = safeSize.width - buttonSize.width + controlSpaced
+                navButtonArray[1].frame.origin.x = CGFloat(buttonSize.width + controlSpaced)
+            }, completion: { _ in
+                self.modeBoxArray[0].alpha = 1
+            })
+        })
+
+        
+//        UIView.animate(withDuration: 0.5, animations: {
+//            self.navButtonArray[0].frame.size.width = safeSize.width
+//        }, completion: { _ in
+//            UIView.animate(withDuration: 0.1, animations: {
+//            }, completion: { _ in
+//                UIView.animate(withDuration: 0.1, animations: {
+//                    self.modeBoxArray[0].alpha = 1
+//                    self.modeBoxArray[0].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                }, completion: { _ in
+//                    UIView.animate(withDuration: 0.1, animations: {
+//                        self.modeBoxArray[1].alpha = 1
+//                        self.modeBoxArray[1].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                    }, completion: { _ in
+//                        UIView.animate(withDuration: 0.1, animations: {
+//                            self.modeBoxArray[2].alpha = 1
+//                            self.modeBoxArray[2].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                        }, completion: { _ in
+//                            UIView.animate(withDuration: 0.1, animations: {
+//                                self.modeBoxArray[3].alpha = 1
+//                                self.modeBoxArray[3].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                            }, completion: { _ in
+//                                UIView.animate(withDuration: 0.1, animations: {
+//                                    self.modeBoxArray[4].alpha = 1
+//                                    self.modeBoxArray[4].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                                }, completion: { _ in
+//                                    UIView.animate(withDuration: 0.1, animations: {
+//                                        self.modeBoxArray[5].alpha = 1
+//                                        self.modeBoxArray[5].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                                    }, completion: { _ in
+//                                        UIView.animate(withDuration: 0.1, animations: {
+//                                            self.modeBoxArray[6].alpha = 1
+//                                            self.modeBoxArray[6].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                                        }, completion: { _ in
+//                                            UIView.animate(withDuration: 0.1, animations: {
+//                                                self.modeBoxArray[7].alpha = 1
+//                                                self.modeBoxArray[7].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                                            }, completion: { _ in
+//                                                UIView.animate(withDuration: 0.1, animations: {
+//                                                    self.modeBoxArray[8].alpha = 1
+//                                                    self.modeBoxArray[8].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                                                }, completion: { _ in
+//                                                    UIView.animate(withDuration: 0.1, animations: {
+//                                                        self.modeBoxArray[9].alpha = 1
+//                                                        self.modeBoxArray[9].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                                                    }, completion: { _ in
+//                                                        UIView.animate(withDuration: 0.1, animations: {
+//                                                            self.modeBoxArray[10].alpha = 1
+//                                                            self.modeBoxArray[10].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                                                        }, completion: { _ in
+//                                                            UIView.animate(withDuration: 0.1, animations: {
+//                                                                self.modeBoxArray[11].alpha = 1
+//                                                                self.modeBoxArray[11].transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                                                            }, completion: { _ in
+//
+//                                                            })
+//                                                        })
+//                                                    })
+//                                                })
+//                                            })
+//                                        })
+//                                    })
+//                                })
+//                            })
+//                        })
+//                    })
+//                })
+//            })
+//        })
     }
     
     let displayBoxView = UIScrollView(frame: CGRect(origin: CGPoint(x: safePoint.x, y: 0), size: CGSize(width: safeSize.width, height: screenHeight)))
     var modeBoxArray: Array<UIButton> = []
     
-    @objc func scrollToView(sender: UIButton) {
+    @objc func clickEvents(sender: UIButton) {
         self.dismiss(animated: false)
     }
     
-    @objc func clickEvents() {
-        self.dismiss(animated: false)
+    @objc func stayTuned() {
+        print(#function)
+        let alertController = UIAlertController(title: "敬请期待", message: "正在制作中......", preferredStyle: .alert)
+        let knownAction = UIAlertAction(title: "知道了", style: .cancel) { (action) in
+        }
+        alertController.addAction(knownAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     var navButtonArray: Array<UIButton> = []
-    let buttonCount = 8
+    let buttonCount = 2
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 获取UIScrollView的偏移量
         let offsetY = displayBoxView.contentOffset.y
-        let alpha = (offsetY - (controlSpaced + buttonSize.height / 2)) / navButtonArray[1].frame.height
-        if offsetY >= controlSpaced + buttonSize.height / 2 {
+        let alpha = (offsetY - (controlSpaced)) / navButtonArray[1].frame.height
+        if offsetY >= controlSpaced {
             for i in 0 ... buttonCount {
-                navButtonArray[i].alpha = 1 - alpha
-                navButtonArray[i].isUserInteractionEnabled = false
-                navigationBar.isUserInteractionEnabled = false
+                navButtonArray[i].alpha = 1 - alpha / 2
             }
+        } else if navButtonArray[buttonCount].alpha == 0 {
+            navButtonArray[buttonCount].isUserInteractionEnabled = false
+            navigationBar.isUserInteractionEnabled = false
         } else {
             for i in 0 ... buttonCount {
                 navButtonArray[i].alpha = 1

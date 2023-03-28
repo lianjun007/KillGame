@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
         enterGameButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         
         let buttonCount = 5
-        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: buttonCount, buttonContent: [["rectangle.portrait.and.arrow.right", "doc.richtext.ar", "macwindow.on.rectangle", "terminal", "gearshape"], ["登录", "公告", "官网", "日志", "设置"]], bounce: false, boxAlpha: 1)
+        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: buttonCount, buttonContent: [["rectangle.portrait.and.arrow.right", "doc.richtext.ar", "macwindow.on.rectangle", "terminal", "gearshape"], ["登录", "公告", "官网", "日志", "设置"]], bounce: false)
         for i in 0 ..< buttonCount {
             navButtonArray[i].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
         }
@@ -33,7 +33,6 @@ class MainViewController: UIViewController {
     }
     
     @objc func stayTuned() {
-        print(#function)
         let alertController = UIAlertController(title: "敬请期待", message: "该功能正在制作中......", preferredStyle: .alert)
         let knownAction = UIAlertAction(title: "知道了", style: .cancel) { (action) in
         }

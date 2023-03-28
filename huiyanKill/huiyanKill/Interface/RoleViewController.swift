@@ -15,8 +15,8 @@ class RoleViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         view.backgroundColor = backgroundColor
         
-        let buttonCount = 8
-        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: buttonCount, buttonContent: [["arrowshape.backward", "person", "figure.softball", "person.2", "unknown", "unknown", "unknown", "unknown"], ["返回首页", "角色选择", "模式选择", "角色图鉴"]], bounce: true, boxAlpha: 1)
+        let buttonCount = 4
+        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: buttonCount, buttonContent: [["arrowshape.backward", "person", "figure.softball", "person.2"], ["返回首页", "角色选择", "模式选择", "角色图鉴"]], bounce: false)
         for i in 0 ..< buttonCount {
             navButtonArray[i].addTarget(self, action: #selector(clickEvents), for: .touchUpInside)
             navButtonArray[i].tag = i
@@ -48,7 +48,7 @@ class RoleViewController: UIViewController {
         switch sender.tag {
         case 0: self.navigationController?.popViewController(animated: true)
         case 1: self.present(RoleChooseViewController(), animated: false)
-        case 2: self.present(ModeViewController(), animated: true)
+        case 2: self.present(ModeViewController(), animated: false)
         default:
             break
         }
