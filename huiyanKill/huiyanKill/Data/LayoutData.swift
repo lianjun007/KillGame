@@ -54,7 +54,7 @@ let controlRoundSize = screenHeight / 20
 // color
 let backgroundColor = UIColor.systemGray6
 let controlColor = UIColor.systemGray4
-let frameColor = UIColor.systemGray
+let frameColor = UIColor.systemGray4.withAlphaComponent(0.8).cgColor
 let buttonColor = UIColor.systemGray2
 let fontColor = UIColor.black
 // Point
@@ -71,6 +71,7 @@ func navigationBarBuild(view: UIView, direction: Bool, buttonCount num: Int, but
     
     let navigationBarBox = UIButton(frame: CGRect(origin: CGPointZero, size: CGSize(width: screenWidth, height: safePoint.y + buttonSize.height + controlSpaced / 2)))
     navigationBarBox.backgroundColor = backgroundColor
+    navigationBarBox.layer.shadowColor = backgroundColor.cgColor
     view.addSubview(navigationBarBox)
     
     // direction为true则在顶部创建一个水平滑动导航栏，为false则在左侧创建一个垂直滑动导航栏

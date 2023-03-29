@@ -26,7 +26,7 @@ class RoleViewController: UIViewController {
         let roleImageBox = UIImageView(frame: CGRect(origin: roleImagePoint, size: roleBoxLargeSize))
         roleImageBox.backgroundColor = backgroundColor
         roleImageBox.layer.borderWidth = 7
-        roleImageBox.layer.borderColor = controlColor.withAlphaComponent(0.8).cgColor
+        roleImageBox.layer.borderColor = frameColor
         roleImageBox.image = UIImage(named: "DefaultRole.jpeg")
         roleImageBox.contentMode = .scaleAspectFill
         roleImageBox.layer.cornerRadius = controlRoundSize
@@ -36,11 +36,16 @@ class RoleViewController: UIViewController {
         // roleBrieflyBox是角色选择后的信息预览区域的背景
         let roleTextBox = UIScrollView(frame: CGRect(origin: roleTextPoint, size: roleTextSize))
         roleTextBox.backgroundColor = backgroundColor
-        roleTextBox.layer.borderColor = controlColor.cgColor
+        roleTextBox.layer.borderColor = frameColor
         roleTextBox.layer.borderWidth = 7
         roleTextBox.layer.cornerRadius = controlRoundSize
         roleTextBox.contentSize = CGSize(width: roleTextSize.width, height: roleTextSize.height * 2) // 暂定
         view.addSubview(roleTextBox)
+        
+        // 开始游戏按钮
+        let gameStart = ButtonBuild(image: "", title: "开始游戏", piont: CGPoint(x: roleTextSize.width - buttonSize.width - controlSpaced, y: roleTextSize.height - buttonSize.height - controlSpaced), view: roleTextBox)
+        gameStart.tag = 4
+        gameStart.addTarget(self, action: #selector(clickEvents), for: .touchUpInside)
         
     }
     
@@ -49,15 +54,14 @@ class RoleViewController: UIViewController {
         case 0: self.navigationController?.popViewController(animated: true)
         case 1: self.present(RoleChooseViewController(), animated: false)
         case 2: self.present(ModeViewController(), animated: false)
+        case 4: self.navigationController?.pushViewController(GameViewController(), animated: true)
         default:
-            break
+            let alertController = UIAlertController(title: "敬请期待", message: "该功能正在制作中......", preferredStyle: .alert)
+            let knownAction = UIAlertAction(title: "知道了", style: .cancel) { (action) in
+            }
+            alertController.addAction(knownAction)
+            self.present(alertController, animated: true, completion: nil)
         }
-        print(#function)
-        let alertController = UIAlertController(title: "敬请期待", message: "该功能正在制作中......", preferredStyle: .alert)
-        let knownAction = UIAlertAction(title: "知道了", style: .cancel) { (action) in
-        }
-        alertController.addAction(knownAction)
-        self.present(alertController, animated: true, completion: nil)
     }
 
 }

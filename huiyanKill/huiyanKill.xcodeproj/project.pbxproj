@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA0A4BB529D357090050FCF9 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0A4BB429D357090050FCF9 /* GameViewController.swift */; };
 		DA4655F529CDC1FF0051F420 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4655F429CDC1FF0051F420 /* AppDelegate.swift */; };
 		DA4655F729CDC1FF0051F420 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4655F629CDC1FF0051F420 /* SceneDelegate.swift */; };
 		DA4655F929CDC1FF0051F420 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4655F829CDC1FF0051F420 /* MainViewController.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA0A4BB429D357090050FCF9 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = huiyanKill/Interface/GameViewController.swift; sourceTree = SOURCE_ROOT; };
 		DA4655F129CDC1FF0051F420 /* HuiYanKill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuiYanKill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4655F429CDC1FF0051F420 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA4655F629CDC1FF0051F420 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 			children = (
 				DA4655F829CDC1FF0051F420 /* MainViewController.swift */,
 				DA46562A29CDC5E50051F420 /* RoleViewController.swift */,
+				DA0A4BB429D357090050FCF9 /* GameViewController.swift */,
 				DA625ED229CF42A000C50163 /* PersentView */,
 			);
 			path = Interface;
@@ -368,6 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA0A4BB529D357090050FCF9 /* GameViewController.swift in Sources */,
 				DA46562829CDC5290051F420 /* LayoutData.swift in Sources */,
 				DA4655F929CDC1FF0051F420 /* MainViewController.swift in Sources */,
 				DA87BE6729D0AB1C0078C679 /* RoleData.swift in Sources */,

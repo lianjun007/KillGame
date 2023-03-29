@@ -11,10 +11,11 @@ class ModeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = backgroundColor.withAlphaComponent(1.0)
         
-        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: 1, buttonContent: [["figure.softball"], ["模式选择"]], bounce: false)
-        navButtonArray[0].frame.origin.x += CGFloat((buttonSize.width + controlSpaced) * 2)
+        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: 2, buttonContent: [["arrowshape.backward", "figure.softball"], ["返回首页", "模式选择"]], bounce: false)
         navButtonArray[0].addTarget(self, action: #selector(clickEvents), for: .touchUpInside)
+        navButtonArray[1].frame.origin.x += CGFloat(buttonSize.width + controlSpaced)
         
         let boxCount = 5
         let boxContent = [["单人模式", "剧情模式", "军团模式", "BOSS模式"], ["singlePlayerMode.jpeg"]]
@@ -43,11 +44,12 @@ class ModeViewController: UIViewController {
             let modeBox = UIButton(frame: CGRect(origin: displayMode == 0 ? CGPoint(x: 0, y: 0): CGPoint(x: screenSpaced, y: 0), size: roleBoxLargeSize))
             modeBox.frame.origin.x += CGFloat(i) * (controlSpaced + modeBox.frame.width)
             modeBoxArray.append(modeBox)
+            modeBox.alpha = 0
             modeBox.layer.cornerRadius = controlRoundSize
             let borderWidth = CGFloat(7)
             modeBox.tag = i
             modeBox.layer.borderWidth = borderWidth
-            modeBox.layer.borderColor = controlColor.withAlphaComponent(0.8).cgColor
+            modeBox.layer.borderColor = frameColor
             modeBox.setImage(UIImage(named: image[i]), for: .normal)
             modeBox.imageView?.contentMode = .scaleAspectFill
             modeBox.layer.masksToBounds = true
@@ -56,8 +58,9 @@ class ModeViewController: UIViewController {
             
             // Mode Title
             let modeLabel = UILabel()
-            modeLabel.backgroundColor = controlColor.withAlphaComponent(0.8)
-            modeLabel.text = title[i] //
+            modeLabel.backgroundColor = UIColor(cgColor: frameColor) 
+            modeLabel.text = title[i]
+            modeLabel.textAlignment = .center
             modeLabel.textColor = fontColor
             modeBox.addSubview(modeLabel)
             modeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +82,23 @@ class ModeViewController: UIViewController {
         modeBoxArray[2].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
         modeBoxArray[3].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
         modeBoxArray[4].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
+        
+        UIView.animate(withDuration: 0, animations: {
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.5,delay: 0, options: [.curveEaseInOut], animations: { [self] in
+                navButtonArray[0].backgroundColor = buttonColor
+                navButtonArray[0].setTitle("取消", for: .normal)
+                navButtonArray[1].backgroundColor = buttonColor
+                navButtonArray[1].setTitle("选择模式", for: .normal)
+                navButtonArray[1].frame.size.width = safeSize.width - buttonSize.width + controlSpaced
+                navButtonArray[1].frame.origin.x = CGFloat(buttonSize.width + controlSpaced)
+                UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseIn]) {
+                    for i in 0 ..< boxCount {
+                        self.modeBoxArray[i].alpha = 1
+                    }
+                }
+            })
+        })
         
     }
     
@@ -102,11 +122,11 @@ class ModeViewController: UIViewController {
         let knownAction = UIAlertAction(title: "知道了", style: .cancel) { (action) in
         }
         alertController.addAction(knownAction)
-        self.present(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true)
     }
     
     @objc func clickEvents() {
-        self.dismiss(animated: true)
+        self.dismiss(animated: false)
     }
     
 }
