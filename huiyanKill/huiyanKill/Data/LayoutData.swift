@@ -49,12 +49,15 @@ let buttonSize = CGSize(width: screenHeight * 3 / 10, height: screenHeight / 10)
 let buttonSmallSize = CGSize(width: screenHeight / 10, height: screenHeight / 10)
 let roleBoxSize = CGSize(width: (safeSize.width - controlSpaced * 5) / 6, height: (safeSize.width - controlSpaced * 5) / 4)
 let roleBoxLargeSize = CGSize(width: (safeSize.height - controlSpaced - buttonSize.height) / 3 * 2, height: safeSize.height - controlSpaced - buttonSize.height)
-let roleBoxSmallSize = CGSize(width: (screenWidth - safeAreaInsets.left - safeAreaInsets.right - controlSpaced * 6) / 7, height: (screenWidth - safeAreaInsets.left - safeAreaInsets.right - controlSpaced * 6) * 3 / 14)
+
+let roleBoxSmallSizeHeight = (safeSize.width - controlSpaced * 6) * 3 / 14
+let roleBoxSmallSize = roleBoxSmallSizeHeight <= safeSize.height / 3 ? CGSize(width: roleBoxSmallSizeHeight / 3 * 2, height: roleBoxSmallSizeHeight): CGSize(width: safeSize.height / 4.5, height: safeSize.height / 3)
 let controlRoundSize = screenHeight / 20
+let smallContronRoundSize = screenHeight / 40
 // color
 let backgroundColor = UIColor.systemGray6
 let controlColor = UIColor.systemGray4
-let frameColor = UIColor.systemGray4.withAlphaComponent(0.8).cgColor
+let borderColor = UIColor.systemGray4.withAlphaComponent(0.8).cgColor
 let buttonColor = UIColor.systemGray2
 let fontColor = UIColor.black
 // Point
@@ -62,6 +65,8 @@ let menuBtnPoint = CGPoint(x: safePoint.x + safeSize.width - screenHeight * 3 / 
 let gameStartBtnPoint = CGPoint(x: safePoint.x + safeSize.width - screenHeight * 3 / 10, y: safePoint.y + safeSize.height - screenHeight / 10)
 let roleImagePoint = CGPoint(x: safePoint.x, y: safePoint.y + controlSpaced + screenHeight / 10)
 let roleTextPoint = CGPoint(x: safePoint.x + controlSpaced + roleBoxLargeSize.width, y: safePoint.y + controlSpaced + buttonSize.height)
+// 边框宽度(borderWidth)
+let thinBorderWidth = CGFloat(3)
 
 let roleTextSize = CGSize(width: safeSize.width - roleBoxLargeSize.width - controlSpaced, height: safeSize.height - buttonSize.height - controlSpaced)
 

@@ -49,7 +49,7 @@ class ModeViewController: UIViewController {
             let borderWidth = CGFloat(7)
             modeBox.tag = i
             modeBox.layer.borderWidth = borderWidth
-            modeBox.layer.borderColor = frameColor
+            modeBox.layer.borderColor = borderColor
             modeBox.setImage(UIImage(named: image[i]), for: .normal)
             modeBox.imageView?.contentMode = .scaleAspectFill
             modeBox.layer.masksToBounds = true
@@ -58,7 +58,7 @@ class ModeViewController: UIViewController {
             
             // Mode Title
             let modeLabel = UILabel()
-            modeLabel.backgroundColor = UIColor(cgColor: frameColor) 
+            modeLabel.backgroundColor = UIColor(cgColor: borderColor)
             modeLabel.text = title[i]
             modeLabel.textAlignment = .center
             modeLabel.textColor = fontColor
@@ -112,7 +112,7 @@ class ModeViewController: UIViewController {
     @objc func singlePlayerMode() {
         let button1 = ButtonBuild(image: "person", title: "选择人数", piont: CGPointZero, view: modeBoxArray[0])
         button1.center = modeBoxArray[0].center
-        ButtonBuild(image: "slider.horizontal.2.square.on.square", title: "选择难度", piont: CGPointZero, view: modeBoxArray[0])
+        let btn = ButtonBuild(image: "slider.horizontal.2.square.on.square", title: "选择难度", piont: CGPointZero, view: modeBoxArray[0])
         
     }
     
