@@ -4,6 +4,10 @@ import UIKit
 class RoleViewController: UIViewController, RoleChooseViewControllerDelegate {
 
     let roleImageBox = UIImageView()
+    var roleDateArray: Array<UILabel> = []
+    let roleMassageTextArray = ["角色", "生命", "体力", "敏捷", "攻击", "防御"]
+    var chuanzhi = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // 初始化视图
@@ -38,11 +42,30 @@ class RoleViewController: UIViewController, RoleChooseViewControllerDelegate {
         view.addSubview(roleTextBox)
         
         // 角色信息预览区域
-        let titleLabel = UILabel(frame: CGRect(origin: CGPoint(x: controlSpaced * 2, y: controlSpaced * 2), size: CGSizeZero))
+        let massageView = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: roleTextSize.width, height: 300)))
+        roleTextBox.addSubview(massageView)
+        
+        let titleLabel = UILabel()
         titleLabel.text = "属性"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
-        titleLabel.sizeToFit()
-        roleTextBox.addSubview(titleLabel)
+        massageView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: massageView.topAnchor, constant: controlSpaced * 2),
+            titleLabel.leadingAnchor.constraint(equalTo: massageView.leadingAnchor, constant: controlSpaced * 2),
+        ])
+        
+        for i in 0 ... 5 {
+            let roleMassage = UILabel()
+            roleMassage.text = "\(roleMassageTextArray[i])："
+            massageView.addSubview(roleMassage)
+            roleDateArray.append(roleMassage)
+            roleMassage.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                roleMassage.topAnchor.constraint(equalTo: massageView.topAnchor, constant: CGFloat(70 + 40 * i)),
+                roleMassage.leadingAnchor.constraint(equalTo: massageView.leadingAnchor, constant: controlSpaced * 2),
+            ])
+        }
 
         // 开始游戏按钮
         let gameStart = ButtonBuild(image: "", title: "开始游戏", piont: CGPoint(x: roleTextSize.width - buttonSize.width - controlSpaced, y: roleTextSize.height - buttonSize.height - controlSpaced), view: roleTextBox)
@@ -59,7 +82,10 @@ class RoleViewController: UIViewController, RoleChooseViewControllerDelegate {
             roleChooseVC.delegate = self
             self.present(roleChooseVC, animated: false)
         case 2: self.present(ModeViewController(), animated: false)
-        case 4: self.navigationController?.pushViewController(GameViewController(), animated: true)
+        case 4:
+            let gameVC = GameViewController()
+            gameVC.text = chuanzhi
+            self.navigationController?.pushViewController(gameVC, animated: true)
         default:
             let alertController = UIAlertController(title: "敬请期待", message: "该功能正在制作中......", preferredStyle: .alert)
             let knownAction = UIAlertAction(title: "知道了", style: .cancel) { (action) in
@@ -70,9 +96,16 @@ class RoleViewController: UIViewController, RoleChooseViewControllerDelegate {
     }
 
     func passValue(value: Int) {
+        
         print("接收到的值为：\(value)")
+        chuanzhi = value
         let roleDate = roleData[value]
-        roleImageBox.image = UIImage(named: roleDate["插画"]!)
+        roleImageBox.image = UIImage(named: roleDate["插画"] ?? "")
+        for i in 0 ... 5 {
+            roleDateArray[i].text?.removeAll()
+            roleDateArray[i].text?.append("\(roleMassageTextArray[i])：\(roleDate[roleMassageTextArray[i]]!)")
+        }
+
     }
     
 }

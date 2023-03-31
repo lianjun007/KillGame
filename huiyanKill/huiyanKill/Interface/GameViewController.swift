@@ -9,9 +9,15 @@ import UIKit
 
 class GameViewController: UIViewController {
 
+    var roleBoxButtonArray: Array<UIButton> = []
+    var text: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
+        
+        let navButtonArray = navigationBarBuild(view: view, direction: true, buttonCount: 1, buttonContent: [[""], ["返回"]], bounce: false)
+        // navButtonArray[0].addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
         
         var boxPoint = CGPoint()
         for i in 0 ..< 8 {
@@ -32,8 +38,12 @@ class GameViewController: UIViewController {
             roleBoxButton.layer.cornerRadius = smallContronRoundSize
             roleBoxButton.layer.borderWidth = 3
             roleBoxButton.layer.borderColor = borderColor
+            roleBoxButtonArray.append(roleBoxButton)
             view.addSubview(roleBoxButton)
         }
+        
+        let roleDate = roleData[text!]
+        roleBoxButtonArray[0].setImage(UIImage(named: roleDate["插画"]!), for: .normal)
 
     }
 
