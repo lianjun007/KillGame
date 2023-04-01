@@ -8,12 +8,27 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // 初始化视图
         self.navigationController?.isNavigationBarHidden = true
         view.backgroundColor = backgroundColor
+        
+        var roleDataArray: Array<Any> = []
+        if let path = Bundle.main.path(forResource: "RoleData", ofType: "plist") {
+            if let dict = NSDictionary(contentsOfFile: path) as? [String: Any] {
+                if let arr = dict["神弃之地"] as? [Any] {
+                    roleDataArray = arr
+//                    for item in arr {
+//                        print(item)
+//                    }
+                }
+            }
+        } else {
+            print("文件不存在")
+        }
+        print(roleDataArray)
         
         // 进入游戏按钮
         let enterGameBtnPoint = CGPoint(x: safePoint.x + safeSize.width - buttonSize.width, y: safePoint.y + safeSize.height - buttonSize.height)

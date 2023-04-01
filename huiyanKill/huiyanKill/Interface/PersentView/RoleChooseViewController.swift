@@ -23,7 +23,7 @@ class RoleChooseViewController: UIViewController, UIScrollViewDelegate {
             navButtonArray[1].frame.size.width = safeSize.width - buttonSize.width + controlSpaced
             navButtonArray[1].frame.origin.x = CGFloat(buttonSize.width + controlSpaced)
             for i in 0 ..< roleData.count {
-                self.chooseRoleBoxArray[i].alpha = 1
+                chooseRoleBoxArray[i].alpha = 1
             }
         })
 

@@ -9,15 +9,30 @@ import UIKit
 
 class ModeViewController: UIViewController {
     
+    var navButtonArray: Array<UIButton> = []
+    let boxCount = 5
+    override func viewWillAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut], animations: { [self] in
+            navButtonArray[0].backgroundColor = buttonColor
+            navButtonArray[0].setTitle("取消", for: .normal)
+            navButtonArray[1].backgroundColor = buttonColor
+            navButtonArray[1].setTitle("选择模式", for: .normal)
+            navButtonArray[1].frame.size.width = safeSize.width - buttonSize.width + controlSpaced
+            navButtonArray[1].frame.origin.x = CGFloat(buttonSize.width + controlSpaced)
+            for i in 0 ..< boxCount {
+                modeBoxArray[i].alpha = 1
+            }
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor.withAlphaComponent(1.0)
         
-        let navButtonArray:Array<UIButton> = navigationBarBuild(view: view, direction: true, buttonCount: 2, buttonContent: [["arrowshape.backward", "figure.softball"], ["返回首页", "模式选择"]], bounce: false)
+        navButtonArray = navigationBarBuild(view: view, direction: true, buttonCount: 2, buttonContent: [["arrowshape.backward", "figure.softball"], ["返回首页", "模式选择"]], bounce: false)
         navButtonArray[0].addTarget(self, action: #selector(clickEvents), for: .touchUpInside)
         navButtonArray[1].frame.origin.x += CGFloat(buttonSize.width + controlSpaced)
         
-        let boxCount = 5
         let boxContent = [["单人模式", "剧情模式", "军团模式", "BOSS模式"], ["singlePlayerMode.jpeg"]]
         
         // Mode Interface 创建滚动视图
@@ -82,23 +97,6 @@ class ModeViewController: UIViewController {
         modeBoxArray[2].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
         modeBoxArray[3].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
         modeBoxArray[4].addTarget(self, action: #selector(stayTuned), for: .touchUpInside)
-        
-        UIView.animate(withDuration: 0, animations: {
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.5,delay: 0, options: [.curveEaseInOut], animations: { [self] in
-                navButtonArray[0].backgroundColor = buttonColor
-                navButtonArray[0].setTitle("取消", for: .normal)
-                navButtonArray[1].backgroundColor = buttonColor
-                navButtonArray[1].setTitle("选择模式", for: .normal)
-                navButtonArray[1].frame.size.width = safeSize.width - buttonSize.width + controlSpaced
-                navButtonArray[1].frame.origin.x = CGFloat(buttonSize.width + controlSpaced)
-                UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseIn]) {
-                    for i in 0 ..< boxCount {
-                        self.modeBoxArray[i].alpha = 1
-                    }
-                }
-            })
-        })
         
     }
     

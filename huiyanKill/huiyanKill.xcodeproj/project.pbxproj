@@ -21,6 +21,7 @@
 		DA46562829CDC5290051F420 /* LayoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46562729CDC5290051F420 /* LayoutData.swift */; };
 		DA46562B29CDC5E50051F420 /* RoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46562A29CDC5E50051F420 /* RoleViewController.swift */; };
 		DA46562E29CDC64C0051F420 /* ModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA46562D29CDC64C0051F420 /* ModeViewController.swift */; };
+		DA54A99C29D6F0FC00543038 /* RoleData.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA54A99B29D6F0FC00543038 /* RoleData.plist */; };
 		DA625EC829CEDC5B00C50163 /* singlePlayerMode.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DA625EC729CEDC5B00C50163 /* singlePlayerMode.jpeg */; };
 		DA625ECF29CEE0E800C50163 /* stayTunedMode.png in Resources */ = {isa = PBXBuildFile; fileRef = DA625ECE29CEE0E800C50163 /* stayTunedMode.png */; };
 		DA87BE6229D094270078C679 /* RoleChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA87BE6129D094270078C679 /* RoleChooseViewController.swift */; };
@@ -72,6 +73,7 @@
 		DA46562729CDC5290051F420 /* LayoutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutData.swift; sourceTree = "<group>"; };
 		DA46562A29CDC5E50051F420 /* RoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleViewController.swift; sourceTree = "<group>"; };
 		DA46562D29CDC64C0051F420 /* ModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeViewController.swift; sourceTree = "<group>"; };
+		DA54A99B29D6F0FC00543038 /* RoleData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = RoleData.plist; path = HuiYanKill/Interface/RoleData.plist; sourceTree = SOURCE_ROOT; };
 		DA625EC729CEDC5B00C50163 /* singlePlayerMode.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = singlePlayerMode.jpeg; sourceTree = "<group>"; };
 		DA625ECE29CEE0E800C50163 /* stayTunedMode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stayTunedMode.png; sourceTree = "<group>"; };
 		DA87BE6129D094270078C679 /* RoleChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoleChooseViewController.swift; path = HuiYanKill/Interface/PersentView/RoleChooseViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -181,6 +183,7 @@
 				DA4655F829CDC1FF0051F420 /* MainViewController.swift */,
 				DA46562A29CDC5E50051F420 /* RoleViewController.swift */,
 				DA0A4BB429D357090050FCF9 /* GameViewController.swift */,
+				DA54A99B29D6F0FC00543038 /* RoleData.plist */,
 				DA625ED229CF42A000C50163 /* PersentView */,
 			);
 			path = Interface;
@@ -346,6 +349,7 @@
 				DA625EC829CEDC5B00C50163 /* singlePlayerMode.jpeg in Resources */,
 				DA46560129CDC2000051F420 /* Assets.xcassets in Resources */,
 				DA4655FC29CDC1FF0051F420 /* Main.storyboard in Resources */,
+				DA54A99C29D6F0FC00543038 /* RoleData.plist in Resources */,
 				DA87BE9529D0B6DF0078C679 /* huizhu.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
