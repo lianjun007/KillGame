@@ -73,7 +73,7 @@
 		DA46562729CDC5290051F420 /* LayoutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutData.swift; sourceTree = "<group>"; };
 		DA46562A29CDC5E50051F420 /* RoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleViewController.swift; sourceTree = "<group>"; };
 		DA46562D29CDC64C0051F420 /* ModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeViewController.swift; sourceTree = "<group>"; };
-		DA54A99B29D6F0FC00543038 /* RoleData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = RoleData.plist; path = HuiYanKill/Interface/RoleData.plist; sourceTree = SOURCE_ROOT; };
+		DA54A99B29D6F0FC00543038 /* RoleData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = RoleData.plist; path = HuiYanKill/Data/RoleData.plist; sourceTree = SOURCE_ROOT; };
 		DA625EC729CEDC5B00C50163 /* singlePlayerMode.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = singlePlayerMode.jpeg; sourceTree = "<group>"; };
 		DA625ECE29CEE0E800C50163 /* stayTunedMode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stayTunedMode.png; sourceTree = "<group>"; };
 		DA87BE6129D094270078C679 /* RoleChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoleChooseViewController.swift; path = HuiYanKill/Interface/PersentView/RoleChooseViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -173,6 +173,7 @@
 				DA625ECA29CEDC8400C50163 /* Image */,
 				DA46562729CDC5290051F420 /* LayoutData.swift */,
 				DA87BE6629D0AB1C0078C679 /* RoleData.swift */,
+				DA54A99B29D6F0FC00543038 /* RoleData.plist */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -183,7 +184,6 @@
 				DA4655F829CDC1FF0051F420 /* MainViewController.swift */,
 				DA46562A29CDC5E50051F420 /* RoleViewController.swift */,
 				DA0A4BB429D357090050FCF9 /* GameViewController.swift */,
-				DA54A99B29D6F0FC00543038 /* RoleData.plist */,
 				DA625ED229CF42A000C50163 /* PersentView */,
 			);
 			path = Interface;

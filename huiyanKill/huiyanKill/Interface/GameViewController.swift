@@ -12,8 +12,6 @@ class GameViewController: UIViewController {
     var roleBoxButtonArray: Array<UIButton> = []
     var text: Int?
     
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
