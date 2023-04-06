@@ -1,9 +1,3 @@
-//
-//  ModeViewController.swift
-//  HuiYanKill
-//
-//  Created by QHuiYan on 2023/3/24.
-//
 
 import UIKit
 

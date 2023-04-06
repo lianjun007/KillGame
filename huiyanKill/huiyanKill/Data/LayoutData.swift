@@ -157,14 +157,15 @@ func roleDataFunc(extend: String, ordinal: Int) -> Dictionary<String, Any> {
     if let path = Bundle.main.path(forResource: "RoleData", ofType: "plist") {
         if let dict = NSDictionary(contentsOfFile: path) as? [String: Any] {
             if let arr = dict[extend] as? [Any] {
-                roleDataArray = arr[ordinal] as! Dictionary<String, Dictionary<String, Any>>
+                roleDataArray = arr[ordinal] /! Dictionary<String, Dictionary<String, Any>>
             }
         }
-    } else {
-        print("文件不存在")
+        
+        
     }
-    print(roleDataArray)
+    print(roleDataArray["角色"])
     return roleDataArray
+    
 }
 
 //func roleDataFunc(extend: String, ordinal: Int, type: String) -> Dictionary<String, Dictionary<String, Any>> {
