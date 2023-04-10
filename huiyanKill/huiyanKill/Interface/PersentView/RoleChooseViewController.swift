@@ -26,7 +26,7 @@ class RoleChooseViewController: UIViewController, UIScrollViewDelegate {
                 chooseRoleBoxArray[i].alpha = 1
             }
         })
-
+        
     }
 
     var roleShowcaseOffsetY = CGFloat() // 接收滚动展示柜(roleShowcase)的Y轴偏移量

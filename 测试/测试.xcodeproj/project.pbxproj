@@ -23,6 +23,7 @@
 		DA6A1E5029DF3F6300360C16 /* 截屏2023-04-07 01.56.41.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6A1E4F29DF3F6300360C16 /* 截屏2023-04-07 01.56.41.png */; };
 		DA6A1E5229DF422100360C16 /* 截屏2023-04-07 02.08.25.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6A1E5129DF422000360C16 /* 截屏2023-04-07 02.08.25.png */; };
 		DA6A1E5429DF424900360C16 /* 截屏2023-04-07 02.09.06.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6A1E5329DF424900360C16 /* 截屏2023-04-07 02.09.06.png */; };
+		DA6A1E5629E12A3C00360C16 /* BasicFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6A1E5529E12A3C00360C16 /* BasicFrame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		DA6A1E4F29DF3F6300360C16 /* 截屏2023-04-07 01.56.41.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "截屏2023-04-07 01.56.41.png"; sourceTree = "<group>"; };
 		DA6A1E5129DF422000360C16 /* 截屏2023-04-07 02.08.25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "截屏2023-04-07 02.08.25.png"; sourceTree = "<group>"; };
 		DA6A1E5329DF424900360C16 /* 截屏2023-04-07 02.09.06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "截屏2023-04-07 02.09.06.png"; sourceTree = "<group>"; };
+		DA6A1E5529E12A3C00360C16 /* BasicFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicFrame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				DA6A1E5129DF422000360C16 /* 截屏2023-04-07 02.08.25.png */,
 				DA6A1E4F29DF3F6300360C16 /* 截屏2023-04-07 01.56.41.png */,
 				DA6A1E5329DF424900360C16 /* 截屏2023-04-07 02.09.06.png */,
+				DA6A1E5529E12A3C00360C16 /* BasicFrame.swift */,
 				DA6A1E4A29DF3D9400360C16 /* image1.jpg */,
 				DA6A1E4B29DF3D9400360C16 /* image2.jpg */,
 				DA6A1E4929DF3D9400360C16 /* image3.jpg */,
@@ -288,6 +291,7 @@
 				DA6A1E1B29DEE8A700360C16 /* ViewController.swift in Sources */,
 				DA6A1E2129DEE8A700360C16 /* __.xcdatamodeld in Sources */,
 				DA6A1E1729DEE8A700360C16 /* AppDelegate.swift in Sources */,
+				DA6A1E5629E12A3C00360C16 /* BasicFrame.swift in Sources */,
 				DA6A1E1929DEE8A700360C16 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,7 +474,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -497,7 +502,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

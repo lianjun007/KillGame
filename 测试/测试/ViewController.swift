@@ -1,30 +1,38 @@
-
 import UIKit
 
-class ViewController: UIViewController {
+// 主界面的类
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var buttonArray: Array<UIButton> = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        for i in 0 ... 7 {
-            let button = UIButton()
-            button.frame = CGRect(origin: CGPoint(x: 50, y: 200 + 50 * i), size: CGSize(width: 100, height: 30))
-            button.setTitle("按钮\(i)", for: .normal)
-            button.tag = i
-            button.backgroundColor = UIColor.systemGray
-            button.addTarget(self, action: #selector(clicked), for: .touchUpInside)
-            view.addSubview(button)
-            buttonArray.append(button)
-        }
-        
+    let textLabel = ["ActivityIndicator", "ProgressView", "Control", "Picker", "ScrollView", "lunbotu", "DataView", "ScrollView"]
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        3
     }
     
-    @objc func clicked(sender: UIButton) {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        8
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.accessoryType = .disclosureIndicator
+        cell.textLabel?.text = textLabel[indexPath.row]
+        // cell.backgroundColor = .systemGray6
+        cell.imageView?.image = UIImage(systemName: "person")
         
-        switch sender.tag {
-        case 0: self.present(ActivityIndicatorViewController(), animated: true)
+        let view = UIView()
+        view.frame = CGRect(x: 0, y: 10, width: cell.frame.size.width, height: cell.frame.size.height)
+        view.backgroundColor = .white
+        // cell.addSubview(view)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            self.navigationController?.pushViewController(ActivityIndicatorViewController(), animated: true)
         case 1: self.present(ProgressViewViewController(), animated: true)
         case 2: self.present(Control(), animated: true)
         case 3: self.present(Picker(), animated: true)
@@ -44,7 +52,87 @@ class ViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    
+    var buttonArray: Array<UIButton> = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.title = "你好"
         
+        let tabBarController = UITabBarController()
+        let viewController1 = UIViewController()
+        let viewController2 = UIViewController()
+
+        viewController1.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
+        viewController2.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
+
+        tabBarController.viewControllers = [viewController1, viewController2]
+        
+        let safeView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight), style: .insetGrouped)
+        // safeView.rowHeight = 100
+        // safeView.backgroundColor = .systemBackground
+        safeView.dataSource = self
+        safeView.delegate = self
+
+        view.addSubview(safeView)
+        
+//        let safeView = UIScrollView()
+//        safeView.backgroundColor = .blue
+//        view.addSubview(safeView)
+//        safeView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            safeView.topAnchor.constraint(equalTo: view.topAnchor, constant: safeAreaInsets.top),
+//            safeView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: safeAreaInsets.left),
+//            safeView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -safeAreaInsets.right),
+//            safeView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+//        ])
+        
+//        for i in 0 ... 7 {
+//            let button = UIButton()
+//            button.frame = CGRect(origin: CGPoint(x: 50, y: 200 + 50 * i), size: CGSize(width: 100, height: 30))
+//            button.setTitle("按钮\(i)", for: .normal)
+//            button.tag = i
+//            button.backgroundColor = UIColor.systemGray
+//            button.layer.cornerRadius = 15
+//            button.addTarget(self, action: #selector(clicked), for: .touchUpInside)
+//            safeView.addSubview(button)
+//            buttonArray.append(button)
+//        }
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
+        
+    }
+    
+    @objc func orientationDidChange() {
+        print(UIDevice.current.orientation)
+    }
+    
+    @objc func clicked(sender: UIButton) {
+        
+//        switch sender.tag {
+//        case 0: self.present(ActivityIndicatorViewController(), animated: true)
+//        case 1: self.present(ProgressViewViewController(), animated: true)
+//        case 2: self.present(Control(), animated: true)
+//        case 3: self.present(Picker(), animated: true)
+//        case 4:
+//            let SVC = ScrollView()
+//            SVC.modalPresentationStyle = .currentContext
+//            self.present(SVC, animated: true)
+//        case 5: self.present(lunbotu(), animated: true)
+//        case 6:
+//            let SVC = DataViewController()
+//            SVC.modalPresentationStyle = .currentContext
+//            self.present(SVC, animated: true)
+//        case 7:
+//            let SVC = ScrollViewController()
+//            SVC.modalPresentationStyle = .currentContext
+//            self.present(SVC, animated: true)
+//        default:
+//            break
+//        }
+//
     }
     
 }
@@ -445,4 +533,3 @@ class ScrollViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 }
-
