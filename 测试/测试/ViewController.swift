@@ -1,32 +1,83 @@
 import UIKit
 
-// 主界面的类
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+// Main Interface
+class ViewController: UIViewController {
     
     let textLabel = ["ActivityIndicator", "ProgressView", "Control", "Picker", "ScrollView", "lunbotu", "DataView", "ScrollView"]
     
+    var buttonArray: Array<UIButton> = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.title = "你好"
+        
+        let safeView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight * 0.903), style: .insetGrouped)
+        safeView.rowHeight = 100
+        safeView.separatorStyle = .none
+        safeView.backgroundColor = .systemBackground
+        safeView.dataSource = self
+        safeView.delegate = self
+        
+        view.addSubview(safeView)
+        
+        let tabBar = UITabBar()
+        tabBar.frame.origin.y = screenHeight * 0.903
+        tabBar.frame.size.width = screenWidth
+        
+        let a = UITabBarItem(title: "你好", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person"))
+        let b = UITabBarItem(title: "12", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person"))
+        let c = UITabBarItem(title: "12", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person"))
+        let d = UITabBarItem(title: "12", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person"))
+        tabBar.items = [a, b, c, d]
+        
+        view.addSubview(tabBar)
+        
+    }
+    
+    @objc func orientationDidChange() {
+        print(UIDevice.current.orientation)
+    }
+    
+    
+    
+}
+
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        8
+        800
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = textLabel[indexPath.row]
-        // cell.backgroundColor = .systemGray6
-        cell.imageView?.image = UIImage(systemName: "person")
         
-        let view = UIView()
-        view.frame = CGRect(x: 0, y: 10, width: cell.frame.size.width, height: cell.frame.size.height)
-        view.backgroundColor = .white
-        // cell.addSubview(view)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "a")
+        
+        guard let cell = cell else {
+            
+            let view = UIView()
+            view.frame = CGRect(x: 0, y: 0, width: cell?.bounds.size.width ?? 0 , height: 90)
+            view.backgroundColor = .black
+            cell?.contentView.addSubview(view)
+            
+            return UITableViewCell(style: .default, reuseIdentifier: "a")
+            
+        }
+        
+        cell.selectionStyle = .gray
+        cell.accessoryView = nil
+        
+        // cell.textLabel?.text = textLabel[indexPath.row]
+        // cell.backgroundColor = .systemGray6
+        // cell.imageView?.image = UIImage(systemName: "person")
+        
+
         
         return cell
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -54,85 +105,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    
-    var buttonArray: Array<UIButton> = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.title = "你好"
-        
-        let tabBarController = UITabBarController()
-        let viewController1 = UIViewController()
-        let viewController2 = UIViewController()
-
-        viewController1.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
-        viewController2.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
-
-        tabBarController.viewControllers = [viewController1, viewController2]
-        
-        let safeView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight), style: .insetGrouped)
-        // safeView.rowHeight = 100
-        // safeView.backgroundColor = .systemBackground
-        safeView.dataSource = self
-        safeView.delegate = self
-
-        view.addSubview(safeView)
-        
-//        let safeView = UIScrollView()
-//        safeView.backgroundColor = .blue
-//        view.addSubview(safeView)
-//        safeView.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            safeView.topAnchor.constraint(equalTo: view.topAnchor, constant: safeAreaInsets.top),
-//            safeView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: safeAreaInsets.left),
-//            safeView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -safeAreaInsets.right),
-//            safeView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
-//        ])
-        
-//        for i in 0 ... 7 {
-//            let button = UIButton()
-//            button.frame = CGRect(origin: CGPoint(x: 50, y: 200 + 50 * i), size: CGSize(width: 100, height: 30))
-//            button.setTitle("按钮\(i)", for: .normal)
-//            button.tag = i
-//            button.backgroundColor = UIColor.systemGray
-//            button.layer.cornerRadius = 15
-//            button.addTarget(self, action: #selector(clicked), for: .touchUpInside)
-//            safeView.addSubview(button)
-//            buttonArray.append(button)
-//        }
-//
-//        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
-        
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "你好"
     }
     
-    @objc func orientationDidChange() {
-        print(UIDevice.current.orientation)
-    }
-    
-    @objc func clicked(sender: UIButton) {
-        
-//        switch sender.tag {
-//        case 0: self.present(ActivityIndicatorViewController(), animated: true)
-//        case 1: self.present(ProgressViewViewController(), animated: true)
-//        case 2: self.present(Control(), animated: true)
-//        case 3: self.present(Picker(), animated: true)
-//        case 4:
-//            let SVC = ScrollView()
-//            SVC.modalPresentationStyle = .currentContext
-//            self.present(SVC, animated: true)
-//        case 5: self.present(lunbotu(), animated: true)
-//        case 6:
-//            let SVC = DataViewController()
-//            SVC.modalPresentationStyle = .currentContext
-//            self.present(SVC, animated: true)
-//        case 7:
-//            let SVC = ScrollViewController()
-//            SVC.modalPresentationStyle = .currentContext
-//            self.present(SVC, animated: true)
-//        default:
-//            break
-//        }
-//
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        "不好"
     }
     
 }
@@ -194,12 +172,12 @@ class ProgressViewViewController: UIViewController {
         progressView.layer.borderColor = UIColor.black.cgColor
         progressView.layer.borderWidth = 0.2
         progressView.layer.cornerRadius = 0
-
+        
         progressView.progress = 0.0
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(increaseProgress))
         progressView.addGestureRecognizer(tap)
-
+        
         view.addSubview(progressView)
         
     }
@@ -342,40 +320,40 @@ class ScrollView: UIViewController {
     
     
 }
-    
-class lunbotu: UIViewController {
 
+class lunbotu: UIViewController {
+    
     var scrollView: UIScrollView!
     var pageControl: UIPageControl!
     var timer: Timer!
     let imageWidth = UIScreen.main.bounds.width
     let imageHeight = UIScreen.main.bounds.width * 0.6
     let images = ["image1.jpg", "image2.jpg", "image3.jpg"]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.systemBackground
-
+        
         scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight))
         scrollView.contentSize = CGSize(width: imageWidth * CGFloat(images.count), height: imageHeight)
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = self
         view.addSubview(scrollView)
-
+        
         for i in 0 ..< images.count {
             let imageView = UIImageView(frame: CGRect(x: imageWidth * CGFloat(i), y: 0, width: imageWidth, height: imageHeight))
             imageView.image = UIImage(named: images[i])
             scrollView.addSubview(imageView)
         }
-
+        
         pageControl = UIPageControl(frame: CGRect(x: 0, y: imageHeight - 50, width: imageWidth, height: 50))
         pageControl.numberOfPages = images.count
         pageControl.currentPageIndicatorTintColor = UIColor.red // 选中颜色
         pageControl.pageIndicatorTintColor = UIColor.white // 未选中颜色
         pageControl.addTarget(self, action: #selector(aaa), for: .valueChanged)
         view.addSubview(pageControl)
-
+        
         timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector:#selector(autoScroll), userInfo:nil, repeats:true)
     }
     
@@ -384,7 +362,7 @@ class lunbotu: UIViewController {
         let offsetX = CGFloat(currentPage) * imageWidth
         scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
     }
-
+    
     @objc func autoScroll() {
         var currentPage = pageControl.currentPage
         currentPage += 1
@@ -402,21 +380,21 @@ extension lunbotu: UIScrollViewDelegate {
         let currentPage = Int(offsetX / imageWidth + 0.5)
         pageControl.currentPage = currentPage
     }
-
+    
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         timer.invalidate()
     }
-
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         timer = Timer.scheduledTimer(timeInterval: 5, target:self, selector:#selector(autoScroll), userInfo:nil, repeats:true)
     }
 }
 
 class DataViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
+    
     let textView = UITextField()
     let pickerView = UIPickerView()
-
+    
     let years = ["2003", "2004"]
     let months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
     let days = ["01", "02", "03", "04", "05", "06", "07", "08", "09",
@@ -424,10 +402,10 @@ class DataViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 "18", "19", "20", "21", "22", "23", "24", "25",
                 "26", "27", "28"]
     let days1 = ["01", "02", "03", "04", "05", "06", "07", "08", "09",
-                "10", "11", "12", "13", "14", "15", "16", "17",
-                "18", "19", "20", "21", "22", "23", "24", "25",
-                "26", "27", "28", "29", "30"]
-
+                 "10", "11", "12", "13", "14", "15", "16", "17",
+                 "18", "19", "20", "21", "22", "23", "24", "25",
+                 "26", "27", "28", "29", "30"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.systemBackground
@@ -440,11 +418,11 @@ class DataViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         pickerView.delegate = self
         pickerView.dataSource = self
     }
-
+    
     @objc func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
             return years.count
@@ -454,7 +432,7 @@ class DataViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             return days1.count
         }
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
             return years[row]
@@ -464,7 +442,7 @@ class DataViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             return days1[row]
         }
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let year = years[pickerView.selectedRow(inComponent: 0)]
         let month = months[pickerView.selectedRow(inComponent: 1)]
@@ -476,10 +454,10 @@ class DataViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
 class ScrollViewController: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView!
     var imageView: UIImageView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         imageView = UIImageView(image: UIImage(named: "image1.jpg"))
         scrollView = UIScrollView(frame: view.bounds)
         scrollView.backgroundColor = UIColor.black
@@ -490,31 +468,31 @@ class ScrollViewController: UIViewController, UIScrollViewDelegate {
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 4.0
         view.addSubview(scrollView)
-
+        
         setZoomScale()
         setupGestureRecognizer()
     }
-
+    
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
-
+    
     func setZoomScale() {
         let imageViewSize = imageView.bounds.size
         let scrollViewSize = scrollView.bounds.size
         let widthScale = scrollViewSize.width / imageViewSize.width
         let heightScale = scrollViewSize.height / imageViewSize.height
-
+        
         scrollView.minimumZoomScale = min(widthScale, heightScale)
         scrollView.zoomScale = 1.0
     }
-
+    
     func setupGestureRecognizer() {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
         doubleTap.numberOfTapsRequired = 2
         scrollView.addGestureRecognizer(doubleTap)
     }
-
+    
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         print(#function)
     }
