@@ -9,36 +9,38 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "你好"
+        self.navigationItem.title = "课程"
         
-        let safeView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight * 0.903), style: .insetGrouped)
-        safeView.rowHeight = 100
+        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+        scrollView.contentSize = CGSize(width: screenWidth * 4, height: screenHeight)
+        view.addSubview(scrollView)
+        
+        let safeView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight), style: .insetGrouped)
+        safeView.rowHeight = screenHeight / 5
         safeView.separatorStyle = .none
         safeView.backgroundColor = .systemBackground
+        // safeView.isEditing = true
+        
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        headerView.backgroundColor = .black
+        safeView.tableHeaderView = headerView
         safeView.dataSource = self
         safeView.delegate = self
         
-        view.addSubview(safeView)
+        scrollView.addSubview(safeView)
         
         let tabBar = UITabBar()
         tabBar.frame.origin.y = screenHeight * 0.903
         tabBar.frame.size.width = screenWidth
         
-        let a = UITabBarItem(title: "你好", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person"))
-        let b = UITabBarItem(title: "12", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person"))
-        let c = UITabBarItem(title: "12", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person"))
-        let d = UITabBarItem(title: "12", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person"))
+        let a = UITabBarItem(title: "课程", image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))
+        let b = UITabBarItem(title: "讨论", image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))
+        let c = UITabBarItem(title: "收藏", image: UIImage(systemName: "star.square.on.square"), selectedImage: UIImage(systemName: "star.square.on.square.fill"))
+        let d = UITabBarItem(title: "搜索", image: UIImage(systemName: "rectangle.and.hand.point.up.left"), selectedImage: UIImage(systemName: "rectangle.and.hand.point.up.left.fill"))
         tabBar.items = [a, b, c, d]
-        
         view.addSubview(tabBar)
         
     }
-    
-    @objc func orientationDidChange() {
-        print(UIDevice.current.orientation)
-    }
-    
-    
     
 }
 
@@ -49,35 +51,32 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        800
+        8
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "a")
-        
-        guard let cell = cell else {
-            
-            let view = UIView()
-            view.frame = CGRect(x: 0, y: 0, width: cell?.bounds.size.width ?? 0 , height: 90)
-            view.backgroundColor = .black
-            cell?.contentView.addSubview(view)
-            
-            return UITableViewCell(style: .default, reuseIdentifier: "a")
-            
-        }
-        
-        cell.selectionStyle = .gray
-        cell.accessoryView = nil
-        
-        // cell.textLabel?.text = textLabel[indexPath.row]
-        // cell.backgroundColor = .systemGray6
-        // cell.imageView?.image = UIImage(systemName: "person")
-        
-
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style: .default, reuseIdentifier: "cell")
+        // cell.selectionStyle = .gray
         return cell
         
+    }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        <#code#>
+//    }
+    
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        .insert
+//    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let view = UIView()
+        print(cell.bounds.size.width, screenWidth)
+        view.frame.size = CGSize(width: cell.bounds.size.width, height: screenHeight / 5 - controlSpaced)
+        view.backgroundColor = .systemCyan
+        view.layer.cornerRadius = 15
+        cell.contentView.addSubview(view)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -105,12 +104,18 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        "你好"
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .systemBackground
+        return headerView
     }
     
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        "不好"
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        controlSpaced
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        0
     }
     
 }
