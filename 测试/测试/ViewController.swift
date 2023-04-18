@@ -1,7 +1,123 @@
 import UIKit
 
+class ViewController: UITabBarController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let viewControllers = [
+            UINavigationController(rootViewController: DiscussViewController().withTabBarItem(title: "课程", image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))),
+            UINavigationController(rootViewController: CourseViewController().withTabBarItem(title: "讨论", image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))),
+            UINavigationController(rootViewController: ViewController3().withTabBarItem(title: "收藏", image: UIImage(systemName: "star.square.on.square"), selectedImage: UIImage(systemName: "star.square.on.square.fill"))),
+            UINavigationController(rootViewController: ViewController4().withTabBarItem(title: "搜索", image: UIImage(systemName: "rectangle.and.hand.point.up.left"), selectedImage: UIImage(systemName: "rectangle.and.hand.point.up.left.fill")))
+        ]
+        self.viewControllers = viewControllers
+    }
+}
+
+extension UIViewController {
+    func withTabBarItem(title: String, image: UIImage?, selectedImage: UIImage?) -> UIViewController {
+        let tabBarItem = UITabBarItem(title: title, image: image, selectedImage: selectedImage)
+        self.tabBarItem = tabBarItem
+        return self
+    }
+}
+
 // Main Interface
-class ViewController: UIViewController {
+class DiscussViewController: UIViewController {
+    
+    let fsu: Array<String> = ["Swift基础", "iOS初级开发", "HTML5和CSS3基础", "JavaScript入门"]
+    
+    var offset = CGFloat()
+    // var navHeight = CGFloat()
+    
+    let navTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth - screenSpaced * 2, height: navHeight / 5 * 4))
+    var navTitleImg = UIImageView(image: UIImage(systemName: "books.vertical"))
+    let discussTableView = UITableView(frame: CGRect(origin: CGPointZero, size: CGSizeZero), style: .grouped) // 创建一个UITableView作为DiscussViewController的主体
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let navImgHeight = screenHeight / 25
+        let navImgWidth = navImgHeight / (navTitleImg.image?.size.height ?? navImgHeight) * (navTitleImg.image?.size.width ?? navImgHeight)
+        // 初始化导航栏
+        navTitleImg.frame = CGRect(x: screenSpaced, y: navHeight / 2, width: navHeight / 5 * 6, height: navImgHeight)
+        navTitleImg.contentMode = .scaleAspectFit
+        navTitleImg.contentMode = .left
+        self.navigationController?.navigationBar.addSubview(navTitleImg)
+        
+        navTitleLabel.text = "课程"
+        navTitleLabel.font = UIFont.systemFont(ofSize: navTitleLabel.frame.height, weight: .bold)
+        navTitleLabel.frame.origin.x = (navTitleImg.image?.size.width)!
+        navTitleImg.addSubview(navTitleLabel)
+        self.navigationItem.title = "课程"
+        
+        // 初始化tableview
+        discussTableView.frame.size = self.view.bounds.size
+        discussTableView.rowHeight = screenHeight / 5
+        discussTableView.separatorStyle = .none
+        discussTableView.backgroundColor = .systemBackground
+        
+        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight / 3))
+        scrollView.contentSize = CGSize(width: scrollView.frame.height * 2, height: scrollView.frame.height)
+        discussTableView.tableHeaderView = scrollView
+        
+        let view0 = UIView()
+        view0.backgroundColor = .blue
+        scrollView.addSubview(view0)
+        view0.translatesAutoresizingMaskIntoConstraints = false
+        view0.layer.cornerRadius = 15
+        NSLayoutConstraint.activate([
+            view0.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: navHeight * 2 - (navigationController?.navigationBar.frame.size.height ?? 40)),
+            view0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: screenSpaced),
+            view0.widthAnchor.constraint(equalToConstant: screenWidth - screenSpaced),
+            view0.heightAnchor.constraint(equalToConstant: screenHeight / 2 - controlSpaced * 2)
+        ])
+        
+        let imageView = UIImageView(image: UIImage(systemName: "book"))
+        imageView.frame.size = CGSize(width: 200, height: 150)
+        view0.addSubview(imageView)
+
+        discussTableView.dataSource = self
+        discussTableView.delegate = self
+        
+        view.addSubview(discussTableView)
+        
+    }
+    
+}
+
+extension DiscussViewController: UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style: .default, reuseIdentifier: "cell")
+        // cell.selectionStyle = .gray
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let view = UIView(frame: CGRect(x: screenSpaced, y: 0, width: screenWidth - screenSpaced * 2, height: screenHeight / 5 - controlSpaced))
+        view.backgroundColor = .systemCyan
+        view.layer.cornerRadius = 15
+        
+        let label = UILabel(frame: CGRect(x: 20, y: 20, width: 500, height: 100))
+        label.text = fsu[indexPath.row]
+        view.addSubview(label)
+        cell.contentView.addSubview(view)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        offset = discussTableView.contentOffset.y
+        print(offset, navHeight)
+        self.navTitleLabel.alpha = 1 - (offset / navHeight / 2)
+    }
+}
+
+class CourseViewController: UIViewController {
     
     let textLabel = ["ActivityIndicator", "ProgressView", "Control", "Picker", "ScrollView", "lunbotu", "DataView", "ScrollView"]
     
@@ -9,11 +125,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "课程"
-        
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
-        scrollView.contentSize = CGSize(width: screenWidth * 4, height: screenHeight)
-        view.addSubview(scrollView)
+        self.navigationItem.title = "讨论"
         
         let safeView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight), style: .insetGrouped)
         safeView.rowHeight = screenHeight / 5
@@ -21,30 +133,16 @@ class ViewController: UIViewController {
         safeView.backgroundColor = .systemBackground
         // safeView.isEditing = true
         
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        headerView.backgroundColor = .black
-        safeView.tableHeaderView = headerView
         safeView.dataSource = self
         safeView.delegate = self
         
-        scrollView.addSubview(safeView)
-        
-        let tabBar = UITabBar()
-        tabBar.frame.origin.y = screenHeight * 0.903
-        tabBar.frame.size.width = screenWidth
-        
-        let a = UITabBarItem(title: "课程", image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))
-        let b = UITabBarItem(title: "讨论", image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))
-        let c = UITabBarItem(title: "收藏", image: UIImage(systemName: "star.square.on.square"), selectedImage: UIImage(systemName: "star.square.on.square.fill"))
-        let d = UITabBarItem(title: "搜索", image: UIImage(systemName: "rectangle.and.hand.point.up.left"), selectedImage: UIImage(systemName: "rectangle.and.hand.point.up.left.fill"))
-        tabBar.items = [a, b, c, d]
-        view.addSubview(tabBar)
+        view.addSubview(safeView)
         
     }
     
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension CourseViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         1
@@ -117,6 +215,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         0
     }
+    
+}
+
+class ViewController3: UIViewController {
+    
+}
+
+class ViewController4: UIViewController {
     
 }
 

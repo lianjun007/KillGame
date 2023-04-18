@@ -4,7 +4,8 @@ import UIKit
 // 框架的基本属性
 let screenWidth: CGFloat = UIScreen.main.bounds.width
 let screenHeight: CGFloat = UIScreen.main.bounds.height
-let screenSpaced = screenHeight / 20 // 屏幕边距
+let screenSpaced = screenWidth / 23 // 屏幕边距
+let navHeight = screenHeight / 20
 let controlSpaced = screenSpaced / 2 // 控件间距
 
 // 获取安全插值

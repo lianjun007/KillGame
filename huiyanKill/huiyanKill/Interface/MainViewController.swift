@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         view.backgroundColor = backgroundColor
         
-        roleDataFunc(extend: "神弃之地", ordinal: 0)
+//        roleDataFunc(extend: "神弃之地", ordinal: 0)
         
         // 进入游戏按钮
         let enterGameBtnPoint = CGPoint(x: safePoint.x + safeSize.width - buttonSize.width, y: safePoint.y + safeSize.height - buttonSize.height)
