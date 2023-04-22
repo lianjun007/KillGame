@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA381CEC29F2FB410038ADFA /* CourseData.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA381CEB29F2FB410038ADFA /* CourseData.plist */; };
 		DA6A1E1729DEE8A700360C16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6A1E1629DEE8A700360C16 /* AppDelegate.swift */; };
 		DA6A1E1929DEE8A700360C16 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6A1E1829DEE8A700360C16 /* SceneDelegate.swift */; };
 		DA6A1E1B29DEE8A700360C16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6A1E1A29DEE8A700360C16 /* ViewController.swift */; };
@@ -23,7 +24,7 @@
 		DA6A1E5029DF3F6300360C16 /* 截屏2023-04-07 01.56.41.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6A1E4F29DF3F6300360C16 /* 截屏2023-04-07 01.56.41.png */; };
 		DA6A1E5229DF422100360C16 /* 截屏2023-04-07 02.08.25.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6A1E5129DF422000360C16 /* 截屏2023-04-07 02.08.25.png */; };
 		DA6A1E5429DF424900360C16 /* 截屏2023-04-07 02.09.06.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6A1E5329DF424900360C16 /* 截屏2023-04-07 02.09.06.png */; };
-		DA6A1E5629E12A3C00360C16 /* BasicFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6A1E5529E12A3C00360C16 /* BasicFrame.swift */; };
+		DA6A1E5629E12A3C00360C16 /* BasicCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6A1E5529E12A3C00360C16 /* BasicCode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA381CEB29F2FB410038ADFA /* CourseData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CourseData.plist; sourceTree = "<group>"; };
 		DA6A1E1329DEE8A700360C16 /* 测试.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "测试.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6A1E1629DEE8A700360C16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA6A1E1829DEE8A700360C16 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +66,7 @@
 		DA6A1E4F29DF3F6300360C16 /* 截屏2023-04-07 01.56.41.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "截屏2023-04-07 01.56.41.png"; sourceTree = "<group>"; };
 		DA6A1E5129DF422000360C16 /* 截屏2023-04-07 02.08.25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "截屏2023-04-07 02.08.25.png"; sourceTree = "<group>"; };
 		DA6A1E5329DF424900360C16 /* 截屏2023-04-07 02.09.06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "截屏2023-04-07 02.09.06.png"; sourceTree = "<group>"; };
-		DA6A1E5529E12A3C00360C16 /* BasicFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicFrame.swift; sourceTree = "<group>"; };
+		DA6A1E5529E12A3C00360C16 /* BasicCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,11 +120,12 @@
 				DA6A1E1629DEE8A700360C16 /* AppDelegate.swift */,
 				DA6A1E1829DEE8A700360C16 /* SceneDelegate.swift */,
 				DA6A1E1A29DEE8A700360C16 /* ViewController.swift */,
+				DA381CEB29F2FB410038ADFA /* CourseData.plist */,
 				DA6A1E1C29DEE8A700360C16 /* Main.storyboard */,
 				DA6A1E5129DF422000360C16 /* 截屏2023-04-07 02.08.25.png */,
 				DA6A1E4F29DF3F6300360C16 /* 截屏2023-04-07 01.56.41.png */,
 				DA6A1E5329DF424900360C16 /* 截屏2023-04-07 02.09.06.png */,
-				DA6A1E5529E12A3C00360C16 /* BasicFrame.swift */,
+				DA6A1E5529E12A3C00360C16 /* BasicCode.swift */,
 				DA6A1E4A29DF3D9400360C16 /* image1.jpg */,
 				DA6A1E4B29DF3D9400360C16 /* image2.jpg */,
 				DA6A1E4929DF3D9400360C16 /* image3.jpg */,
@@ -256,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA6A1E4D29DF3D9400360C16 /* image1.jpg in Resources */,
+				DA381CEC29F2FB410038ADFA /* CourseData.plist in Resources */,
 				DA6A1E4E29DF3D9400360C16 /* image2.jpg in Resources */,
 				DA6A1E2629DEE8A800360C16 /* LaunchScreen.storyboard in Resources */,
 				DA6A1E2329DEE8A800360C16 /* Assets.xcassets in Resources */,
@@ -291,7 +295,7 @@
 				DA6A1E1B29DEE8A700360C16 /* ViewController.swift in Sources */,
 				DA6A1E2129DEE8A700360C16 /* __.xcdatamodeld in Sources */,
 				DA6A1E1729DEE8A700360C16 /* AppDelegate.swift in Sources */,
-				DA6A1E5629E12A3C00360C16 /* BasicFrame.swift in Sources */,
+				DA6A1E5629E12A3C00360C16 /* BasicCode.swift in Sources */,
 				DA6A1E1929DEE8A700360C16 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

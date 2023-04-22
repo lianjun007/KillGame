@@ -1,13 +1,14 @@
 import UIKit
 
+// 创建标签栏
 class ViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let viewControllers = [
-            UINavigationController(rootViewController: DiscussViewController().withTabBarItem(title: "课程", image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))),
-            UINavigationController(rootViewController: CourseViewController().withTabBarItem(title: "讨论", image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))),
+            UINavigationController(rootViewController: CourseViewController().withTabBarItem(title: "学习", image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))),
+            UINavigationController(rootViewController: DiscussViewController().withTabBarItem(title: "讨论", image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))),
             UINavigationController(rootViewController: ViewController3().withTabBarItem(title: "收藏", image: UIImage(systemName: "star.square.on.square"), selectedImage: UIImage(systemName: "star.square.on.square.fill"))),
             UINavigationController(rootViewController: ViewController4().withTabBarItem(title: "搜索", image: UIImage(systemName: "rectangle.and.hand.point.up.left"), selectedImage: UIImage(systemName: "rectangle.and.hand.point.up.left.fill")))
         ]
@@ -23,101 +24,178 @@ extension UIViewController {
     }
 }
 
-// Main Interface
-class DiscussViewController: UIViewController {
+// 创建课程界面
+class CourseViewController: UIViewController {
     
-    let fsu: Array<String> = ["Swift基础", "iOS初级开发", "HTML5和CSS3基础", "JavaScript入门"]
+    // 在滑动courseTableView之前获取初始偏移量，offsetJudgment判断是否是首次滑动，如果是首次滑动就用initialOffset接收当时的偏移量
+    var offsetJudgment = true
+    var initialOffset = CGFloat()
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if offsetJudgment {
+            initialOffset = courseTableView.contentOffset.y
+            offsetJudgment = false
+        }
+    }
     
-    var offset = CGFloat()
-    // var navHeight = CGFloat()
+    let navLabel = UILabel(frame: navLabelFrame) // 创建导航栏标题，会随着courseTableView的滑动而消失或者放大
+    let moduleLabel = UILabel(frame: CGRect(origin: moduleOrigin, size: CGSizeZero)) // 创建模块二级标题
     
-    let navTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth - screenSpaced * 2, height: navHeight / 5 * 4))
-    var navTitleImg = UIImageView(image: UIImage(systemName: "books.vertical"))
-    let discussTableView = UITableView(frame: CGRect(origin: CGPointZero, size: CGSizeZero), style: .grouped) // 创建一个UITableView作为DiscussViewController的主体
+    let courseTableView = UITableView(frame: screenRect, style: .grouped) // 创建一个UITableView作为courseViewController的主体
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let navImgHeight = screenHeight / 25
-        let navImgWidth = navImgHeight / (navTitleImg.image?.size.height ?? navImgHeight) * (navTitleImg.image?.size.width ?? navImgHeight)
-        // 初始化导航栏
-        navTitleImg.frame = CGRect(x: screenSpaced, y: navHeight / 2, width: navHeight / 5 * 6, height: navImgHeight)
-        navTitleImg.contentMode = .scaleAspectFit
-        navTitleImg.contentMode = .left
-        self.navigationController?.navigationBar.addSubview(navTitleImg)
-        
-        navTitleLabel.text = "课程"
-        navTitleLabel.font = UIFont.systemFont(ofSize: navTitleLabel.frame.height, weight: .bold)
-        navTitleLabel.frame.origin.x = (navTitleImg.image?.size.width)!
-        navTitleImg.addSubview(navTitleLabel)
-        self.navigationItem.title = "课程"
+        let courseData = courseData()
+        // 设置导航栏标题的其他属性
+        navLabel.text = "开始学习"
+        navLabel.font = UIFont.systemFont(ofSize: titleFont, weight: .heavy)
+        self.navigationController?.navigationBar.addSubview(navLabel)
         
         // 初始化tableview
-        discussTableView.frame.size = self.view.bounds.size
-        discussTableView.rowHeight = screenHeight / 5
-        discussTableView.separatorStyle = .none
-        discussTableView.backgroundColor = .systemBackground
+        courseTableView.rowHeight = tableCellFrame.height + controlSpaced
+        courseTableView.separatorStyle = .none
+        courseTableView.backgroundColor = .systemBackground
+        self.view.addSubview(courseTableView)
+        courseTableView.dataSource = self
+        courseTableView.delegate = self
         
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight / 3))
-        scrollView.contentSize = CGSize(width: scrollView.frame.height * 2, height: scrollView.frame.height)
-        discussTableView.tableHeaderView = scrollView
+        // headerView是courseTableView的表头视图的容器
+        let headerView = UIView(frame: headerViewFrame)
+        courseTableView.tableHeaderView = headerView
         
-        let view0 = UIView()
-        view0.backgroundColor = .blue
-        scrollView.addSubview(view0)
-        view0.translatesAutoresizingMaskIntoConstraints = false
-        view0.layer.cornerRadius = 15
-        NSLayoutConstraint.activate([
-            view0.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: navHeight * 2 - (navigationController?.navigationBar.frame.size.height ?? 40)),
-            view0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: screenSpaced),
-            view0.widthAnchor.constraint(equalToConstant: screenWidth - screenSpaced),
-            view0.heightAnchor.constraint(equalToConstant: screenHeight / 2 - controlSpaced * 2)
-        ])
+        // 设置头部容器视图的标题
+        let headerLabel = UILabel(frame: CGRect(x: screenSpaced, y: screenSpaced * 2 + navLabelFrame.height - (self.navigationController?.navigationBar.frame.height)!, width: 0, height: 0))
+        headerLabel.text = "精选课程"
+        headerLabel.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
+        headerLabel.sizeToFit()
+        headerView.addSubview(headerLabel)
         
-        let imageView = UIImageView(image: UIImage(systemName: "book"))
-        imageView.frame.size = CGSize(width: 200, height: 150)
-        view0.addSubview(imageView)
-
-        discussTableView.dataSource = self
-        discussTableView.delegate = self
+        // 设置模块视图的标题
+        moduleLabel.text = "精选文章"
+        moduleLabel.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
+        moduleLabel.sizeToFit()
+ 
+        let courseBtnWidth = screenWidth / 1.5 // 课程框的宽度
+        // 设置头部容器视图的滚动视图，用作精选课程模块
+        let featuredCoursesView = UIScrollView(frame: CGRect(x: 0, y: headerLabel.frame.origin.y + headerLabel.frame.size.height, width: screenWidth, height: headerView.frame.height - headerLabel.frame.height - headerLabel.frame.origin.y))
+        featuredCoursesView.contentSize = CGSize(width: (courseBtnWidth + controlSpaced) * CGFloat(courseData.count) + screenSpaced * 2 - controlSpaced, height: featuredCoursesView.frame.height)
+        featuredCoursesView.showsHorizontalScrollIndicator = false
+        headerView.addSubview(featuredCoursesView)
         
-        view.addSubview(discussTableView)
+        // 循环创建精选课程框
+        for i in 0 ..< courseData.count {
+            
+            // 创建精选课程框
+            let courseBtn = UIButton(frame: CGRect(x: screenSpaced + CGFloat(CGFloat(i) * (courseBtnWidth + controlSpaced)), y: controlSpaced, width: courseBtnWidth, height: featuredCoursesView.frame.height - controlSpaced))
+            courseBtn.backgroundColor = .systemFill
+            courseBtn.layer.cornerRadius = basicCornerRadius
+            courseBtn.setImage(UIImage(named: courseData[i]["name"]!), for: .normal)
+            courseBtn.imageView?.contentMode = .scaleAspectFill
+            courseBtn.layer.masksToBounds = true
+            featuredCoursesView.addSubview(courseBtn)
+            
+            // 设置高斯模糊
+            let blurEffect = UIBlurEffect(style: .light)
+            let blurView = UIVisualEffectView(effect: blurEffect)
+            blurView.frame = CGRect(x: 0, y: courseBtn.frame.height / 4 * 3, width: courseBtn.frame.width, height: courseBtn.frame.height / 4)
+            blurView.isUserInteractionEnabled = false
+            courseBtn.addSubview(blurView)
+            
+            // 设置精选课程的标题
+            let courseLabel = UILabel(frame: CGRect(x: controlSpaced, y: courseBtn.frame.height / 4 * 3 + screenSpaced, width: 0, height: 0))
+            courseLabel.text = courseData[i]["name"]
+            courseLabel.font = UIFont.systemFont(ofSize: titleFont3, weight: .bold)
+            courseLabel.sizeToFit()
+            courseLabel.isUserInteractionEnabled = false
+            courseBtn.addSubview(courseLabel)
+            
+            // 设置精选课程的作者名
+            let courseLabel2 = UILabel(frame: CGRect(x: controlSpaced, y: courseBtn.frame.height / 4 * 3 + screenSpaced + courseLabel.frame.height, width: 0, height: 0))
+            courseLabel2.text = courseData[i]["author"]
+            courseLabel2.font = UIFont.systemFont(ofSize: basicFont, weight: .regular)
+            courseLabel2.sizeToFit()
+            courseLabel2.isUserInteractionEnabled = false
+            courseBtn.addSubview(courseLabel2)
+            
+        }
         
     }
     
 }
 
-extension DiscussViewController: UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
+extension CourseViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         4
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return moduleSpaced + moduleLabel.frame.height
+        }
+        return tableCellFrame.height + controlSpaced
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style: .default, reuseIdentifier: "cell")
-        // cell.selectionStyle = .gray
+        cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let view = UIView(frame: CGRect(x: screenSpaced, y: 0, width: screenWidth - screenSpaced * 2, height: screenHeight / 5 - controlSpaced))
-        view.backgroundColor = .systemCyan
-        view.layer.cornerRadius = 15
+        if indexPath.row == 0 {
+
+            cell.contentView.addSubview(moduleLabel)
+        } else {
+            let view = UIView(frame: tableCellFrame)
+            view.backgroundColor = .systemCyan
+            view.layer.cornerRadius = basicCornerRadius
+            cell.contentView.addSubview(view)
+        }
         
-        let label = UILabel(frame: CGRect(x: 20, y: 20, width: 500, height: 100))
-        label.text = fsu[indexPath.row]
-        view.addSubview(label)
-        cell.contentView.addSubview(view)
+//        let label = UILabel(frame: CGRect(x: 20, y: 20, width: 500, height: 100))
+//        view.addSubview(label)
+
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        offset = discussTableView.contentOffset.y
-        print(offset, navHeight)
-        self.navTitleLabel.alpha = 1 - (offset / navHeight / 2)
+        
+        let offset = courseTableView.contentOffset.y - initialOffset // 通过现在的偏移量减去初始偏移量获得相较于初始状态实际偏移的数值
+        
+        if !offsetJudgment {
+            if !offsetJudgment, offset >= 0 {
+
+                self.navLabel.frame.origin.y = screenSpaced - offset
+                self.navLabel.alpha = 1 - (offset / navHeight)
+            } else {
+                self.navLabel.frame.origin.y = screenSpaced - offset / 2.5
+                self.navLabel.frame.size.height = screenHeight / 25 * (1 - offset / navHeight / 12)
+                self.navLabel.font = UIFont.systemFont(ofSize: screenHeight / 25 * (1 - offset / navHeight / 12), weight: .bold)
+                self.navLabel.alpha = 1 - (offset / navHeight)
+            }
+        }
+        
+        let titleViewRect = CGRect(x: 0, y: 0, width: screenWidth / 4, height: self.navigationController?.navigationBar.frame.height ?? screenHeight / 20)
+        let titleView = UILabel(frame: titleViewRect)
+        titleView.text = "课程"
+        titleView.font = UIFont.systemFont(ofSize: titleView.font.pointSize, weight: .bold)
+        let containerView = UIView(frame: titleViewRect)
+        containerView.addSubview(titleView)
+        titleView.textAlignment = .center
+        self.navigationItem.titleView = containerView
+        
+        // print(newOffset / navHeight)
+        if self.navLabel.alpha <= 0.7 {
+            print("a")
+            titleView.alpha = (offset / navHeight) - 0.36776
+        } else {
+            titleView.alpha = 0
+        }
+
     }
 }
 
-class CourseViewController: UIViewController {
+class DiscussViewController: UIViewController {
     
     let textLabel = ["ActivityIndicator", "ProgressView", "Control", "Picker", "ScrollView", "lunbotu", "DataView", "ScrollView"]
     
@@ -128,7 +206,7 @@ class CourseViewController: UIViewController {
         self.navigationItem.title = "讨论"
         
         let safeView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight), style: .insetGrouped)
-        safeView.rowHeight = screenHeight / 5
+        // safeView.rowHeight = screenHeight / 5
         safeView.separatorStyle = .none
         safeView.backgroundColor = .systemBackground
         // safeView.isEditing = true
@@ -142,11 +220,7 @@ class CourseViewController: UIViewController {
     
 }
 
-extension CourseViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
+extension DiscussViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         8
@@ -159,14 +233,6 @@ extension CourseViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
         
     }
-    
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        <#code#>
-//    }
-    
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//        .insert
-//    }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let view = UIView()
