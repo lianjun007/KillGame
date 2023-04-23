@@ -7,10 +7,10 @@ class ViewController: UITabBarController {
         super.viewDidLoad()
         
         let viewControllers = [
-            UINavigationController(rootViewController: CourseViewController().withTabBarItem(title: "学习", image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))),
-            UINavigationController(rootViewController: DiscussViewController().withTabBarItem(title: "讨论", image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))),
-            UINavigationController(rootViewController: ViewController3().withTabBarItem(title: "收藏", image: UIImage(systemName: "star.square.on.square"), selectedImage: UIImage(systemName: "star.square.on.square.fill"))),
-            UINavigationController(rootViewController: ViewController4().withTabBarItem(title: "搜索", image: UIImage(systemName: "rectangle.and.hand.point.up.left"), selectedImage: UIImage(systemName: "rectangle.and.hand.point.up.left.fill")))
+            UINavigationController(rootViewController: LearningViewController().withTabBarItem(title: "学习", image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))),
+            UINavigationController(rootViewController: DiscussViewController().withTabBarItem(title: "交流", image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))),
+            UINavigationController(rootViewController: CollectionViewController().withTabBarItem(title: "收藏", image: UIImage(systemName: "star.square.on.square"), selectedImage: UIImage(systemName: "star.square.on.square.fill"))),
+            UINavigationController(rootViewController: ViewController4().withTabBarItem(title: "检索", image: UIImage(systemName: "rectangle.and.hand.point.up.left"), selectedImage: UIImage(systemName: "rectangle.and.hand.point.up.left.fill")))
         ]
         self.viewControllers = viewControllers
     }
@@ -24,44 +24,45 @@ extension UIViewController {
     }
 }
 
-// 创建课程界面
-class CourseViewController: UIViewController {
+// 创建学习界面
+class LearningViewController: UIViewController {
     
-    // 在滑动courseTableView之前获取初始偏移量，offsetJudgment判断是否是首次滑动，如果是首次滑动就用initialOffset接收当时的偏移量
+    // 在滑动learningTableView之前获取初始偏移量，offsetJudgment判断是否是首次滑动，如果是首次滑动就用initialOffset接收当时的偏移量
     var offsetJudgment = true
     var initialOffset = CGFloat()
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if offsetJudgment {
-            initialOffset = courseTableView.contentOffset.y
+            initialOffset = learningTableView.contentOffset.y
             offsetJudgment = false
         }
     }
     
-    let navLabel = UILabel(frame: navLabelFrame) // 创建导航栏标题，会随着courseTableView的滑动而消失或者放大
+    let navLabel = UILabel(frame: navLabelFrame) // 创建导航栏标题，会随着learningTableView的滑动而消失或者放大
     let moduleLabel = UILabel(frame: CGRect(origin: moduleOrigin, size: CGSizeZero)) // 创建模块二级标题
     
-    let courseTableView = UITableView(frame: screenRect, style: .grouped) // 创建一个UITableView作为courseViewController的主体
+    let learningTableView = UITableView(frame: screenRect, style: .grouped) // 创建一个UITableView作为LearningViewController的主体
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let courseData = courseData()
+        let courseData = courseData() // 获取CourseData中的数据
+        
         // 设置导航栏标题的其他属性
         navLabel.text = "开始学习"
         navLabel.font = UIFont.systemFont(ofSize: titleFont, weight: .heavy)
         self.navigationController?.navigationBar.addSubview(navLabel)
         
         // 初始化tableview
-        courseTableView.rowHeight = tableCellFrame.height + controlSpaced
-        courseTableView.separatorStyle = .none
-        courseTableView.backgroundColor = .systemBackground
-        self.view.addSubview(courseTableView)
-        courseTableView.dataSource = self
-        courseTableView.delegate = self
+        learningTableView.rowHeight = tableCellFrame.height + controlSpaced
+        learningTableView.separatorStyle = .none
+        learningTableView.backgroundColor = .systemBackground
+        self.view.addSubview(learningTableView)
+        learningTableView.dataSource = self
+        learningTableView.delegate = self
         
         // headerView是courseTableView的表头视图的容器
         let headerView = UIView(frame: headerViewFrame)
-        courseTableView.tableHeaderView = headerView
+        learningTableView.tableHeaderView = headerView
         
         // 设置头部容器视图的标题
         let headerLabel = UILabel(frame: CGRect(x: screenSpaced, y: screenSpaced * 2 + navLabelFrame.height - (self.navigationController?.navigationBar.frame.height)!, width: 0, height: 0))
@@ -94,7 +95,7 @@ class CourseViewController: UIViewController {
             courseBtn.layer.masksToBounds = true
             featuredCoursesView.addSubview(courseBtn)
             
-            // 设置高斯模糊
+            // 设置精选课程框底部的高斯模糊
             let blurEffect = UIBlurEffect(style: .light)
             let blurView = UIVisualEffectView(effect: blurEffect)
             blurView.frame = CGRect(x: 0, y: courseBtn.frame.height / 4 * 3, width: courseBtn.frame.width, height: courseBtn.frame.height / 4)
@@ -123,45 +124,124 @@ class CourseViewController: UIViewController {
     
 }
 
-extension CourseViewController: UITableViewDataSource, UITableViewDelegate {
+// 学习界面扩展类
+extension LearningViewController: UITableViewDataSource, UITableViewDelegate {
     
+    // 设置精选文章的cell行数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        8
     }
     
+    // 设置cell的行高，第一行用作该模块的标题行
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         if indexPath.row == 0 {
             return moduleSpaced + moduleLabel.frame.height
         }
         return tableCellFrame.height + controlSpaced
+        
     }
     
+    // 重用池创建和调用cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style: .default, reuseIdentifier: "cell")
         cell.selectionStyle = .none
         return cell
+        
     }
     
+    // 创建自定义cellView视图
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        
+        let essayData = essayData() // 获取CourseData中的数据
+        
+        if cell.contentView.subviews.isEmpty {
+            // 如果是第一行，返回该模块的标题视图moduleLabel
+            if indexPath.row == 0 {
+                cell.contentView.addSubview(moduleLabel)
+            } else {
+                // 创建精选文章的框
+                let cellView = UIButton(frame: tableCellFrame)
+                cellView.backgroundColor = .systemFill
+                cellView.setImage(UIImage(named: essayData[indexPath.row - 1]["image"]!), for: .normal)
+                cellView.imageView?.contentMode = .scaleAspectFill
+                cellView.layer.cornerRadius = basicCornerRadius
+                cellView.clipsToBounds = true
+                
+                // 设置精选文章信息区域的高斯模糊背景
+                let blurEffect = UIBlurEffect(style: .light)
+                let blurView = UIVisualEffectView(effect: blurEffect)
+                if indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 5 {
+                    blurView.frame = CGRect(x: cellView.frame.width / 5 * 2, y: 0, width: cellView.frame.width - cellView.frame.width / 5 * 2, height: cellView.frame.height + 1)
+                } else {
+                    blurView.frame = CGRect(x: 0, y: 0, width: cellView.frame.width - cellView.frame.width / 5 * 2, height: cellView.frame.height + 1)
+                } // 判断模糊应该在左边还是右边
+                blurView.isUserInteractionEnabled = false
+                cellView.addSubview(blurView)
+                
+                // 创建封面图视图
+                let imageView = UIImageView(image: UIImage(named: essayData[indexPath.row - 1]["image"]!))
+                imageView.frame = CGRect(x: blurView.frame.origin.x == 0 ? blurView.frame.origin.x + blurView.frame.width - 1: 0, y: 0, width: cellView.frame.width - blurView.frame.width + 1, height: cellView.frame.height)
+                imageView.isUserInteractionEnabled = false
+                imageView.contentMode = .scaleAspectFill
+                imageView.clipsToBounds = true
+                cellView.addSubview(imageView)
+                
+                // 设置精选文章的标题
+                let essayLabel = UILabel(frame: CGRect(x: blurView.frame.origin.x + controlSpaced, y: 0, width: blurView.frame.width - controlSpaced * 2, height: 0))
+                essayLabel.text = essayData[indexPath.row - 1]["name"]
+                essayLabel.font = UIFont.systemFont(ofSize: titleFont3, weight: .bold)
+                // 根据字符串长度赋予不同行数,最多为两行
+                if isTruncated(essayLabel) {
+                    essayLabel.numberOfLines += 1
+                }
+                essayLabel.sizeToFit()
+                essayLabel.frame.size.width = blurView.frame.width - controlSpaced * 2
+                essayLabel.isUserInteractionEnabled = false
+                cellView.addSubview(essayLabel)
+                
+                // 设置精选文章的作者名
+                let essayLabel2 = UILabel()
+                essayLabel2.text = essayData[indexPath.row - 1]["author"]
+                essayLabel2.font = UIFont.systemFont(ofSize: basicFont, weight: .regular)
+                essayLabel2.sizeToFit()
+                essayLabel2.isUserInteractionEnabled = false
+                cellView.addSubview(essayLabel2)
+                cell.contentView.addSubview(cellView)
+                
+                // 根据字符串行数判断动态坐标
+                if essayLabel.numberOfLines == 1 {
+                    essayLabel.frame.origin.y = (blurView.frame.height - essayLabel.frame.height * 2 - essayLabel2.frame.height - controlSpaced) / 2
+                    essayLabel2.frame.origin = CGPoint(x: blurView.frame.origin.x + controlSpaced, y: (blurView.frame.height - essayLabel.frame.height * 2 - essayLabel2.frame.height - controlSpaced) / 2 + essayLabel.frame.height * 2 + controlSpaced)
+                } else {
+                    essayLabel.frame.origin.y = (blurView.frame.height - essayLabel.frame.height - essayLabel2.frame.height - controlSpaced) / 2
+                    essayLabel2.frame.origin = CGPoint(x: blurView.frame.origin.x + controlSpaced, y: (blurView.frame.height - essayLabel.frame.height - essayLabel2.frame.height - controlSpaced) / 2 + essayLabel.frame.height + controlSpaced)
+                }
 
-            cell.contentView.addSubview(moduleLabel)
-        } else {
-            let view = UIView(frame: tableCellFrame)
-            view.backgroundColor = .systemCyan
-            view.layer.cornerRadius = basicCornerRadius
-            cell.contentView.addSubview(view)
+            }
+            
         }
         
-//        let label = UILabel(frame: CGRect(x: 20, y: 20, width: 500, height: 100))
-//        view.addSubview(label)
+        // 判断字符串是否超出UILabel的范围
+        func isTruncated(_ label: UILabel) -> Bool {
+            
+            let judgmentLabel = UILabel()
+            judgmentLabel.text = label.text
+            judgmentLabel.font = UIFont.systemFont(ofSize: titleFont3, weight: .bold)
+            judgmentLabel.sizeToFit()
+            return label.frame.width < judgmentLabel.frame.width
+            
+        }
 
     }
     
+    // 导航栏随着滚动而动态变化
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        let offset = courseTableView.contentOffset.y - initialOffset // 通过现在的偏移量减去初始偏移量获得相较于初始状态实际偏移的数值
+        let offset = learningTableView.contentOffset.y - initialOffset // 通过现在的偏移量减去初始偏移量获得相较于初始状态实际偏移的数值
         
+        // 导航栏初始大标题渐变消失和放大动画代码
         if !offsetJudgment {
             if !offsetJudgment, offset >= 0 {
 
@@ -175,26 +255,27 @@ extension CourseViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
         
+        // 导航栏标题随着大标题的消失而出现的代码
         let titleViewRect = CGRect(x: 0, y: 0, width: screenWidth / 4, height: self.navigationController?.navigationBar.frame.height ?? screenHeight / 20)
         let titleView = UILabel(frame: titleViewRect)
-        titleView.text = "课程"
+        titleView.text = "学习"
         titleView.font = UIFont.systemFont(ofSize: titleView.font.pointSize, weight: .bold)
         let containerView = UIView(frame: titleViewRect)
         containerView.addSubview(titleView)
         titleView.textAlignment = .center
         self.navigationItem.titleView = containerView
-        
-        // print(newOffset / navHeight)
+        // 控制导航栏标题渐变出现透明度
         if self.navLabel.alpha <= 0.7 {
-            print("a")
             titleView.alpha = (offset / navHeight) - 0.36776
         } else {
             titleView.alpha = 0
         }
 
     }
+    
 }
 
+// 创建讨论界面
 class DiscussViewController: UIViewController {
     
     let textLabel = ["ActivityIndicator", "ProgressView", "Control", "Picker", "ScrollView", "lunbotu", "DataView", "ScrollView"]
@@ -284,7 +365,254 @@ extension DiscussViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
-class ViewController3: UIViewController {
+// 创建收藏界面
+class CollectionViewController: UIViewController {
+    
+    // 在滑动learningTableView之前获取初始偏移量，offsetJudgment判断是否是首次滑动，如果是首次滑动就用initialOffset接收当时的偏移量
+    var offsetJudgment = true
+    var initialOffset = CGFloat()
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if offsetJudgment {
+            initialOffset = learningTableView.contentOffset.y
+            offsetJudgment = false
+        }
+    }
+    
+    let navLabel = UILabel(frame: navLabelFrame) // 创建导航栏标题，会随着learningTableView的滑动而消失或者放大
+    let moduleLabel = UILabel(frame: CGRect(origin: moduleOrigin, size: CGSizeZero)) // 创建模块二级标题
+    
+    let learningTableView = UITableView(frame: screenRect, style: .grouped) // 创建一个UITableView作为LearningViewController的主体
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let courseData = courseData() // 获取CourseData中的数据
+        
+        // 设置导航栏标题的其他属性
+        navLabel.text = "内容收藏"
+        navLabel.font = UIFont.systemFont(ofSize: titleFont, weight: .heavy)
+        self.navigationController?.navigationBar.addSubview(navLabel)
+        
+        // 初始化tableview
+        learningTableView.rowHeight = tableCellFrame.height + controlSpaced
+        learningTableView.separatorStyle = .none
+        learningTableView.backgroundColor = .systemBackground
+        self.view.addSubview(learningTableView)
+        learningTableView.dataSource = self
+        learningTableView.delegate = self
+        
+        // headerView是courseTableView的表头视图的容器
+        let headerView = UIView(frame: headerViewFrame)
+        learningTableView.tableHeaderView = headerView
+        
+        // 设置头部容器视图的标题
+        let headerLabel = UILabel(frame: CGRect(x: screenSpaced, y: screenSpaced * 2 + navLabelFrame.height - (self.navigationController?.navigationBar.frame.height)!, width: 0, height: 0))
+        headerLabel.text = "精选课程"
+        headerLabel.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
+        headerLabel.sizeToFit()
+        headerView.addSubview(headerLabel)
+        
+        // 设置模块视图的标题
+        moduleLabel.text = "精选文章"
+        moduleLabel.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
+        moduleLabel.sizeToFit()
+ 
+        let courseBtnWidth = screenWidth / 1.5 // 课程框的宽度
+        // 设置头部容器视图的滚动视图，用作精选课程模块
+        let featuredCoursesView = UIScrollView(frame: CGRect(x: 0, y: headerLabel.frame.origin.y + headerLabel.frame.size.height, width: screenWidth, height: headerView.frame.height - headerLabel.frame.height - headerLabel.frame.origin.y))
+        featuredCoursesView.contentSize = CGSize(width: (courseBtnWidth + controlSpaced) * CGFloat(courseData.count) + screenSpaced * 2 - controlSpaced, height: featuredCoursesView.frame.height)
+        featuredCoursesView.showsHorizontalScrollIndicator = false
+        headerView.addSubview(featuredCoursesView)
+        
+        // 循环创建精选课程框
+        for i in 0 ..< courseData.count {
+            
+            // 创建精选课程框
+            let courseBtn = UIButton(frame: CGRect(x: screenSpaced + CGFloat(CGFloat(i) * (courseBtnWidth + controlSpaced)), y: controlSpaced, width: courseBtnWidth, height: featuredCoursesView.frame.height - controlSpaced))
+            courseBtn.backgroundColor = .systemFill
+            courseBtn.layer.cornerRadius = basicCornerRadius
+            courseBtn.setImage(UIImage(named: courseData[i]["name"]!), for: .normal)
+            courseBtn.imageView?.contentMode = .scaleAspectFill
+            courseBtn.layer.masksToBounds = true
+            featuredCoursesView.addSubview(courseBtn)
+            
+            // 设置精选课程框底部的高斯模糊
+            let blurEffect = UIBlurEffect(style: .light)
+            let blurView = UIVisualEffectView(effect: blurEffect)
+            blurView.frame = CGRect(x: 0, y: courseBtn.frame.height / 4 * 3, width: courseBtn.frame.width, height: courseBtn.frame.height / 4)
+            blurView.isUserInteractionEnabled = false
+            courseBtn.addSubview(blurView)
+            
+            // 设置精选课程的标题
+            let courseLabel = UILabel(frame: CGRect(x: controlSpaced, y: courseBtn.frame.height / 4 * 3 + screenSpaced, width: 0, height: 0))
+            courseLabel.text = courseData[i]["name"]
+            courseLabel.font = UIFont.systemFont(ofSize: titleFont3, weight: .bold)
+            courseLabel.sizeToFit()
+            courseLabel.isUserInteractionEnabled = false
+            courseBtn.addSubview(courseLabel)
+            
+            // 设置精选课程的作者名
+            let courseLabel2 = UILabel(frame: CGRect(x: controlSpaced, y: courseBtn.frame.height / 4 * 3 + screenSpaced + courseLabel.frame.height, width: 0, height: 0))
+            courseLabel2.text = courseData[i]["author"]
+            courseLabel2.font = UIFont.systemFont(ofSize: basicFont, weight: .regular)
+            courseLabel2.sizeToFit()
+            courseLabel2.isUserInteractionEnabled = false
+            courseBtn.addSubview(courseLabel2)
+            
+        }
+        
+    }
+    
+}
+
+// 学习界面扩展类
+extension CollectionViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    // 设置精选文章的cell行数
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        8
+    }
+    
+    // 设置cell的行高，第一行用作该模块的标题行
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0 {
+            return moduleSpaced + moduleLabel.frame.height
+        }
+        return tableCellFrame.height + controlSpaced
+        
+    }
+    
+    // 重用池创建和调用cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style: .default, reuseIdentifier: "cell")
+        cell.selectionStyle = .none
+        return cell
+        
+    }
+    
+    // 创建自定义cellView视图
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let essayData = essayData() // 获取CourseData中的数据
+        
+        if cell.contentView.subviews.isEmpty {
+            // 如果是第一行，返回该模块的标题视图moduleLabel
+            if indexPath.row == 0 {
+                cell.contentView.addSubview(moduleLabel)
+            } else {
+                // 创建精选文章的框
+                let cellView = UIButton(frame: tableCellFrame)
+                cellView.backgroundColor = .systemFill
+                cellView.setImage(UIImage(named: essayData[indexPath.row - 1]["image"]!), for: .normal)
+                cellView.imageView?.contentMode = .scaleAspectFill
+                cellView.layer.cornerRadius = basicCornerRadius
+                cellView.clipsToBounds = true
+                
+                // 设置精选文章信息区域的高斯模糊背景
+                let blurEffect = UIBlurEffect(style: .light)
+                let blurView = UIVisualEffectView(effect: blurEffect)
+                if indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 5 {
+                    blurView.frame = CGRect(x: cellView.frame.width / 5 * 2, y: 0, width: cellView.frame.width - cellView.frame.width / 5 * 2, height: cellView.frame.height + 1)
+                } else {
+                    blurView.frame = CGRect(x: 0, y: 0, width: cellView.frame.width - cellView.frame.width / 5 * 2, height: cellView.frame.height + 1)
+                } // 判断模糊应该在左边还是右边
+                blurView.isUserInteractionEnabled = false
+                cellView.addSubview(blurView)
+                
+                // 创建封面图视图
+                let imageView = UIImageView(image: UIImage(named: essayData[indexPath.row - 1]["image"]!))
+                imageView.frame = CGRect(x: blurView.frame.origin.x == 0 ? blurView.frame.origin.x + blurView.frame.width - 1: 0, y: 0, width: cellView.frame.width - blurView.frame.width + 1, height: cellView.frame.height)
+                imageView.isUserInteractionEnabled = false
+                imageView.contentMode = .scaleAspectFill
+                imageView.clipsToBounds = true
+                cellView.addSubview(imageView)
+                
+                // 设置精选文章的标题
+                let essayLabel = UILabel(frame: CGRect(x: blurView.frame.origin.x + controlSpaced, y: 0, width: blurView.frame.width - controlSpaced * 2, height: 0))
+                essayLabel.text = essayData[indexPath.row - 1]["name"]
+                essayLabel.font = UIFont.systemFont(ofSize: titleFont3, weight: .bold)
+                // 根据字符串长度赋予不同行数,最多为两行
+                if isTruncated(essayLabel) {
+                    essayLabel.numberOfLines += 1
+                }
+                essayLabel.sizeToFit()
+                essayLabel.frame.size.width = blurView.frame.width - controlSpaced * 2
+                essayLabel.isUserInteractionEnabled = false
+                cellView.addSubview(essayLabel)
+                
+                // 设置精选文章的作者名
+                let essayLabel2 = UILabel()
+                essayLabel2.text = essayData[indexPath.row - 1]["author"]
+                essayLabel2.font = UIFont.systemFont(ofSize: basicFont, weight: .regular)
+                essayLabel2.sizeToFit()
+                essayLabel2.isUserInteractionEnabled = false
+                cellView.addSubview(essayLabel2)
+                cell.contentView.addSubview(cellView)
+                
+                // 根据字符串行数判断动态坐标
+                if essayLabel.numberOfLines == 1 {
+                    essayLabel.frame.origin.y = (blurView.frame.height - essayLabel.frame.height * 2 - essayLabel2.frame.height - controlSpaced) / 2
+                    essayLabel2.frame.origin = CGPoint(x: blurView.frame.origin.x + controlSpaced, y: (blurView.frame.height - essayLabel.frame.height * 2 - essayLabel2.frame.height - controlSpaced) / 2 + essayLabel.frame.height * 2 + controlSpaced)
+                } else {
+                    essayLabel.frame.origin.y = (blurView.frame.height - essayLabel.frame.height - essayLabel2.frame.height - controlSpaced) / 2
+                    essayLabel2.frame.origin = CGPoint(x: blurView.frame.origin.x + controlSpaced, y: (blurView.frame.height - essayLabel.frame.height - essayLabel2.frame.height - controlSpaced) / 2 + essayLabel.frame.height + controlSpaced)
+                }
+
+            }
+            
+        }
+        
+        // 判断字符串是否超出UILabel的范围
+        func isTruncated(_ label: UILabel) -> Bool {
+            
+            let judgmentLabel = UILabel()
+            judgmentLabel.text = label.text
+            judgmentLabel.font = UIFont.systemFont(ofSize: titleFont3, weight: .bold)
+            judgmentLabel.sizeToFit()
+            return label.frame.width < judgmentLabel.frame.width
+            
+        }
+
+    }
+    
+    // 导航栏随着滚动而动态变化
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let offset = learningTableView.contentOffset.y - initialOffset // 通过现在的偏移量减去初始偏移量获得相较于初始状态实际偏移的数值
+        
+        // 导航栏初始大标题渐变消失和放大动画代码
+        if !offsetJudgment {
+            if !offsetJudgment, offset >= 0 {
+
+                self.navLabel.frame.origin.y = screenSpaced - offset
+                self.navLabel.alpha = 1 - (offset / navHeight)
+            } else {
+                self.navLabel.frame.origin.y = screenSpaced - offset / 2.5
+                self.navLabel.frame.size.height = screenHeight / 25 * (1 - offset / navHeight / 12)
+                self.navLabel.font = UIFont.systemFont(ofSize: screenHeight / 25 * (1 - offset / navHeight / 12), weight: .bold)
+                self.navLabel.alpha = 1 - (offset / navHeight)
+            }
+        }
+        
+        // 导航栏标题随着大标题的消失而出现的代码
+        let titleViewRect = CGRect(x: 0, y: 0, width: screenWidth / 4, height: self.navigationController?.navigationBar.frame.height ?? screenHeight / 20)
+        let titleView = UILabel(frame: titleViewRect)
+        titleView.text = "收藏"
+        titleView.font = UIFont.systemFont(ofSize: titleView.font.pointSize, weight: .bold)
+        let containerView = UIView(frame: titleViewRect)
+        containerView.addSubview(titleView)
+        titleView.textAlignment = .center
+        self.navigationItem.titleView = containerView
+        // 控制导航栏标题渐变出现透明度
+        if self.navLabel.alpha <= 0.7 {
+            titleView.alpha = (offset / navHeight) - 0.36776
+        } else {
+            titleView.alpha = 0
+        }
+
+    }
     
 }
 

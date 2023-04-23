@@ -22,7 +22,7 @@ let basicCornerRadius = CGFloat(15) // 标准控件圆角
 // 具体控件的框架或原点或尺寸
 let navLabelFrame = CGRect(origin: basicOrigin, size: CGSize(width: basicWidth, height: screenHeight / 25)) // 导航栏标题框架
 let headerViewFrame = CGRect(origin: CGPointZero, size: CGSize(width: screenWidth, height: (screenHeight - navHeight * 2 - safeAreaInsets.top - safeAreaInsets.bottom) / 1.5)) // tableView的头部视图容器的尺寸
-let tableCellFrame = CGRect(origin: controlOrigin, size: CGSize(width: basicWidth / 2, height: (screenHeight - navHeight * 2 - safeAreaInsets.top - safeAreaInsets.bottom) / 6)) // tableView的cell的内部显示视图的尺寸
+let tableCellFrame = CGRect(origin: controlOrigin, size: CGSize(width: basicWidth, height: (screenHeight - navHeight * 2 - safeAreaInsets.top - safeAreaInsets.bottom) / 6)) // tableView的cell的内部显示视图的尺寸
 
 // 字体大小
 let basicFont = screenHeight / 50 // 标准正文字体大小
@@ -30,15 +30,28 @@ let titleFont = screenHeight / 25 // 一级标题字体大小
 let titleFont2 = screenHeight / 35 // 二级标题字体大小
 let titleFont3 = screenHeight / 45 // 三级标题字体大小
 
+// CourseData数据初始化
 func courseData() -> Array<Dictionary<String, String>>  {
+
     var courseDataArray: Array<Dictionary<String, String>> = []
     if let path = Bundle.main.path(forResource: "CourseData", ofType: "plist") {
         if let array = NSArray(contentsOfFile: path) as? [Dictionary<String, String>] {
             courseDataArray = array
         }
-    } else {
-        print("文件不存在")
     }
-    print(courseDataArray)
     return courseDataArray
+    
+}
+
+// EssayData数据初始化
+func essayData() -> Array<Dictionary<String, String>>  {
+    
+    var essayDataArray: Array<Dictionary<String, String>> = []
+    if let path = Bundle.main.path(forResource: "EssayData", ofType: "plist") {
+        if let array = NSArray(contentsOfFile: path) as? [Dictionary<String, String>] {
+            essayDataArray = array
+        }
+    }
+    return essayDataArray
+    
 }

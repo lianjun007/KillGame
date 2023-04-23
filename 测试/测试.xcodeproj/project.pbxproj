@@ -25,6 +25,9 @@
 		DA6A1E5229DF422100360C16 /* 截屏2023-04-07 02.08.25.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6A1E5129DF422000360C16 /* 截屏2023-04-07 02.08.25.png */; };
 		DA6A1E5429DF424900360C16 /* 截屏2023-04-07 02.09.06.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6A1E5329DF424900360C16 /* 截屏2023-04-07 02.09.06.png */; };
 		DA6A1E5629E12A3C00360C16 /* BasicCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6A1E5529E12A3C00360C16 /* BasicCode.swift */; };
+		DA6F614329F4CC2A0002A5A0 /* EssayData.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA6F614229F4CC2A0002A5A0 /* EssayData.plist */; };
+		DA6F614629F4D78C0002A5A0 /* EssayImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA6F614529F4D78C0002A5A0 /* EssayImage.xcassets */; };
+		DA6F614829F575330002A5A0 /* CourseImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA6F614729F575330002A5A0 /* CourseImage.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,9 @@
 		DA6A1E5129DF422000360C16 /* 截屏2023-04-07 02.08.25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "截屏2023-04-07 02.08.25.png"; sourceTree = "<group>"; };
 		DA6A1E5329DF424900360C16 /* 截屏2023-04-07 02.09.06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "截屏2023-04-07 02.09.06.png"; sourceTree = "<group>"; };
 		DA6A1E5529E12A3C00360C16 /* BasicCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCode.swift; sourceTree = "<group>"; };
+		DA6F614229F4CC2A0002A5A0 /* EssayData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = EssayData.plist; sourceTree = "<group>"; };
+		DA6F614529F4D78C0002A5A0 /* EssayImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = EssayImage.xcassets; sourceTree = "<group>"; };
+		DA6F614729F575330002A5A0 /* CourseImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CourseImage.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,10 +123,10 @@
 		DA6A1E1529DEE8A700360C16 /* 测试 */ = {
 			isa = PBXGroup;
 			children = (
+				DA6F614429F4CC340002A5A0 /* DataPlist */,
 				DA6A1E1629DEE8A700360C16 /* AppDelegate.swift */,
 				DA6A1E1829DEE8A700360C16 /* SceneDelegate.swift */,
 				DA6A1E1A29DEE8A700360C16 /* ViewController.swift */,
-				DA381CEB29F2FB410038ADFA /* CourseData.plist */,
 				DA6A1E1C29DEE8A700360C16 /* Main.storyboard */,
 				DA6A1E5129DF422000360C16 /* 截屏2023-04-07 02.08.25.png */,
 				DA6A1E4F29DF3F6300360C16 /* 截屏2023-04-07 01.56.41.png */,
@@ -152,6 +158,17 @@
 				DA6A1E3C29DEE8A800360C16 /* __UITestsLaunchTests.swift */,
 			);
 			path = "测试UITests";
+			sourceTree = "<group>";
+		};
+		DA6F614429F4CC340002A5A0 /* DataPlist */ = {
+			isa = PBXGroup;
+			children = (
+				DA6F614229F4CC2A0002A5A0 /* EssayData.plist */,
+				DA6F614529F4D78C0002A5A0 /* EssayImage.xcassets */,
+				DA381CEB29F2FB410038ADFA /* CourseData.plist */,
+				DA6F614729F575330002A5A0 /* CourseImage.xcassets */,
+			);
+			path = DataPlist;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +277,8 @@
 			files = (
 				DA6A1E4D29DF3D9400360C16 /* image1.jpg in Resources */,
 				DA381CEC29F2FB410038ADFA /* CourseData.plist in Resources */,
+				DA6F614829F575330002A5A0 /* CourseImage.xcassets in Resources */,
+				DA6F614329F4CC2A0002A5A0 /* EssayData.plist in Resources */,
 				DA6A1E4E29DF3D9400360C16 /* image2.jpg in Resources */,
 				DA6A1E2629DEE8A800360C16 /* LaunchScreen.storyboard in Resources */,
 				DA6A1E2329DEE8A800360C16 /* Assets.xcassets in Resources */,
@@ -268,6 +287,7 @@
 				DA6A1E4C29DF3D9400360C16 /* image3.jpg in Resources */,
 				DA6A1E5229DF422100360C16 /* 截屏2023-04-07 02.08.25.png in Resources */,
 				DA6A1E5029DF3F6300360C16 /* 截屏2023-04-07 01.56.41.png in Resources */,
+				DA6F614629F4D78C0002A5A0 /* EssayImage.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
