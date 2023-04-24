@@ -4,30 +4,6 @@
 <array>
 	<dict>
 		<key>image</key>
-		<string>向晚</string>
-		<key>author</key>
-		<string>QHuiYan</string>
-		<key>name</key>
-		<string>iOS开发动画制作技巧</string>
-	</dict>
-	<dict>
-		<key>image</key>
-		<string>贝拉</string>
-		<key>author</key>
-		<string>QHuiYan</string>
-		<key>name</key>
-		<string>HTML中的常用元素汇总</string>
-	</dict>
-	<dict>
-		<key>image</key>
-		<string>贝拉</string>
-		<key>author</key>
-		<string>QHuiYan</string>
-		<key>name</key>
-		<string>HTML中的常用元素汇总</string>
-	</dict>
-	<dict>
-		<key>image</key>
 		<string>嘉然</string>
 		<key>author</key>
 		<string>QHuiYan</string>

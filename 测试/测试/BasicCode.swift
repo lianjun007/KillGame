@@ -6,7 +6,7 @@ let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
 let window = windowScene?.windows.first
 let safeAreaInsets = window?.safeAreaInsets ?? UIEdgeInsets.zero
 // 基础属性
-let screenRect = UIScreen.main.bounds // 屏幕原点和尺寸
+let screenFrame = UIScreen.main.bounds // 屏幕原点和尺寸
 let screenWidth: CGFloat = UIScreen.main.bounds.width // 屏幕宽度
 let screenHeight: CGFloat = UIScreen.main.bounds.height // 屏幕高度
 let screenSpaced = screenWidth / 20 // 屏幕边距
@@ -21,7 +21,8 @@ let basicCornerRadius = CGFloat(15) // 标准控件圆角
 
 // 具体控件的框架或原点或尺寸
 let navLabelFrame = CGRect(origin: basicOrigin, size: CGSize(width: basicWidth, height: screenHeight / 25)) // 导航栏标题框架
-let headerViewFrame = CGRect(origin: CGPointZero, size: CGSize(width: screenWidth, height: (screenHeight - navHeight * 2 - safeAreaInsets.top - safeAreaInsets.bottom) / 1.5)) // tableView的头部视图容器的尺寸
+let headerViewFrame = CGRect(origin: CGPointZero, size: CGSize(width: screenWidth, height: (screenHeight - navHeight * 2 - safeAreaInsets.top - safeAreaInsets.bottom) / 1.5)) // tableView的头部视图容器的尺寸（展示模块）
+// let navHeaderViewFrame = CGRect(origin: CGPointZero, size: CGSize(width: screenWidth, height: titleFont2 + )) // tableView的头部视图容器的尺寸（导航模块）
 let tableCellFrame = CGRect(origin: controlOrigin, size: CGSize(width: basicWidth, height: (screenHeight - navHeight * 2 - safeAreaInsets.top - safeAreaInsets.bottom) / 6)) // tableView的cell的内部显示视图的尺寸
 
 // 字体大小
