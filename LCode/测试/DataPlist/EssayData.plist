@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>image</key>
+		<string>嘉然</string>
+		<key>author</key>
+		<string>QHuiYan</string>
+		<key>name</key>
+		<string>iOS开发中的UITableView需要注意的细节</string>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>向晚</string>
+		<key>author</key>
+		<string>QHuiYan</string>
+		<key>name</key>
+		<string>iOS开发动画制作技巧</string>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>乃琳</string>
+		<key>author</key>
+		<string>QHuiYan</string>
+		<key>name</key>
+		<string>苹果导航栏navigationBar的研究与优化等相关具体问题的探讨与研究的点点滴滴如果和我入会费i图和我人好哦发哈</string>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>贝拉</string>
+		<key>author</key>
+		<string>QHuiYan</string>
+		<key>name</key>
+		<string>HTML中的常用元素汇总</string>
+	</dict>
+</array>
+</plist>
