@@ -403,6 +403,9 @@ class CollectionViewController: UIViewController {
         collectionScrollView.showsVerticalScrollIndicator = false
         self.view.addSubview(collectionScrollView)
         
+        print(collectionTableView.contentOffset, "collectionTableView.contentOffset")
+        print(collectionScrollView.contentOffset, "collectionScrollView.contentOffset")
+        
         // 设置收藏页导航栏大标题的其他属性
         navLabel.text = "我的收藏"
         navLabel.font = UIFont.systemFont(ofSize: titleFont, weight: .heavy)
@@ -619,7 +622,8 @@ extension CollectionViewController: UITableViewDataSource, UITableViewDelegate {
         
         let offset = collectionTableView.contentOffset.y - initialOffset // 通过现在的偏移量减去初始偏移量获得相较于初始状态实际偏移的数值
         
-        print(collectionTableView.contentOffset, collectionScrollView.contentOffset)
+        print(collectionTableView.contentOffset, "collectionTableView.contentOffset")
+        print(collectionScrollView.contentOffset, "collectionScrollView.contentOffset")
         
         // 导航栏初始大标题渐变消失和放大动画代码
         if !offsetJudgment {
