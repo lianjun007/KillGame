@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>22605247李言君</title>
+	<style type="text/css">
+		body {
+			background-color: #f2f2f2;
+		}
+		button {
+			background-color: burlywood;
+			border-radius: 20px;
+			color: #fff;
+			font-size: 18px;
+			padding: 10px 20px;
+			border: none;
+			box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+			cursor: pointer;
+			outline: none;
+			position: relative;
+			overflow: hidden;
+		}
+		button:before {
+			content: "";
+			position: absolute;
+			top: -50%;
+			left: -50%;
+			width: 200%;
+			height: 200%;
+			background-color: rgba(255, 255, 255, 0.05);
+			transform-origin: center center;
+			transform: translate(-50%, -50%) scale(0);
+			border-radius: 50%;
+			z-index: -1;
+		}
+		button:hover:before {
+			transform: translate(-50%, -50%) scale(3);
+			transition-duration: 0.5s;
+		}
+	</style>
+</head>
+
+<body>
+	<button onclick="window.location.href='01/page1.html'">第一题-奥运奖牌榜</button>
+	<button onclick="window.location.href='02/page2.html'">第二题-登录界面</button>
+	<button onclick="window.location.href='03/page3.html'">第三题-新闻播报</button>
+</body>
+
+</html>

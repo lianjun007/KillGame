@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四个方框</title>
+    <style type="text/css">
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background-color: #f2f2f2;
+            background-image: url(images/asoul.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .box {
+            width: 200px;
+            height: 300px;
+            background-color: #ccc;
+            box-shadow: 0px 0px 10px #000;
+            margin-right: 20px;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+
+        .box:hover {
+            box-shadow: 0px 0px 20px #000;
+        }
+
+        .like-button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .like-button:hover {
+            background-color: #ddd;
+        }
+
+        .like-count {
+            display: inline-block;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h2>乃琳</h2>
+            <img class="box" src="images/乃琳.jpg" alt="">
+            <div class="like-section">
+                <button class="like-button">点赞</button>
+                <span class="like-count">0</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>向晚</h2>
+            <img class="box" src="images/向晚.jpg" alt="">
+            <div class="like-section">
+                <button class="like-button">点赞</button>
+                <span class="like-count">0</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>嘉然</h2>
+            <img class="box" src="images/嘉然.png" alt="">
+            <div class="like-section">
+                <button class="like-button">点赞</button>
+                <span class="like-count">0</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>贝拉</h2>
+            <img class="box" src="images/贝拉.jpg" alt="">
+            <div class="like-section">
+                <button class="like-button">点赞</button>
+                <span class="like-count">0</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JavaScript -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+          $(".like-button").click(function() {
+              var $count = $(this).next(".like-count");
+              var count = parseInt($count.text());
+              $count.text(count + 1);
+          });
+          
+      });
+    </script>
+
+</body>
+</html>
