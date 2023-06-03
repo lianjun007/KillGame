@@ -75,7 +75,7 @@ class RoleViewController: UIViewController, RoleChooseViewControllerDelegate {
     }
 
     @objc func clickEvents(sender: UIButton) {
-        switch sender.tag {
+        switch sender.tag 
         case 0: self.navigationController?.popViewController(animated: true)
         case 1:
             let roleChooseVC = RoleChooseViewController()

@@ -18,6 +18,10 @@ class LearningViewController: UIViewController {
         self.navigationItem.title = "开始学习"
         navigationController?.navigationBar.prefersLargeTitles = true
         
+//        UserDefaults.standard.set(a, forKey: "nihao")
+//        if let nihao = UserDefaults.standard.string(forKey: "nihao") {
+//            print(nihao)
+//        }
         // 获取状态栏高度
         var statusBarHeight = CGFloat()
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

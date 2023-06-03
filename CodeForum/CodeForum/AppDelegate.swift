@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  CodeForum
 //
-//  Created by QHuiYan on 2023/5/15.
+//  Created by QHuiYan on 2023/5/22.
 //
 
 import UIKit
@@ -11,10 +11,8 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        UITabBar.appearance().tintColor = .systemIndigo
         return true
     }
 
