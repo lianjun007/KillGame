@@ -14,7 +14,7 @@ class CourseViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         navigationItem.title = "精选课程标题"
-        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
     }
     
 }
