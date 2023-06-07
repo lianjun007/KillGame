@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import MarkdownKit
 
 // 框架的基本属性
 let screenWidth = UIScreen.main.bounds.width

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		743FC6EF27B9D3477B18CEB1 /* Pods_HuiYanKill.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E2B7FDE6ACF0B530A842BD /* Pods_HuiYanKill.framework */; };
 		DA0A4BB529D357090050FCF9 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0A4BB429D357090050FCF9 /* GameViewController.swift */; };
 		DA4655F529CDC1FF0051F420 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4655F429CDC1FF0051F420 /* AppDelegate.swift */; };
 		DA4655F729CDC1FF0051F420 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4655F629CDC1FF0051F420 /* SceneDelegate.swift */; };
@@ -55,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C39D0165BEE95A47E9B8116 /* Pods-HuiYanKill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiYanKill.debug.xcconfig"; path = "Target Support Files/Pods-HuiYanKill/Pods-HuiYanKill.debug.xcconfig"; sourceTree = "<group>"; };
+		9F43C1DAE25E0BEA55F0D39A /* Pods-HuiYanKill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiYanKill.release.xcconfig"; path = "Target Support Files/Pods-HuiYanKill/Pods-HuiYanKill.release.xcconfig"; sourceTree = "<group>"; };
 		DA0A4BB429D357090050FCF9 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = huiyanKill/Interface/GameViewController.swift; sourceTree = SOURCE_ROOT; };
 		DA4655F129CDC1FF0051F420 /* HuiYanKill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuiYanKill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4655F429CDC1FF0051F420 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 		DA87BE9229D0B6DF0078C679 /* dilin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dilin.png; sourceTree = "<group>"; };
 		DA87BE9329D0B6DF0078C679 /* suhuan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = suhuan.jpg; sourceTree = "<group>"; };
 		DA87BE9429D0B6DF0078C679 /* qihuiyan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qihuiyan.jpg; sourceTree = "<group>"; };
+		F4E2B7FDE6ACF0B530A842BD /* Pods_HuiYanKill.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuiYanKill.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				743FC6EF27B9D3477B18CEB1 /* Pods_HuiYanKill.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +119,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		389D19BFF6871FC4FAC27982 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F4E2B7FDE6ACF0B530A842BD /* Pods_HuiYanKill.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		926018D764D8611EB5BA1CE1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5C39D0165BEE95A47E9B8116 /* Pods-HuiYanKill.debug.xcconfig */,
+				9F43C1DAE25E0BEA55F0D39A /* Pods-HuiYanKill.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		DA4655E829CDC1FF0051F420 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +144,8 @@
 				DA46560D29CDC2010051F420 /* HuiYanKillTests */,
 				DA46561729CDC2010051F420 /* HuiYanKillUITests */,
 				DA4655F229CDC1FF0051F420 /* Products */,
+				926018D764D8611EB5BA1CE1 /* Pods */,
+				389D19BFF6871FC4FAC27982 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -239,9 +264,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA46561E29CDC2010051F420 /* Build configuration list for PBXNativeTarget "HuiYanKill" */;
 			buildPhases = (
+				15EA9FF6490734D3338167AD /* [CP] Check Pods Manifest.lock */,
 				DA4655ED29CDC1FF0051F420 /* Sources */,
 				DA4655EE29CDC1FF0051F420 /* Frameworks */,
 				DA4655EF29CDC1FF0051F420 /* Resources */,
+				FBE34C3906DEF33B65A2CF8B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -369,6 +396,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		15EA9FF6490734D3338167AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HuiYanKill-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBE34C3906DEF33B65A2CF8B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HuiYanKill/Pods-HuiYanKill-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HuiYanKill/Pods-HuiYanKill-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HuiYanKill/Pods-HuiYanKill-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DA4655ED29CDC1FF0051F420 /* Sources */ = {
@@ -556,6 +625,7 @@
 		};
 		DA46561F29CDC2010051F420 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C39D0165BEE95A47E9B8116 /* Pods-HuiYanKill.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -584,6 +654,7 @@
 		};
 		DA46562029CDC2010051F420 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F43C1DAE25E0BEA55F0D39A /* Pods-HuiYanKill.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

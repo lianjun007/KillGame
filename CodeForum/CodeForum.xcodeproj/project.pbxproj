@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		DA09E2632A1DB577006B5CF6 /* BasicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA09E2622A1DB577006B5CF6 /* BasicData.swift */; };
-		DA30E1052A299BF800BE22C3 /* FeaturedCollectionsData.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA30E1042A299BF800BE22C3 /* FeaturedCollectionsData.plist */; };
 		DA30E1072A299C3000BE22C3 /* FeaturedCollectionsImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA30E1062A299C3000BE22C3 /* FeaturedCollectionsImage.xcassets */; };
 		DA30E10A2A2AF67200BE22C3 /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30E1092A2AF67200BE22C3 /* CourseViewController.swift */; };
-		DA30E10D2A2B030300BE22C3 /* PaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30E10C2A2B030300BE22C3 /* PaperViewController.swift */; };
 		DA30E10F2A2CF5F100BE22C3 /* ControlBuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30E10E2A2CF5F000BE22C3 /* ControlBuild.swift */; };
 		DA30E1342A2D08A400BE22C3 /* favicon.ico in Resources */ = {isa = PBXBuildFile; fileRef = DA30E1162A2D08A400BE22C3 /* favicon.ico */; };
 		DA30E1352A2D08A400BE22C3 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = DA30E1172A2D08A400BE22C3 /* index.html */; };
@@ -35,6 +33,11 @@
 		DA30E1472A2D08A400BE22C3 /* i18n_en.json in Resources */ = {isa = PBXBuildFile; fileRef = DA30E12F2A2D08A400BE22C3 /* i18n_en.json */; };
 		DA30E1482A2D08A400BE22C3 /* i18n_cn.json in Resources */ = {isa = PBXBuildFile; fileRef = DA30E1302A2D08A400BE22C3 /* i18n_cn.json */; };
 		DA30E14A2A2D6A0F00BE22C3 /* DataInvoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30E1492A2D6A0F00BE22C3 /* DataInvoke.swift */; };
+		DA30E1542A2D805100BE22C3 /* FeaturedCollectionsData.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA30E1532A2D805100BE22C3 /* FeaturedCollectionsData.plist */; };
+		DA30E1562A2D80E000BE22C3 /* FeaturedPaperImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA30E1552A2D80E000BE22C3 /* FeaturedPaperImage.xcassets */; };
+		DA30E1582A2D80E400BE22C3 /* FeaturedPaperData.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA30E1572A2D80E400BE22C3 /* FeaturedPaperData.plist */; };
+		DA369D4F2A2DD11400C8D878 /* PaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30E10C2A2B030300BE22C3 /* PaperViewController.swift */; };
+		DA369D502A2DD1AD00C8D878 /* FeaturedPaperFile0.md in Resources */ = {isa = PBXBuildFile; fileRef = DA30E1592A2D859C00BE22C3 /* FeaturedPaperFile0.md */; };
 		DA3705102A1B9CF00077DF05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA37050F2A1B9CF00077DF05 /* AppDelegate.swift */; };
 		DA3705122A1B9CF00077DF05 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3705112A1B9CF00077DF05 /* SceneDelegate.swift */; };
 		DA3705142A1B9CF00077DF05 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3705132A1B9CF00077DF05 /* ViewController.swift */; };
@@ -48,9 +51,21 @@
 		DA37052E2A1B9E4E0077DF05 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA37052D2A1B9E4E0077DF05 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		DA13A47A2A2E536E002F44AB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		DA09E2622A1DB577006B5CF6 /* BasicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicData.swift; sourceTree = "<group>"; };
-		DA30E1042A299BF800BE22C3 /* FeaturedCollectionsData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = FeaturedCollectionsData.plist; sourceTree = "<group>"; };
 		DA30E1062A299C3000BE22C3 /* FeaturedCollectionsImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FeaturedCollectionsImage.xcassets; sourceTree = "<group>"; };
 		DA30E1092A2AF67200BE22C3 /* CourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
 		DA30E10C2A2B030300BE22C3 /* PaperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperViewController.swift; sourceTree = "<group>"; };
@@ -77,7 +92,11 @@
 		DA30E12F2A2D08A400BE22C3 /* i18n_en.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = i18n_en.json; sourceTree = "<group>"; };
 		DA30E1302A2D08A400BE22C3 /* i18n_cn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = i18n_cn.json; sourceTree = "<group>"; };
 		DA30E1492A2D6A0F00BE22C3 /* DataInvoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInvoke.swift; sourceTree = "<group>"; };
-		DA37050C2A1B9CF00077DF05 /* CodeForum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeForum.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA30E1532A2D805100BE22C3 /* FeaturedCollectionsData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FeaturedCollectionsData.plist; sourceTree = "<group>"; };
+		DA30E1552A2D80E000BE22C3 /* FeaturedPaperImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FeaturedPaperImage.xcassets; sourceTree = "<group>"; };
+		DA30E1572A2D80E400BE22C3 /* FeaturedPaperData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FeaturedPaperData.plist; sourceTree = "<group>"; };
+		DA30E1592A2D859C00BE22C3 /* FeaturedPaperFile0.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = FeaturedPaperFile0.md; sourceTree = "<group>"; };
+		DA369D4E2A2DC79F00C8D878 /* CodeForum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = CodeForum.app; path = "/Users/macbook-air-2022/HuiYanKillDome/CodeForum/build/Debug-iphoneos/CodeForum.app"; sourceTree = "<absolute>"; };
 		DA37050F2A1B9CF00077DF05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA3705112A1B9CF00077DF05 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DA3705132A1B9CF00077DF05 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,8 +125,11 @@
 		DA30E1082A299C3700BE22C3 /* DataFile */ = {
 			isa = PBXGroup;
 			children = (
+				DA30E15A2A2D85B000BE22C3 /* paperFile */,
+				DA30E1572A2D80E400BE22C3 /* FeaturedPaperData.plist */,
+				DA30E1552A2D80E000BE22C3 /* FeaturedPaperImage.xcassets */,
 				DA30E1062A299C3000BE22C3 /* FeaturedCollectionsImage.xcassets */,
-				DA30E1042A299BF800BE22C3 /* FeaturedCollectionsData.plist */,
+				DA30E1532A2D805100BE22C3 /* FeaturedCollectionsData.plist */,
 			);
 			path = DataFile;
 			sourceTree = "<group>";
@@ -207,20 +229,19 @@
 			path = i18n;
 			sourceTree = "<group>";
 		};
+		DA30E15A2A2D85B000BE22C3 /* paperFile */ = {
+			isa = PBXGroup;
+			children = (
+				DA30E1592A2D859C00BE22C3 /* FeaturedPaperFile0.md */,
+			);
+			path = paperFile;
+			sourceTree = "<group>";
+		};
 		DA3705032A1B9CF00077DF05 = {
 			isa = PBXGroup;
 			children = (
 				DA37050E2A1B9CF00077DF05 /* CodeForum */,
-				DA37050D2A1B9CF00077DF05 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		DA37050D2A1B9CF00077DF05 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DA37050C2A1B9CF00077DF05 /* CodeForum.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		DA37050E2A1B9CF00077DF05 /* CodeForum */ = {
@@ -261,9 +282,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA3705232A1B9CF10077DF05 /* Build configuration list for PBXNativeTarget "CodeForum" */;
 			buildPhases = (
+				B187807D2CD5047814A83FE6 /* [CP] Check Pods Manifest.lock */,
 				DA3705082A1B9CF00077DF05 /* Sources */,
 				DA3705092A1B9CF00077DF05 /* Frameworks */,
 				DA37050A2A1B9CF00077DF05 /* Resources */,
+				E9F63C944DA56949A94C3AA8 /* [CP] Embed Pods Frameworks */,
+				DA13A47A2A2E536E002F44AB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -271,7 +295,7 @@
 			);
 			name = CodeForum;
 			productName = CodeForum;
-			productReference = DA37050C2A1B9CF00077DF05 /* CodeForum.app */;
+			productReference = DA369D4E2A2DC79F00C8D878 /* CodeForum.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -298,7 +322,7 @@
 				Base,
 			);
 			mainGroup = DA3705032A1B9CF00077DF05;
-			productRefGroup = DA37050D2A1B9CF00077DF05 /* Products */;
+			productRefGroup = DA3705032A1B9CF00077DF05;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -319,13 +343,15 @@
 				DA30E1402A2D08A400BE22C3 /* portfolio2.jpg in Resources */,
 				DA30E1342A2D08A400BE22C3 /* favicon.ico in Resources */,
 				DA30E1372A2D08A400BE22C3 /* swiper-bundle.min.css in Resources */,
+				DA30E1582A2D80E400BE22C3 /* FeaturedPaperData.plist in Resources */,
 				DA30E1382A2D08A400BE22C3 /* styles.css in Resources */,
 				DA37051F2A1B9CF10077DF05 /* LaunchScreen.storyboard in Resources */,
-				DA30E1052A299BF800BE22C3 /* FeaturedCollectionsData.plist in Resources */,
 				DA30E1442A2D08A400BE22C3 /* cat.png in Resources */,
 				DA30E1422A2D08A400BE22C3 /* gitee.png in Resources */,
 				DA30E13B2A2D08A400BE22C3 /* main.js in Resources */,
 				DA30E1362A2D08A400BE22C3 /* LICENSE in Resources */,
+				DA369D502A2DD1AD00C8D878 /* FeaturedPaperFile0.md in Resources */,
+				DA30E1542A2D805100BE22C3 /* FeaturedCollectionsData.plist in Resources */,
 				DA30E1352A2D08A400BE22C3 /* index.html in Resources */,
 				DA30E1432A2D08A400BE22C3 /* bilibili.png in Resources */,
 				DA30E1482A2D08A400BE22C3 /* i18n_cn.json in Resources */,
@@ -338,10 +364,53 @@
 				DA3705172A1B9CF00077DF05 /* Main.storyboard in Resources */,
 				DA30E1472A2D08A400BE22C3 /* i18n_en.json in Resources */,
 				DA30E13E2A2D08A400BE22C3 /* 简历.pdf in Resources */,
+				DA30E1562A2D80E000BE22C3 /* FeaturedPaperImage.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B187807D2CD5047814A83FE6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CodeForum-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9F63C944DA56949A94C3AA8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CodeForum/Pods-CodeForum-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CodeForum/Pods-CodeForum-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CodeForum/Pods-CodeForum-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DA3705082A1B9CF00077DF05 /* Sources */ = {
@@ -352,7 +421,7 @@
 				DA30E14A2A2D6A0F00BE22C3 /* DataInvoke.swift in Sources */,
 				DA30E10F2A2CF5F100BE22C3 /* ControlBuild.swift in Sources */,
 				DA3705102A1B9CF00077DF05 /* AppDelegate.swift in Sources */,
-				DA30E10D2A2B030300BE22C3 /* PaperViewController.swift in Sources */,
+				DA369D4F2A2DD11400C8D878 /* PaperViewController.swift in Sources */,
 				DA09E2632A1DB577006B5CF6 /* BasicData.swift in Sources */,
 				DA30E10A2A2AF67200BE22C3 /* CourseViewController.swift in Sources */,
 				DA37052E2A1B9E4E0077DF05 /* SearchViewController.swift in Sources */,
@@ -525,6 +594,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -553,6 +623,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

@@ -1,0 +1,6 @@
+platform :ios, '16.4'
+use_frameworks!
+
+target 'HuiYanKill' do
+  pod 'MarkdownKit'
+end

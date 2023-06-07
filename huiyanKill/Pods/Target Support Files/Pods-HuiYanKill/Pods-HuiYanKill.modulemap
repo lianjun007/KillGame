@@ -1,0 +1,6 @@
+framework module Pods_HuiYanKill {
+  umbrella header "Pods-HuiYanKill-umbrella.h"
+
+  export *
+  module * { export * }
+}
