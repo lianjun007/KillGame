@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  CodeForum
-//
-//  Created by QHuiYan on 2023/5/22.
-//
-
 import UIKit
 
 // 创建标签栏

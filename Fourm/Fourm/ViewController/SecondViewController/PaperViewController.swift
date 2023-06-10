@@ -1,7 +1,6 @@
 
 import UIKit
 import WebKit
-import SwiftUI
 //import Ink
 
 class PaperViewController: UIViewController {
@@ -16,6 +15,10 @@ class PaperViewController: UIViewController {
         navigationItem.title = "精选文章的标题大家你是他的好挑食的剪完头"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
+        
+        let paper = FeaturedPaperFile0()
+        controlBuild(body: paper, ViewController: self)
+        
         
 //        let url = Bundle.main.url(forResource: "FeaturedPaperFile0", withExtension: "md")!
 //        let markdown = try! String(contentsOf: url)

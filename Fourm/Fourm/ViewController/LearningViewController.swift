@@ -43,7 +43,6 @@ class LearningViewController: UIViewController {
             moduleView.addSubview(featuredCourseBox)
             let interaction = UIContextMenuInteraction(delegate: self)
             featuredCourseBox.addInteraction(interaction)
-            
         }
         
         // Set the UILabel at the featuredCoursesBox tilte
@@ -142,7 +141,7 @@ extension LearningViewController: UIContextMenuInteractionDelegate {
                 // 设置精选课程的作者名
                 let courseLabel2 = UILabel(frame: CGRect(x: spacedForScreen, y: courseLabel.frame.maxY + spacedForControl, width: 0, height: 0))
                 courseLabel2.text = featuredCollectionsRandomDataArray[identifier]["author"]
-                courseLabel2.font = UIFont.systemFont(ofSize: CGFloat(titleFont3), weight: .regular)
+                courseLabel2.font = UIFont.systemFont(ofSize: titleFont3, weight: .regular)
                 courseLabel2.sizeToFit()
                 courseLabel2.isUserInteractionEnabled = false
                 previewControllerInstance.view.addSubview(courseLabel2)
@@ -166,7 +165,7 @@ extension LearningViewController: UIContextMenuInteractionDelegate {
                 // 设置精选课程的作者名
                 let courseLabel2 = UILabel(frame: CGRect(x: spacedForScreen, y: courseLabel.frame.maxY + spacedForControl, width: 0, height: 0))
                 courseLabel2.text = featuredCollectionsRandomDataArray[identifier - 7]["author"]
-                courseLabel2.font = UIFont.systemFont(ofSize: CGFloat(titleFont3), weight: .regular)
+                courseLabel2.font = UIFont.systemFont(ofSize: titleFont3, weight: .regular)
                 courseLabel2.sizeToFit()
                 courseLabel2.isUserInteractionEnabled = false
                 previewControllerInstance.view.addSubview(courseLabel2)
