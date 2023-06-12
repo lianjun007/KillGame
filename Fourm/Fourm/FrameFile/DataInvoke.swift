@@ -24,3 +24,13 @@ func featuredCollectionsDataInitialize() -> Array<Dictionary<String, String>>  {
     return dataArray
 }
 
+func contentDataInitialize() -> Dictionary<String, Dictionary<String, Dictionary<String, Any>>>  {
+    var dataArray: Dictionary<String, Dictionary<String, Dictionary<String, Any>>> = [:]
+    if let path = Bundle.main.path(forResource: "ContentFile", ofType: "plist") {
+        if let array = NSDictionary(contentsOfFile: path) as? Dictionary<String, Dictionary<String, Dictionary<String, Any>>> {
+            dataArray = array
+        }
+    }
+    // 将精选合集数据里面的所有数据全部初始化载入项目
+    return dataArray
+}

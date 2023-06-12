@@ -70,7 +70,7 @@ func mediumControlBuild(origin: CGPoint, imageName: String, title: String, title
     UIGraphicsEndImageContext()
 
     // 配置主体控件的基本属性
-    control.layer.cornerRadius = 20
+    control.layer.cornerRadius = 15
     control.setImage(finalImage, for: .normal)
     control.imageView?.contentMode = .scaleAspectFill
     control.layer.masksToBounds = true

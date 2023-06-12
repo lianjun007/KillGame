@@ -39,21 +39,18 @@
 		DA13A4DB2A2E5D86002F44AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4DA2A2E5D86002F44AB /* ViewController.swift */; };
 		DA13A4DC2A2E5D86002F44AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4DA2A2E5D86002F44AB /* ViewController.swift */; };
 		DA13A4DD2A2E5D86002F44AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4DA2A2E5D86002F44AB /* ViewController.swift */; };
-		DA13A4E52A2E5DAA002F44AB /* FeaturedPaperImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4DF2A2E5DAA002F44AB /* FeaturedPaperImage.xcassets */; };
-		DA13A4E62A2E5DAA002F44AB /* FeaturedPaperImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4DF2A2E5DAA002F44AB /* FeaturedPaperImage.xcassets */; };
-		DA13A4E72A2E5DAA002F44AB /* FeaturedPaperImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4DF2A2E5DAA002F44AB /* FeaturedPaperImage.xcassets */; };
+		DA13A4E52A2E5DAA002F44AB /* ContentImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4DF2A2E5DAA002F44AB /* ContentImage.xcassets */; };
+		DA13A4E62A2E5DAA002F44AB /* ContentImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4DF2A2E5DAA002F44AB /* ContentImage.xcassets */; };
+		DA13A4E72A2E5DAA002F44AB /* ContentImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4DF2A2E5DAA002F44AB /* ContentImage.xcassets */; };
 		DA13A4E82A2E5DAA002F44AB /* FeaturedCollectionsData.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E02A2E5DAA002F44AB /* FeaturedCollectionsData.plist */; };
 		DA13A4E92A2E5DAA002F44AB /* FeaturedCollectionsData.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E02A2E5DAA002F44AB /* FeaturedCollectionsData.plist */; };
 		DA13A4EA2A2E5DAA002F44AB /* FeaturedCollectionsData.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E02A2E5DAA002F44AB /* FeaturedCollectionsData.plist */; };
 		DA13A4EB2A2E5DAA002F44AB /* FeaturedPaperData.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E12A2E5DAA002F44AB /* FeaturedPaperData.plist */; };
 		DA13A4EC2A2E5DAA002F44AB /* FeaturedPaperData.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E12A2E5DAA002F44AB /* FeaturedPaperData.plist */; };
 		DA13A4ED2A2E5DAA002F44AB /* FeaturedPaperData.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E12A2E5DAA002F44AB /* FeaturedPaperData.plist */; };
-		DA13A4EE2A2E5DAA002F44AB /* FeaturedPaperFile0.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E32A2E5DAA002F44AB /* FeaturedPaperFile0.txt */; };
-		DA13A4EF2A2E5DAA002F44AB /* FeaturedPaperFile0.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E32A2E5DAA002F44AB /* FeaturedPaperFile0.txt */; };
-		DA13A4F02A2E5DAA002F44AB /* FeaturedPaperFile0.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E32A2E5DAA002F44AB /* FeaturedPaperFile0.txt */; };
-		DA13A4F12A2E5DAA002F44AB /* FeaturedCollectionsImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E42A2E5DAA002F44AB /* FeaturedCollectionsImage.xcassets */; };
-		DA13A4F22A2E5DAA002F44AB /* FeaturedCollectionsImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E42A2E5DAA002F44AB /* FeaturedCollectionsImage.xcassets */; };
-		DA13A4F32A2E5DAB002F44AB /* FeaturedCollectionsImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E42A2E5DAA002F44AB /* FeaturedCollectionsImage.xcassets */; };
+		DA13A4F12A2E5DAA002F44AB /* Cover.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E42A2E5DAA002F44AB /* Cover.xcassets */; };
+		DA13A4F22A2E5DAA002F44AB /* Cover.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E42A2E5DAA002F44AB /* Cover.xcassets */; };
+		DA13A4F32A2E5DAB002F44AB /* Cover.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA13A4E42A2E5DAA002F44AB /* Cover.xcassets */; };
 		DA13A4F82A2E5DE4002F44AB /* BasicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4F52A2E5DE4002F44AB /* BasicData.swift */; };
 		DA13A4F92A2E5DE4002F44AB /* BasicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4F52A2E5DE4002F44AB /* BasicData.swift */; };
 		DA13A4FA2A2E5DE4002F44AB /* BasicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4F52A2E5DE4002F44AB /* BasicData.swift */; };
@@ -63,8 +60,8 @@
 		DA13A4FE2A2E5DE4002F44AB /* DataInvoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */; };
 		DA13A4FF2A2E5DE4002F44AB /* DataInvoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */; };
 		DA13A5002A2E5DE4002F44AB /* DataInvoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */; };
+		DA182AB92A357E3D009F73EE /* ContentFile.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA182AB82A357E3D009F73EE /* ContentFile.plist */; };
 		DA4D571B2A30CE1400ABE114 /* PaperControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D571A2A30CE1400ABE114 /* PaperControl.swift */; };
-		DA4D571D2A30D26900ABE114 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D571C2A30D26900ABE114 /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,16 +102,15 @@
 		DA13A4C32A2E5D52002F44AB /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionViewController.swift; path = ../../../Fourm/Fourm/ViewController/CollectionViewController.swift; sourceTree = "<group>"; };
 		DA13A4D62A2E5D66002F44AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA13A4DA2A2E5D86002F44AB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DA13A4DF2A2E5DAA002F44AB /* FeaturedPaperImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FeaturedPaperImage.xcassets; sourceTree = "<group>"; };
+		DA13A4DF2A2E5DAA002F44AB /* ContentImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ContentImage.xcassets; sourceTree = "<group>"; };
 		DA13A4E02A2E5DAA002F44AB /* FeaturedCollectionsData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FeaturedCollectionsData.plist; sourceTree = "<group>"; };
 		DA13A4E12A2E5DAA002F44AB /* FeaturedPaperData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FeaturedPaperData.plist; sourceTree = "<group>"; };
-		DA13A4E32A2E5DAA002F44AB /* FeaturedPaperFile0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FeaturedPaperFile0.txt; sourceTree = "<group>"; };
-		DA13A4E42A2E5DAA002F44AB /* FeaturedCollectionsImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FeaturedCollectionsImage.xcassets; sourceTree = "<group>"; };
+		DA13A4E42A2E5DAA002F44AB /* Cover.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Cover.xcassets; sourceTree = "<group>"; };
 		DA13A4F52A2E5DE4002F44AB /* BasicData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasicData.swift; path = ../../../Fourm/Fourm/FrameFile/BasicData.swift; sourceTree = "<group>"; };
 		DA13A4F62A2E5DE4002F44AB /* ControlBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlBuild.swift; path = ../../../Fourm/Fourm/FrameFile/ControlBuild.swift; sourceTree = "<group>"; };
 		DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataInvoke.swift; path = ../../../Fourm/Fourm/FrameFile/DataInvoke.swift; sourceTree = "<group>"; };
+		DA182AB82A357E3D009F73EE /* ContentFile.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContentFile.plist; sourceTree = "<group>"; };
 		DA4D571A2A30CE1400ABE114 /* PaperControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperControl.swift; sourceTree = "<group>"; };
-		DA4D571C2A30D26900ABE114 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,22 +217,13 @@
 		DA13A4DE2A2E5DAA002F44AB /* DataFile */ = {
 			isa = PBXGroup;
 			children = (
-				DA13A4DF2A2E5DAA002F44AB /* FeaturedPaperImage.xcassets */,
 				DA13A4E02A2E5DAA002F44AB /* FeaturedCollectionsData.plist */,
 				DA13A4E12A2E5DAA002F44AB /* FeaturedPaperData.plist */,
-				DA13A4E22A2E5DAA002F44AB /* paperFile */,
-				DA13A4E42A2E5DAA002F44AB /* FeaturedCollectionsImage.xcassets */,
+				DA13A4E42A2E5DAA002F44AB /* Cover.xcassets */,
+				DA182AB82A357E3D009F73EE /* ContentFile.plist */,
+				DA13A4DF2A2E5DAA002F44AB /* ContentImage.xcassets */,
 			);
 			path = DataFile;
-			sourceTree = "<group>";
-		};
-		DA13A4E22A2E5DAA002F44AB /* paperFile */ = {
-			isa = PBXGroup;
-			children = (
-				DA13A4E32A2E5DAA002F44AB /* FeaturedPaperFile0.txt */,
-				DA4D571C2A30D26900ABE114 /* File.swift */,
-			);
-			path = paperFile;
 			sourceTree = "<group>";
 		};
 		DA13A4F42A2E5DE4002F44AB /* FrameFile */ = {
@@ -314,7 +301,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					DA13A4852A2E5CE4002F44AB = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -357,10 +344,10 @@
 				DA13A4E82A2E5DAA002F44AB /* FeaturedCollectionsData.plist in Resources */,
 				DA13A4992A2E5CE5002F44AB /* LaunchScreen.storyboard in Resources */,
 				DA13A4D72A2E5D66002F44AB /* Assets.xcassets in Resources */,
-				DA13A4EE2A2E5DAA002F44AB /* FeaturedPaperFile0.txt in Resources */,
-				DA13A4E52A2E5DAA002F44AB /* FeaturedPaperImage.xcassets in Resources */,
-				DA13A4F12A2E5DAA002F44AB /* FeaturedCollectionsImage.xcassets in Resources */,
+				DA13A4E52A2E5DAA002F44AB /* ContentImage.xcassets in Resources */,
+				DA13A4F12A2E5DAA002F44AB /* Cover.xcassets in Resources */,
 				DA13A4912A2E5CE4002F44AB /* Main.storyboard in Resources */,
+				DA182AB92A357E3D009F73EE /* ContentFile.plist in Resources */,
 				DA13A4EB2A2E5DAA002F44AB /* FeaturedPaperData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,12 +356,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA13A4E62A2E5DAA002F44AB /* FeaturedPaperImage.xcassets in Resources */,
-				DA13A4EF2A2E5DAA002F44AB /* FeaturedPaperFile0.txt in Resources */,
+				DA13A4E62A2E5DAA002F44AB /* ContentImage.xcassets in Resources */,
 				DA13A4E92A2E5DAA002F44AB /* FeaturedCollectionsData.plist in Resources */,
 				DA13A4D82A2E5D66002F44AB /* Assets.xcassets in Resources */,
 				DA13A4EC2A2E5DAA002F44AB /* FeaturedPaperData.plist in Resources */,
-				DA13A4F22A2E5DAA002F44AB /* FeaturedCollectionsImage.xcassets in Resources */,
+				DA13A4F22A2E5DAA002F44AB /* Cover.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,12 +368,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA13A4E72A2E5DAA002F44AB /* FeaturedPaperImage.xcassets in Resources */,
-				DA13A4F02A2E5DAA002F44AB /* FeaturedPaperFile0.txt in Resources */,
+				DA13A4E72A2E5DAA002F44AB /* ContentImage.xcassets in Resources */,
 				DA13A4EA2A2E5DAA002F44AB /* FeaturedCollectionsData.plist in Resources */,
 				DA13A4D92A2E5D66002F44AB /* Assets.xcassets in Resources */,
 				DA13A4ED2A2E5DAA002F44AB /* FeaturedPaperData.plist in Resources */,
-				DA13A4F32A2E5DAB002F44AB /* FeaturedCollectionsImage.xcassets in Resources */,
+				DA13A4F32A2E5DAB002F44AB /* Cover.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,7 +393,6 @@
 				DA13A4CD2A2E5D52002F44AB /* PaperViewController.swift in Sources */,
 				DA13A4FB2A2E5DE4002F44AB /* ControlBuild.swift in Sources */,
 				DA13A4F82A2E5DE4002F44AB /* BasicData.swift in Sources */,
-				DA4D571D2A30D26900ABE114 /* File.swift in Sources */,
 				DA13A4C72A2E5D52002F44AB /* DiscussViewController.swift in Sources */,
 				DA13A48C2A2E5CE4002F44AB /* SceneDelegate.swift in Sources */,
 				DA13A4942A2E5CE4002F44AB /* Fourm.xcdatamodeld in Sources */,

@@ -1,33 +1,25 @@
 
 import UIKit
 import WebKit
-//import Ink
 
 class PaperViewController: UIViewController {
     
-    var content: String?
     var webView: WKWebView!
     
+    var tag: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let ID = tag ?? "0"
+        
         view.backgroundColor = .systemBackground
-        navigationItem.title = "精选文章的标题大家你是他的好挑食的剪完头"
+        navigationItem.title = "文章的标题"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         
-        let paper = FeaturedPaperFile0()
-        controlBuild(body: paper, ViewController: self)
+        essayInterfaceBuild(data: essayData[ID]!, ViewController: self)
         
-        
-//        let url = Bundle.main.url(forResource: "FeaturedPaperFile0", withExtension: "md")!
-//        let markdown = try! String(contentsOf: url)
-//        let html = MarkdownParser()
-//        
-//        let webView = WKWebView(frame: view.bounds)
-//        
-//        webView.loadHTMLString(markdown, baseURL: url)
-//        view.addSubview(webView)
     }
     
     //    override func viewWillAppear(_ animated: Bool) {

@@ -3,7 +3,7 @@ import UIKit
 class LearningViewController: UIViewController {
     
     // 从文件中载入精选课程的数据
-    let featuredCollectionsDataArray = featuredCollectionsDataInitialize()
+    
     var featuredCollectionsRandomDataArray: Array<Dictionary<String, String>> = [] // 接收精选课程的随机数据
     
     override func viewDidLoad() {
@@ -32,14 +32,13 @@ class LearningViewController: UIViewController {
         moduleView.showsHorizontalScrollIndicator = false
         moduleView.clipsToBounds = false
         underlyScrollView.addSubview(moduleView)
-        
-        // 创建7个精选课程框
+        // 创建7个精选合集框
         for i in 0 ... 6 {
             // 配置参数
             let moduleControlOrigin = CGPoint(x: spacedForScreen + CGFloat(i) * (largeControlSize.width + spacedForControl), y: 0)
             let featuredCourseBox = largeControlBuild(origin: moduleControlOrigin, imageName: featuredCollectionsRandomDataArray[i]["imageName"]!, title: featuredCollectionsRandomDataArray[i]["title"]!, title2: featuredCollectionsRandomDataArray[i]["author"]!)
             featuredCourseBox.tag = i
-            featuredCourseBox.addTarget(self, action: #selector(click), for: .touchUpInside)
+            featuredCourseBox.addTarget(self, action: #selector(clickCollectionControl), for: .touchUpInside)
             moduleView.addSubview(featuredCourseBox)
             let interaction = UIContextMenuInteraction(delegate: self)
             featuredCourseBox.addInteraction(interaction)
@@ -63,10 +62,12 @@ class LearningViewController: UIViewController {
                 direction = true
             }
             
-            let cellView = mediumControlBuild(origin: CGPoint(x: spacedForScreen, y: featuredCourseLable1.frame.maxY + spacedForControl + CGFloat(i) * (spacedForControl + mediumControlSize.height)), imageName: featuredCollectionsRandomDataArray[i]["imageName"]!, title: featuredCollectionsRandomDataArray[i]["title"]!, title2: featuredCollectionsRandomDataArray[i]["author"]!, direction: direction)
+            print((essayData["\(i + 1)"]?["cover"] as! String) , essayData["\(i + 1)"]?["title"] as! String, essayData["\(i + 1)"]?["author"] as! String)
             
-            cellView.tag = i + 7
-            cellView.addTarget(self, action: #selector(click), for: .touchUpInside)
+            let cellView = mediumControlBuild(origin: CGPoint(x: spacedForScreen, y: featuredCourseLable1.frame.maxY + spacedForControl + CGFloat(i) * (spacedForControl + mediumControlSize.height)), imageName: essayData["\(i + 1)"]?["cover"] as! String, title: essayData["\(i + 1)"]?["title"] as! String, title2: essayData["\(i + 1)"]?["author"] as! String, direction: direction)
+            
+            cellView.tag = i + 1
+            cellView.addTarget(self, action: #selector(clickEssayControl), for: .touchUpInside)
             cellViewArray.append(cellView)
             underlyScrollView.addSubview(cellView)
             
@@ -100,14 +101,16 @@ class LearningViewController: UIViewController {
         
     }
     
-    @objc func click(_ sender: UIButton) {
-        let b = CourseViewController()
-        let a = PaperViewController()
-        if sender.tag < 7 {
-            self.navigationController?.pushViewController(b, animated: true)
-        } else {
-            self.navigationController?.pushViewController(a, animated: true)
-        }
+    @objc func clickEssayControl(_ sender: UIButton) {
+        let VC = PaperViewController()
+        VC.tag = "\(sender.tag)"
+        self.navigationController?.pushViewController(VC, animated: true)
+    }
+    
+    @objc func clickCollectionControl(_ sender: UIButton) {
+        let VC = CourseViewController()
+        VC.tag = "\(sender.tag)"
+        self.navigationController?.pushViewController(VC, animated: true)
     }
     
 }
@@ -125,7 +128,7 @@ extension LearningViewController: UIContextMenuInteractionDelegate {
             let previewControllerInstance = UIViewController()
             if identifier < 7 {
                 let image = UIImageView(frame: CGRect(x: spacedForScreen, y: spacedForScreen, width: previewControllerInstance.view.bounds.width - spacedForScreen * 2, height: previewControllerInstance.view.bounds.width - spacedForScreen * 2))
-                image.layer.cornerRadius = basicCornerRadius(image.frame.size) * 0.5
+                image.layer.cornerRadius = 10
                 image.clipsToBounds = true
                 image.image = UIImage(named: featuredCollectionsRandomDataArray[identifier]["imageName"]!)
                 previewControllerInstance.view.addSubview(image)
@@ -149,7 +152,7 @@ extension LearningViewController: UIContextMenuInteractionDelegate {
                 previewControllerInstance.preferredContentSize = CGSize(width: previewControllerInstance.view.bounds.width, height: courseLabel2.frame.maxY + spacedForScreen)
             } else {
                 let image = UIImageView(frame: CGRect(x: spacedForScreen, y: spacedForScreen, width: previewControllerInstance.view.bounds.width - spacedForScreen * 2, height: previewControllerInstance.view.bounds.width - spacedForScreen * 2))
-                image.layer.cornerRadius = basicCornerRadius(image.frame.size) * 0.5
+                image.layer.cornerRadius = 10
                 image.clipsToBounds = true
                 image.image = UIImage(named: featuredCollectionsRandomDataArray[identifier - 7]["imageName"]!)
                 previewControllerInstance.view.addSubview(image)

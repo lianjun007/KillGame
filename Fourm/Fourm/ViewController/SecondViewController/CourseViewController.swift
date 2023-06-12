@@ -1,39 +1,39 @@
-//
-//  CourseViewController.swift
-//  CodeForum
-//
-//  Created by QHuiYan on 2023/6/3.
-//
-
-
 import UIKit
-// import MarkdownKit
 
 class CourseViewController: UIViewController {
+    
+    var tag: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .systemBackground
         navigationItem.title = "精选课程标题"
         navigationItem.largeTitleDisplayMode = .never
         
-//        let markdownParser = MarkdownParser()
-//        let markdown = """
-//        # Hello, world!
-//
-//        This is a paragraph.
-//
-//        ```swift
-//        let message = "Hello, world!"
-//        print(message)
-//        ```
-//        """
-//
-//        let attributedString = markdownParser.parse(markdown)
-//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-//        label.numberOfLines = 0
-//        label.attributedText = attributedString
-
-        //view.addSubview(label)
+        let collectionView = UITableView(frame: view.bounds, style: .insetGrouped)
+        view.addSubview(collectionView)
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
 }
+
+extension CourseViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        10
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let data = collectionData["11"]!["essays"] as! Array<Int>
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: .none)
+        
+        cell.textLabel?.text = essayData["\(data[indexPath.row])"]!["title"]! as? String
+ 
+        cell.imageView?.image = UIImage(named: "preson")
+        
+        return cell
+    }
+    
+}
+

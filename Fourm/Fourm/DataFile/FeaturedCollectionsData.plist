@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>imageName</key>
-		<string>FeaturedCollections0</string>
+		<string>FC0</string>
 		<key>author</key>
 		<string>LianJun</string>
 		<key>title</key>
@@ -12,7 +12,7 @@
 	</dict>
 	<dict>
 		<key>imageName</key>
-		<string>FeaturedCollections1</string>
+		<string>FC1</string>
 		<key>author</key>
 		<string>LianJun</string>
 		<key>title</key>
@@ -20,7 +20,7 @@
 	</dict>
 	<dict>
 		<key>imageName</key>
-		<string>FeaturedCollections2</string>
+		<string>FC2</string>
 		<key>author</key>
 		<string>LianJun</string>
 		<key>title</key>
@@ -28,7 +28,7 @@
 	</dict>
 	<dict>
 		<key>imageName</key>
-		<string>FeaturedCollections3</string>
+		<string>FC3</string>
 		<key>author</key>
 		<string>LianJun</string>
 		<key>title</key>
@@ -36,7 +36,7 @@
 	</dict>
 	<dict>
 		<key>imageName</key>
-		<string>FeaturedCollections4</string>
+		<string>FC4</string>
 		<key>author</key>
 		<string>LianJun</string>
 		<key>title</key>
@@ -44,7 +44,7 @@
 	</dict>
 	<dict>
 		<key>imageName</key>
-		<string>FeaturedCollections5</string>
+		<string>FC5</string>
 		<key>author</key>
 		<string>LianJun</string>
 		<key>title</key>
@@ -52,7 +52,7 @@
 	</dict>
 	<dict>
 		<key>imageName</key>
-		<string>FeaturedCollections6</string>
+		<string>FC6</string>
 		<key>author</key>
 		<string>LianJun</string>
 		<key>title</key>

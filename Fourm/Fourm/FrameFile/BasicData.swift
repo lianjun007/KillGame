@@ -12,6 +12,12 @@
 import Foundation
 import UIKit
 
+let featuredCollectionsDataArray = featuredCollectionsDataInitialize()
+let ContentData = contentDataInitialize()
+let essayData: Dictionary<String, Dictionary<String, Any>> = ContentData["essay"]!
+let collectionData: Dictionary<String, Dictionary<String, Any>> = ContentData["collections"]!
+
+
 // 获取安全插值
 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
 let window = windowScene?.windows.first
@@ -42,27 +48,28 @@ let titleFont3 = CGFloat(22) // 三级标题字体大小，例如展示文章的
 
 
 
-func basicCornerRadius(_ size: CGSize) -> CGFloat {
-    if size.width >= size.height {
-        return (size.width * 0.04)
-    } else {
-        return (size.height * 0.04)
-    }
-} // 标准控件圆角
+//
+//func basicCornerRadius(_ size: CGSize) -> CGFloat {
+//    if size.width >= size.height {
+//        return (size.width * 0.04)
+//    } else {
+//        return (size.height * 0.04)
+//    }
+//} // 标准控件圆角
 
 
 
-// 判断字符串是否超出UILabel的范围
-func isTruncated(_ label: UILabel) -> Bool {
-    
-    let judgmentLabel = UILabel()
-    judgmentLabel.text = label.text
-    judgmentLabel.font = UIFont.systemFont(ofSize: CGFloat(titleFont3), weight: .bold)
-    judgmentLabel.sizeToFit()
-    return label.frame.width < judgmentLabel.frame.width
-    
-}
-
-func navBar(_ navBar: UINavigationBar) -> CGFloat {
-    navBar.frame.height
-}
+//// 判断字符串是否超出UILabel的范围
+//func isTruncated(_ label: UILabel) -> Bool {
+//    
+//    let judgmentLabel = UILabel()
+//    judgmentLabel.text = label.text
+//    judgmentLabel.font = UIFont.systemFont(ofSize: CGFloat(titleFont3), weight: .bold)
+//    judgmentLabel.sizeToFit()
+//    return label.frame.width < judgmentLabel.frame.width
+//    
+//}
+//
+//func navBar(_ navBar: UINavigationBar) -> CGFloat {
+//    navBar.frame.height
+//}
