@@ -12,7 +12,7 @@ class ViewController1: UIViewController, UIScrollViewDelegate {
     let scrollView = UIScrollView()
 
     override func viewDidLoad() {
-        super.viewDidLoad(
+        super.viewDidLoad()
 
         // 设置界面视图的背景色和导航栏的基础设置
         view.backgroundColor = .systemBackground

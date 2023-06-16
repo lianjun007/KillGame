@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+class ViewController: UITabBarController {
     
     var user: String? = nil
     

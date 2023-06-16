@@ -19,12 +19,13 @@ class ViewController1: UIViewController {
         navigationItem.title = "开始聊天"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let c = UITableView(frame: view.bounds)
-        view.addSubview(c)
+        let tableView = UITableView(frame: view.bounds)
+        view.addSubview(tableView)
         
-        c.delegate = self
-        c.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 
 }
@@ -35,10 +36,10 @@ extension ViewController1: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let a = mediumControlBuild(origin: CGPoint(x: spacedForScreen, y: 0), imageName: "aaa", title: "sefiiu", title2: "adcfiua", direction: true)
-        let b = UITableViewCell()
-        b.addSubview(a)
-        return b
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let customView = mediumControlBuild(origin: CGPoint(x: spacedForScreen, y: 0), imageName: "aaa", title: "sefiiu", title2: "adcfiua", direction: false)
+        cell.addSubview(customView)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

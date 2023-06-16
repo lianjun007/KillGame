@@ -26,6 +26,18 @@ let titleFont = CGFloat(34) // 一级标题字体大小
 let titleFont2 = CGFloat(28) // 二级标题字体大小
 let titleFont3 = CGFloat(22) // 三级标题字体大小
 
+func userData() -> Dictionary<String, String> {
+    var dataDict: Dictionary<String, String> = [:]
+    if let path = Bundle.main.path(forResource: "userName", ofType: "plist") {
+        if let dict = NSDictionary(contentsOfFile: path) as? Dictionary<String, String> {
+            dataDict = dict
+        }
+    }
+    // 将精选合集数据里面的所有数据全部初始化载入项目
+    return dataDict
+}
+
+
 // 创建横向控件：一侧放置4:3的长方形封面，另一侧放置简介信息(模糊蒙版)
 let mediumControlSize = CGSize(width: screenWidth - spacedForScreen * 2, height: (screenWidth - spacedForScreen * 2) / 4)
 func mediumControlBuild(origin: CGPoint, imageName: String, title: String, title2: String, direction: Bool) -> UIButton {
