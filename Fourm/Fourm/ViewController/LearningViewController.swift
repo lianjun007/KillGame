@@ -51,8 +51,6 @@ class LearningViewController: UIViewController {
         featuredCourseLable1.sizeToFit()
         underlyScrollView.addSubview(featuredCourseLable1)
         
-
-        
         var cellViewArray: Array<UIButton> = []
         for i in 0 ... 6 {
             var direction = Bool()
@@ -62,16 +60,12 @@ class LearningViewController: UIViewController {
                 direction = true
             }
             
-            print((essayData["\(i + 1)"]?["cover"] as! String) , essayData["\(i + 1)"]?["title"] as! String, essayData["\(i + 1)"]?["author"] as! String)
-            
             let cellView = mediumControlBuild(origin: CGPoint(x: spacedForScreen, y: featuredCourseLable1.frame.maxY + spacedForControl + CGFloat(i) * (spacedForControl + mediumControlSize.height)), imageName: essayData["\(i + 1)"]?["cover"] as! String, title: essayData["\(i + 1)"]?["title"] as! String, title2: essayData["\(i + 1)"]?["author"] as! String, direction: direction)
             
             cellView.tag = i + 1
             cellView.addTarget(self, action: #selector(clickEssayControl), for: .touchUpInside)
             cellViewArray.append(cellView)
             underlyScrollView.addSubview(cellView)
-            
-
 
 //            // 根据字符串长度赋予不同行数,最多为两行
 //            if isTruncated(essayLabel) {
@@ -81,7 +75,6 @@ class LearningViewController: UIViewController {
 //            essayLabel.frame.size.width = blurView.frame.width - spacedForControl * 2
 //            essayLabel.isUserInteractionEnabled = false
 //            cellView.addSubview(essayLabel)
-//
 //
 //            // 根据字符串行数判断动态坐标
 //            if essayLabel.numberOfLines == 1 {

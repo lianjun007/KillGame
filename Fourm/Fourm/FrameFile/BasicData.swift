@@ -28,8 +28,8 @@ let screenWidth = UIScreen.main.bounds.width // 与设备屏幕宽度一样宽
 let screenHeight = UIScreen.main.bounds.height // 与设备屏幕高度一样高
 
 // 各种间距边距
-let spacedForScreen = screenWidth / 22 // 左右边屏幕的留白边距
-let spacedForControl = screenWidth / 45 // 各个相邻的控件之间的间距，也用做二级标题和模块之间的间距
+let spacedForScreen = CGFloat(20)
+let spacedForControl = CGFloat(10) // 各个相邻的控件之间的间距，也用做二级标题和模块之间的间距
 let spacedForModule = CGFloat(45) // 各个模块之间的间距
 let spacedForModule2 = CGFloat(25) // 导航栏与第一个模块之间的间距
 

@@ -7,7 +7,7 @@
 		<key>1</key>
 		<dict>
 			<key>title</key>
-			<string>HTML5和CSS3</string>
+			<string>Swift基础</string>
 			<key>author</key>
 			<string>LianJun</string>
 			<key>cover</key>
@@ -204,95 +204,207 @@
 		<key>1</key>
 		<dict>
 			<key>title</key>
-			<string>iOS开发之ReplayKit录屏</string>
+			<string>1、入门介绍</string>
 			<key>author</key>
-			<string>YungFan</string>
+			<string>LianJun</string>
+			<key>date</key>
+			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
-			<string>FC1</string>
+			<string>FC2</string>
 			<key>isFeatured</key>
-			<true/>
-			<key>isCollection</key>
 			<false/>
+			<key>isCollection</key>
+			<true/>
 			<key>content</key>
 			<array>
 				<string>title2</string>
-				<string>介绍</string>
+				<string>简介</string>
 				<string>text</string>
-				<string>iOS中使用RPScreenRecorder进行专门的录屏操作。开始录屏时会弹出授权对话框，录制过程中是无感的，停止录制之后可以弹出录制的预览界面，然后可以保存到相册。录屏的同时可以录制麦克风的声音与摄像头的内容。需要导入ReplayKit模块。</string>
+				<string>Swift 语言由 Apple 公司在 2014 年推出，主要用于开发 iOS/iPadOS/macOS 应用程序。
+发布于 Apple WWDC 2014。
+作者：Chris Lattner
+LLVM 项目的主要发起人与作者之一
+Clang 编译器的作者
+领导 Xcode、Instruments 等编译器团队
+Swift 的大部分基础架构由他完成
+已从 Apple 离职</string>
 				<string>title2</string>
-				<string>案例</string>
-				<string>code</string>
-				<string>import ReplayKit
-import UIKit
-
-	class ViewController: UIViewController {
-	// 显示摄像头
-		var cameraView: UIView?
-
-		override func viewDidLoad() {
-		super.viewDidLoad()
-
-			navigationItem.rightBarButtonItem = UIBarButtonItem(title: &quot;开始录屏&quot;,
-																style: .plain,
-																target: self,
-																action: #selector(startRecording))
-		}
-
-		@objc func startRecording() {
-			guard RPScreenRecorder.shared().isAvailable else { return }
-			// 获取RPScreenRecorder
-			let recorder = RPScreenRecorder.shared()
-			// 开启麦克风
-			recorder.isMicrophoneEnabled = true
-			// 开启摄像头
-			recorder.isCameraEnabled = true
-			// 摄像头类型（前、后摄像头）
-			recorder.cameraPosition = .front
-			// 开始录制
-			recorder.startRecording { [unowned self] error in
-				if let error = error {
-					print(error.localizedDescription)
-				} else {
-					self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: &quot;停止录屏&quot;,
-																			style: .plain,
-																			target: self,
-																			action: #selector(self.stopRecording))
-					// 设置摄像头
-					guard let cameraView = recorder.cameraPreviewView else { return }
-					cameraView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-					cameraView.center = view.center
-					view.addSubview(cameraView)
-					self.cameraView = cameraView
-				}
-			}
-		}
-
-    	@objc func stopRecording() {
-            let recorder = RPScreenRecorder.shared()
-            // 停止录制
-            recorder.stopRecording { [unowned self] preview, _ in
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: &quot;开始录屏&quot;,
-                                                                            style: .plain,
-                                                                            target: self,
-                                                                            action: #selector(self.startRecording))
-                if let preview = preview {
-                    // 设置代理
-                    preview.previewControllerDelegate = self
-                    self.present(preview, animated: true)
-                }
-            }
-                cameraView?.removeFromSuperview()
-        }
-    }
-
-	extension ViewController: RPPreviewViewControllerDelegate {
-        // MARK: 完成预览
-		func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
-			dismiss(animated: true)
-    }
-}</string>
+				<string>历史</string>
 				<string>text</string>
-				<string>注意：需要在真机运行测试。</string>
+				<string>时间	事件
+2010年7月	开始 Swift 编程语言的设计工作
+2014年6月	Swift 1.0 提出
+2014年9月	Swift 1.0 发布
+2014年10月	Swift 1.1 发布
+2015年4月	Swift 1.2 发布
+2015年9月	Swift 2.0 发布
+2015年12月	Apple 宣布 Swift 开放源代码
+2016年9月	Swift 3.0 发布
+2017年9月	Swift 4.0 发布
+2018年3月	Swift 4.1 发布
+2018年9月	Swift 4.2 发布
+2019年3月	Swift 5 发布
+2019年9月	Swift 5.1 发布
+2020年3月	Swift 5.2 发布</string>
+				<string>text</string>
+				<string>随着 Swift 5 发布，Swift 迎来了ABI（Application Binary Interface）稳定，未来版本将与 Swift 5 二进制兼容。Swift 5 与 Swift 4.2 兼容，但与早期的 Swift 版本不兼容。Swift 5.1 版本后，我们可以用不同 Swift 支持的第三方框架，最终编译成同一个 APP，这是成熟语言的标志，只有这样才能让不同的框架和代码为你所用，大家使用时也不会有那么多的顾虑。</string>
+				<string>title2</string>
+				<string>ABI</string>
+				<string>text</string>
+				<string>应用程序二进制接口
+应用程序与底层操作系统之间的接口
+ABI 稳定意味着语法不会有太大的变动（实际上从 Swift 4 之后语法基本没变化）</string>
+				<string>title2</string>
+				<string>特性</string>
+				<string>text</string>
+				<string>现代，从它的语法中能看到 JavaScript、Python、Java 等语言的影子，吸取了很多语言好的特性。
+简单，语法简洁、使用方便，易于维护。
+安全，它是类型安全的语言。
+高效，速度更快，运算性能更高。
+混编，可与 Objective-C 混合使用（混合开发），提供了很多 Objective-C 中没有的新特性。
+
+</string>
+				<string>title2</string>
+				<string>重要性</string>
+				<string>text</string>
+				<string>Apple 目前在大力推广 Swift，以后 Swift 必将代替 Objective-C。
+已经出现 Swift Only 的 API，如 SwiftUI、Combine。
+很多企业要求掌握 Swift 或者有 Swift 开发经验。
+</string>
+				<string>title2</string>
+				<string>学习建议</string>
+				<string>text</string>
+				<string>先学习 Swift 基本语法，夯实语法的基础。
+应用于开发（iOS/iPadOS/macOS 开发），掌握 Swift 在项目工程的应用。</string>
+				<string>title2</string>
+				<string>开发环境</string>
+				<string>text</string>
+				<string>App Store 搜索下载 Xcode，如果下载不了，可能需要升级 macOS。
+对应关系</string>
+				<string>text</string>
+				<string>Xcode版本	Swift版本
+Xcode 10.2 - Xcode 10.3.3	Swift 5.0
+Xcode 11 - Xcode 11.3.1	Swift 5.1
+Xcode 11.4 -	Swift 5.2</string>
+				<string>title2</string>
+				<string>查看Swift版本</string>
+				<string>text</string>
+				<string>安装完 Xcode，可以在终端中输入Swift -v查看机器上 Swift 的版本。</string>
+				<string>image</string>
+				<string>eassyImg2-1</string>
+				<string>title2</string>
+				<string>playground是什么?</string>
+				<string>text</string>
+				<string>从 Xcode 6 开始出现（Swift 开始出现）
+翻译为操场/游乐场
+对于学习 Swift 基本语法非常方便
+所见即所得，可快速查看结果
+语法特性发生改变时，可以快速查看
+新建：打开 Xcode —&gt;选择Get stated with a playground，如下图的第一项。</string>
+				<string>image</string>
+				<string>eassyImg2-2</string>
+				<string>title2</string>
+				<string>Swift第一印象</string>
+				<string>text</string>
+				<string>导入模块 import UIKit
+定义标识符时，必须声明该标识符是变量还是常量。
+声明标识符的格式：变量/常量关键字 名称: 数据类型，当然: 数据类型可以省略。
+语句结束可以不加;
+如果同一行有多个语句，则依然需要加上，但不建议一行写多条语句。</string>
+				<string>title2</string>
+				<string>打印语句</string>
+				<string>text</string>
+				<string>Swift 中的打印语句：print(打印的内容)
+print语句输出的内容不是显示在代码预览区，而是显示在控制台。
+print语句输出的内容会自动换行。</string>
+				<string>code</string>
+				<string>// 直接输出
+print(&quot;Hello Swift&quot;)
+
+let str = &quot;Hello Swift&quot;
+// 输出变/常量
+print(str)</string>
+				<string>title2</string>
+				<string>注释</string>
+				<string>text</string>
+				<string>注释是程序开发中非常重要的组成部分，好的注释可以提高程序的可读性，帮助开发者快速理解程序的含义。Swift 中的注释主要有四种：
+单行注释
+多行注释
+分组注释
+文档注释</string>
+				<string>title3</string>
+				<string>单行注释</string>
+				<string>text</string>
+				<string>单行注释以双正斜杠//作为起始标记</string>
+				<string>code</string>
+				<string>// 注释内容</string>
+				<string>title3</string>
+				<string>多行注释</string>
+				<string>text</string>
+				<string>其起始标记为单个正斜杠后跟随一个星号/*
+终止标记为一个星号后跟随单个正斜杠*/</string>
+				<string>code</string>
+				<string>/* 这是一个，
+多行注释 */</string>
+				<string>text</string>
+				<string>多行注释可以嵌套在其它的多行注释之中</string>
+				<string>code</string>
+				<string>/* 这是第一个多行注释的开头
+/* 这是第二个被嵌套的多行注释 */
+这是第一个多行注释的结尾 */</string>
+				<string>title3</string>
+				<string>分组注释</string>
+				<string>text</string>
+				<string>如果打算对代码进行分组可以使用分组注释
+一般用在 iOS 开发中，用于方法的分组</string>
+				<string>code</string>
+				<string>// MARK:-</string>
+				<string>title3</string>
+				<string>文档注释</string>
+				<string>text</string>
+				<string>Swift 中添加文档注释较为简单
+使用///可以为方法或者属性添加文档注释</string>
+				<string>code</string>
+				<string>func add(num1: Int, num2: Int) -&gt; Int {
+    return num1 + num2
+}
+
+add(num1: 1, num2: 2)</string>
+				<string>text</string>
+				<string>按住 option，点击add，查看对话框内容，发现Parameters没有描述</string>
+				<string>image</string>
+				<string>eassyImg2-3</string>
+				<string>text</string>
+				<string>使用规范
+第一行概述功能，然后空一行再写详细描述
+参数格式- Paramerer 参数名: 描述
+返回格式- Returns: 描述
+批注格式- Note: 描述（可选）
+添加文档注释</string>
+				<string>code</string>
+				<string>/// 求和【概述】
+///
+/// 求两个整数的和【详细描述】
+/// - Parameter num1: 整型参数一【参数格式】
+/// - Parameter num2: 整型参数二
+/// - Returns: 两个整数的和【返回格式】
+/// - Note: 使用时需传入整型数据【批注格式】
+func add(num1: Int, num2: Int) -&gt; Int {
+    return num1 + num2
+}
+
+// 调用
+add(num1: 1, num2: 2)</string>
+				<string>text</string>
+				<string>再次查看</string>
+				<string>image</string>
+				<string>eassyImg2-4</string>
+				<string>title2</string>
+				<string>Xcode 11 文档注释的补齐功能</string>
+				<string>text</string>
+				<string>Xcode 11 增强了文档注释的自动补齐功能，只要按住command，单击想添加注释的函数，选择Add Documentation会自动补齐代码注释，简洁方便。</string>
+				<string>image</string>
+				<string>eassyImg2-5</string>
 			</array>
 		</dict>
 		<key>2</key>
@@ -301,6 +413,8 @@ import UIKit
 			<string>1、入门介绍</string>
 			<key>author</key>
 			<string>YungFan</string>
+			<key>date</key>
+			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC2</string>
 			<key>isFeatured</key>
@@ -505,6 +619,8 @@ add(num1: 1, num2: 2)</string>
 			<string>2、数据类型与运算符</string>
 			<key>author</key>
 			<string>YungFan</string>
+			<key>date</key>
+			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC3</string>
 			<key>isFeatured</key>
@@ -687,6 +803,8 @@ var two: (id: String, name: String, Swift_score: Int, iOS_score: Int)</string>
 			<string>3、逻辑分支与循环</string>
 			<key>author</key>
 			<string>YungFan</string>
+			<key>date</key>
+			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC4</string>
 			<key>isFeatured</key>
@@ -1004,6 +1122,8 @@ for i in 0...10 {
 			<string>4、字符与字符串</string>
 			<key>author</key>
 			<string>YungFan</string>
+			<key>date</key>
+			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC5</string>
 			<key>isFeatured</key>
@@ -1322,6 +1442,8 @@ for i in 0...10 {
 			<string>5、数组、集合与字典</string>
 			<key>author</key>
 			<string>YungFan</string>
+			<key>date</key>
+			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC6</string>
 			<key>isFeatured</key>
@@ -1651,6 +1773,8 @@ for i in 0...10 {
 			<string>6、可选型</string>
 			<key>author</key>
 			<string>YungFan</string>
+			<key>date</key>
+			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC7</string>
 			<key>isFeatured</key>
@@ -1990,6 +2114,8 @@ for i in 0...10 {
 			<string>7、函数与闭包</string>
 			<key>author</key>
 			<string>YungFan</string>
+			<key>date</key>
+			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC8</string>
 			<key>isFeatured</key>
@@ -2329,6 +2455,8 @@ for i in 0...10 {
 			<string>8、枚举</string>
 			<key>author</key>
 			<string>YungFan</string>
+			<key>date</key>
+			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC9</string>
 			<key>isFeatured</key>
@@ -2668,6 +2796,8 @@ for i in 0...10 {
 			<string>9、结构体与类</string>
 			<key>author</key>
 			<string>YungFan</string>
+			<key>date</key>
+			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC10</string>
 			<key>isFeatured</key>
@@ -3007,6 +3137,8 @@ for i in 0...10 {
 			<string>10、属性和方法</string>
 			<key>author</key>
 			<string>YungFan</string>
+			<key>date</key>
+			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC11</string>
 			<key>isFeatured</key>
@@ -3338,6 +3470,102 @@ for i in 0...10 {
     }
     print(i) // 输出 0 1 2 3 4 6 7 8 9 10
 }</string>
+			</array>
+		</dict>
+		<key>12</key>
+		<dict>
+			<key>title</key>
+			<string>iOS开发之ReplayKit录屏</string>
+			<key>author</key>
+			<string>YungFan</string>
+			<key>date</key>
+			<date>2023-06-20T12:46:19Z</date>
+			<key>cover</key>
+			<string>FC1</string>
+			<key>isFeatured</key>
+			<true/>
+			<key>isCollection</key>
+			<false/>
+			<key>content</key>
+			<array>
+				<string>title2</string>
+				<string>介绍</string>
+				<string>text</string>
+				<string>iOS中使用RPScreenRecorder进行专门的录屏操作。开始录屏时会弹出授权对话框，录制过程中是无感的，停止录制之后可以弹出录制的预览界面，然后可以保存到相册。录屏的同时可以录制麦克风的声音与摄像头的内容。需要导入ReplayKit模块。</string>
+				<string>title2</string>
+				<string>案例</string>
+				<string>code</string>
+				<string>import ReplayKit
+import UIKit
+
+	class ViewController: UIViewController {
+	// 显示摄像头
+		var cameraView: UIView?
+
+		override func viewDidLoad() {
+		super.viewDidLoad()
+
+			navigationItem.rightBarButtonItem = UIBarButtonItem(title: &quot;开始录屏&quot;,
+																style: .plain,
+																target: self,
+																action: #selector(startRecording))
+		}
+
+		@objc func startRecording() {
+			guard RPScreenRecorder.shared().isAvailable else { return }
+			// 获取RPScreenRecorder
+			let recorder = RPScreenRecorder.shared()
+			// 开启麦克风
+			recorder.isMicrophoneEnabled = true
+			// 开启摄像头
+			recorder.isCameraEnabled = true
+			// 摄像头类型（前、后摄像头）
+			recorder.cameraPosition = .front
+			// 开始录制
+			recorder.startRecording { [unowned self] error in
+				if let error = error {
+					print(error.localizedDescription)
+				} else {
+					self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: &quot;停止录屏&quot;,
+																			style: .plain,
+																			target: self,
+																			action: #selector(self.stopRecording))
+					// 设置摄像头
+					guard let cameraView = recorder.cameraPreviewView else { return }
+					cameraView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+					cameraView.center = view.center
+					view.addSubview(cameraView)
+					self.cameraView = cameraView
+				}
+			}
+		}
+
+    	@objc func stopRecording() {
+            let recorder = RPScreenRecorder.shared()
+            // 停止录制
+            recorder.stopRecording { [unowned self] preview, _ in
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: &quot;开始录屏&quot;,
+                                                                            style: .plain,
+                                                                            target: self,
+                                                                            action: #selector(self.startRecording))
+                if let preview = preview {
+                    // 设置代理
+                    preview.previewControllerDelegate = self
+                    self.present(preview, animated: true)
+                }
+            }
+                cameraView?.removeFromSuperview()
+        }
+    }
+
+	extension ViewController: RPPreviewViewControllerDelegate {
+        // MARK: 完成预览
+		func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
+			dismiss(animated: true)
+    }
+}</string>
+				<string>text</string>
+				<string>注意：需要在真机运行测试。</string>
 			</array>
 		</dict>
 	</dict>
