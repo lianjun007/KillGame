@@ -1,15 +1,18 @@
-
 import UIKit
 import WebKit
 
+var settingEssayTitle2DisplayMode: Int? = defaults.integer(forKey: "settingEssayTitle2DisplayMode")
+
+let defaults = UserDefaults.standard
+
 class PaperViewController: UIViewController {
-    
-    var webView: WKWebView!
     
     var tag: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        settingEssayTitle2DisplayMode = defaults.integer(forKey: "settingEssayTitle2DisplayMode")
         
         let ID = tag ?? "0"
         

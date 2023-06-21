@@ -207,8 +207,6 @@
 			<string>1、入门介绍</string>
 			<key>author</key>
 			<string>LianJun</string>
-			<key>date</key>
-			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC2</string>
 			<key>isFeatured</key>
@@ -220,7 +218,7 @@
 				<string>title2</string>
 				<string>简介</string>
 				<string>text</string>
-				<string>Swift 语言由 Apple 公司在 2014 年推出，主要用于开发 iOS/iPadOS/macOS 应用程序。
+				<string>Swift语言由Apple公司在2014年推出，主要用于开发iOS/iPadOS/macOS应用程序。
 发布于 Apple WWDC 2014。
 作者：Chris Lattner
 LLVM 项目的主要发起人与作者之一
@@ -410,11 +408,9 @@ add(num1: 1, num2: 2)</string>
 		<key>2</key>
 		<dict>
 			<key>title</key>
-			<string>1、入门介绍</string>
+			<string>官方设置示例文本</string>
 			<key>author</key>
-			<string>YungFan</string>
-			<key>date</key>
-			<date>2023-06-20T12:46:19Z</date>
+			<string>LianJun</string>
 			<key>cover</key>
 			<string>FC2</string>
 			<key>isFeatured</key>
@@ -424,42 +420,16 @@ add(num1: 1, num2: 2)</string>
 			<key>content</key>
 			<array>
 				<string>title2</string>
-				<string>简介</string>
+				<string>标题</string>
+				<string>title3</string>
+				<string>副标题</string>
+				<string>code</string>
+                <string>
+                    
+                    
+                </string>
 				<string>text</string>
-				<string>Swift 语言由 Apple 公司在 2014 年推出，主要用于开发 iOS/iPadOS/macOS 应用程序。
-发布于 Apple WWDC 2014。
-作者：Chris Lattner
-LLVM 项目的主要发起人与作者之一
-Clang 编译器的作者
-领导 Xcode、Instruments 等编译器团队
-Swift 的大部分基础架构由他完成
-已从 Apple 离职</string>
-				<string>title2</string>
-				<string>历史</string>
-				<string>text</string>
-				<string>时间	事件
-2010年7月	开始 Swift 编程语言的设计工作
-2014年6月	Swift 1.0 提出
-2014年9月	Swift 1.0 发布
-2014年10月	Swift 1.1 发布
-2015年4月	Swift 1.2 发布
-2015年9月	Swift 2.0 发布
-2015年12月	Apple 宣布 Swift 开放源代码
-2016年9月	Swift 3.0 发布
-2017年9月	Swift 4.0 发布
-2018年3月	Swift 4.1 发布
-2018年9月	Swift 4.2 发布
-2019年3月	Swift 5 发布
-2019年9月	Swift 5.1 发布
-2020年3月	Swift 5.2 发布</string>
-				<string>text</string>
-				<string>随着 Swift 5 发布，Swift 迎来了ABI（Application Binary Interface）稳定，未来版本将与 Swift 5 二进制兼容。Swift 5 与 Swift 4.2 兼容，但与早期的 Swift 版本不兼容。Swift 5.1 版本后，我们可以用不同 Swift 支持的第三方框架，最终编译成同一个 APP，这是成熟语言的标志，只有这样才能让不同的框架和代码为你所用，大家使用时也不会有那么多的顾虑。</string>
-				<string>title2</string>
-				<string>ABI</string>
-				<string>text</string>
-				<string>应用程序二进制接口
-应用程序与底层操作系统之间的接口
-ABI 稳定意味着语法不会有太大的变动（实际上从 Swift 4 之后语法基本没变化）</string>
+				<string>这是一段正文文字，你可以在这里展示你的正文内容。这是一段正文文字，你可以在这里展示你的正文内容。这是一段正文文字，你可以在这里展示你的正文内容。</string>
 				<string>title2</string>
 				<string>特性</string>
 				<string>text</string>
@@ -619,8 +589,6 @@ add(num1: 1, num2: 2)</string>
 			<string>2、数据类型与运算符</string>
 			<key>author</key>
 			<string>YungFan</string>
-			<key>date</key>
-			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC3</string>
 			<key>isFeatured</key>
@@ -803,8 +771,6 @@ var two: (id: String, name: String, Swift_score: Int, iOS_score: Int)</string>
 			<string>3、逻辑分支与循环</string>
 			<key>author</key>
 			<string>YungFan</string>
-			<key>date</key>
-			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC4</string>
 			<key>isFeatured</key>
@@ -1122,8 +1088,6 @@ for i in 0...10 {
 			<string>4、字符与字符串</string>
 			<key>author</key>
 			<string>YungFan</string>
-			<key>date</key>
-			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC5</string>
 			<key>isFeatured</key>
@@ -1442,8 +1406,6 @@ for i in 0...10 {
 			<string>5、数组、集合与字典</string>
 			<key>author</key>
 			<string>YungFan</string>
-			<key>date</key>
-			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC6</string>
 			<key>isFeatured</key>
@@ -1773,8 +1735,6 @@ for i in 0...10 {
 			<string>6、可选型</string>
 			<key>author</key>
 			<string>YungFan</string>
-			<key>date</key>
-			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC7</string>
 			<key>isFeatured</key>
@@ -2114,8 +2074,6 @@ for i in 0...10 {
 			<string>7、函数与闭包</string>
 			<key>author</key>
 			<string>YungFan</string>
-			<key>date</key>
-			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC8</string>
 			<key>isFeatured</key>
@@ -2455,8 +2413,6 @@ for i in 0...10 {
 			<string>8、枚举</string>
 			<key>author</key>
 			<string>YungFan</string>
-			<key>date</key>
-			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC9</string>
 			<key>isFeatured</key>
@@ -2796,8 +2752,6 @@ for i in 0...10 {
 			<string>9、结构体与类</string>
 			<key>author</key>
 			<string>YungFan</string>
-			<key>date</key>
-			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC10</string>
 			<key>isFeatured</key>
@@ -3137,8 +3091,6 @@ for i in 0...10 {
 			<string>10、属性和方法</string>
 			<key>author</key>
 			<string>YungFan</string>
-			<key>date</key>
-			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC11</string>
 			<key>isFeatured</key>
@@ -3478,8 +3430,6 @@ for i in 0...10 {
 			<string>iOS开发之ReplayKit录屏</string>
 			<key>author</key>
 			<string>YungFan</string>
-			<key>date</key>
-			<date>2023-06-20T12:46:19Z</date>
 			<key>cover</key>
 			<string>FC1</string>
 			<key>isFeatured</key>

@@ -34,7 +34,7 @@ class CollectionViewController: UIViewController {
 //                // 设置精选课程的标题
 //                let courseLabel = UILabel(frame: CGRect(x: spacedForScreen, y: image.frame.maxY + spacedForScreen, width: 0, height: 0))
 //                courseLabel.text = index2[identifier]["title"]
-//                courseLabel.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
+//                courseLabel.font = titleFont2
 //                courseLabel.sizeToFit()
 //                courseLabel.isUserInteractionEnabled = false
 //                previewControllerInstance.view.addSubview(courseLabel)
@@ -58,7 +58,7 @@ class CollectionViewController: UIViewController {
 //                // 设置精选课程的标题
 //                let courseLabel = UILabel(frame: CGRect(x: spacedForScreen, y: image.frame.maxY + spacedForScreen, width: 0, height: 0))
 //                courseLabel.text = index2[identifier - 7]["name"]
-//                courseLabel.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
+//                courseLabel.font = titleFont2
 //                courseLabel.sizeToFit()
 //                courseLabel.isUserInteractionEnabled = false
 //                previewControllerInstance.view.addSubview(courseLabel)
@@ -115,7 +115,7 @@ class CollectionViewController: UIViewController {
 //        // Set the UILabel at the featuredCoursesBox tilte
 //        let featuredCourseLable = UILabel(frame: CGRect(x: spacedForScreen, y: spacedForModule2, width: 0, height: 0))
 //        featuredCourseLable.text = "收藏夹"
-//        featuredCourseLable.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
+//        featuredCourseLable.font = titleFont2
 //        featuredCourseLable.sizeToFit()
 //        mainScrollView.addSubview(featuredCourseLable)
 //        
@@ -129,7 +129,7 @@ class CollectionViewController: UIViewController {
 //        // Set the UILabel at the featuredCoursesBox tilte
 //        let featuredCourseLable1 = UILabel(frame: CGRect(x: spacedForScreen, y: spacedForModule2 + headerScrollView.frame.height + spacedForModule * 2, width: 0, height: 0))
 //        featuredCourseLable1.text = "收藏的合集"
-//        featuredCourseLable1.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
+//        featuredCourseLable1.font = titleFont2
 //        featuredCourseLable1.sizeToFit()
 //        mainScrollView.addSubview(featuredCourseLable1)
 //        

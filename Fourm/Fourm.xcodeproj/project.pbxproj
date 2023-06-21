@@ -60,6 +60,7 @@
 		DA13A4FE2A2E5DE4002F44AB /* DataInvoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */; };
 		DA13A4FF2A2E5DE4002F44AB /* DataInvoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */; };
 		DA13A5002A2E5DE4002F44AB /* DataInvoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */; };
+		DA15E4AA2A4221E2002CF9C0 /* SettingImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA15E4A92A4221E2002CF9C0 /* SettingImage.xcassets */; };
 		DA182AB92A357E3D009F73EE /* ContentFile.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA182AB82A357E3D009F73EE /* ContentFile.plist */; };
 		DA4D571B2A30CE1400ABE114 /* EssayControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D571A2A30CE1400ABE114 /* EssayControl.swift */; };
 /* End PBXBuildFile section */
@@ -107,8 +108,9 @@
 		DA13A4E12A2E5DAA002F44AB /* FeaturedPaperData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FeaturedPaperData.plist; sourceTree = "<group>"; };
 		DA13A4E42A2E5DAA002F44AB /* Cover.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Cover.xcassets; sourceTree = "<group>"; };
 		DA13A4F52A2E5DE4002F44AB /* BasicData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasicData.swift; path = ../../../Fourm/Fourm/FrameFile/BasicData.swift; sourceTree = "<group>"; };
-		DA13A4F62A2E5DE4002F44AB /* ControlBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlBuild.swift; path = ../../../Fourm/Fourm/FrameFile/ControlBuild.swift; sourceTree = "<group>"; };
+		DA13A4F62A2E5DE4002F44AB /* ControlBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBuild.swift; sourceTree = "<group>"; };
 		DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataInvoke.swift; path = ../../../Fourm/Fourm/FrameFile/DataInvoke.swift; sourceTree = "<group>"; };
+		DA15E4A92A4221E2002CF9C0 /* SettingImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SettingImage.xcassets; sourceTree = "<group>"; };
 		DA182AB82A357E3D009F73EE /* ContentFile.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContentFile.plist; sourceTree = "<group>"; };
 		DA4D571A2A30CE1400ABE114 /* EssayControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -222,6 +224,7 @@
 				DA13A4E42A2E5DAA002F44AB /* Cover.xcassets */,
 				DA182AB82A357E3D009F73EE /* ContentFile.plist */,
 				DA13A4DF2A2E5DAA002F44AB /* ContentImage.xcassets */,
+				DA15E4A92A4221E2002CF9C0 /* SettingImage.xcassets */,
 			);
 			path = DataFile;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 			files = (
 				DA13A4E82A2E5DAA002F44AB /* FeaturedCollectionsData.plist in Resources */,
 				DA13A4992A2E5CE5002F44AB /* LaunchScreen.storyboard in Resources */,
+				DA15E4AA2A4221E2002CF9C0 /* SettingImage.xcassets in Resources */,
 				DA13A4D72A2E5D66002F44AB /* Assets.xcassets in Resources */,
 				DA13A4E52A2E5DAA002F44AB /* ContentImage.xcassets in Resources */,
 				DA13A4F12A2E5DAA002F44AB /* Cover.xcassets in Resources */,

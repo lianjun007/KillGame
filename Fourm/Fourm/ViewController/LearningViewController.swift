@@ -2,32 +2,24 @@ import UIKit
 
 class LearningViewController: UIViewController {
     
-    // 从文件中载入精选课程的数据
-    
     var featuredCollectionsRandomDataArray: Array<Dictionary<String, String>> = [] // 接收精选课程的随机数据
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 发送精选课程的随机数据
-        featuredCollectionsRandomDataArray = arrayRandom(number: 7, array: featuredCollectionsDataArray) as! Array<Dictionary<String, String>>
+        viewControllerInitialize(vc: self, navTitle: "开始学习")
         
-        // 设置界面视图的背景色和导航栏的基础设置
-        view.backgroundColor = .systemBackground
-        navigationItem.title = "开始学习"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        // 设置最底层的滚动视图，用来承载界面内的所有元素
+        // 创建底层滚动视图
         let underlyScrollView = UIScrollView(frame: UIScreen.main.bounds)
         view.addSubview(underlyScrollView)
         
-        // 设置第一个模块标题
-        let moduleTitle = UILabel(frame: CGRect(x: spacedForScreen, y: spacedForModule2, width: 0, height: 0))
-        moduleTitle.text = "精选合集"
-        moduleTitle.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
-        moduleTitle.sizeToFit()
-        underlyScrollView.addSubview(moduleTitle)
+        let moduleTitle1 = moduleTitleBuild(superView: underlyScrollView, title: "精选合集", originY: spacedForNavigation)
+        
+        // 发送精选课程的随机数据
+        featuredCollectionsRandomDataArray = arrayRandom(number: 7, array: featuredCollectionsDataArray) as! Array<Dictionary<String, String>>
+
         // 设置第一个模块的横向滚动视图，用来承载第一个模块“精选合集”
-        let moduleView = UIScrollView(frame: CGRect(x: 0, y: moduleTitle.frame.maxY + spacedForControl, width: screenWidth, height: largeControlSize.height))
+        let moduleView = UIScrollView(frame: CGRect(x: 0, y: moduleTitle1.frame.maxY + spacedForControl, width: screenWidth, height: largeControlSize.height))
         moduleView.contentSize = CGSize(width: largeControlSize.width * 7 + spacedForControl * 6 + spacedForScreen * 2, height: largeControlSize.height)
         moduleView.showsHorizontalScrollIndicator = false
         moduleView.clipsToBounds = false
@@ -45,9 +37,9 @@ class LearningViewController: UIViewController {
         }
         
         // Set the UILabel at the featuredCoursesBox tilte
-        let featuredCourseLable1 = UILabel(frame: CGRect(x: spacedForScreen, y: spacedForModule2 + moduleView.frame.height + spacedForModule * 2, width: 0, height: 0))
+        let featuredCourseLable1 = UILabel(frame: CGRect(x: spacedForScreen, y: spacedForNavigation + moduleView.frame.height + spacedForModule * 2, width: 0, height: 0))
         featuredCourseLable1.text = "精选文章"
-        featuredCourseLable1.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
+        featuredCourseLable1.font = titleFont2
         featuredCourseLable1.sizeToFit()
         underlyScrollView.addSubview(featuredCourseLable1)
         
@@ -129,7 +121,7 @@ extension LearningViewController: UIContextMenuInteractionDelegate {
                 // 设置精选课程的标题
                 let courseLabel = UILabel(frame: CGRect(x: spacedForScreen, y: image.frame.maxY + spacedForScreen, width: 0, height: 0))
                 courseLabel.text = featuredCollectionsRandomDataArray[identifier]["title"]
-                courseLabel.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
+                courseLabel.font = titleFont2
                 courseLabel.sizeToFit()
                 courseLabel.isUserInteractionEnabled = false
                 previewControllerInstance.view.addSubview(courseLabel)
@@ -153,7 +145,7 @@ extension LearningViewController: UIContextMenuInteractionDelegate {
                 // 设置精选课程的标题
                 let courseLabel = UILabel(frame: CGRect(x: spacedForScreen, y: image.frame.maxY + spacedForScreen, width: 0, height: 0))
                 courseLabel.text = featuredCollectionsRandomDataArray[identifier - 7]["title"]
-                courseLabel.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
+                courseLabel.font = titleFont2
                 courseLabel.sizeToFit()
                 courseLabel.isUserInteractionEnabled = false
                 previewControllerInstance.view.addSubview(courseLabel)

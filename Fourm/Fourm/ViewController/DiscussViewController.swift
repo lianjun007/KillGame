@@ -49,7 +49,7 @@ class DiscussViewController: UIViewController {
 //        // 两字和三字UILabel的参考尺寸
 //        let referenceLabel2 = UILabel()
 //        referenceLabel2.text = "一二三四"
-//        referenceLabel2.font = UIFont.systemFont(ofSize: titleFont2, weight: .bold)
+//        referenceLabel2.font = titleFont2
 //        referenceLabel2.sizeToFit()
 //        
 //        // 循环创建收藏界面导航栏按钮

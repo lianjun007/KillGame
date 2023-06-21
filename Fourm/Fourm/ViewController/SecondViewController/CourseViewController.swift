@@ -16,6 +16,7 @@ class CourseViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 }
 
@@ -34,6 +35,6 @@ extension CourseViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
+
 }
 
