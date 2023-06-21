@@ -24,28 +24,28 @@ let largeControlSize = CGSize(width: 240, height: 320)
 ///
 /// 创建开始学习界面的精选课程模块的
 /// - Parameter originY: Y轴坐标
-/// - Parameter superView: 模块控件图片名
+/// - Parameter imageName: 模块控件图片名
 /// - Parameter title: 标题名字
 /// - Returns: 两个整数的和【返回格式】
 /// - Note: 使用时需传入整型数据【批注格式】
-func largeControlBuild(superView: UIView, originY: CGFloat, origin: CGPoint, imageName: String, title: String, title2: String) -> UIButton {
+func largeControlBuild(origin: CGPoint, imageName: String, title: String, title2: String) -> UIButton {
     // 设置第一个模块的横向滚动视图，用来承载第一个模块“精选合集”
-    let moduleView = UIScrollView(frame: CGRect(x: 0, y: originY, width: screenWidth, height: largeControlSize.height))
-    moduleView.contentSize = CGSize(width: largeControlSize.width * 7 + spacedForControl * 6 + spacedForScreen * 2, height: largeControlSize.height)
-    moduleView.showsHorizontalScrollIndicator = false
-    moduleView.clipsToBounds = false
-    superView.addSubview(moduleView)
-    // 创建7个精选合集框
-    for i in 0 ... 6 {
-        // 配置参数
-        let moduleControlOrigin = CGPoint(x: spacedForScreen + CGFloat(i) * (largeControlSize.width + spacedForControl), y: 0)
-        let featuredCourseBox = largeControlBuild(origin: moduleControlOrigin, imageName: featuredCollectionsRandomDataArray[i]["imageName"]!, title: featuredCollectionsRandomDataArray[i]["title"]!, title2: featuredCollectionsRandomDataArray[i]["author"]!)
-        featuredCourseBox.tag = i
-        featuredCourseBox.addTarget(self, action: #selector(clickCollectionControl), for: .touchUpInside)
-        moduleView.addSubview(featuredCourseBox)
-        let interaction = UIContextMenuInteraction(delegate: self)
-        featuredCourseBox.addInteraction(interaction)
-    }
+//    let moduleView = UIScrollView(frame: CGRect(x: 0, y: moduleTitle1.frame.maxY + spacedForControl, width: screenWidth, height: largeControlSize.height))
+//    moduleView.contentSize = CGSize(width: largeControlSize.width * 7 + spacedForControl * 6 + spacedForScreen * 2, height: largeControlSize.height)
+//    moduleView.showsHorizontalScrollIndicator = false
+//    moduleView.clipsToBounds = false
+//    underlyScrollView.addSubview(moduleView)
+//    // 创建7个精选合集框
+//    for i in 0 ... 6 {
+//        // 配置参数
+//        let moduleControlOrigin = CGPoint(x: spacedForScreen + CGFloat(i) * (largeControlSize.width + spacedForControl), y: 0)
+//        let featuredCourseBox = largeControlBuild(origin: moduleControlOrigin, imageName: featuredCollectionsRandomDataArray[i]["imageName"]!, title: featuredCollectionsRandomDataArray[i]["title"]!, title2: featuredCollectionsRandomDataArray[i]["author"]!)
+//        featuredCourseBox.tag = i
+//        featuredCourseBox.addTarget(self, action: #selector(clickCollectionControl), for: .touchUpInside)
+//        moduleView.addSubview(featuredCourseBox)
+//        let interaction = UIContextMenuInteraction(delegate: self)
+//        featuredCourseBox.addInteraction(interaction)
+//    }
     
     // 创建控件主体(一个UIButton)
     let control = UIButton(frame: CGRect(origin: origin, size: largeControlSize))
