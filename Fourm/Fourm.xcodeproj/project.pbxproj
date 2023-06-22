@@ -200,9 +200,9 @@
 			children = (
 				DA13A4BF2A2E5D52002F44AB /* SecondViewController */,
 				DA13A4C22A2E5D52002F44AB /* LearningViewController.swift */,
-				DA13A4BD2A2E5D52002F44AB /* SearchViewController.swift */,
 				DA13A4BE2A2E5D52002F44AB /* DiscussViewController.swift */,
 				DA13A4C32A2E5D52002F44AB /* CollectionViewController.swift */,
+				DA13A4BD2A2E5D52002F44AB /* SearchViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

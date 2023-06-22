@@ -37,6 +37,7 @@ func essayInterfaceBuild(data: Dictionary<String, Any>, ViewController: UIViewCo
     author.frame.origin = CGPoint(x: author0.frame.maxX, y: spacedForControl - 2)
     author.layer.cornerRadius = 5
     author.frame.size.width += 7
+    author.clipsToBounds = true
     author.textAlignment = .center
     author.backgroundColor = UIColor.systemFill
     underlyScrollView.addSubview(author)
