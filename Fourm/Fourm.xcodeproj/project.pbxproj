@@ -63,6 +63,7 @@
 		DA15E4AA2A4221E2002CF9C0 /* SettingImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA15E4A92A4221E2002CF9C0 /* SettingImage.xcassets */; };
 		DA182AB92A357E3D009F73EE /* ContentFile.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA182AB82A357E3D009F73EE /* ContentFile.plist */; };
 		DA4D571B2A30CE1400ABE114 /* EssayControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D571A2A30CE1400ABE114 /* EssayControl.swift */; };
+		DA54BBC52A45AB1C0009BF68 /* File in Resources */ = {isa = PBXBuildFile; fileRef = DA54BBC42A45AB1C0009BF68 /* File */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		DA15E4A92A4221E2002CF9C0 /* SettingImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SettingImage.xcassets; sourceTree = "<group>"; };
 		DA182AB82A357E3D009F73EE /* ContentFile.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContentFile.plist; sourceTree = "<group>"; };
 		DA4D571A2A30CE1400ABE114 /* EssayControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayControl.swift; sourceTree = "<group>"; };
+		DA54BBC42A45AB1C0009BF68 /* File */ = {isa = PBXFileReference; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,7 @@
 				DA13A4F62A2E5DE4002F44AB /* ControlBuild.swift */,
 				DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */,
 				DA4D571A2A30CE1400ABE114 /* EssayControl.swift */,
+				DA54BBC42A45AB1C0009BF68 /* File */,
 			);
 			path = FrameFile;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				DA13A4992A2E5CE5002F44AB /* LaunchScreen.storyboard in Resources */,
 				DA15E4AA2A4221E2002CF9C0 /* SettingImage.xcassets in Resources */,
 				DA13A4D72A2E5D66002F44AB /* Assets.xcassets in Resources */,
+				DA54BBC52A45AB1C0009BF68 /* File in Resources */,
 				DA13A4E52A2E5DAA002F44AB /* ContentImage.xcassets in Resources */,
 				DA13A4F12A2E5DAA002F44AB /* Cover.xcassets in Resources */,
 				DA13A4912A2E5CE4002F44AB /* Main.storyboard in Resources */,

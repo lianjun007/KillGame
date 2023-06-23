@@ -5,7 +5,7 @@ var settingEssayTitle2DisplayMode: Int? = defaults.integer(forKey: "settingEssay
 
 let defaults = UserDefaults.standard
 
-class PaperViewController: UIViewController {
+class EssayViewController: UIViewController {
     
     var tag: String?
 
@@ -21,29 +21,13 @@ class PaperViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         
-        essayInterfaceBuild(data: essayData[ID]!, ViewController: self)
+        let fileURL = Bundle.main.path(forResource: "File", ofType: "")
+        let content = try! String(contentsOfFile: fileURL!, encoding: .utf8)
+        
+        essayInterfaceBuild0(content, self)
+        
+        // essayInterfaceBuild(data: essayData[ID]!, ViewController: self)
         
     }
-    
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        super.viewWillAppear(animated)
-    //        self.navigationController?.navigationBar.subviews.forEach({ (view) in
-    //            if !view.isKind(of: NSClassFromString("_UINavigationBarContentView")!) {
-    //                view.isHidden = true
-    //
-    //            }
-    //        })
-    //
-    //    }
-    //
-    //    override func viewWillDisappear(_ animated: Bool) {
-    //        super.viewWillDisappear(animated)
-    //        self.navigationController?.navigationBar.subviews.forEach({ (view) in
-    //            if !view.isKind(of: NSClassFromString("_UINavigationBarContentView")!) {
-    //                view.isHidden = false
-    //            }
-    //        })
-    //
-    //    }
     
 }

@@ -87,7 +87,7 @@ class LearningViewController: UIViewController {
     }
     
     @objc func clickEssayControl(_ sender: UIButton) {
-        let VC = PaperViewController()
+        let VC = EssayViewController()
         VC.tag = "\(sender.tag)"
         self.navigationController?.pushViewController(VC, animated: true)
     }

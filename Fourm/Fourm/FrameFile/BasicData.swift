@@ -27,7 +27,18 @@ let safeAreaInsets = window?.safeAreaInsets ?? UIEdgeInsets.zero
 let screenWidth = UIScreen.main.bounds.width // 与设备屏幕宽度一样宽
 let screenHeight = UIScreen.main.bounds.height // 与设备屏幕高度一样高
 
+enum Direction: String {
+
+  case screen  // 等价于 case east = "east"，
+  case west
+  case south
+  case north = "n"
+}
 // 各种间距边距
+func spaced(_ type: Direction) -> CGFloat {
+    CGFloat(0)
+}
+
 let spacedForScreen = CGFloat(20)
 let spacedForControl = CGFloat(10) // 各个相邻的控件之间的间距，也用做二级标题和模块之间的间距
 let spacedForModule = CGFloat(45) // 各个模块之间的间距
