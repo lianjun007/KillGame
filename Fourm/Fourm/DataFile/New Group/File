@@ -1,0 +1,38 @@
+#title 函数的定义与参数
+#author 李言君
+#date 2020-06-01 07:59
+
+
+
+
+
+# 函数的定义
+函数是一段代码块，可以在使用重复功能时不用重新写一份代码，直接引用函数即可
+## 定义函数的格式
+
+### 一、没有参数和返回值
+#p
+无参数和返回值的函数有三种写法（其实主要是没有返回值的写法有三种）
+Void其实是一个空的元组，可以写成 ( )
+##p
+#code Swift
+func function0() -> Void {
+    print("这是没有参数和返回值的函数1")
+}
+function0()
+##code
+
+#tb 
+left        | niahdonihafxfdghdgjhfhjfjhfjhfvjhfo  | niahdo |
+ heaohfoia | ieoanihao                            | n
+ heaohfoia | ieoanihao                            | niahdo
+> heaohfoia | ieoa                                 |
+> heaohfoia | ieoanihao                            | niahdo
+> heaohfoia | ieoanihao                            | niahdo
+heaohfoia | ieoa
+nihao     | niahdo
+heaohfoia | ieoanihao     | niahdo
+heaohfoia | ieoa
+nihao     | niahdo
+heaohfoia | ieoa
+##tb

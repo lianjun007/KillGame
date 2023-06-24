@@ -1,0 +1,212 @@
+#title 跟我学Swift 5.2-数据类型与运算符
+
+#author YungFan
+#date 2020-06-01 07:59
+
+# 常量与变量
+
+#p
+在 Swift 中规定：在定义一个标识符时必须明确说明该标识符是一个常量还是变量。
+使用let来定义常量，定义之后不可以再修改。
+使用var来定义变量，定义之后可以修改。
+##p
+
+## 基本使用
+
+#code Swift
+let a: Int = 10
+// 报错，当一个字段定义为常量时不可以修改
+// a = 20
+var b: Int = 20
+// 因为b定义为变量，因此是可以修改的
+b = 30
+##code
+
+## 关键字变/常量
+
+每种语言都占用了一些 “单词” 称之为关键字，关键字一般情况下不能作为变/常量名，但 Swift 允许使用，使用方式为：`关键字` 。
+
+#code Swift
+var `var` = "Hello"
+let `let` = "Swift"
+
+print(`var`) // Hello
+print(`let`) // Swift
+##code
+
+# 数据类型
+
+#p
+数据类型：通俗一点理解就是一门编程语言已经实现、可以直接用的数据结构。
+
+Swift 中的常见的数据类型有：整型/浮点型/Bool型/元组/枚举/结构体/类等。
+##p
+## 基本类型
+
+整型
+
+#p
+    UInt8：无符号8位整型
+    UInt16：无符号16位整型
+    UInt32：无符号32位整型
+    UInt64：无符号64位整型
+    UInt：和平台相关（默认）
+    Int8：有符号8位整型
+    Int16：有符号16位整型
+    Int32：有符号32位整型
+    Int64：有符号64位整型
+    Int：和平台相关（默认）
+    有符号（可以取负值）
+    无符号（不可以取负值）
+##p
+浮点型
+#p
+    Float：32位浮点型
+
+    Double：64浮点型（默认）
+##p
+Bool型
+#p
+    true：真
+    false：假
+##p
+
+#code Swift
+// 定义一个Int类型的变量m，并且赋值为10
+var m: Int = 10
+// 定义一个Double类型的常量n，并且赋值为3.14
+let n: Double = 3.14
+// 定义一个Bool类型
+let t: Bool = true
+##code
+## 类型推断
+#p
+Swift 是一种类型安全的语言，编译代码时执行类型检查，并将任何不匹配的类型标记为错误，让我们尽早捕获并修复错误。
+
+类型推断使编译器能够在编译代码时根据赋值的类型自动推断出变量或者常量的类型。
+
+可以通过option + 鼠标左键来查看变量的数据类型。
+##p
+#img Image111
+#code Swift
+// 定义变量时没有指定明确的类型，但是因为赋值给i一个20是一个Int类型的数据.因此i为Int类型
+var i = 20
+// 错误写法：如果之后赋值给i一个浮点型数值，则会报错
+// i = 30.5
+
+// 正确写法
+var j = 3.33
+j = 6.66
+##code
+## 类型别名
+Swift 中使用 typealias 给已有的类型取一个别名（类似给人取外号）。
+#code Swift
+// 给Int取一个别名TypeA
+typealias TypeA = Int
+// 使用TypeA定义变量
+var a: TypeA = 10
+##code
+# 常用运算符
+#p
++ 、- 、*、/、%（ 算数运算符 ）
+
+=、+= 、-=、*=、/=、%=（ 赋值运算符 ）
+
+>、>=、<、<=、==、!=（ 比较运算符，得到Bool值）
+
+区间运算符
+
+半开半闭区间..<：0..<10 表示：0~9，不包括10
+
+闭区间...：0...10 表示：0~10
+
+数学中区间：(0,10)、(0,10]、[0,10)、[0,10]
+
+Swift 中的区间：
+
+与&&或||非!（ 逻辑运算符 ）
+
+操作数的类型必须是Bool
+
+&&与运算：表示多个条件必须同时成立
+
+||或运算：表示多个条件有一个成立即可
+
+!取反运算：表示对条件取反
+##p
+#code Swift
+true && true  // true
+true && false  // false
+false && true  // false
+false && false  // false
+
+true || true  // true
+true || false  // true
+false || true  // true
+false || false  // false
+
+!true  // false
+!false  // true
+##code
+~=（ 包含运算符 ）
+#code Swift
+// 下面两行代码效果相同
+(1...100).contains(42) // true
+1...100 ~= 42 // true
+##code
+## 注意事项
+运算符书写的时候，要么两边都不加空格，要么两边同时需要加空格。
+#code Swift
+let a: Int = 10
+let b: Int = 20
+a + b   // 正确写法
+a+b   // 正确写法
+a +b   // 错误写法
+##code
+#p
+Swift 中在进行基本运算时必须保证数据的类型一致，否则会出错。
+
+Int 类型转成 Double 类型：Double(Int变量/常量)
+
+Double 类型转成 Int 类型：Int(Double变量/常量)
+
+只有相同类型的数据才可以进行运算。
+
+Swift 中没有隐式转换，数据类型的转换必须显示进行：转换类型(待转类型变量/常量)（类型转换章节详细讲解）
+##p
+#code Swift
+let a = 10
+let b = 3.14
+// 错误写法
+// let c = a + b
+// let c = a * b
+// 正确写法
+let c = Double(a) + b
+let d = a + Int(b)
+##code
+## 元组
+#p
+元组是 Swift 中新增的一种数据类型（Python中也有）
+
+一种数据类型
+
+可以用于定义一组数据，用()括起来，多个值用,隔开
+
+组成元组的数据可以称为元素
+##p
+# 定义
+元组的常见写法
+#code Swift
+// 使用元组描述一个人的信息
+var one = ("1001", "张三", 30, 90)
+// 给元素加上名称，之后可以通过名称访问元素
+var two = (id: "1001", name: "张三", Swift_score: 80, iOS_score: 90)
+##code
+#p
+上面两种写法，查看一下one与two的类型有什么不同
+
+var one: (String, String, Int, Int)
+
+var two: (id: String, name: String, Swift_score: Int, iOS_score: Int)
+
+##p
