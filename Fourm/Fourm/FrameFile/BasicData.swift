@@ -56,9 +56,6 @@ let titleFont = CGFloat(34) // 一级标题字体大小，largeTitle那种
 let titleFont2 = UIFont.systemFont(ofSize: CGFloat(28), weight: .bold) // 二级标题字体大小，例如每个模块的标题
 let titleFont3 = CGFloat(22) // 三级标题字体大小，例如展示文章的一些控件的标题
 
-
-
-
 //
 //func basicCornerRadius(_ size: CGSize) -> CGFloat {
 //    if size.width >= size.height {

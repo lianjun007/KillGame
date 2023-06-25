@@ -27,16 +27,26 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
     var table = false
     var tableType = ""
     var tableArray: Array<String> = []
+    var title = false
+    var author = false
+    for item in essayDataArray {
+        if item.hasPrefix("@title "), !title {
+            title = true
+            VC.navigationItem.title = stringHandling(item)
+        } else if item.hasPrefix("@author "), !author {
+            author = true
+            originY = authorModuleBuild(stringHandling(item), underlyScrollView)
+        }
+    }
+    if !title {
+        VC.navigationItem.title = "未设置标题"
+    }
+    if !author {
+        originY = authorModuleBuild("未知", underlyScrollView)
+    }
     for item in essayDataArray {
         text = false
-        if item.hasPrefix("#title ") {
-            VC.navigationItem.title = stringHandling(item)
-        } else if item.hasPrefix("#author ") {
-            originY = authorModuleBuild(stringHandling(item), underlyScrollView)
-        } else if item.hasPrefix("#date ") {
-            // 日期
-            
-        } else if item.hasPrefix("# ") {
+        if item.hasPrefix("# ") {
             originY = title2ModuleBuild(stringHandling(item), underlyScrollView, originY: control ? originY: 0)
             control = true
         } else if item.hasPrefix("## ") {
@@ -62,6 +72,7 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
                 }
             }
         } else if item.hasPrefix("#code") {
+            control = true
             codeArray = []
             code = true
             codeType = stringHandling(item)
@@ -69,6 +80,7 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             code = false
             originY = codeModuleBuild(Array(codeArray.dropFirst()), underlyScrollView, originY: originY, language: codeType)
         } else if item.hasPrefix("#tb") {
+            control = true
             tableArray = []
             table = true
             tableType = stringHandling(item)
@@ -76,6 +88,7 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             table = false
             originY = tableModuleBuild(Array(tableArray.dropFirst()), underlyScrollView, originY: originY, mode: tableType)
         } else {
+            control = true
             text = true
         }
         
@@ -88,6 +101,8 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
         } else if text {
             originY = textModuleBuild(item, underlyScrollView, originY: originY, spaced: true)
         }
+        
+        
     }
     underlyScrollView.contentSize = CGSize(width: screenWidth, height: originY + spacedForControl)
 }
@@ -109,7 +124,7 @@ func stringHandling(_ string: String) -> String {
             bool0 = true
             bool1 = false
         }
-        if i != " ", bool0 {
+        if i != " " || index1 == string.count, bool0 {
             bool0 = false
             index0 = index1 - 1
         }
@@ -185,10 +200,13 @@ func authorModuleBuild(_ string: String, _ view: UIView) -> CGFloat {
 /// - Returns: 返回一个新的Y轴坐标
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
 func title2ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CGFloat {
+    print(string.count)
+    
     var newOriginY = originY
     let title2 = UILabel()
     title2.frame.size.width = screenWidth - spacedForScreen * 2
     title2.text = string
+    title2.numberOfLines = 0
     title2.font = titleFont2
     title2.sizeToFit()
     title2.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForModule)
@@ -451,90 +469,148 @@ func imageModuleBuild(_ imageName: String, _ view: UIView, originY: CGFloat) -> 
 /// - Returns: 返回一个新的Y轴坐标
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
 func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, mode: String) -> CGFloat {
+    var arrayData: Array<String> = []
+    for i in 0 ..< array.count {
+        if !array[i].isEmpty {
+            arrayData.append(array[i])
+        }
+    }
     let underlyView = UIScrollView()
     underlyView.layer.cornerRadius = 7
     underlyView.layer.borderWidth = 1
+    underlyView.bounces = false
     underlyView.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForControl + 4)
-    var cellViewArray: Array<UIView> = []
+    
     // 获取最大列数
     var lieCountMax = 0
-    for i in 0 ..< array.count {
-        let cellString = String(array[i]).components(separatedBy: "|")
+    for i in 0 ..< arrayData.count {
+        let cellString = String(arrayData[i]).components(separatedBy: "|")
         if lieCountMax < cellString.count {
             lieCountMax = cellString.count
         }
     }
-
-    // 获取每列最长字符串
-    
+    // 获取每列最长宽度
     var lieStringArrayArray: Array<Array<String>> = []
     for _ in 0 ..< lieCountMax {
         let lieMaxStringArray: Array<String> = []
         lieStringArrayArray.append(lieMaxStringArray)
     }
-    for i in 0 ..< array.count {
-        let cellString = String(array[i]).components(separatedBy: "|")
-//        let cellString1 = stringHandling(cellString0)
-//        let cellString = cellString1.trimmingCharacters(in: .whitespacesAndNewlines)
+    for i in 0 ..< arrayData.count {
+        let cellString = String(arrayData[i]).components(separatedBy: "|")
         for item in 0 ..< lieCountMax {
             if item < cellString.count {
                 lieStringArrayArray[item].append(cellString[item])
             }
         }
+    }
+    var lieMaxWidthArray: Array<CGFloat> = []
+    for i in 0 ..< lieStringArrayArray.count {
+        var lieMaxWidth = CGFloat(0)
+        for item in 0 ..< lieStringArrayArray[i].count {
+            let cellString1 = stringHandling(lieStringArrayArray[i][item])
+            let cellString = cellString1.trimmingCharacters(in: .whitespacesAndNewlines)
+            let labelFrame = UILabel()
+            labelFrame.text = cellString
+            labelFrame.sizeToFit()
+            if lieMaxWidth < labelFrame.frame.size.width {
+                lieMaxWidth = labelFrame.frame.size.width
+            }
+        }
+        if lieMaxWidth <= 50 {
+            lieMaxWidth = 50
+        }
+        lieMaxWidthArray.append(lieMaxWidth)
         
     }
-//    var lieMaxString = ""
-//    for item in 0 ..< lieCountMax {
-//        if item < cellString.count {
-//            let trimmedString = String(cellString[item]).trimmingCharacters(in: .whitespacesAndNewlines)
-//            if lieMaxString.count < trimmedString.count {
-//                lieMaxString = trimmedString
-//            }
-//        }
-//    }
-//    lieMaxStringArray.append(lieMaxString)
-    print(lieCountMax, lieStringArrayArray)
+    // 框架大小
+    var frameWidth = CGFloat(0)
+    var frameOriginX: Array<CGFloat> = []
+    for i in 0 ..< lieCountMax {
+        frameOriginX.append(frameWidth + 6)
+        frameWidth += lieMaxWidthArray[i] + 11
+    }
+    if frameWidth < screenWidth - spacedForScreen * 2 {
+        let chazhi = (screenWidth - spacedForScreen * 2) - frameWidth
+        frameWidth = screenWidth - spacedForScreen * 2
+        for i in 0 ..< lieCountMax {
+            frameOriginX[i] += CGFloat(i * (Int(chazhi) / lieCountMax))
+            lieMaxWidthArray[i] += chazhi / CGFloat(lieCountMax)
+        }
+    }
+    underlyView.contentSize.width = frameWidth
     
-    for i in 0 ..< array.count {
-        let cellView = UIView(frame: CGRect(x: 1, y: CGFloat(30 * i), width: screenWidth - spacedForScreen * 2 - 6, height: 30))
+    var cellViewArray: Array<UIView> = []
+    for i in 0 ..< arrayData.count {
+        let cellView = UIView(frame: CGRect(x: 0, y: CGFloat(30 * i), width: frameWidth, height: 30))
+        if i != 0 {
+            let hengxian = UIBezierPath()
+            hengxian.move(to: CGPoint(x: 0, y: CGFloat(30 * i)))
+            hengxian.addLine(to: CGPoint(x: frameWidth, y: CGFloat(30 * i)))
+            let shapeLayer = CAShapeLayer()
+            shapeLayer.path = hengxian.cgPath
+            shapeLayer.strokeColor = UIColor.black.cgColor
+            shapeLayer.lineWidth = 1.0
+            underlyView.layer.addSublayer(shapeLayer)
+        }
+        
         cellViewArray.append(cellView)
         underlyView.addSubview(cellView)
-        let cellString = String(array[i]).components(separatedBy: "|")
-        for item in 0 ..< cellString.count {
-            let trimmedString = String(cellString[item]).trimmingCharacters(in: .whitespacesAndNewlines)
-            let label = UILabel(frame: CGRect(x: item * Int(cellView.frame.size.width) / cellString.count + 5, y: 0, width: Int(cellView.frame.size.width) / cellString.count - 5, height: 30))
-            switch mode {
-            case ">": label.textAlignment = .right
-            case "left": label.textAlignment = .left
-            case "<": label.textAlignment = .left
-            case "right": label.textAlignment = .right
-            default:
-                label.textAlignment = .center
+        let cellString = String(arrayData[i]).components(separatedBy: "|")
+        var labelArray: Array<UILabel> = []
+        for item in 0 ..< lieCountMax {
+            if i == 0, item != 0 {
+                let shuxian = UIBezierPath()
+                let point = frameOriginX[item] - 5
+                shuxian.move(to: CGPoint(x: point, y: 0))
+                shuxian.addLine(to: CGPoint(x: point, y: CGFloat(arrayData.count * 30)))
+                let shapeLayer = CAShapeLayer()
+                shapeLayer.path = shuxian.cgPath
+                shapeLayer.strokeColor = UIColor.black.cgColor
+                shapeLayer.lineWidth = 1.0
+                underlyView.layer.addSublayer(shapeLayer)
             }
-            if trimmedString.hasPrefix("> ") {
-                label.textAlignment = .right
-            } else if trimmedString.hasPrefix("< ") {
-                label.textAlignment = .left
-            } else if trimmedString.hasPrefix("left ") {
-                label.textAlignment = .left
-            } else if trimmedString.hasPrefix("right ") {
-                label.textAlignment = .right
-            } else if trimmedString.hasPrefix("<> "){
-                label.textAlignment = .center
-            } else if trimmedString.hasPrefix(">< "){
-                label.textAlignment = .center
-            } else if trimmedString.hasPrefix("center "){
-                label.textAlignment = .center
-            } 
-            label.text = stringHandling(trimmedString)
-            label.layer.borderWidth = 0.5
-            label.font = UIFont.systemFont(ofSize: basicFont - 1)
-            cellView.addSubview(label)
+            if item < cellString.count {
+                let trimmedString = String(cellString[item]).trimmingCharacters(in: .whitespacesAndNewlines)
+                let label = UILabel(frame: CGRect(x: Int(frameOriginX[item]), y: 0, width: Int(lieMaxWidthArray[item]), height: 30))
+                label.backgroundColor = UIColor.white
+                switch mode {
+                case "<>": label.textAlignment = .center
+                case "><": label.textAlignment = .center
+                case "center": label.textAlignment = .center
+                case ">": label.textAlignment = .right
+                case "right": label.textAlignment = .right
+                default:
+                    label.textAlignment = .left
+                }
+                if trimmedString.hasPrefix("> ") {
+                    label.textAlignment = .right
+                } else if trimmedString.hasPrefix("< ") {
+                    label.textAlignment = .left
+                } else if trimmedString.hasPrefix("left ") {
+                    label.textAlignment = .left
+                } else if trimmedString.hasPrefix("right ") {
+                    label.textAlignment = .right
+                } else if trimmedString.hasPrefix("<> "){
+                    label.textAlignment = .center
+                } else if trimmedString.hasPrefix(">< "){
+                    label.textAlignment = .center
+                } else if trimmedString.hasPrefix("center "){
+                    label.textAlignment = .center
+                }
+                label.text = stringHandling(trimmedString)
+                label.font = UIFont.systemFont(ofSize: basicFont - 1)
+                label.frame.origin.y += 0.9
+                label.frame.size.height -= 1
+                cellView.addSubview(label)
+                labelArray.append(label)
+            } else {
+                labelArray[cellString.count - 1].frame.size.width += CGFloat(11 + Int(lieMaxWidthArray[item]))
+            }
         }
-       
+        
         underlyView.addSubview(cellView)
     }
-    underlyView.frame.size = CGSize(width: screenWidth - spacedForScreen * 2, height: cellViewArray[array.count - 1].frame.maxY)
+    underlyView.frame.size = CGSize(width: screenWidth - spacedForScreen * 2, height: cellViewArray[arrayData.count - 1].frame.maxY)
     view.addSubview(underlyView)
     return underlyView.frame.maxY
 }
@@ -710,7 +786,7 @@ func essayInterfaceBuild(data: Dictionary<String, Any>, ViewController: UIViewCo
                 let code = UILabel()
                 code.frame.origin = CGPoint(x: 10, y: 10)
                 let attString = NSMutableAttributedString(string: String(lines[i]))
-
+                
                 if attString.string.count >= 5 {
                     for index in 0 ..< attString.string.count - 4 {
                         let strIndex = attString.string.index(attString.string.startIndex, offsetBy: index)
@@ -793,5 +869,4 @@ func essayInterfaceBuild(data: Dictionary<String, Any>, ViewController: UIViewCo
         underlyScrollView.contentSize = CGSize(width: screenWidth, height: originY + spacedForScreen)
     }
 }
-
 

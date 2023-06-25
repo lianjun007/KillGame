@@ -121,7 +121,7 @@ func mediumControlBuild(origin: CGPoint, imageName: String, title: String, title
     // 设置控件底部的高斯模糊
     let blurEffect = UIBlurEffect(style: .light)
     let blurView = UIVisualEffectView(effect: blurEffect)
-    blurView.frame = CGRect(x: !direction ? 0: mediumControlSize.width / 3, y: 0, width: mediumControlSize.width * 2 / 3, height: mediumControlSize.height)
+    blurView.frame = CGRect(x: !direction ? 0: mediumControlSize.width / 3, y: 0, width: mediumControlSize.width * 2 / 3, height: mediumControlSize.height + 1)
     blurView.isUserInteractionEnabled = false
     blurView.backgroundColor = .white.withAlphaComponent(0.4)
     control.addSubview(blurView)

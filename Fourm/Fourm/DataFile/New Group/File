@@ -1,12 +1,5 @@
-#title 函数的定义与参数
-#author 李言君
-#date 2020-06-01 07:59
-
-
-
-
-
-# 函数的定义
+2020-06-01 07:59
+# mmm
 函数是一段代码块，可以在使用重复功能时不用重新写一份代码，直接引用函数即可
 ## 定义函数的格式
 
@@ -14,7 +7,9 @@
 #p
 无参数和返回值的函数有三种写法（其实主要是没有返回值的写法有三种）
 Void其实是一个空的元组，可以写成 ( )
+@author LianJun
 ##p
+# nihao
 #code Swift
 func function0() -> Void {
     print("这是没有参数和返回值的函数1")
@@ -22,17 +17,9 @@ func function0() -> Void {
 function0()
 ##code
 
-#tb 
-left        | niahdonihafxfdghdgjhfhjfjhfjhfvjhfo  | niahdo |
- heaohfoia | ieoanihao                            | n
- heaohfoia | ieoanihao                            | niahdo
-> heaohfoia | ieoa                                 |
-> heaohfoia | ieoanihao                            | niahdo
-> heaohfoia | ieoanihao                            | niahdo
-heaohfoia | ieoa
-nihao     | niahdo
-heaohfoia | ieoanihao     | niahdo
-heaohfoia | ieoa
-nihao     | niahdo
-heaohfoia | ieoa
+#tb
+Xcode版本   | Swift版本||
+Xcode 10.2 - Xcode 10.3.3   | Swift 5.0|||||
+Xcode 11 - Xcode 11.3.1   | Swift 5.1|
+Xcode 11.4 - |  Swift 5.2|
 ##tb

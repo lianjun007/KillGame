@@ -17,7 +17,7 @@ class EssayViewController: UIViewController {
         let ID = tag ?? "0"
         
         view.backgroundColor = .systemBackground
-        navigationItem.title = "文章的标题"
+        navigationItem.title = "文章加载失败"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         
