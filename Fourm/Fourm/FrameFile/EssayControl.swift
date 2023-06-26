@@ -321,7 +321,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ view: UIView, originY: CGFl
     }
     let codeScroll = UIScrollView(frame: CGRect(x: spacedForScreen, y: originY + spacedForControl, width: screenWidth - spacedForScreen * 2, height: 0))
     codeScroll.backgroundColor = UIColor.systemFill
-    codeScroll.layer.cornerRadius = 7
+    codeScroll.layer.cornerRadius = 5
     codeScroll.alwaysBounceHorizontal = true
     view.addSubview(codeScroll)
     var codeContentArray: Array<UILabel> = []
@@ -476,10 +476,15 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
         }
     }
     let underlyView = UIScrollView()
-    underlyView.layer.cornerRadius = 7
-    underlyView.layer.borderWidth = 1
+    underlyView.layer.cornerRadius = 4
+    underlyView.layer.borderWidth = 0.75
+    underlyView.backgroundColor = UIColor.systemGroupedBackground
     underlyView.bounces = false
     underlyView.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForControl + 4)
+    if settingEssayTitle2DisplayMode == 2 {
+        underlyView.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.3)
+        underlyView.layer.borderWidth = 0
+    }
     
     // 获取最大列数
     var lieCountMax = 0
@@ -549,7 +554,11 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = hengxian.cgPath
             shapeLayer.strokeColor = UIColor.black.cgColor
-            shapeLayer.lineWidth = 1.0
+            shapeLayer.lineWidth = 0.5
+            if settingEssayTitle2DisplayMode == 2 {
+                shapeLayer.strokeColor = UIColor.systemBackground.cgColor
+                shapeLayer.lineWidth = 3
+            }
             underlyView.layer.addSublayer(shapeLayer)
         }
         
@@ -566,13 +575,17 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 let shapeLayer = CAShapeLayer()
                 shapeLayer.path = shuxian.cgPath
                 shapeLayer.strokeColor = UIColor.black.cgColor
-                shapeLayer.lineWidth = 1.0
+                shapeLayer.lineWidth = 0.5
+                if settingEssayTitle2DisplayMode == 2 {
+                    shapeLayer.strokeColor = UIColor.systemBackground.cgColor
+                    shapeLayer.lineWidth = 3
+                }
                 underlyView.layer.addSublayer(shapeLayer)
             }
             if item < cellString.count {
                 let trimmedString = String(cellString[item]).trimmingCharacters(in: .whitespacesAndNewlines)
                 let label = UILabel(frame: CGRect(x: Int(frameOriginX[item]), y: 0, width: Int(lieMaxWidthArray[item]), height: 30))
-                label.backgroundColor = UIColor.white
+                label.backgroundColor = UIColor.systemGroupedBackground
                 switch mode {
                 case "<>": label.textAlignment = .center
                 case "><": label.textAlignment = .center
@@ -599,10 +612,15 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 }
                 label.text = stringHandling(trimmedString)
                 label.font = UIFont.systemFont(ofSize: basicFont - 1)
-                label.frame.origin.y += 0.9
+                label.frame.origin.y += 0.7
                 label.frame.size.height -= 1
                 cellView.addSubview(label)
                 labelArray.append(label)
+                if settingEssayTitle2DisplayMode == 2 {
+                    label.backgroundColor = UIColor(red: 205/255.0, green: 204/255.0, blue: 243/255.0, alpha: 1.000)
+                    label.frame.origin.y += 1.7
+                    label.frame.size.height -= 3
+                }
             } else {
                 labelArray[cellString.count - 1].frame.size.width += CGFloat(11 + Int(lieMaxWidthArray[item]))
             }
