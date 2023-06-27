@@ -321,7 +321,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ view: UIView, originY: CGFl
     }
     let codeScroll = UIScrollView(frame: CGRect(x: spacedForScreen, y: originY + spacedForControl, width: screenWidth - spacedForScreen * 2, height: 0))
     codeScroll.backgroundColor = UIColor.systemFill
-    codeScroll.layer.cornerRadius = 5
+    codeScroll.layer.cornerRadius = 4
     codeScroll.alwaysBounceHorizontal = true
     view.addSubview(codeScroll)
     var codeContentArray: Array<UILabel> = []
@@ -469,6 +469,8 @@ func imageModuleBuild(_ imageName: String, _ view: UIView, originY: CGFloat) -> 
 /// - Returns: 返回一个新的Y轴坐标
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
 func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, mode: String) -> CGFloat {
+    var lineWidth = CGFloat(1) // 表格中的分割线宽度
+    var boardWidth = CGFloat(1.5) // 表格的边框宽度
     var arrayData: Array<String> = []
     for i in 0 ..< array.count {
         if !array[i].isEmpty {
@@ -477,115 +479,123 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
     }
     let underlyView = UIScrollView()
     underlyView.layer.cornerRadius = 4
-    underlyView.layer.borderWidth = 0.75
     underlyView.backgroundColor = UIColor.systemGroupedBackground
     underlyView.bounces = false
     underlyView.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForControl + 4)
-    if settingEssayTitle2DisplayMode == 2 {
+    if settingEssayTitle2DisplayMode == 1 {
+        lineWidth = CGFloat(0.5)
+        boardWidth = CGFloat(0.75)
+        underlyView.backgroundColor = UIColor.systemBackground
+    } else if settingEssayTitle2DisplayMode == 2 {
+        lineWidth = CGFloat(3)
+        boardWidth = CGFloat(0)
         underlyView.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.3)
-        underlyView.layer.borderWidth = 0
     }
+    underlyView.layer.borderWidth = boardWidth
     
     // 获取最大列数
-    var lieCountMax = 0
+    var columnCountMax = 0
     for i in 0 ..< arrayData.count {
         let cellString = String(arrayData[i]).components(separatedBy: "|")
-        if lieCountMax < cellString.count {
-            lieCountMax = cellString.count
+        if columnCountMax < cellString.count {
+            columnCountMax = cellString.count
         }
     }
     // 获取每列最长宽度
-    var lieStringArrayArray: Array<Array<String>> = []
-    for _ in 0 ..< lieCountMax {
-        let lieMaxStringArray: Array<String> = []
-        lieStringArrayArray.append(lieMaxStringArray)
+    var columnStringArrayArray: Array<Array<String>> = []
+    for _ in 0 ..< columnCountMax {
+        let columnMaxStringArray: Array<String> = []
+        columnStringArrayArray.append(columnMaxStringArray)
     }
     for i in 0 ..< arrayData.count {
         let cellString = String(arrayData[i]).components(separatedBy: "|")
-        for item in 0 ..< lieCountMax {
+        for item in 0 ..< columnCountMax {
             if item < cellString.count {
-                lieStringArrayArray[item].append(cellString[item])
+                columnStringArrayArray[item].append(cellString[item])
             }
         }
     }
-    var lieMaxWidthArray: Array<CGFloat> = []
-    for i in 0 ..< lieStringArrayArray.count {
-        var lieMaxWidth = CGFloat(0)
-        for item in 0 ..< lieStringArrayArray[i].count {
-            let cellString1 = stringHandling(lieStringArrayArray[i][item])
+    var columnMaxWidthArray: Array<CGFloat> = []
+    for i in 0 ..< columnStringArrayArray.count {
+        var columnMaxWidth = CGFloat(0)
+        for item in 0 ..< columnStringArrayArray[i].count {
+            let cellString1 = stringHandling(columnStringArrayArray[i][item])
             let cellString = cellString1.trimmingCharacters(in: .whitespacesAndNewlines)
             let labelFrame = UILabel()
             labelFrame.text = cellString
             labelFrame.sizeToFit()
-            if lieMaxWidth < labelFrame.frame.size.width {
-                lieMaxWidth = labelFrame.frame.size.width
+            if columnMaxWidth < labelFrame.frame.size.width {
+                columnMaxWidth = labelFrame.frame.size.width
             }
         }
-        if lieMaxWidth <= 50 {
-            lieMaxWidth = 50
+        if columnMaxWidth <= 50 {
+            columnMaxWidth = 50
         }
-        lieMaxWidthArray.append(lieMaxWidth)
+        columnMaxWidthArray.append(columnMaxWidth)
         
     }
     // 框架大小
     var frameWidth = CGFloat(0)
     var frameOriginX: Array<CGFloat> = []
-    for i in 0 ..< lieCountMax {
-        frameOriginX.append(frameWidth + 6)
-        frameWidth += lieMaxWidthArray[i] + 11
+    for i in 0 ..< columnCountMax {
+        frameOriginX.append(frameWidth + 5)
+        frameWidth += columnMaxWidthArray[i] + 10
     }
     if frameWidth < screenWidth - spacedForScreen * 2 {
-        let chazhi = (screenWidth - spacedForScreen * 2) - frameWidth
+        let difference = (screenWidth - spacedForScreen * 2) - frameWidth
         frameWidth = screenWidth - spacedForScreen * 2
-        for i in 0 ..< lieCountMax {
-            frameOriginX[i] += CGFloat(i * (Int(chazhi) / lieCountMax))
-            lieMaxWidthArray[i] += chazhi / CGFloat(lieCountMax)
+        for i in 0 ..< columnCountMax {
+            frameOriginX[i] += CGFloat(i * (Int(difference) / columnCountMax))
+             columnMaxWidthArray[i] += difference / CGFloat(columnCountMax)
         }
     }
-    underlyView.contentSize.width = frameWidth
     
     var cellViewArray: Array<UIView> = []
     for i in 0 ..< arrayData.count {
-        let cellView = UIView(frame: CGRect(x: 0, y: CGFloat(30 * i), width: frameWidth, height: 30))
+        let cellView = UIView(frame: CGRect(x: underlyView.layer.borderWidth - lineWidth / 2, y: underlyView.layer.borderWidth + Double(30 * i) - lineWidth / 2, width: frameWidth - underlyView.layer.borderWidth * 2, height: 30))
+        // 绘制表格水平方向的分割线
         if i != 0 {
-            let hengxian = UIBezierPath()
-            hengxian.move(to: CGPoint(x: 0, y: CGFloat(30 * i)))
-            hengxian.addLine(to: CGPoint(x: frameWidth, y: CGFloat(30 * i)))
-            let shapeLayer = CAShapeLayer()
-            shapeLayer.path = hengxian.cgPath
-            shapeLayer.strokeColor = UIColor.black.cgColor
-            shapeLayer.lineWidth = 0.5
+            let horizontalLinePath = UIBezierPath()
+            let pointY = Double(30 * i) + underlyView.layer.borderWidth - lineWidth / 2
+            horizontalLinePath.move(to: CGPoint(x: underlyView.layer.borderWidth, y: pointY))
+            horizontalLinePath.addLine(to: CGPoint(x: frameWidth - underlyView.layer.borderWidth, y: pointY))
+            let horizontalLine = CAShapeLayer()
+            horizontalLine.path = horizontalLinePath.cgPath
+            horizontalLine.strokeColor = UIColor.black.cgColor
+            horizontalLine.lineWidth = lineWidth
             if settingEssayTitle2DisplayMode == 2 {
-                shapeLayer.strokeColor = UIColor.systemBackground.cgColor
-                shapeLayer.lineWidth = 3
+                horizontalLine.strokeColor = UIColor.systemBackground.cgColor
+                horizontalLine.lineWidth = 3
             }
-            underlyView.layer.addSublayer(shapeLayer)
+            underlyView.layer.addSublayer(horizontalLine)
         }
         
         cellViewArray.append(cellView)
         underlyView.addSubview(cellView)
         let cellString = String(arrayData[i]).components(separatedBy: "|")
         var labelArray: Array<UILabel> = []
-        for item in 0 ..< lieCountMax {
+        for item in 0 ..< columnCountMax {
             if i == 0, item != 0 {
-                let shuxian = UIBezierPath()
-                let point = frameOriginX[item] - 5
-                shuxian.move(to: CGPoint(x: point, y: 0))
-                shuxian.addLine(to: CGPoint(x: point, y: CGFloat(arrayData.count * 30)))
-                let shapeLayer = CAShapeLayer()
-                shapeLayer.path = shuxian.cgPath
-                shapeLayer.strokeColor = UIColor.black.cgColor
-                shapeLayer.lineWidth = 0.5
-                if settingEssayTitle2DisplayMode == 2 {
-                    shapeLayer.strokeColor = UIColor.systemBackground.cgColor
-                    shapeLayer.lineWidth = 3
-                }
-                underlyView.layer.addSublayer(shapeLayer)
+                // 绘制表格垂直方向的分割线
+                let verticalLinePath = UIBezierPath()
+                let point = frameOriginX[item] - 5 - lineWidth / 2 + boardWidth - 1
+                verticalLinePath.move(to: CGPoint(x: point, y: underlyView.layer.borderWidth))
+                verticalLinePath.addLine(to: CGPoint(x: point, y: Double(arrayData.count * 30) + underlyView.layer.borderWidth))
+                let verticalLine = CAShapeLayer()
+                verticalLine.path = verticalLinePath.cgPath
+                verticalLine.strokeColor = settingEssayTitle2DisplayMode == 2 ? UIColor.systemBackground.cgColor: UIColor.black.cgColor
+                verticalLine.lineWidth = lineWidth
+                underlyView.layer.addSublayer(verticalLine)
             }
             if item < cellString.count {
                 let trimmedString = String(cellString[item]).trimmingCharacters(in: .whitespacesAndNewlines)
-                let label = UILabel(frame: CGRect(x: Int(frameOriginX[item]), y: 0, width: Int(lieMaxWidthArray[item]), height: 30))
+                let label = UILabel(frame: CGRect(x: Int(frameOriginX[item]), y: 0, width: Int( columnMaxWidthArray[item]), height: 30))
                 label.backgroundColor = UIColor.systemGroupedBackground
+                if settingEssayTitle2DisplayMode == 1 {
+                    label.backgroundColor = UIColor.systemBackground
+                } else if settingEssayTitle2DisplayMode == 2 {
+                    label.backgroundColor = UIColor(red: 205/255.0, green: 204/255.0, blue: 243/255.0, alpha: 1.000)
+                }
                 switch mode {
                 case "<>": label.textAlignment = .center
                 case "><": label.textAlignment = .center
@@ -612,23 +622,20 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 }
                 label.text = stringHandling(trimmedString)
                 label.font = UIFont.systemFont(ofSize: basicFont - 1)
-                label.frame.origin.y += 0.7
-                label.frame.size.height -= 1
+                label.frame.origin.y += (i == 0 ? boardWidth / 2: lineWidth / 2)
+                label.frame.size.height -= (i == 0 ? lineWidth / 2 + boardWidth / 2: lineWidth)
                 cellView.addSubview(label)
                 labelArray.append(label)
-                if settingEssayTitle2DisplayMode == 2 {
-                    label.backgroundColor = UIColor(red: 205/255.0, green: 204/255.0, blue: 243/255.0, alpha: 1.000)
-                    label.frame.origin.y += 1.7
-                    label.frame.size.height -= 3
-                }
+
             } else {
-                labelArray[cellString.count - 1].frame.size.width += CGFloat(11 + Int(lieMaxWidthArray[item]))
+                labelArray[cellString.count - 1].frame.size.width += CGFloat(10 + Int( columnMaxWidthArray[item]))
             }
         }
         
         underlyView.addSubview(cellView)
     }
-    underlyView.frame.size = CGSize(width: screenWidth - spacedForScreen * 2, height: cellViewArray[arrayData.count - 1].frame.maxY)
+    underlyView.frame.size = CGSize(width: screenWidth - spacedForScreen * 2, height: cellViewArray[arrayData.count - 1].frame.maxY + underlyView.layer.borderWidth - lineWidth / 2)
+    underlyView.contentSize.width = frameWidth - lineWidth
     view.addSubview(underlyView)
     return underlyView.frame.maxY
 }
