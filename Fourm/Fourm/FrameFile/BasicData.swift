@@ -27,6 +27,14 @@ let safeAreaInsets = window?.safeAreaInsets ?? UIEdgeInsets.zero
 let screenWidth = UIScreen.main.bounds.width // 与设备屏幕宽度一样宽
 let screenHeight = UIScreen.main.bounds.height // 与设备屏幕高度一样高
 
+func a(viewController: UIViewController) {
+    if viewController.traitCollection.userInterfaceStyle == .dark {
+        // User Interface is Dark
+    } else {
+        // User Interface is Light
+    }
+}
+
 enum Direction: String {
 
   case screen  // 等价于 case east = "east"，

@@ -16,6 +16,16 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
     underlyScrollView.alwaysBounceVertical = true
     VC.view.addSubview(underlyScrollView)
     
+    let horizontalLinePath = UIBezierPath()
+    let pointY = CGFloat(0)
+    horizontalLinePath.move(to: CGPoint(x: spacedForScreen, y: pointY))
+    horizontalLinePath.addLine(to: CGPoint(x: screenWidth - spacedForScreen, y: pointY))
+    let horizontalLine = CAShapeLayer()
+    horizontalLine.path = horizontalLinePath.cgPath
+    horizontalLine.strokeColor = settingEssayTitle2DisplayMode == 2 ? UIColor.systemIndigo.cgColor: UIColor.black.cgColor
+    horizontalLine.lineWidth = settingEssayTitle2DisplayMode == 2 ? 3: 1
+    underlyScrollView.layer.addSublayer(horizontalLine)
+    
     var originY = CGFloat(0)
     var control = false
     var text = false
@@ -273,7 +283,7 @@ func title3ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CG
         path.addLine(to: CGPoint(x: spacedForScreen + 5, y: title3.frame.maxY - 3))
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
-        shapeLayer.strokeColor = UIColor.systemIndigo.withAlphaComponent(0.7).cgColor
+        shapeLayer.strokeColor = UIColor.systemIndigo.withAlphaComponent(0.4).cgColor
         shapeLayer.lineWidth = 5.0
         view.layer.addSublayer(shapeLayer)
     default:
@@ -328,7 +338,10 @@ func codeModuleBuild(_ stringArray: Array<String>, _ view: UIView, originY: CGFl
     var maxX = CGFloat(0)
     for i in 0 ..< codeArray.count {
         let code = UILabel()
-        code.frame.origin = CGPoint(x: 10, y: 10)
+        code.frame.origin = CGPoint(x: settingEssayTitle2DisplayMode == 1 ? 40: 35, y: 10)
+        if settingEssayTitle2DisplayMode == 2 {
+            code.frame.origin.x = 30
+        }
         var attString = NSMutableAttributedString(string: codeArray[i])
         switch language {
         case "Swift": attString = swiftCodeOptimize(attString: attString)
@@ -346,6 +359,32 @@ func codeModuleBuild(_ stringArray: Array<String>, _ view: UIView, originY: CGFl
         }
         codeContentArray.append(code)
         codeScroll.addSubview(code)
+        
+        let codeRow = UILabel()
+        codeRow.frame.origin = CGPoint(x: settingEssayTitle2DisplayMode == 2 ? 1: 0, y: 10)
+        if i != 0 {
+            codeRow.frame.origin.y = codeContentArray[i - 1].frame.maxY + 4
+        }
+        codeRow.text = settingEssayTitle2DisplayMode == 0 ? "\(i + 1).": "\(i + 1)"
+//        switch codeArray.count {
+//        case 1:
+//        }
+//        switch i {
+//        case 1: codeRow.text == "00\(i)"
+//        case 2: codeRow.text == "0\(i)"
+//        case 3: codeRow.text == "00\(i)"
+//        default:
+//            break
+//        }
+        codeRow.font = UIFont(name: "Menlo", size: basicFont - 1)
+        codeRow.textColor = settingEssayTitle2DisplayMode == 2 ? UIColor.black.withAlphaComponent(0.6): UIColor.black.withAlphaComponent(0.5)
+        codeRow.sizeToFit()
+        codeRow.frame.size.width = settingEssayTitle2DisplayMode == 1 ? 30: 30
+        if settingEssayTitle2DisplayMode == 2 {
+            codeRow.frame.size.width = 30
+        }
+        codeRow.textAlignment = .center
+        codeScroll.addSubview(codeRow)
     }
     
     codeScroll.frame.size.height = codeContentArray[codeArray.count - 1].frame.maxY + 10
@@ -356,8 +395,21 @@ func codeModuleBuild(_ stringArray: Array<String>, _ view: UIView, originY: CGFl
         codeScroll.backgroundColor = UIColor.systemGroupedBackground
         codeScroll.layer.borderWidth = 1
         codeScroll.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
+        let verticalLinePath = UIBezierPath()
+        let point = 30
+        verticalLinePath.move(to: CGPoint(x: point, y: 0))
+        verticalLinePath.addLine(to: CGPoint(x: CGFloat(point), y: codeScroll.frame.maxY))
+        let verticalLine = CAShapeLayer()
+        verticalLine.path = verticalLinePath.cgPath
+        verticalLine.lineWidth = 0.5
+        verticalLine.strokeColor = UIColor.black.withAlphaComponent(0.5).cgColor
+        codeScroll.layer.addSublayer(verticalLine)
     case 2:
         codeScroll.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
+        let codeRowView = UIView(frame: CGRect(x: 7, y: 6, width: 18, height: codeScroll.frame.height - 12))
+        codeRowView.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
+        codeRowView.layer.cornerRadius = 5
+        codeScroll.addSubview(codeRowView)
     default:
         break
     }
@@ -442,7 +494,7 @@ func textModuleBuild(_ string: String, _ view: UIView, originY: CGFloat, spaced:
 /// 创建图片显示模块
 ///
 /// 输入代码数组和底层视图后将自动创建一个显示三级标题的视图
-/// - Parameter stringArray: 代码块内容的数组
+/// - Parameter imageName: 代码块内容的数组
 /// - Parameter view: 底层视图
 /// - Parameter originY: 代码块的Y轴坐标
 /// - Returns: 返回一个新的Y轴坐标
@@ -469,8 +521,14 @@ func imageModuleBuild(_ imageName: String, _ view: UIView, originY: CGFloat) -> 
 /// - Returns: 返回一个新的Y轴坐标
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
 func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, mode: String) -> CGFloat {
-    var lineWidth = CGFloat(1) // 表格中的分割线宽度
+    var lineWidth = CGFloat(1.0) // 表格中的分割线宽度
     var boardWidth = CGFloat(1.5) // 表格的边框宽度
+    var rowHeight = CGFloat(30)
+    /* 一些问题：
+    1、设置lineWidth为0.5时label不知道为什么会有一条上边框，百思不得其解
+    2、设置lineWidth和boardWidth为10时不知道为什么需要向左偏移1才能对齐(适配2)
+    3、设置lineWidth为1.0和boardWidth设置为1.5时label不知道为什么尺寸会不对，在检查器中查看坐标都没问题，按理说不会有遮挡，应该是小数被优化掉了(适配3)
+    猜测可能和Label的尺寸坐标参数的小数点有关系，因为后面又遇到了一次，把所有的CGFloat改为Int值就没这问题了，懒得研究了 */
     var arrayData: Array<String> = []
     for i in 0 ..< array.count {
         if !array[i].isEmpty {
@@ -483,12 +541,13 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
     underlyView.bounces = false
     underlyView.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForControl + 4)
     if settingEssayTitle2DisplayMode == 1 {
-        lineWidth = CGFloat(0.5)
+        lineWidth = CGFloat(0.6)
         boardWidth = CGFloat(0.75)
         underlyView.backgroundColor = UIColor.systemBackground
     } else if settingEssayTitle2DisplayMode == 2 {
         lineWidth = CGFloat(3)
         boardWidth = CGFloat(0)
+        rowHeight = CGFloat(30)
         underlyView.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.3)
     }
     underlyView.layer.borderWidth = boardWidth
@@ -523,6 +582,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
             let cellString = cellString1.trimmingCharacters(in: .whitespacesAndNewlines)
             let labelFrame = UILabel()
             labelFrame.text = cellString
+            labelFrame.font = UIFont.systemFont(ofSize: basicFont - 1)
             labelFrame.sizeToFit()
             if columnMaxWidth < labelFrame.frame.size.width {
                 columnMaxWidth = labelFrame.frame.size.width
@@ -532,7 +592,6 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
             columnMaxWidth = 50
         }
         columnMaxWidthArray.append(columnMaxWidth)
-        
     }
     // 框架大小
     var frameWidth = CGFloat(0)
@@ -552,21 +611,20 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
     
     var cellViewArray: Array<UIView> = []
     for i in 0 ..< arrayData.count {
-        let cellView = UIView(frame: CGRect(x: underlyView.layer.borderWidth - lineWidth / 2, y: underlyView.layer.borderWidth + Double(30 * i) - lineWidth / 2, width: frameWidth - underlyView.layer.borderWidth * 2, height: 30))
+        let cellView = UIView(frame: CGRect(x: boardWidth - lineWidth / 2, y: boardWidth + rowHeight * CGFloat(i) - lineWidth / 2, width: frameWidth - boardWidth * 2, height: rowHeight))
+        if frameWidth == screenWidth - spacedForScreen * 2, settingEssayTitle2DisplayMode == 2 , i % 2 == 1 {
+            cellView.frame.size.width += lineWidth / 2
+        }
         // 绘制表格水平方向的分割线
         if i != 0 {
             let horizontalLinePath = UIBezierPath()
-            let pointY = Double(30 * i) + underlyView.layer.borderWidth - lineWidth / 2
-            horizontalLinePath.move(to: CGPoint(x: underlyView.layer.borderWidth, y: pointY))
-            horizontalLinePath.addLine(to: CGPoint(x: frameWidth - underlyView.layer.borderWidth, y: pointY))
+            let pointY = rowHeight * CGFloat(i) + boardWidth - lineWidth / 2
+            horizontalLinePath.move(to: CGPoint(x: boardWidth, y: pointY))
+            horizontalLinePath.addLine(to: CGPoint(x: frameWidth - boardWidth, y: pointY))
             let horizontalLine = CAShapeLayer()
             horizontalLine.path = horizontalLinePath.cgPath
-            horizontalLine.strokeColor = UIColor.black.cgColor
+            horizontalLine.strokeColor = settingEssayTitle2DisplayMode == 2 ? UIColor.systemBackground.cgColor: UIColor.black.cgColor
             horizontalLine.lineWidth = lineWidth
-            if settingEssayTitle2DisplayMode == 2 {
-                horizontalLine.strokeColor = UIColor.systemBackground.cgColor
-                horizontalLine.lineWidth = 3
-            }
             underlyView.layer.addSublayer(horizontalLine)
         }
         
@@ -578,24 +636,59 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
             if i == 0, item != 0 {
                 // 绘制表格垂直方向的分割线
                 let verticalLinePath = UIBezierPath()
-                let point = frameOriginX[item] - 5 - lineWidth / 2 + boardWidth - 1
-                verticalLinePath.move(to: CGPoint(x: point, y: underlyView.layer.borderWidth))
-                verticalLinePath.addLine(to: CGPoint(x: point, y: Double(arrayData.count * 30) + underlyView.layer.borderWidth))
+                var point = frameOriginX[item] - 5 - lineWidth / 2 + boardWidth
+                if boardWidth == CGFloat(10), lineWidth == CGFloat(10) {
+                    // 适配2
+                    point -= 1
+                }
+                verticalLinePath.move(to: CGPoint(x: point, y: boardWidth))
+                verticalLinePath.addLine(to: CGPoint(x: point, y: CGFloat(arrayData.count) * rowHeight + boardWidth))
                 let verticalLine = CAShapeLayer()
                 verticalLine.path = verticalLinePath.cgPath
                 verticalLine.strokeColor = settingEssayTitle2DisplayMode == 2 ? UIColor.systemBackground.cgColor: UIColor.black.cgColor
                 verticalLine.lineWidth = lineWidth
                 underlyView.layer.addSublayer(verticalLine)
             }
+            for item in 0 ..< columnCountMax {
+                if i % 2 == 1, item != 0 {
+                    let verticalLinePath2 = UIBezierPath()
+                    var point2 = frameOriginX[item] - 5 + boardWidth
+                    if boardWidth == CGFloat(10), lineWidth == CGFloat(10) {
+                        // 适配2
+                        point2 -= 1
+                    }
+                    verticalLinePath2.move(to: CGPoint(x: point2, y: 0))
+                    verticalLinePath2.addLine(to: CGPoint(x: point2, y: rowHeight))
+                    let verticalLine2 = CAShapeLayer()
+                    verticalLine2.path = verticalLinePath2.cgPath
+                    verticalLine2.strokeColor = UIColor.systemBackground.cgColor
+                    verticalLine2.lineWidth = lineWidth
+                    cellView.layer.addSublayer(verticalLine2)
+                }
+            }
             if item < cellString.count {
                 let trimmedString = String(cellString[item]).trimmingCharacters(in: .whitespacesAndNewlines)
-                let label = UILabel(frame: CGRect(x: Int(frameOriginX[item]), y: 0, width: Int( columnMaxWidthArray[item]), height: 30))
+                let label = UILabel(frame: CGRect(x: Int(frameOriginX[item]), y: 0, width:  Int(columnMaxWidthArray[item]), height: Int(rowHeight)))
                 label.backgroundColor = UIColor.systemGroupedBackground
                 if settingEssayTitle2DisplayMode == 1 {
                     label.backgroundColor = UIColor.systemBackground
                 } else if settingEssayTitle2DisplayMode == 2 {
-                    label.backgroundColor = UIColor(red: 205/255.0, green: 204/255.0, blue: 243/255.0, alpha: 1.000)
+                    if i % 2 == 1 {
+                        cellView.backgroundColor = UIColor(red: 222/255.0, green: 221/255.0, blue: 247/255.0, alpha: 1.000)
+                        label.backgroundColor = UIColor.clear
+                        let horizontalLinePath2 = UIBezierPath()
+                        horizontalLinePath2.move(to: CGPoint(x: 0, y: 0))
+                        horizontalLinePath2.addLine(to: CGPoint(x: cellView.frame.width, y: 0))
+                        let horizontalLine2 = CAShapeLayer()
+                        horizontalLine2.path = horizontalLinePath2.cgPath
+                        horizontalLine2.strokeColor = UIColor.systemBackground.cgColor
+                        horizontalLine2.lineWidth = 2.5
+                        cellView.layer.addSublayer(horizontalLine2)
+                    } else {
+                        label.backgroundColor = UIColor(red: 205/255.0, green: 204/255.0, blue: 243/255.0, alpha: 1.000)
+                    }
                 }
+                
                 switch mode {
                 case "<>": label.textAlignment = .center
                 case "><": label.textAlignment = .center
@@ -605,28 +698,35 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 default:
                     label.textAlignment = .left
                 }
+                // 单独的单元格模式
+                label.text = stringHandling(trimmedString)
                 if trimmedString.hasPrefix("> ") {
                     label.textAlignment = .right
                 } else if trimmedString.hasPrefix("< ") {
                     label.textAlignment = .left
-                } else if trimmedString.hasPrefix("left ") {
+                } else if trimmedString.hasPrefix("#left ") {
                     label.textAlignment = .left
-                } else if trimmedString.hasPrefix("right ") {
+                } else if trimmedString.hasPrefix("#right ") {
                     label.textAlignment = .right
-                } else if trimmedString.hasPrefix("<> "){
+                } else if trimmedString.hasPrefix("<> ") {
                     label.textAlignment = .center
-                } else if trimmedString.hasPrefix(">< "){
+                } else if trimmedString.hasPrefix(">< ") {
                     label.textAlignment = .center
-                } else if trimmedString.hasPrefix("center "){
+                } else if trimmedString.hasPrefix("#center ") {
                     label.textAlignment = .center
+                } else {
+                    label.text = trimmedString
                 }
-                label.text = stringHandling(trimmedString)
                 label.font = UIFont.systemFont(ofSize: basicFont - 1)
                 label.frame.origin.y += (i == 0 ? boardWidth / 2: lineWidth / 2)
                 label.frame.size.height -= (i == 0 ? lineWidth / 2 + boardWidth / 2: lineWidth)
+                if lineWidth == CGFloat(1.0), boardWidth == CGFloat(1.5) {
+                    // 适配3
+                    label.frame.origin.y += (i == 0 ? 0: 0.002)
+                    label.frame.size.height -= (i == 0 ? 0: 0.002)
+                }
                 cellView.addSubview(label)
                 labelArray.append(label)
-
             } else {
                 labelArray[cellString.count - 1].frame.size.width += CGFloat(10 + Int( columnMaxWidthArray[item]))
             }
@@ -634,7 +734,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
         
         underlyView.addSubview(cellView)
     }
-    underlyView.frame.size = CGSize(width: screenWidth - spacedForScreen * 2, height: cellViewArray[arrayData.count - 1].frame.maxY + underlyView.layer.borderWidth - lineWidth / 2)
+    underlyView.frame.size = CGSize(width: screenWidth - spacedForScreen * 2, height: cellViewArray[arrayData.count - 1].frame.maxY + boardWidth - lineWidth / 2)
     underlyView.contentSize.width = frameWidth - lineWidth
     view.addSubview(underlyView)
     return underlyView.frame.maxY

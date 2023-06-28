@@ -1,25 +1,149 @@
-2020-06-01 07:59
-# mmm
-函数是一段代码块，可以在使用重复功能时不用重新写一份代码，直接引用函数即可
-## 定义函数的格式
 
-### 一、没有参数和返回值
-#p
-无参数和返回值的函数有三种写法（其实主要是没有返回值的写法有三种）
-Void其实是一个空的元组，可以写成 ( )
-@author LianJun
-##p
-# nihao
+# 功能返回部署
+增加了@backDeployed(before: ...)属性，允许将修饰的功能扩展到没有将其作为应用程序二进制接口（ABI）的旧操作系统中，即在旧版本上使用新 API。
 #code Swift
-func function0() -> Void {
-    print("这是没有参数和返回值的函数1")
-}
-function0()
+@backDeployed(before: iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4)
 ##code
+@backDeployed要求当前所在类型与修饰内容的访问权限不低于public。
+@backDeployed适用于计算属性与方法。
+#code Swift
+public struct Person {
+    @available(iOS 11, *)
+    @backDeployed(before: iOS 16.4)
+    public var age: Int {
+        return Int.random(in: 0 ... 100)
+    }
 
+    @available(iOS 13.0, *)
+    @backDeployed(before: iOS 16.4)
+    public func info() {}
+}
+##code
+# [weak self]改变
+Swift 5.3 之后 self 可以在闭包中有条件省略，Swift 5.8 之后类中的[weak self]也可以省略 self。
+#code
+import UIKit
+
+class ViewController: UIViewController {
+    var count = 0
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        let action = UIAction(title: "计数") { [weak self] _ in
+            guard let self = self else { return }
+            // Swift 5.8之前
+            // self.count += 1
+            // print(self.count)
+
+            // Swift 5.8之后
+            count += 1
+            print(count)
+        }
+
+        let navItem = UIBarButtonItem(systemItem: .done, primaryAction: action)
+        navigationItem.leftBarButtonItem = navItem
+    }
+}
+##code
+# 取消result builders中对变量的使用限制
+Swift 5.4 中引入的 result builders 对局部变量有一些限制：不能使用lazy、不能被计算、不能有观察器、不能附加属性包装等。Swift 5.8 之后解除了所有使用限制。
+#code
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            lazy var name = "zhangsan"
+
+            var age: Int {
+                return 10
+            }
+
+            var sex: String = "male" {
+                willSet {
+                    print(newValue)
+                }
+
+                didSet {
+                    print(oldValue)
+                }
+            }
+
+            Text("Hello, \(name), \(age), \(sex)")
+
+            Button("change") {
+                sex = "female"
+            }
+        }
+        .padding()
+    }
+}
+##code
+## 支持集合类型向下类型转换
+Swift 5.8 之前集合类型不支持直接向下类型转换，需要使用if let as?。Swift 5.8 之后语法上支持直接向下类型转换，但也仅仅是语法不再报错，并不能保证转换成功。
+#code
+class Vehicle {
+    var name: String
+
+    init(name: String) {
+        self.name = name
+    }
+}
+
+class Bicycle: Vehicle {
+    func run() {
+        print("Bicycle \(name) Run run")
+    }
+}
+
+func test(vehicles: [Vehicle]) {
+    // Swift 5.8之前
+    if let bicycles = vehicles as? [Bicycle] {
+        for bicycle in bicycles {
+            bicycle.run()
+        }
+    } else {
+        print("error")
+    }
+
+    // Swift 5.8之后
+    switch vehicles {
+    case let bicycles as [Bicycle]:
+        for bicycle in bicycles {
+            bicycle.run()
+        }
+    default:
+        print("default")
+    }
+}
+##code
+# #file与#filepath
+#file的输出不再包含文件的完整路径，只包含模块与文件名，如果需要显示完整路径使用新的编译符号#filePath。
+#code
+func test() {
+    print(#file)
+    print(#filePath)
+}
+
+test()
+##code
+# 附录
+## Swift历史
 #tb
-Xcode版本   | Swift版本||
-Xcode 10.2 - Xcode 10.3.3   | Swift 5.0|||||
-Xcode 11 - Xcode 11.3.1   | Swift 5.1|
-Xcode 11.4 - |  Swift 5.2|
+<> 时间     |<> 事件
+2010年7月   | 开始 Swift 编程语言的设计工作
+2014年6月   | Swift 1.0 提出
+2014年9月| Swift 1.0 发布
+2014年10月  | Swift 1.1 发布
+2015年4月   | Swift 1.2 发布
+2015年9月   | Swift 2.0 发布
+2015年12月  | Apple 宣布 Swift 开放源代码
+2016年9月   | Swift 3.0 发布
+2017年9月   | Swift 4.0 发布
+2018年3月   | Swift 4.1 发布
+2018年9月   | Swift 4.2 发布
+2019年3月   | Swift 5 发布
+2019年9月   | Swift 5.1 发布
+2020年3月   | Swift 5.2 发布
 ##tb

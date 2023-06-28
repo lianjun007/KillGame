@@ -39,7 +39,7 @@ class SearchViewController: UIViewController {
         scroll.addSubview(moduleTitle)
         
         let settingTitle = UILabel(frame: CGRect(x: spacedForScreen, y: moduleTitle.frame.maxY + spacedForModule, width: 0, height: 0))
-        settingTitle.text = "更多设置"
+        settingTitle.text = "偏好设置"
         settingTitle.font = titleFont2
         settingTitle.sizeToFit()
         scroll.addSubview(settingTitle)

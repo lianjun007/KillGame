@@ -62,9 +62,9 @@
 		DA13A5002A2E5DE4002F44AB /* DataInvoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */; };
 		DA15E4AA2A4221E2002CF9C0 /* SettingImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA15E4A92A4221E2002CF9C0 /* SettingImage.xcassets */; };
 		DA182AB92A357E3D009F73EE /* ContentFile.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA182AB82A357E3D009F73EE /* ContentFile.plist */; };
-		DA4D571B2A30CE1400ABE114 /* EssayControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4D571A2A30CE1400ABE114 /* EssayControl.swift */; };
 		DA54BBC52A45AB1C0009BF68 /* File in Resources */ = {isa = PBXBuildFile; fileRef = DA54BBC42A45AB1C0009BF68 /* File */; };
 		DA54BBCA2A46109D0009BF68 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA54BBC92A46109D0009BF68 /* Media.xcassets */; };
+		DA5C73BB2A4B7CB500EC672A /* EssayControl copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C73BA2A4B7CB500EC672A /* EssayControl copy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,9 +114,9 @@
 		DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataInvoke.swift; path = ../../../Fourm/Fourm/FrameFile/DataInvoke.swift; sourceTree = "<group>"; };
 		DA15E4A92A4221E2002CF9C0 /* SettingImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SettingImage.xcassets; sourceTree = "<group>"; };
 		DA182AB82A357E3D009F73EE /* ContentFile.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContentFile.plist; sourceTree = "<group>"; };
-		DA4D571A2A30CE1400ABE114 /* EssayControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayControl.swift; sourceTree = "<group>"; };
 		DA54BBC42A45AB1C0009BF68 /* File */ = {isa = PBXFileReference; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 		DA54BBC92A46109D0009BF68 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		DA5C73BA2A4B7CB500EC672A /* EssayControl copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EssayControl copy.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,7 +240,7 @@
 				DA13A4F52A2E5DE4002F44AB /* BasicData.swift */,
 				DA13A4F62A2E5DE4002F44AB /* ControlBuild.swift */,
 				DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */,
-				DA4D571A2A30CE1400ABE114 /* EssayControl.swift */,
+				DA5C73BA2A4B7CB500EC672A /* EssayControl copy.swift */,
 			);
 			path = FrameFile;
 			sourceTree = "<group>";
@@ -409,8 +409,8 @@
 				DA13A4D02A2E5D52002F44AB /* LearningViewController.swift in Sources */,
 				DA13A4DB2A2E5D86002F44AB /* ViewController.swift in Sources */,
 				DA13A4D32A2E5D52002F44AB /* CollectionViewController.swift in Sources */,
-				DA4D571B2A30CE1400ABE114 /* EssayControl.swift in Sources */,
 				DA13A4CD2A2E5D52002F44AB /* EssayViewController.swift in Sources */,
+				DA5C73BB2A4B7CB500EC672A /* EssayControl copy.swift in Sources */,
 				DA13A4FB2A2E5DE4002F44AB /* ControlBuild.swift in Sources */,
 				DA13A4F82A2E5DE4002F44AB /* BasicData.swift in Sources */,
 				DA13A4C72A2E5D52002F44AB /* DiscussViewController.swift in Sources */,

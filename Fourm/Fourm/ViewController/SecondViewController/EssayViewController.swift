@@ -13,7 +13,8 @@ class EssayViewController: UIViewController {
         super.viewDidLoad()
         
         settingEssayTitle2DisplayMode = defaults.integer(forKey: "settingEssayTitle2DisplayMode")
-        
+        print(UserDefaults.standard.url(forKey: "settingEssayTitle2DisplayMode"))
+
         let ID = tag ?? "0"
         
         view.backgroundColor = .systemBackground
