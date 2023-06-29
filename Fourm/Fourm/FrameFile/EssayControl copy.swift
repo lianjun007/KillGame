@@ -16,16 +16,6 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
     underlyScrollView.alwaysBounceVertical = true
     VC.view.addSubview(underlyScrollView)
     
-    let horizontalLinePath = UIBezierPath()
-    let pointY = CGFloat(0)
-    horizontalLinePath.move(to: CGPoint(x: spacedForScreen, y: pointY))
-    horizontalLinePath.addLine(to: CGPoint(x: screenWidth - spacedForScreen, y: pointY))
-    let horizontalLine = CAShapeLayer()
-    horizontalLine.path = horizontalLinePath.cgPath
-    horizontalLine.strokeColor = settingEssayTitle2DisplayMode == 2 ? UIColor.systemIndigo.cgColor: UIColor.black.cgColor
-    horizontalLine.lineWidth = settingEssayTitle2DisplayMode == 2 ? 3: 1
-    underlyScrollView.layer.addSublayer(horizontalLine)
-    
     var originY = CGFloat(0)
     var control = false
     var text = false
@@ -46,6 +36,15 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
         } else if item.hasPrefix("@author "), !author {
             author = true
             originY = authorModuleBuild(stringHandling(item), underlyScrollView)
+            let horizontalLinePath = UIBezierPath()
+            let pointY = spacedForModule + spacedForControl / 2
+            horizontalLinePath.move(to: CGPoint(x: 0, y: pointY))
+            horizontalLinePath.addLine(to: CGPoint(x: screenWidth, y: pointY))
+            let horizontalLine = CAShapeLayer()
+            horizontalLine.path = horizontalLinePath.cgPath
+            horizontalLine.strokeColor = settingEssayTitle2DisplayMode == 2 ? UIColor.systemIndigo.withAlphaComponent(0.2).cgColor: UIColor.black.withAlphaComponent(0.2).cgColor
+            horizontalLine.lineWidth = 1
+            underlyScrollView.layer.addSublayer(horizontalLine)
         }
     }
     if !title {
@@ -53,11 +52,21 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
     }
     if !author {
         originY = authorModuleBuild("未知", underlyScrollView)
+        let horizontalLinePath = UIBezierPath()
+        let pointY = spacedForModule + spacedForControl / 2
+        horizontalLinePath.move(to: CGPoint(x: 0, y: pointY))
+        horizontalLinePath.addLine(to: CGPoint(x: screenWidth, y: pointY))
+        let horizontalLine = CAShapeLayer()
+        horizontalLine.path = horizontalLinePath.cgPath
+        horizontalLine.strokeColor = settingEssayTitle2DisplayMode == 2 ? UIColor.systemIndigo.withAlphaComponent(0.3).cgColor: UIColor.black.withAlphaComponent(0.5).cgColor
+        horizontalLine.lineWidth = 1
+        underlyScrollView.layer.addSublayer(horizontalLine)
     }
+    originY += spacedForControl * 3
     for item in essayDataArray {
         text = false
         if item.hasPrefix("# ") {
-            originY = title2ModuleBuild(stringHandling(item), underlyScrollView, originY: control ? originY: 0)
+            originY = title2ModuleBuild(stringHandling(item), underlyScrollView, originY: control ? originY: spacedForControl * 2)
             control = true
         } else if item.hasPrefix("## ") {
             control = true
@@ -98,8 +107,11 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             table = false
             originY = tableModuleBuild(Array(tableArray.dropFirst()), underlyScrollView, originY: originY, mode: tableType)
         } else {
-            control = true
-            text = true
+            // 还有一个屏蔽前几行空行的字符没做
+            if !item.isEmpty, !item.hasPrefix("@title"), !item.hasPrefix("@author") {
+                control = true
+                text = true
+            }
         }
         
         if code {
@@ -125,18 +137,21 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
 /// - Note: 返回的内容字符串将被去掉识别码和识别码后的所有空格，但是从第一个有效字符开始后的空格不受影响。
 func stringHandling(_ string: String) -> String {
     var index0 = 0
-    var index1 = 0
-    var bool0 = false
-    var bool1 = true
-    for i in string {
-        index1 += 1
-        if i == " ", bool1 {
-            bool0 = true
-            bool1 = false
-        }
-        if i != " " || index1 == string.count, bool0 {
-            bool0 = false
-            index0 = index1 - 1
+    if string.hasPrefix("> ") || string.hasPrefix("< ") || string.hasPrefix("<> ") || string.hasPrefix(">< ") || string.hasPrefix("#left ") || string.hasPrefix("right ") || string.hasPrefix("#center ") || string.hasPrefix("# ") || string.hasPrefix("## ") || string.hasPrefix("# ") || string.hasPrefix("### ") || string.hasPrefix("#img ") || string.hasPrefix("@title ") || string.hasPrefix("@author ") || string.hasPrefix("#tb ") || string.hasPrefix("##tb ") || string.hasPrefix("#code ") || string.hasPrefix("##code ") || string.hasPrefix("#p ") || string.hasPrefix("##p ") {
+        
+        var index1 = 0
+        var bool0 = false
+        var bool1 = true
+        for i in string {
+            index1 += 1
+            if i == " ", bool1 {
+                bool0 = true
+                bool1 = false
+            }
+            if i != " " || index1 == string.count, bool0 {
+                bool0 = false
+                index0 = index1 - 1
+            }
         }
     }
     let newString = string.dropFirst(index0)
@@ -210,8 +225,6 @@ func authorModuleBuild(_ string: String, _ view: UIView) -> CGFloat {
 /// - Returns: 返回一个新的Y轴坐标
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
 func title2ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CGFloat {
-    print(string.count)
-    
     var newOriginY = originY
     let title2 = UILabel()
     title2.frame.size.width = screenWidth - spacedForScreen * 2
@@ -477,9 +490,6 @@ func swiftCodeOptimize(attString: NSMutableAttributedString) -> NSMutableAttribu
 /// - Returns: 返回一个新的Y轴坐标
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
 func textModuleBuild(_ string: String, _ view: UIView, originY: CGFloat, spaced: Bool) -> CGFloat {
-    if string.isEmpty {
-        return originY
-    }
     let text = UILabel()
     text.frame.size.width = screenWidth - spacedForScreen * 2
     text.text = string
@@ -541,9 +551,8 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
     underlyView.bounces = false
     underlyView.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForControl + 4)
     if settingEssayTitle2DisplayMode == 1 {
-        lineWidth = CGFloat(0.6)
-        boardWidth = CGFloat(0.75)
         underlyView.backgroundColor = UIColor.systemBackground
+        underlyView.layer.borderColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
     } else if settingEssayTitle2DisplayMode == 2 {
         lineWidth = CGFloat(3)
         boardWidth = CGFloat(0)
@@ -581,6 +590,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
             let cellString1 = stringHandling(columnStringArrayArray[i][item])
             let cellString = cellString1.trimmingCharacters(in: .whitespacesAndNewlines)
             let labelFrame = UILabel()
+            print(i, item, columnStringArrayArray[i][item].count, cellString.count)
             labelFrame.text = cellString
             labelFrame.font = UIFont.systemFont(ofSize: basicFont - 1)
             labelFrame.sizeToFit()
@@ -623,7 +633,13 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
             horizontalLinePath.addLine(to: CGPoint(x: frameWidth - boardWidth, y: pointY))
             let horizontalLine = CAShapeLayer()
             horizontalLine.path = horizontalLinePath.cgPath
-            horizontalLine.strokeColor = settingEssayTitle2DisplayMode == 2 ? UIColor.systemBackground.cgColor: UIColor.black.cgColor
+            switch settingEssayTitle2DisplayMode {
+            case 0: horizontalLine.strokeColor = UIColor.black.cgColor
+            case 1: horizontalLine.strokeColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
+            case 2: horizontalLine.strokeColor = UIColor.systemBackground.cgColor
+            default:
+                break
+            }
             horizontalLine.lineWidth = lineWidth
             underlyView.layer.addSublayer(horizontalLine)
         }
@@ -645,12 +661,18 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 verticalLinePath.addLine(to: CGPoint(x: point, y: CGFloat(arrayData.count) * rowHeight + boardWidth))
                 let verticalLine = CAShapeLayer()
                 verticalLine.path = verticalLinePath.cgPath
-                verticalLine.strokeColor = settingEssayTitle2DisplayMode == 2 ? UIColor.systemBackground.cgColor: UIColor.black.cgColor
+                switch settingEssayTitle2DisplayMode {
+                case 0: verticalLine.strokeColor = UIColor.black.cgColor
+                case 1: verticalLine.strokeColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
+                case 2: verticalLine.strokeColor = UIColor.systemBackground.cgColor
+                default:
+                    break
+                }
                 verticalLine.lineWidth = lineWidth
                 underlyView.layer.addSublayer(verticalLine)
             }
             for item in 0 ..< columnCountMax {
-                if i % 2 == 1, item != 0 {
+                if i % 2 == 1, item != 0, settingEssayTitle2DisplayMode == 2 {
                     let verticalLinePath2 = UIBezierPath()
                     var point2 = frameOriginX[item] - 5 + boardWidth
                     if boardWidth == CGFloat(10), lineWidth == CGFloat(10) {
@@ -670,12 +692,14 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 let trimmedString = String(cellString[item]).trimmingCharacters(in: .whitespacesAndNewlines)
                 let label = UILabel(frame: CGRect(x: Int(frameOriginX[item]), y: 0, width:  Int(columnMaxWidthArray[item]), height: Int(rowHeight)))
                 label.backgroundColor = UIColor.systemGroupedBackground
+                label.lineBreakMode = .byClipping
+
                 if settingEssayTitle2DisplayMode == 1 {
                     label.backgroundColor = UIColor.systemBackground
                 } else if settingEssayTitle2DisplayMode == 2 {
                     if i % 2 == 1 {
                         cellView.backgroundColor = UIColor(red: 222/255.0, green: 221/255.0, blue: 247/255.0, alpha: 1.000)
-                        label.backgroundColor = UIColor.clear
+                        label.backgroundColor = UIColor(red: 222/255.0, green: 221/255.0, blue: 247/255.0, alpha: 1.000)
                         let horizontalLinePath2 = UIBezierPath()
                         horizontalLinePath2.move(to: CGPoint(x: 0, y: 0))
                         horizontalLinePath2.addLine(to: CGPoint(x: cellView.frame.width, y: 0))
@@ -720,6 +744,11 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 label.font = UIFont.systemFont(ofSize: basicFont - 1)
                 label.frame.origin.y += (i == 0 ? boardWidth / 2: lineWidth / 2)
                 label.frame.size.height -= (i == 0 ? lineWidth / 2 + boardWidth / 2: lineWidth)
+//                if settingEssayTitle2DisplayMode == 1 {
+//                    let canshu = 0.1165
+//                    label.frame.origin.y += canshu
+//                    label.frame.size.height -= canshu * 2
+//                }
                 if lineWidth == CGFloat(1.0), boardWidth == CGFloat(1.5) {
                     // 适配3
                     label.frame.origin.y += (i == 0 ? 0: 0.002)

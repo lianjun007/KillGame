@@ -1,4 +1,8 @@
-
+@title Swift 5.8 新特性
+@author YungFan
+##buidsagof diuqw
+2023-03-27 16:00
+Swift 5.8 内置于 Xcode 14.3，增加了如下的几个重要的新特性。
 # 功能返回部署
 增加了@backDeployed(before: ...)属性，允许将修饰的功能扩展到没有将其作为应用程序二进制接口（ABI）的旧操作系统中，即在旧版本上使用新 API。
 #code Swift
@@ -80,7 +84,7 @@ struct ContentView: View {
     }
 }
 ##code
-## 支持集合类型向下类型转换
+# 支持集合类型向下类型转换
 Swift 5.8 之前集合类型不支持直接向下类型转换，需要使用if let as?。Swift 5.8 之后语法上支持直接向下类型转换，但也仅仅是语法不再报错，并不能保证转换成功。
 #code
 class Vehicle {
@@ -132,18 +136,13 @@ test()
 ## Swift历史
 #tb
 <> 时间     |<> 事件
-2010年7月   | 开始 Swift 编程语言的设计工作
-2014年6月   | Swift 1.0 提出
-2014年9月| Swift 1.0 发布
-2014年10月  | Swift 1.1 发布
-2015年4月   | Swift 1.2 发布
-2015年9月   | Swift 2.0 发布
-2015年12月  | Apple 宣布 Swift 开放源代码
-2016年9月   | Swift 3.0 发布
-2017年9月   | Swift 4.0 发布
-2018年3月   | Swift 4.1 发布
-2018年9月   | Swift 4.2 发布
-2019年3月   | Swift 5 发布
-2019年9月   | Swift 5.1 发布
-2020年3月   | Swift 5.2 发布
+refg|||||
+dgsiiufdhgui;||
+regfio|iurohgeoffgigdlsgfieug
+||uroehgo
+||||
+|
+|
+|
+|
 ##tb
