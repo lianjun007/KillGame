@@ -60,6 +60,8 @@ let largeControl2Size2 = CGSize(width: screenWidth - spacedForScreen * 2, height
 
 // 字体大小
 let basicFont = CGFloat(17) // 标准正文字体大小，还有作者名也使用
+let basicFont2 = UIFont.systemFont(ofSize: CGFloat(16)) // 小号正文字体大小
+let codeFont = UIFont(name: "Menlo", size: 16)
 let titleFont = CGFloat(34) // 一级标题字体大小，largeTitle那种
 let titleFont2 = UIFont.systemFont(ofSize: CGFloat(28), weight: .bold) // 二级标题字体大小，例如每个模块的标题
 let titleFont3 = CGFloat(22) // 三级标题字体大小，例如展示文章的一些控件的标题

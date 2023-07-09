@@ -16,7 +16,7 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
     underlyScrollView.alwaysBounceVertical = true
     VC.view.addSubview(underlyScrollView)
     
-    var originY = CGFloat(0)
+    var priginY = CGFloat(0)
     var control = false
     var text = false
     var paragraph = false
@@ -35,7 +35,7 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             VC.navigationItem.title = stringHandling(item)
         } else if item.hasPrefix("@author "), !author {
             author = true
-            originY = authorModuleBuild(stringHandling(item), underlyScrollView)
+            priginY = authorModuleBuild(stringHandling(item), underlyScrollView)
             let horizontalLinePath = UIBezierPath()
             let pointY = spacedForModule + spacedForControl / 2
             horizontalLinePath.move(to: CGPoint(x: 0, y: pointY))
@@ -51,7 +51,7 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
         VC.navigationItem.title = "未设置标题"
     }
     if !author {
-        originY = authorModuleBuild("未知", underlyScrollView)
+        priginY = authorModuleBuild("未知", underlyScrollView)
         let horizontalLinePath = UIBezierPath()
         let pointY = spacedForModule + spacedForControl / 2
         horizontalLinePath.move(to: CGPoint(x: 0, y: pointY))
@@ -62,21 +62,21 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
         horizontalLine.lineWidth = 1
         underlyScrollView.layer.addSublayer(horizontalLine)
     }
-    originY += spacedForControl * 3
+    priginY += spacedForControl * 3
     for item in essayDataArray {
         text = false
         if item.hasPrefix("# ") {
-            originY = title2ModuleBuild(stringHandling(item), underlyScrollView, originY: control ? originY: spacedForControl * 2)
+            priginY = title2ModuleBuild(stringHandling(item), underlyScrollView, originY: control ? priginY: spacedForControl * 2)
             control = true
         } else if item.hasPrefix("## ") {
             control = true
-            originY = title3ModuleBuild(stringHandling(item), underlyScrollView, originY: originY)
+            priginY = title3ModuleBuild(stringHandling(item), underlyScrollView, originY: priginY)
         } else if item.hasPrefix("### ") {
             control = true
-            originY = title4ModuleBuild(stringHandling(item), underlyScrollView, originY: originY)
+            priginY = title4ModuleBuild(stringHandling(item), underlyScrollView, originY: priginY)
         } else if item.hasPrefix("#img ") {
             control = true
-            originY = imageModuleBuild(stringHandling(item), underlyScrollView, originY: originY)
+            priginY = imageModuleBuild(stringHandling(item), underlyScrollView, originY: priginY)
         } else if item.hasPrefix("#p") {
             control = true
             textArray = []
@@ -85,9 +85,9 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             paragraph = false
             for i in 0 ..< textArray.count {
                 if i == 1 {
-                    originY = textModuleBuild(textArray[i], underlyScrollView, originY: originY, spaced: true)
+                    priginY = textModuleBuild(textArray[i], underlyScrollView, originY: priginY, spaced: true)
                 } else if i != 0 {
-                    originY = textModuleBuild(textArray[i], underlyScrollView, originY: originY, spaced: false)
+                    priginY = textModuleBuild(textArray[i], underlyScrollView, originY: priginY, spaced: false)
                 }
             }
         } else if item.hasPrefix("#code") {
@@ -97,7 +97,10 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             codeType = stringHandling(item)
         } else if item.hasPrefix("##code") {
             code = false
-            originY = codeModuleBuild(Array(codeArray.dropFirst()), underlyScrollView, originY: originY, language: codeType)
+            priginY = codeModuleBuild(Array(codeArray.dropFirst()), underlyScrollView, originY: priginY, language: codeType, buttonAction: { longPressRecognizer in
+                buttonTapped(longPressRecognizer)
+            })
+
         } else if item.hasPrefix("#tb") {
             control = true
             tableArray = []
@@ -105,7 +108,7 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             tableType = stringHandling(item)
         } else if item.hasPrefix("##tb") {
             table = false
-            originY = tableModuleBuild(Array(tableArray.dropFirst()), underlyScrollView, originY: originY, mode: tableType)
+            priginY = tableModuleBuild(Array(tableArray.dropFirst()), underlyScrollView, originY: priginY, mode: tableType)
         } else {
             // 还有一个屏蔽前几行空行的字符没做
             if !item.isEmpty, !item.hasPrefix("@title"), !item.hasPrefix("@author") {
@@ -121,12 +124,12 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
         } else if paragraph {
             textArray.append(item)
         } else if text {
-            originY = textModuleBuild(item, underlyScrollView, originY: originY, spaced: true)
+            priginY = textModuleBuild(item, underlyScrollView, originY: priginY, spaced: true)
         }
         
         
     }
-    underlyScrollView.contentSize = CGSize(width: screenWidth, height: originY + spacedForControl)
+    underlyScrollView.contentSize = CGSize(width: screenWidth, height: priginY + spacedForControl)
 }
 
 /// 处理文章内容的字符串
@@ -325,6 +328,18 @@ func title4ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CG
     return title4.frame.maxY
 }
 
+class ClosureWrapper: NSObject {
+    let closure: (UILongPressGestureRecognizer) -> Void
+    
+    init(_ closure: @escaping (UILongPressGestureRecognizer) -> Void) {
+        self.closure = closure
+    }
+    
+    @objc func invoke(_ sender: UILongPressGestureRecognizer) {
+        closure(sender)
+    }
+}
+
 /// 创建代码块显示模块
 ///
 /// 输入代码数组和底层视图后将自动创建一个显示三级标题的视图
@@ -333,100 +348,195 @@ func title4ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CG
 /// - Parameter originY: 代码块的Y轴坐标
 /// - Returns: 返回一个新的Y轴坐标
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
-func codeModuleBuild(_ stringArray: Array<String>, _ view: UIView, originY: CGFloat, language: String) -> CGFloat {
-    var codeArray = stringArray
-    var index = 0
-    for item in codeArray {
-        index += 1
-        if item.isEmpty {
-            codeArray[index - 1] = "    "
+func codeModuleBuild(_ stringArray: Array<String>, _ view: UIView, originY: CGFloat,language codeLanguage: String, buttonAction: @escaping (UILongPressGestureRecognizer) -> Void) -> CGFloat {
+    // 对空行进行处理
+    var codeStringArray = stringArray
+    for (index, element) in codeStringArray.enumerated() {
+        if element.isEmpty {
+            codeStringArray[index] = "    "
         }
     }
-    let codeScroll = UIScrollView(frame: CGRect(x: spacedForScreen, y: originY + spacedForControl, width: screenWidth - spacedForScreen * 2, height: 0))
-    codeScroll.backgroundColor = UIColor.systemFill
-    codeScroll.layer.cornerRadius = 4
-    codeScroll.alwaysBounceHorizontal = true
-    view.addSubview(codeScroll)
-    var codeContentArray: Array<UILabel> = []
-    var maxX = CGFloat(0)
-    for i in 0 ..< codeArray.count {
-        let code = UILabel()
-        code.frame.origin = CGPoint(x: settingEssayTitle2DisplayMode == 1 ? 40: 35, y: 10)
-        if settingEssayTitle2DisplayMode == 2 {
-            code.frame.origin.x = 30
-        }
-        var attString = NSMutableAttributedString(string: codeArray[i])
-        switch language {
-        case "Swift": attString = swiftCodeOptimize(attString: attString)
+    
+    // 创建底层的代码框的UIScrollView
+    let codeScrollBox = UIScrollView(frame: CGRect(x: spacedForScreen, y: originY + spacedForControl, width: screenWidth - spacedForScreen * 2, height: 0))
+    
+    // 处理代码行和行序号
+    var rowArray: Array<UILabel> = []
+    var codeRowMaxX = CGFloat(0) // 接收所有代码行的最大X轴坐标的属性
+    let rowSpacing = CGFloat(4) // 代码行之间的间距属性
+    for i in 0 ..< codeStringArray.count {
+        // 代码行部分
+        let codeRow = UILabel()
+        codeRow.frame.origin.y = i == 0 ? 10: rowArray[(i - 1) * 2].frame.maxY + rowSpacing
+        var newCodeString = NSMutableAttributedString(string: codeStringArray[i])
+        switch codeLanguage {
+        case "Swift": newCodeString = swiftCodeOptimize(attString: newCodeString)
+        case "HTML": newCodeString = htmlCodeOptimize(attString: newCodeString)
         default:
             break
         }
-        code.attributedText = attString
-        code.font = UIFont(name: "Menlo", size: basicFont - 1)
-        code.sizeToFit()
-        if i != 0 {
-            code.frame.origin.y = codeContentArray[i - 1].frame.maxY + 4
-        }
-        if code.frame.maxX > maxX {
-            maxX = code.frame.maxX
-        }
-        codeContentArray.append(code)
-        codeScroll.addSubview(code)
-        
-        let codeRow = UILabel()
-        codeRow.frame.origin = CGPoint(x: settingEssayTitle2DisplayMode == 2 ? 1: 0, y: 10)
-        if i != 0 {
-            codeRow.frame.origin.y = codeContentArray[i - 1].frame.maxY + 4
-        }
-        codeRow.text = settingEssayTitle2DisplayMode == 0 ? "\(i + 1).": "\(i + 1)"
-//        switch codeArray.count {
-//        case 1:
-//        }
-//        switch i {
-//        case 1: codeRow.text == "00\(i)"
-//        case 2: codeRow.text == "0\(i)"
-//        case 3: codeRow.text == "00\(i)"
-//        default:
-//            break
-//        }
-        codeRow.font = UIFont(name: "Menlo", size: basicFont - 1)
-        codeRow.textColor = settingEssayTitle2DisplayMode == 2 ? UIColor.black.withAlphaComponent(0.6): UIColor.black.withAlphaComponent(0.5)
+        codeRow.attributedText = newCodeString
+        codeRow.font = codeFont
         codeRow.sizeToFit()
-        codeRow.frame.size.width = settingEssayTitle2DisplayMode == 1 ? 30: 30
-        if settingEssayTitle2DisplayMode == 2 {
-            codeRow.frame.size.width = 30
-        }
-        codeRow.textAlignment = .center
-        codeScroll.addSubview(codeRow)
+        if codeRow.frame.maxX > codeRowMaxX {
+            codeRowMaxX = codeRow.frame.maxX
+        } // 传出代码行的最大X轴坐标
+        rowArray.append(codeRow)
+        codeScrollBox.addSubview(codeRow)
+        
+        // 代码行的序号部分
+        let rowNumber = UILabel()
+        rowNumber.frame.origin.y = i == 0 ? 10: codeRow.frame.origin.y
+        rowNumber.font = codeFont
+        rowArray.append(rowNumber)
+        codeScrollBox.addSubview(rowNumber)
     }
     
-    codeScroll.frame.size.height = codeContentArray[codeArray.count - 1].frame.maxY + 10
-    codeScroll.contentSize = CGSize(width: maxX + 10, height: codeContentArray[codeArray.count - 1].frame.maxY + 10)
+    var rowNumberDigits: Int?
+    switch rowArray.count / 2 {
+    case 0 ..< 10: rowNumberDigits = 0
+    case 10 ..< 100: rowNumberDigits = 1
+    case 100 ..< 1000: rowNumberDigits = 2
+    case 1000 ..< Int.max: rowNumberDigits = 3
+    default:
+        break
+    }
     
+    // 设置代码(滚动)块的基础参数
+    codeScrollBox.frame.size.height = rowArray[(codeStringArray.count - 1) * 2].frame.maxY + 10
+    codeScrollBox.contentSize = CGSize(width: codeRowMaxX + 10, height: rowArray[(codeStringArray.count - 1) * 2].frame.maxY + 10)
+    codeScrollBox.layer.cornerRadius = 4
+    codeScrollBox.alwaysBounceHorizontal = true
+    view.addSubview(codeScrollBox)
+    
+    // 主题相关样式的参数设置
     switch settingEssayTitle2DisplayMode {
+    case 0:
+        // 设置代码行和序号的样式
+        for (index, element) in rowArray.enumerated() {
+            if index % 2 == 0 {
+                // 代码行部分
+                element.frame.origin.x = 35
+            } else {
+                // 代码行的序号部分
+                element.frame.origin.x = 0
+                element.text = "\((index - 1) / 2 + 1)."
+                element.textColor = UIColor.black.withAlphaComponent(0.5)
+                element.sizeToFit()
+                element.frame.size.width = 30
+                element.textAlignment = .center
+            }
+        }
+        
+        // 设置代码(滚动)块的样式
+        codeScrollBox.backgroundColor = UIColor.systemFill
     case 1:
-        codeScroll.backgroundColor = UIColor.systemGroupedBackground
-        codeScroll.layer.borderWidth = 1
-        codeScroll.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
+        // 设置代码行和序号的样式
+        for (index, element) in rowArray.enumerated() {
+            if index % 2 == 0 {
+                // 代码行部分
+                element.frame.origin.x = 40
+            } else {
+                // 代码行的序号部分
+                element.frame.origin.x = 0
+                element.text = "\((index - 1) / 2 + 1)"
+                element.textColor = UIColor.black.withAlphaComponent(0.5)
+                element.sizeToFit()
+                element.frame.size.width = 30
+                element.textAlignment = .center
+            }
+        }
+        
+        // 设置代码(滚动)块的样式
+        codeScrollBox.backgroundColor = UIColor.systemGroupedBackground
+        codeScrollBox.layer.borderWidth = 1
+        codeScrollBox.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
+        
+        // 线条主题代码块中序号的分割竖线
         let verticalLinePath = UIBezierPath()
-        let point = 30
-        verticalLinePath.move(to: CGPoint(x: point, y: 0))
-        verticalLinePath.addLine(to: CGPoint(x: CGFloat(point), y: codeScroll.frame.maxY))
+        let anchor = CGFloat(30)
+        verticalLinePath.move(to: CGPoint(x: anchor, y: 0))
+        verticalLinePath.addLine(to: CGPoint(x: anchor, y: codeScrollBox.frame.maxY))
         let verticalLine = CAShapeLayer()
         verticalLine.path = verticalLinePath.cgPath
         verticalLine.lineWidth = 0.5
         verticalLine.strokeColor = UIColor.black.withAlphaComponent(0.5).cgColor
-        codeScroll.layer.addSublayer(verticalLine)
+        codeScrollBox.layer.addSublayer(verticalLine)
     case 2:
-        codeScroll.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
-        let codeRowView = UIView(frame: CGRect(x: 7, y: 6, width: 18, height: codeScroll.frame.height - 12))
-        codeRowView.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
-        codeRowView.layer.cornerRadius = 5
-        codeScroll.addSubview(codeRowView)
+        var rowNumberWidth: CGFloat!
+        switch rowNumberDigits {
+        case 0: rowNumberWidth = 18
+        case 1: rowNumberWidth = 26
+        case 2: rowNumberWidth = 34
+        case 3: rowNumberWidth = 34
+        default:
+            break
+        }
+        
+        // 设置代码行和序号的样式
+        for (index, element) in rowArray.enumerated() {
+            if index % 2 == 0 {
+                // 代码行部分
+                element.frame.origin.x = 42
+            } else {
+                // 代码行的序号部分
+                element.frame.origin.x = 7
+                switch rowNumberDigits {
+                case 0: element.text = "\((index - 1) / 2 + 1)"
+                case 1: element.text = (index + 1) / 2 < 10 ? "0\((index - 1) / 2 + 1)": "\((index - 1) / 2 + 1)"
+                case 2:
+                    switch (index + 1) / 2 {
+                    case 0 ..< 10: element.text = "00\((index - 1) / 2 + 1)"
+                    case 10 ..< 100: element.text = "0\((index - 1) / 2 + 1)"
+                    case 100 ..< 1000: element.text = "\((index - 1) / 2 + 1)"
+                    default:
+                        break
+                    }
+                case 3:
+                    switch (index + 1) / 2 {
+                    case 0 ..< 10: element.text = "00\((index - 1) / 2 + 1)"
+                    case 10 ..< 100: element.text = "0\((index - 1) / 2 + 1)"
+                    case 100 ..< 1000: element.text = "\((index - 1) / 2 + 1)"
+                    case 1000 ..< Int.max:
+                        element.text = "\((index - 1) / 2 + 1)"
+                        
+                        let wrapper = ClosureWrapper(buttonAction)
+                        let longPressRecognizer = UILongPressGestureRecognizer(target: wrapper, action: #selector(ClosureWrapper.invoke(_:)))
+                        objc_setAssociatedObject(longPressRecognizer, "ClosureWrapper", wrapper, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                        longPressRecognizer.minimumPressDuration = 1.0
+                        element.isUserInteractionEnabled = true
+                        element.addGestureRecognizer(longPressRecognizer)
+
+                    default:
+                        break
+                    }
+                default:
+                    break
+                }
+                element.textColor = UIColor.black.withAlphaComponent(0.6) // 因为有蒙版覆盖所以深一点
+                element.sizeToFit()
+                element.frame.size.width = rowNumberWidth
+                element.textAlignment = .center
+            }
+        }
+        
+        // 设置代码(滚动)块的样式
+        codeScrollBox.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
+        
+        // 印象主题代码块中序号的容器
+        let rowNumberBox = UIView(frame: CGRect(x: 7, y: 6, width: rowNumberWidth, height: codeScrollBox.frame.height - 12))
+        rowNumberBox.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
+        rowNumberBox.layer.cornerRadius = 5
+        codeScrollBox.addSubview(rowNumberBox)
     default:
         break
     }
-    return codeScroll.frame.maxY
+    
+    return codeScrollBox.frame.maxY
+}
+
+func buttonTapped(_ sender: UILongPressGestureRecognizer) {
+    print("Button was long pressed")
 }
 
 func swiftCodeOptimize(attString: NSMutableAttributedString) -> NSMutableAttributedString {
@@ -479,6 +589,9 @@ func swiftCodeOptimize(attString: NSMutableAttributedString) -> NSMutableAttribu
         }
     }
     return attString
+}
+func htmlCodeOptimize(attString: NSMutableAttributedString) -> NSMutableAttributedString {
+    attString
 }
 
 /// 创建文本显示模块
@@ -535,10 +648,10 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
     var boardWidth = CGFloat(1.5) // 表格的边框宽度
     var rowHeight = CGFloat(30)
     /* 一些问题：
-    1、设置lineWidth为0.5时label不知道为什么会有一条上边框，百思不得其解
-    2、设置lineWidth和boardWidth为10时不知道为什么需要向左偏移1才能对齐(适配2)
-    3、设置lineWidth为1.0和boardWidth设置为1.5时label不知道为什么尺寸会不对，在检查器中查看坐标都没问题，按理说不会有遮挡，应该是小数被优化掉了(适配3)
-    猜测可能和Label的尺寸坐标参数的小数点有关系，因为后面又遇到了一次，把所有的CGFloat改为Int值就没这问题了，懒得研究了 */
+     1、设置lineWidth为0.5时label不知道为什么会有一条上边框，百思不得其解
+     2、设置lineWidth和boardWidth为10时不知道为什么需要向左偏移1才能对齐(适配2)
+     3、设置lineWidth为1.0和boardWidth设置为1.5时label不知道为什么尺寸会不对，在检查器中查看坐标都没问题，按理说不会有遮挡，应该是小数被优化掉了(适配3)
+     猜测可能和Label的尺寸坐标参数的小数点有关系，因为后面又遇到了一次，把所有的CGFloat改为Int值就没这问题了，懒得研究了 */
     var arrayData: Array<String> = []
     for i in 0 ..< array.count {
         if !array[i].isEmpty {
@@ -590,7 +703,6 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
             let cellString1 = stringHandling(columnStringArrayArray[i][item])
             let cellString = cellString1.trimmingCharacters(in: .whitespacesAndNewlines)
             let labelFrame = UILabel()
-            print(i, item, columnStringArrayArray[i][item].count, cellString.count)
             labelFrame.text = cellString
             labelFrame.font = UIFont.systemFont(ofSize: basicFont - 1)
             labelFrame.sizeToFit()
@@ -615,7 +727,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
         frameWidth = screenWidth - spacedForScreen * 2
         for i in 0 ..< columnCountMax {
             frameOriginX[i] += CGFloat(i * (Int(difference) / columnCountMax))
-             columnMaxWidthArray[i] += difference / CGFloat(columnCountMax)
+            columnMaxWidthArray[i] += difference / CGFloat(columnCountMax)
         }
     }
     
@@ -693,7 +805,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 let label = UILabel(frame: CGRect(x: Int(frameOriginX[item]), y: 0, width:  Int(columnMaxWidthArray[item]), height: Int(rowHeight)))
                 label.backgroundColor = UIColor.systemGroupedBackground
                 label.lineBreakMode = .byClipping
-
+                
                 if settingEssayTitle2DisplayMode == 1 {
                     label.backgroundColor = UIColor.systemBackground
                 } else if settingEssayTitle2DisplayMode == 2 {
@@ -744,11 +856,11 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 label.font = UIFont.systemFont(ofSize: basicFont - 1)
                 label.frame.origin.y += (i == 0 ? boardWidth / 2: lineWidth / 2)
                 label.frame.size.height -= (i == 0 ? lineWidth / 2 + boardWidth / 2: lineWidth)
-//                if settingEssayTitle2DisplayMode == 1 {
-//                    let canshu = 0.1165
-//                    label.frame.origin.y += canshu
-//                    label.frame.size.height -= canshu * 2
-//                }
+                //                if settingEssayTitle2DisplayMode == 1 {
+                //                    let canshu = 0.1165
+                //                    label.frame.origin.y += canshu
+                //                    label.frame.size.height -= canshu * 2
+                //                }
                 if lineWidth == CGFloat(1.0), boardWidth == CGFloat(1.5) {
                     // 适配3
                     label.frame.origin.y += (i == 0 ? 0: 0.002)
