@@ -32,25 +32,17 @@ class SearchViewController: UIViewController {
         scroll.contentSize = CGSize(width: screenWidth, height: screenHeight * 2)
         view.addSubview(scroll)
         
-        let moduleTitle = UILabel(frame: CGRect(x: spacedForScreen, y: spacedForNavigation, width: 0, height: 0))
-        moduleTitle.text = "搜索选项"
-        moduleTitle.font = titleFont2
-        moduleTitle.sizeToFit()
-        scroll.addSubview(moduleTitle)
+        let moduleTitle1 = moduleTitleBuild("搜索选项", scroll, spacedForNavigation, interaction: false)
         
-        let settingTitle = UILabel(frame: CGRect(x: spacedForScreen, y: moduleTitle.frame.maxY + spacedForModule, width: 0, height: 0))
-        settingTitle.text = "偏好设置"
-        settingTitle.font = titleFont2
-        settingTitle.sizeToFit()
-        scroll.addSubview(settingTitle)
+        let moduleTitle2 = moduleTitleBuild("偏好设置", scroll, moduleTitle1.frame.maxY + spacedForModule, interaction: true)
         
-        let view = UIView(frame: CGRect(x: spacedForScreen, y: settingTitle.frame.maxY + spacedForControl, width: screenWidth - spacedForScreen * 2, height: 180))
+        let view = UIView(frame: CGRect(x: spacedForScreen, y: moduleTitle2.frame.maxY + spacedForControl, width: screenWidth - spacedForScreen * 2, height: 180))
         view.backgroundColor = UIColor.systemBackground
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 12
         scroll.addSubview(view)
         let basic = (screenWidth - spacedForScreen * 2) / 3
         for i in 0 ... 2 {
-            let button = UIButton(frame: CGRect(x: spacedForScreen + basic * CGFloat(i) + 20, y: settingTitle.frame.maxY + spacedForControl + 20, width: 80, height: 80))
+            let button = UIButton(frame: CGRect(x: spacedForScreen + basic * CGFloat(i) + 20, y: moduleTitle2.frame.maxY + spacedForControl + 20, width: 80, height: 80))
             button.layer.cornerRadius = 15
             button.setBackgroundImage(UIImage(named: "Setting\(i)"), for: .normal)
             button.tag = i
@@ -92,6 +84,8 @@ class SearchViewController: UIViewController {
                 buttonArray[i].setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
             }
         }
+        let setting1Array = [["type": "forward", "rowtitle": "更多设置", "rowHeight": "default"]]
+        let setting1 = settingControlBuild(title: "主题设置", tips: "设置更多主题", scroll, view.frame.maxY, parameter: setting1Array)
     }
     
     

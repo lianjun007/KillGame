@@ -16,7 +16,7 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
     underlyScrollView.alwaysBounceVertical = true
     VC.view.addSubview(underlyScrollView)
     
-    var priginY = CGFloat(0)
+    var pointY = CGFloat(0)
     var control = false
     var text = false
     var paragraph = false
@@ -35,7 +35,7 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             VC.navigationItem.title = stringHandling(item)
         } else if item.hasPrefix("@author "), !author {
             author = true
-            priginY = authorModuleBuild(stringHandling(item), underlyScrollView)
+            pointY = authorModuleBuild(stringHandling(item), underlyScrollView)
             let horizontalLinePath = UIBezierPath()
             let pointY = spacedForModule + spacedForControl / 2
             horizontalLinePath.move(to: CGPoint(x: 0, y: pointY))
@@ -51,7 +51,7 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
         VC.navigationItem.title = "未设置标题"
     }
     if !author {
-        priginY = authorModuleBuild("未知", underlyScrollView)
+        pointY = authorModuleBuild("未知", underlyScrollView)
         let horizontalLinePath = UIBezierPath()
         let pointY = spacedForModule + spacedForControl / 2
         horizontalLinePath.move(to: CGPoint(x: 0, y: pointY))
@@ -62,21 +62,21 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
         horizontalLine.lineWidth = 1
         underlyScrollView.layer.addSublayer(horizontalLine)
     }
-    priginY += spacedForControl * 3
+    pointY += spacedForControl * 3
     for item in essayDataArray {
         text = false
         if item.hasPrefix("# ") {
-            priginY = title2ModuleBuild(stringHandling(item), underlyScrollView, originY: control ? priginY: spacedForControl * 2)
+            pointY = title2ModuleBuild(stringHandling(item), underlyScrollView, originY: control ? pointY: spacedForControl * 2)
             control = true
         } else if item.hasPrefix("## ") {
             control = true
-            priginY = title3ModuleBuild(stringHandling(item), underlyScrollView, originY: priginY)
+            pointY = title3ModuleBuild(stringHandling(item), underlyScrollView, originY: pointY)
         } else if item.hasPrefix("### ") {
             control = true
-            priginY = title4ModuleBuild(stringHandling(item), underlyScrollView, originY: priginY)
+            pointY = title4ModuleBuild(stringHandling(item), underlyScrollView, originY: pointY)
         } else if item.hasPrefix("#img ") {
             control = true
-            priginY = imageModuleBuild(stringHandling(item), underlyScrollView, originY: priginY)
+            pointY = imageModuleBuild(stringHandling(item), underlyScrollView, originY: pointY)
         } else if item.hasPrefix("#p") {
             control = true
             textArray = []
@@ -85,9 +85,9 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             paragraph = false
             for i in 0 ..< textArray.count {
                 if i == 1 {
-                    priginY = textModuleBuild(textArray[i], underlyScrollView, originY: priginY, spaced: true)
+                    pointY = textModuleBuild(textArray[i], underlyScrollView, originY: pointY, spaced: true)
                 } else if i != 0 {
-                    priginY = textModuleBuild(textArray[i], underlyScrollView, originY: priginY, spaced: false)
+                    pointY = textModuleBuild(textArray[i], underlyScrollView, originY: pointY, spaced: false)
                 }
             }
         } else if item.hasPrefix("#code") {
@@ -97,9 +97,7 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             codeType = stringHandling(item)
         } else if item.hasPrefix("##code") {
             code = false
-            priginY = codeModuleBuild(Array(codeArray.dropFirst()), underlyScrollView, originY: priginY, language: codeType, buttonAction: { longPressRecognizer in
-                buttonTapped(longPressRecognizer)
-            })
+            pointY = codeModuleBuild(Array(codeArray.dropFirst()), underlyScrollView, pointY, language: codeType)
 
         } else if item.hasPrefix("#tb") {
             control = true
@@ -108,7 +106,7 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             tableType = stringHandling(item)
         } else if item.hasPrefix("##tb") {
             table = false
-            priginY = tableModuleBuild(Array(tableArray.dropFirst()), underlyScrollView, originY: priginY, mode: tableType)
+            pointY = tableModuleBuild(Array(tableArray.dropFirst()), underlyScrollView, originY: pointY, mode: tableType)
         } else {
             // 还有一个屏蔽前几行空行的字符没做
             if !item.isEmpty, !item.hasPrefix("@title"), !item.hasPrefix("@author") {
@@ -124,12 +122,12 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
         } else if paragraph {
             textArray.append(item)
         } else if text {
-            priginY = textModuleBuild(item, underlyScrollView, originY: priginY, spaced: true)
+            pointY = textModuleBuild(item, underlyScrollView, originY: pointY, spaced: true)
         }
         
         
     }
-    underlyScrollView.contentSize = CGSize(width: screenWidth, height: priginY + spacedForControl)
+    underlyScrollView.contentSize = CGSize(width: screenWidth, height: pointY + spacedForControl)
 }
 
 /// 处理文章内容的字符串
@@ -328,27 +326,16 @@ func title4ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CG
     return title4.frame.maxY
 }
 
-class ClosureWrapper: NSObject {
-    let closure: (UILongPressGestureRecognizer) -> Void
-    
-    init(_ closure: @escaping (UILongPressGestureRecognizer) -> Void) {
-        self.closure = closure
-    }
-    
-    @objc func invoke(_ sender: UILongPressGestureRecognizer) {
-        closure(sender)
-    }
-}
-
 /// 创建代码块显示模块
 ///
 /// 输入代码数组和底层视图后将自动创建一个显示三级标题的视图
 /// - Parameter stringArray: 代码块内容的数组
-/// - Parameter view: 底层视图
-/// - Parameter originY: 代码块的Y轴坐标
+/// - Parameter superView: 底层视图
+/// - Parameter pointY: 代码块的Y轴坐标
+/// - Parameter codeLanguage: 代码语言
 /// - Returns: 返回一个新的Y轴坐标
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
-func codeModuleBuild(_ stringArray: Array<String>, _ view: UIView, originY: CGFloat,language codeLanguage: String, buttonAction: @escaping (UILongPressGestureRecognizer) -> Void) -> CGFloat {
+func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY: CGFloat, language codeLanguage: String) -> CGFloat {
     // 对空行进行处理
     var codeStringArray = stringArray
     for (index, element) in codeStringArray.enumerated() {
@@ -358,7 +345,16 @@ func codeModuleBuild(_ stringArray: Array<String>, _ view: UIView, originY: CGFl
     }
     
     // 创建底层的代码框的UIScrollView
-    let codeScrollBox = UIScrollView(frame: CGRect(x: spacedForScreen, y: originY + spacedForControl, width: screenWidth - spacedForScreen * 2, height: 0))
+    let codeScrollBox = UIScrollView(frame: CGRect(x: spacedForScreen, y: pointY + spacedForControl, width: screenWidth - spacedForScreen * 2, height: 0))
+    superView.addSubview(codeScrollBox)
+    
+    // 创建代码行序号的容器和对应的高斯模糊
+    let rowNumberBox = UIView()
+    let blurEffect = UIBlurEffect(style: .light)
+    let blurView = UIVisualEffectView(effect: blurEffect)
+    blurView.isUserInteractionEnabled = false
+    rowNumberBox.addSubview(blurView)
+    superView.addSubview(rowNumberBox)
     
     // 处理代码行和行序号
     var rowArray: Array<UILabel> = []
@@ -386,12 +382,13 @@ func codeModuleBuild(_ stringArray: Array<String>, _ view: UIView, originY: CGFl
         
         // 代码行的序号部分
         let rowNumber = UILabel()
-        rowNumber.frame.origin.y = i == 0 ? 10: codeRow.frame.origin.y
+        rowNumber.frame.origin = CGPoint(x: codeScrollBox.frame.origin.x, y: i == 0 ? 10 + codeScrollBox.frame.origin.y: codeRow.frame.origin.y + codeScrollBox.frame.origin.y)
         rowNumber.font = codeFont
         rowArray.append(rowNumber)
-        codeScrollBox.addSubview(rowNumber)
+        superView.addSubview(rowNumber)
     }
     
+    // 获取代码行数的位数
     var rowNumberDigits: Int?
     switch rowArray.count / 2 {
     case 0 ..< 10: rowNumberDigits = 0
@@ -401,142 +398,199 @@ func codeModuleBuild(_ stringArray: Array<String>, _ view: UIView, originY: CGFl
     default:
         break
     }
+    // 代码行序号容器的宽度
+    var rowNumberBoxWidth: CGFloat!
+    switch rowNumberDigits {
+    case 0: rowNumberBoxWidth = 24
+    case 1: rowNumberBoxWidth = 32
+    case 2: rowNumberBoxWidth = 40
+    case 3: rowNumberBoxWidth = 40
+    default:
+        break
+    }
     
     // 设置代码(滚动)块的基础参数
     codeScrollBox.frame.size.height = rowArray[(codeStringArray.count - 1) * 2].frame.maxY + 10
     codeScrollBox.contentSize = CGSize(width: codeRowMaxX + 10, height: rowArray[(codeStringArray.count - 1) * 2].frame.maxY + 10)
     codeScrollBox.layer.cornerRadius = 4
     codeScrollBox.alwaysBounceHorizontal = true
-    view.addSubview(codeScrollBox)
     
     // 主题相关样式的参数设置
     switch settingEssayTitle2DisplayMode {
     case 0:
         // 设置代码行和序号的样式
         for (index, element) in rowArray.enumerated() {
+            let rowNumber = (index - 1) / 2 + 1 // 代码行的序号的具体数字
             if index % 2 == 0 {
                 // 代码行部分
-                element.frame.origin.x = 35
+                element.frame.origin.x = rowNumberBoxWidth + 10
             } else {
                 // 代码行的序号部分
-                element.frame.origin.x = 0
-                element.text = "\((index - 1) / 2 + 1)."
-                element.textColor = UIColor.black.withAlphaComponent(0.5)
-                element.sizeToFit()
-                element.frame.size.width = 30
-                element.textAlignment = .center
-            }
-        }
-        
-        // 设置代码(滚动)块的样式
-        codeScrollBox.backgroundColor = UIColor.systemFill
-    case 1:
-        // 设置代码行和序号的样式
-        for (index, element) in rowArray.enumerated() {
-            if index % 2 == 0 {
-                // 代码行部分
-                element.frame.origin.x = 40
-            } else {
-                // 代码行的序号部分
-                element.frame.origin.x = 0
-                element.text = "\((index - 1) / 2 + 1)"
-                element.textColor = UIColor.black.withAlphaComponent(0.5)
-                element.sizeToFit()
-                element.frame.size.width = 30
-                element.textAlignment = .center
-            }
-        }
-        
-        // 设置代码(滚动)块的样式
-        codeScrollBox.backgroundColor = UIColor.systemGroupedBackground
-        codeScrollBox.layer.borderWidth = 1
-        codeScrollBox.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
-        
-        // 线条主题代码块中序号的分割竖线
-        let verticalLinePath = UIBezierPath()
-        let anchor = CGFloat(30)
-        verticalLinePath.move(to: CGPoint(x: anchor, y: 0))
-        verticalLinePath.addLine(to: CGPoint(x: anchor, y: codeScrollBox.frame.maxY))
-        let verticalLine = CAShapeLayer()
-        verticalLine.path = verticalLinePath.cgPath
-        verticalLine.lineWidth = 0.5
-        verticalLine.strokeColor = UIColor.black.withAlphaComponent(0.5).cgColor
-        codeScrollBox.layer.addSublayer(verticalLine)
-    case 2:
-        var rowNumberWidth: CGFloat!
-        switch rowNumberDigits {
-        case 0: rowNumberWidth = 18
-        case 1: rowNumberWidth = 26
-        case 2: rowNumberWidth = 34
-        case 3: rowNumberWidth = 34
-        default:
-            break
-        }
-        
-        // 设置代码行和序号的样式
-        for (index, element) in rowArray.enumerated() {
-            if index % 2 == 0 {
-                // 代码行部分
-                element.frame.origin.x = 42
-            } else {
-                // 代码行的序号部分
-                element.frame.origin.x = 7
                 switch rowNumberDigits {
-                case 0: element.text = "\((index - 1) / 2 + 1)"
-                case 1: element.text = (index + 1) / 2 < 10 ? "0\((index - 1) / 2 + 1)": "\((index - 1) / 2 + 1)"
+                case 0: element.text = "\(rowNumber)."
+                case 1: element.text = rowNumber < 10 ? "0\(rowNumber).": "\(rowNumber)."
                 case 2:
-                    switch (index + 1) / 2 {
-                    case 0 ..< 10: element.text = "00\((index - 1) / 2 + 1)"
-                    case 10 ..< 100: element.text = "0\((index - 1) / 2 + 1)"
-                    case 100 ..< 1000: element.text = "\((index - 1) / 2 + 1)"
+                    switch rowNumber {
+                    case 0 ..< 10: element.text = "00\(rowNumber)."
+                    case 10 ..< 100: element.text = "0\(rowNumber)."
+                    case 100 ..< 1000: element.text = "\(rowNumber)."
                     default:
                         break
                     }
                 case 3:
-                    switch (index + 1) / 2 {
-                    case 0 ..< 10: element.text = "00\((index - 1) / 2 + 1)"
-                    case 10 ..< 100: element.text = "0\((index - 1) / 2 + 1)"
-                    case 100 ..< 1000: element.text = "\((index - 1) / 2 + 1)"
-                    case 1000 ..< Int.max:
-                        element.text = "\((index - 1) / 2 + 1)"
-                        
-                        let wrapper = ClosureWrapper(buttonAction)
-                        let longPressRecognizer = UILongPressGestureRecognizer(target: wrapper, action: #selector(ClosureWrapper.invoke(_:)))
-                        objc_setAssociatedObject(longPressRecognizer, "ClosureWrapper", wrapper, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                        longPressRecognizer.minimumPressDuration = 1.0
-                        element.isUserInteractionEnabled = true
-                        element.addGestureRecognizer(longPressRecognizer)
-
+                    switch rowNumber {
+                    case 0 ..< 10: element.text = "00\(rowNumber)."
+                    case 10 ..< 100: element.text = "0\(rowNumber)."
+                    case 100 ..< 1000: element.text = "\(rowNumber)."
+                    case 1000 ..< Int.max: element.text = "…\(String(rowNumber).suffix(2))"
                     default:
                         break
                     }
                 default:
                     break
                 }
-                element.textColor = UIColor.black.withAlphaComponent(0.6) // 因为有蒙版覆盖所以深一点
+                element.textColor = UIColor(red: 127/255.0, green: 125/255.0, blue: 159/255.0, alpha: 1.000)
                 element.sizeToFit()
-                element.frame.size.width = rowNumberWidth
-                element.textAlignment = .center
+                element.textAlignment = .right
+                element.frame.size.width = rowNumberBoxWidth + 5
             }
         }
         
         // 设置代码(滚动)块的样式
-        codeScrollBox.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
+        codeScrollBox.backgroundColor = UIColor.systemFill
         
-        // 印象主题代码块中序号的容器
-        let rowNumberBox = UIView(frame: CGRect(x: 7, y: 6, width: rowNumberWidth, height: codeScrollBox.frame.height - 12))
-        rowNumberBox.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
+        // 代码行序号容器的样式
+        rowNumberBox.frame = CGRect(x: codeScrollBox.frame.origin.x, y: codeScrollBox.frame.origin.y, width: rowNumberBoxWidth + 5, height: codeScrollBox.frame.height)
+        let path = UIBezierPath(roundedRect: rowNumberBox.bounds,
+                                byRoundingCorners: [.topLeft, .bottomLeft],
+                                cornerRadii: CGSize(width: 4, height: 4))
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        rowNumberBox.layer.mask = shapeLayer
+        blurView.frame = CGRect(origin: CGPointZero, size: rowNumberBox.frame.size)
+        rowNumberBox.backgroundColor = UIColor.white.withAlphaComponent(0)
+        rowNumberBox.layer.masksToBounds = true
+    case 1:
+        // 设置代码行和序号的样式
+        for (index, element) in rowArray.enumerated() {
+            let rowNumber = (index - 1) / 2 + 1 // 代码行的序号的具体数字
+            if index % 2 == 0 {
+                // 代码行部分
+                element.frame.origin.x = rowNumberBoxWidth + 5
+            } else {
+                // 代码行的序号部分
+                element.frame.origin.x += 0
+                switch rowNumberDigits {
+                case 0: element.text = "\(rowNumber)"
+                case 1: element.text = rowNumber < 10 ? "0\(rowNumber)": "\(rowNumber)"
+                case 2:
+                    switch rowNumber {
+                    case 0 ..< 10: element.text = "00\(rowNumber)"
+                    case 10 ..< 100: element.text = "0\(rowNumber)"
+                    case 100 ..< 1000: element.text = "\(rowNumber)"
+                    default:
+                        break
+                    }
+                case 3:
+                    switch rowNumber {
+                    case 0 ..< 10: element.text = "00\(rowNumber)"
+                    case 10 ..< 100: element.text = "0\(rowNumber)"
+                    case 100 ..< 1000: element.text = "\(rowNumber)"
+                    case 1000 ..< Int.max: element.text = "…\(String(rowNumber).suffix(2))"
+                    default:
+                        break
+                    }
+                default:
+                    break
+                }
+                element.textColor = UIColor(red: 127/255.0, green: 125/255.0, blue: 159/255.0, alpha: 1.000)
+                element.sizeToFit()
+                element.textAlignment = .center
+                element.frame.size.width = rowNumberBoxWidth
+            }
+        }
+        
+        // 设置代码(滚动)块的样式
+        codeScrollBox.backgroundColor = UIColor(red: 242/255.0, green: 242/255.0, blue: 247/255.0, alpha: 1.000)
+        codeScrollBox.layer.borderWidth = 1
+        codeScrollBox.layer.borderColor = UIColor(red: 138/255.0, green: 138/255.0, blue: 141/255.0, alpha: 1.000).cgColor
+        
+        // 代码行序号容器的样式
+        rowNumberBox.frame = CGRect(x: codeScrollBox.frame.origin.x + 1, y: codeScrollBox.frame.origin.y + 1, width: rowNumberBoxWidth - 0.5, height: codeScrollBox.frame.height - 2)
+        let path = UIBezierPath(roundedRect: rowNumberBox.bounds,
+                                byRoundingCorners: [.topLeft, .bottomLeft],
+                                cornerRadii: CGSize(width: 4, height: 4))
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        rowNumberBox.layer.mask = shapeLayer
+        blurView.frame = CGRect(origin: CGPointZero, size: rowNumberBox.frame.size)
+        rowNumberBox.backgroundColor = UIColor.white.withAlphaComponent(0)
+        rowNumberBox.layer.masksToBounds = true
+        
+        // 线条主题代码块中序号的分割竖线
+        let verticalLinePath = UIBezierPath()
+        let anchor = rowNumberBoxWidth + codeScrollBox.frame.origin.x
+        verticalLinePath.move(to: CGPoint(x: anchor, y: codeScrollBox.frame.origin.y))
+        verticalLinePath.addLine(to: CGPoint(x: anchor, y: codeScrollBox.frame.maxY))
+        let verticalLine = CAShapeLayer()
+        verticalLine.path = verticalLinePath.cgPath
+        verticalLine.lineWidth = 0.5
+        verticalLine.strokeColor = UIColor.black.withAlphaComponent(0.5).cgColor
+        superView.layer.addSublayer(verticalLine)
+    case 2:
+        // 设置代码行和序号的样式
+        for (index, element) in rowArray.enumerated() {
+            let rowNumber = (index - 1) / 2 + 1 // 代码行的序号的具体数字
+            if index % 2 == 0 {
+                // 代码行部分
+                element.frame.origin.x = rowNumberBoxWidth + 12
+            } else {
+                // 代码行的序号部分
+                element.frame.origin.x += 7
+                switch rowNumberDigits {
+                case 0: element.text = "\(rowNumber)"
+                case 1: element.text = rowNumber < 10 ? "0\(rowNumber)": "\(rowNumber)"
+                case 2:
+                    switch rowNumber {
+                    case 0 ..< 10: element.text = "00\(rowNumber)"
+                    case 10 ..< 100: element.text = "0\(rowNumber)"
+                    case 100 ..< 1000: element.text = "\(rowNumber)"
+                    default:
+                        break
+                    }
+                case 3:
+                    switch rowNumber {
+                    case 0 ..< 10: element.text = "00\(rowNumber)"
+                    case 10 ..< 100: element.text = "0\(rowNumber)"
+                    case 100 ..< 1000: element.text = "\(rowNumber)"
+                    case 1000 ..< Int.max: element.text = "…\(String(rowNumber).suffix(2))"
+                    default:
+                        break
+                    }
+                default:
+                    break
+                }
+                element.textColor = UIColor(red: 127/255.0, green: 125/255.0, blue: 159/255.0, alpha: 1.000)
+                element.sizeToFit()
+                element.textAlignment = .center
+                element.frame.size.width = rowNumberBoxWidth
+            }
+        }
+        
+        // 设置代码(滚动)块的样式
+        codeScrollBox.backgroundColor = UIColor(red: 222/255.0, green: 221/255.0, blue: 247/255.0, alpha: 1.000)
+        
+        // 代码行序号容器的样式
+        rowNumberBox.frame = CGRect(x: 7 + codeScrollBox.frame.origin.x, y: 6 + codeScrollBox.frame.origin.y, width: rowNumberBoxWidth, height: codeScrollBox.frame.height - 12)
+        blurView.frame = CGRect(origin: CGPointZero, size: rowNumberBox.frame.size)
+        rowNumberBox.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.25)
         rowNumberBox.layer.cornerRadius = 5
-        codeScrollBox.addSubview(rowNumberBox)
+        rowNumberBox.layer.masksToBounds = true
     default:
         break
     }
     
     return codeScrollBox.frame.maxY
-}
-
-func buttonTapped(_ sender: UILongPressGestureRecognizer) {
-    print("Button was long pressed")
 }
 
 func swiftCodeOptimize(attString: NSMutableAttributedString) -> NSMutableAttributedString {
@@ -590,6 +644,7 @@ func swiftCodeOptimize(attString: NSMutableAttributedString) -> NSMutableAttribu
     }
     return attString
 }
+
 func htmlCodeOptimize(attString: NSMutableAttributedString) -> NSMutableAttributedString {
     attString
 }

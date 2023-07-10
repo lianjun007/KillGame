@@ -50,7 +50,7 @@ func spaced(_ type: Direction) -> CGFloat {
 let spacedForScreen = CGFloat(20)
 let spacedForControl = CGFloat(10) // 各个相邻的控件之间的间距，也用做二级标题和模块之间的间距
 let spacedForModule = CGFloat(45) // 各个模块之间的间距
-let spacedForNavigation = CGFloat(25) // 导航栏与第一个模块之间的间距
+let spacedForNavigation = CGFloat(28) // 导航栏与第一个模块之间的间距
 
 // 控件尺寸
 

@@ -9,13 +9,29 @@ func viewControllerInitialize(vc: UIViewController, navTitle: String) {
 }
 
 // 创建模块标题的方法：传入父视图、模块标题名、Y轴坐标
-func moduleTitleBuild(superView: UIView, title: String, originY: CGFloat) -> UILabel {
-    let moduleTitle = UILabel(frame: CGRect(x: spacedForScreen, y: originY, width: 0, height: 0))
+// 点击手势还是没有添加到此处，以后修改
+func moduleTitleBuild(_ title: String,_ superView: UIView,_ pointY: CGFloat,interaction: Bool) -> UIButton {
+    let moduleButton = UIButton(frame: CGRect(x: spacedForScreen, y: pointY, width: screenWidth - spacedForScreen * 2, height: 0))
+    
+    // 创建标题
+    let moduleTitle = UILabel(frame: CGRectZero)
     moduleTitle.text = title
     moduleTitle.font = titleFont2
     moduleTitle.sizeToFit()
-    superView.addSubview(moduleTitle)
-    return moduleTitle
+    moduleButton.addSubview(moduleTitle)
+    
+    // 创建箭头
+    if interaction {
+        let moduleIcon = UIImageView(frame: CGRect(x: moduleTitle.frame.maxX + 5, y: 5, width: 15, height: moduleTitle.frame.size.height - 10))
+        moduleIcon.image = UIImage(systemName: "chevron.forward", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
+        moduleIcon.tintColor = UIColor.black.withAlphaComponent(0.5)
+        moduleButton.addSubview(moduleIcon)
+    }
+    
+    moduleButton.frame.size.height = moduleTitle.frame.size.height
+    superView.addSubview(moduleButton)
+    
+    return moduleButton
 }
 
 let largeControlSize = CGSize(width: 240, height: 320)
@@ -145,5 +161,78 @@ func mediumControlBuild(origin: CGPoint, imageName: String, title: String, title
     // 这两个标题还有一个未解决的隐患：没有考虑标题字数太长的问题
     
     return control
+}
+
+// type: 类型(滚动: custom, 开关: switch, 跳转: forward)
+// rowTitle:
+// rowHeight: 行高(默认: default, 倍数)
+// title
+func settingControlBuild(title: String, tips: String, _ superView: UIView, _ pointY: CGFloat, parameter: Array<Dictionary<String, String>>) {
+    // 标题
+    let settingModuleTitle = UILabel(frame: CGRect(x: spacedForScreen + 10, y: pointY, width: screenWidth - spacedForScreen * 2, height: 0))
+    if !title.isEmpty {
+        settingModuleTitle.text = title
+        settingModuleTitle.font = basicFont2
+        settingModuleTitle.sizeToFit()
+        settingModuleTitle.numberOfLines = 0
+        superView.addSubview(settingModuleTitle)
+    }
+    
+    var settingModuleHeight = CGFloat(0)
+    for (index, item) in parameter.enumerated() {
+        if index != 0 {
+            settingModuleHeight += 1
+        }
+        switch item["rowHeight"] {
+        case "default": settingModuleHeight += CGFloat(44)
+        case "thrice": settingModuleHeight += CGFloat(44) * 3
+        default:
+            break
+        }
+    }
+    
+    let settingModuleBox = UIView(frame: CGRect(x: spacedForScreen, y: settingModuleTitle.frame.maxY, width: screenWidth - spacedForScreen * 2, height: settingModuleHeight))
+    settingModuleBox.backgroundColor = UIColor.systemBackground
+    settingModuleBox.layer.cornerRadius = 12
+    settingModuleBox.clipsToBounds = true
+    superView.addSubview(settingModuleBox)
+    
+    let settingModuleTips = UILabel(frame: CGRect(x: spacedForScreen + 10, y: settingModuleBox.frame.maxY, width: screenWidth - spacedForScreen * 2, height: 0))
+    if !title.isEmpty {
+        settingModuleTips.text = tips
+        settingModuleTips.font = basicFont2
+        settingModuleTips.sizeToFit()
+        settingModuleTips.numberOfLines = 0
+        superView.addSubview(settingModuleTips)
+    }
+    
+    for item in parameter {
+        switch item["type"] {
+        case "custom": break
+        case "forward":
+            let rowBox = UIButton()
+            rowBox.frame.origin = CGPointZero
+            rowBox.frame.size = settingModuleBox.frame.size
+            settingModuleBox.addSubview(rowBox)
+            
+            let rowTitle = UILabel()
+            rowTitle.frame.origin = CGPoint(x: 0, y: 0)
+            rowTitle.frame.size.width = 200
+            rowTitle.text = item["rowTitle"]
+            rowTitle.font = basicFont2
+            rowTitle.textColor = UIColor.black
+            rowTitle.sizeToFit()
+            print(rowTitle.frame)
+            rowBox.addSubview(rowTitle)
+            
+            let rowIcon = UIImageView(frame: CGRect(x: settingModuleBox.frame.maxX - 45, y: 14, width: 10, height: 16))
+            rowIcon.image = UIImage(systemName: "chevron.forward", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
+            rowIcon.tintColor = UIColor.black.withAlphaComponent(0.5)
+            rowBox.addSubview(rowIcon)
+        case "switch": break
+        default:
+            break
+        }
+    }
 }
 

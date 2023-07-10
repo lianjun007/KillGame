@@ -13,7 +13,8 @@ class LearningViewController: UIViewController {
         let underlyScrollView = UIScrollView(frame: UIScreen.main.bounds)
         view.addSubview(underlyScrollView)
         
-        let moduleTitle1 = moduleTitleBuild(superView: underlyScrollView, title: "精选合集", originY: spacedForNavigation)
+        let moduleTitle1 = moduleTitleBuild("精选合集", underlyScrollView, spacedForNavigation, interaction: true)
+        moduleTitle1.addTarget(self, action: #selector(clickModuleTitleControl), for: .touchUpInside)
         
         // 发送精选课程的随机数据
         featuredCollectionsRandomDataArray = arrayRandom(number: 7, array: featuredCollectionsDataArray) as! Array<Dictionary<String, String>>
@@ -37,11 +38,8 @@ class LearningViewController: UIViewController {
         }
         
         // Set the UILabel at the featuredCoursesBox tilte
-        let featuredCourseLable1 = UILabel(frame: CGRect(x: spacedForScreen, y: spacedForNavigation + moduleView.frame.height + spacedForModule * 2, width: 0, height: 0))
-        featuredCourseLable1.text = "精选文章"
-        featuredCourseLable1.font = titleFont2
-        featuredCourseLable1.sizeToFit()
-        underlyScrollView.addSubview(featuredCourseLable1)
+        let moduleTitle2 = moduleTitleBuild("精选文章", underlyScrollView, moduleView.frame.maxY + spacedForModule, interaction: true)
+        moduleTitle2.addTarget(self, action: #selector(clickModuleTitleControl), for: .touchUpInside)
         
         var cellViewArray: Array<UIButton> = []
         for i in 0 ... 6 {
@@ -52,7 +50,7 @@ class LearningViewController: UIViewController {
                 direction = true
             }
             
-            let cellView = mediumControlBuild(origin: CGPoint(x: spacedForScreen, y: featuredCourseLable1.frame.maxY + spacedForControl + CGFloat(i) * (spacedForControl + mediumControlSize.height)), imageName: essayData["\(i + 1)"]?["cover"] as! String, title: essayData["\(i + 1)"]?["title"] as! String, title2: essayData["\(i + 1)"]?["author"] as! String, direction: direction)
+            let cellView = mediumControlBuild(origin: CGPoint(x: spacedForScreen, y: moduleTitle2.frame.maxY + spacedForControl + CGFloat(i) * (spacedForControl + mediumControlSize.height)), imageName: essayData["\(i + 1)"]?["cover"] as! String, title: essayData["\(i + 1)"]?["title"] as! String, title2: essayData["\(i + 1)"]?["author"] as! String, direction: direction)
             
             cellView.tag = i + 1
             cellView.addTarget(self, action: #selector(clickEssayControl), for: .touchUpInside)
@@ -98,6 +96,11 @@ class LearningViewController: UIViewController {
         self.navigationController?.pushViewController(VC, animated: true)
     }
     
+    @objc func clickModuleTitleControl(_ sender: UIButton) {
+        let VC = SelectedCollectionViewController()
+        self.navigationController?.pushViewController(VC, animated: true)
+    }
+
 }
 
 extension LearningViewController: UIContextMenuInteractionDelegate {
@@ -163,13 +166,11 @@ extension LearningViewController: UIContextMenuInteractionDelegate {
             
             return previewControllerInstance
         }) { suggestedActions in
-            let action1 = UIAction(title: "查看该课程", image: UIImage(systemName: "eye")) { action in
-            }
             let action2 = UIAction(title: "收藏至收藏夹", image: UIImage(systemName: "star")) { action in
             }
             let action3 = UIAction(title: "分享给朋友", image: UIImage(systemName: "square.and.arrow.up")) { action in
             }
-            let menu1 = UIMenu(title: "",options: .displayInline, children: [action1, action2, action3])
+            let menu1 = UIMenu(title: "",options: .displayInline, children: [action2, action3])
             let action4 = UIAction(title: "点赞课程", image: UIImage(systemName: "hand.thumbsup")) { action in
             }
             let action5 = UIAction(title: "打赏作者", image: UIImage(systemName: "dollarsign.circle")) { action in
