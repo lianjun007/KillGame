@@ -8,10 +8,9 @@ class CourseViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        navigationItem.title = "精选课程标题"
-        navigationItem.largeTitleDisplayMode = .never
-        
-        let collectionView = UITableView(frame: view.bounds, style: .insetGrouped)
+        viewControllerInitialize(vc: self, navTitle: "精选课程标题")
+
+        let collectionView = UITableView(frame: view.bounds, style: .grouped)
         view.addSubview(collectionView)
         
         collectionView.delegate = self

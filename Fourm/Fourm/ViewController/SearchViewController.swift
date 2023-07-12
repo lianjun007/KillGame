@@ -32,9 +32,12 @@ class SearchViewController: UIViewController {
         scroll.contentSize = CGSize(width: screenWidth, height: screenHeight * 2)
         view.addSubview(scroll)
         
-        let moduleTitle1 = moduleTitleBuild("搜索选项", scroll, spacedForNavigation, interaction: false)
+        let moduleTitle1 = moduleTitleBuild("搜索选项", scroll, spacedForNavigation, interaction: true)
         
-        let moduleTitle2 = moduleTitleBuild("偏好设置", scroll, moduleTitle1.frame.maxY + spacedForModule, interaction: true)
+        let setting0Array = [["type": "forward", "rowTitle": "筛选搜索", "rowHeight": "default"]]
+        let setting0 = settingControlBuild(title: "", tips: "设置和粉丝哦击缶哦is片鹅u啊人分工iu普i哦二热刚刚好hi忍受风格寺佛好", scroll, moduleTitle1.frame.maxY + spacedForControl, parameter: setting0Array)
+        
+        let moduleTitle2 = moduleTitleBuild("偏好设置", scroll, setting0 + spacedForModule, interaction: true)
         
         let view = UIView(frame: CGRect(x: spacedForScreen, y: moduleTitle2.frame.maxY + spacedForControl, width: screenWidth - spacedForScreen * 2, height: 180))
         view.backgroundColor = UIColor.systemBackground
@@ -84,8 +87,8 @@ class SearchViewController: UIViewController {
                 buttonArray[i].setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
             }
         }
-        let setting1Array = [["type": "forward", "rowtitle": "更多设置", "rowHeight": "default"]]
-        let setting1 = settingControlBuild(title: "主题设置", tips: "设置更多主题", scroll, view.frame.maxY, parameter: setting1Array)
+        let setting1Array = [["type": "forward", "rowTitle": "更多设置", "rowHeight": "default"]]
+        let setting1 = settingControlBuild(title: "主题设置", tips: "设置更多主题", scroll, view.frame.maxY + spacedForModule2, parameter: setting1Array)
     }
     
     

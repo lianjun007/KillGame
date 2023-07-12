@@ -22,7 +22,7 @@ func moduleTitleBuild(_ title: String,_ superView: UIView,_ pointY: CGFloat,inte
     
     // 创建箭头
     if interaction {
-        let moduleIcon = UIImageView(frame: CGRect(x: moduleTitle.frame.maxX + 5, y: 5, width: 15, height: moduleTitle.frame.size.height - 10))
+        let moduleIcon = UIImageView(frame: CGRect(x: moduleTitle.frame.maxX + 5, y: 6, width: 15, height: moduleTitle.frame.size.height - 12))
         moduleIcon.image = UIImage(systemName: "chevron.forward", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
         moduleIcon.tintColor = UIColor.black.withAlphaComponent(0.5)
         moduleButton.addSubview(moduleIcon)
@@ -113,7 +113,7 @@ func largeControlBuild(origin: CGPoint, imageName: String, title: String, title2
 }
 
 // 横向的中号控件：如同学习界面精选课程展示框；一侧放置4:3的长方形封面，另一侧放置简介信息(模糊蒙版)
-let mediumControlSize = CGSize(width: screenWidth - spacedForScreen * 2, height: (screenWidth - spacedForScreen * 2) / 4)
+let mediumControlSize = CGSize(width: screenWidth - spacedForScreen * 2, height: 100)
 func mediumControlBuild(origin: CGPoint, imageName: String, title: String, title2: String, direction: Bool) -> UIButton {
     // 创建控件主体(一个UIButton)
     let control = UIButton(frame: CGRect(origin: origin, size: mediumControlSize))
@@ -167,14 +167,16 @@ func mediumControlBuild(origin: CGPoint, imageName: String, title: String, title
 // rowTitle:
 // rowHeight: 行高(默认: default, 倍数)
 // title
-func settingControlBuild(title: String, tips: String, _ superView: UIView, _ pointY: CGFloat, parameter: Array<Dictionary<String, String>>) {
+func settingControlBuild(title: String, tips: String, _ superView: UIView, _ pointY: CGFloat, parameter: Array<Dictionary<String, String>>) -> CGFloat {
     // 标题
-    let settingModuleTitle = UILabel(frame: CGRect(x: spacedForScreen + 10, y: pointY, width: screenWidth - spacedForScreen * 2, height: 0))
+    let settingModuleTitle = UILabel(frame: CGRect(x: spacedForScreen + 18, y: pointY, width: screenWidth - spacedForScreen * 2, height: 0))
     if !title.isEmpty {
         settingModuleTitle.text = title
-        settingModuleTitle.font = basicFont2
-        settingModuleTitle.sizeToFit()
         settingModuleTitle.numberOfLines = 0
+        settingModuleTitle.font = tipsFont
+        settingModuleTitle.sizeToFit()
+        settingModuleTitle.frame.size.width = screenWidth - spacedForScreen * 2 - 36
+        settingModuleTitle.textColor = UIColor.black.withAlphaComponent(0.6)
         superView.addSubview(settingModuleTitle)
     }
     
@@ -191,18 +193,21 @@ func settingControlBuild(title: String, tips: String, _ superView: UIView, _ poi
         }
     }
     
-    let settingModuleBox = UIView(frame: CGRect(x: spacedForScreen, y: settingModuleTitle.frame.maxY, width: screenWidth - spacedForScreen * 2, height: settingModuleHeight))
+    // 设置主体框
+    let settingModuleBox = UIView(frame: CGRect(x: spacedForScreen, y: settingModuleTitle.frame.maxY + 6, width: screenWidth - spacedForScreen * 2, height: settingModuleHeight))
     settingModuleBox.backgroundColor = UIColor.systemBackground
     settingModuleBox.layer.cornerRadius = 12
     settingModuleBox.clipsToBounds = true
     superView.addSubview(settingModuleBox)
     
-    let settingModuleTips = UILabel(frame: CGRect(x: spacedForScreen + 10, y: settingModuleBox.frame.maxY, width: screenWidth - spacedForScreen * 2, height: 0))
-    if !title.isEmpty {
+    let settingModuleTips = UILabel(frame: CGRect(x: spacedForScreen + 18, y: settingModuleBox.frame.maxY + 6, width: screenWidth - spacedForScreen * 2, height: 0))
+    if !tips.isEmpty {
         settingModuleTips.text = tips
-        settingModuleTips.font = basicFont2
-        settingModuleTips.sizeToFit()
         settingModuleTips.numberOfLines = 0
+        settingModuleTips.font = tipsFont
+        settingModuleTips.sizeToFit()
+        settingModuleTips.frame.size.width = settingModuleBox.frame.width - 36
+        settingModuleTips.textColor = UIColor.black.withAlphaComponent(0.6)
         superView.addSubview(settingModuleTips)
     }
     
@@ -216,13 +221,11 @@ func settingControlBuild(title: String, tips: String, _ superView: UIView, _ poi
             settingModuleBox.addSubview(rowBox)
             
             let rowTitle = UILabel()
-            rowTitle.frame.origin = CGPoint(x: 0, y: 0)
-            rowTitle.frame.size.width = 200
+            rowTitle.frame.origin = CGPoint(x: 18, y: 13)
             rowTitle.text = item["rowTitle"]
-            rowTitle.font = basicFont2
+            rowTitle.font = basicFont1
             rowTitle.textColor = UIColor.black
             rowTitle.sizeToFit()
-            print(rowTitle.frame)
             rowBox.addSubview(rowTitle)
             
             let rowIcon = UIImageView(frame: CGRect(x: settingModuleBox.frame.maxX - 45, y: 14, width: 10, height: 16))
@@ -234,5 +237,6 @@ func settingControlBuild(title: String, tips: String, _ superView: UIView, _ poi
             break
         }
     }
+    return settingModuleTips.frame.maxY
 }
 

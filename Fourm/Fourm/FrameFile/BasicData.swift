@@ -36,7 +36,6 @@ func a(viewController: UIViewController) {
 }
 
 enum Direction: String {
-
   case screen  // 等价于 case east = "east"，
   case west
   case south
@@ -47,10 +46,11 @@ func spaced(_ type: Direction) -> CGFloat {
     CGFloat(0)
 }
 
-let spacedForScreen = CGFloat(20)
+let spacedForScreen = CGFloat(20) + safeAreaInsets.left
 let spacedForControl = CGFloat(10) // 各个相邻的控件之间的间距，也用做二级标题和模块之间的间距
-let spacedForModule = CGFloat(45) // 各个模块之间的间距
-let spacedForNavigation = CGFloat(28) // 导航栏与第一个模块之间的间距
+let spacedForModule = CGFloat(30) // 各个模块之间的间距
+let spacedForModule2 = CGFloat(25) // 各个模块之间的间距
+let spacedForNavigation = CGFloat(18) // 导航栏与第一个模块之间的间距
 
 // 控件尺寸
 
@@ -60,10 +60,12 @@ let largeControl2Size2 = CGSize(width: screenWidth - spacedForScreen * 2, height
 
 // 字体大小
 let basicFont = CGFloat(17) // 标准正文字体大小，还有作者名也使用
+let basicFont1 = UIFont.systemFont(ofSize: CGFloat(17)) // 小号正文字体大小
 let basicFont2 = UIFont.systemFont(ofSize: CGFloat(16)) // 小号正文字体大小
+let tipsFont = UIFont.systemFont(ofSize: CGFloat(12)) // 小号正文字体大小
 let codeFont = UIFont(name: "Menlo", size: 16)
 let titleFont = CGFloat(34) // 一级标题字体大小，largeTitle那种
-let titleFont2 = UIFont.systemFont(ofSize: CGFloat(28), weight: .bold) // 二级标题字体大小，例如每个模块的标题
+let titleFont2 = UIFont.systemFont(ofSize: CGFloat(26), weight: .bold) // 二级标题字体大小，例如每个模块的标题
 let titleFont3 = CGFloat(22) // 三级标题字体大小，例如展示文章的一些控件的标题
 
 //
