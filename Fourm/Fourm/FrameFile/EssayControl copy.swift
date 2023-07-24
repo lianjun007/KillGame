@@ -411,7 +411,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
     
     // 设置代码(滚动)块的基础参数
     codeScrollBox.frame.size.height = rowArray[(codeStringArray.count - 1) * 2].frame.maxY + 10
-    codeScrollBox.contentSize = CGSize(width: codeRowMaxX + 10, height: rowArray[(codeStringArray.count - 1) * 2].frame.maxY + 10)
+    codeScrollBox.contentSize.height = rowArray[(codeStringArray.count - 1) * 2].frame.maxY + 10
     codeScrollBox.layer.cornerRadius = 4
     codeScrollBox.alwaysBounceHorizontal = true
     
@@ -458,6 +458,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         
         // 设置代码(滚动)块的样式
         codeScrollBox.backgroundColor = UIColor.systemFill
+        codeScrollBox.contentSize.width = codeRowMaxX + rowNumberBoxWidth + 15
         
         // 代码行序号容器的样式
         rowNumberBox.frame = CGRect(x: codeScrollBox.frame.origin.x, y: codeScrollBox.frame.origin.y, width: rowNumberBoxWidth + 5, height: codeScrollBox.frame.height)
@@ -514,6 +515,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         codeScrollBox.backgroundColor = UIColor(red: 242/255.0, green: 242/255.0, blue: 247/255.0, alpha: 1.000)
         codeScrollBox.layer.borderWidth = 1
         codeScrollBox.layer.borderColor = UIColor(red: 138/255.0, green: 138/255.0, blue: 141/255.0, alpha: 1.000).cgColor
+        codeScrollBox.contentSize.width = codeRowMaxX + rowNumberBoxWidth + 10
         
         // 代码行序号容器的样式
         rowNumberBox.frame = CGRect(x: codeScrollBox.frame.origin.x + 1, y: codeScrollBox.frame.origin.y + 1, width: rowNumberBoxWidth - 0.5, height: codeScrollBox.frame.height - 2)
@@ -579,6 +581,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         
         // 设置代码(滚动)块的样式
         codeScrollBox.backgroundColor = UIColor(red: 222/255.0, green: 221/255.0, blue: 247/255.0, alpha: 1.000)
+        codeScrollBox.contentSize.width = codeRowMaxX + rowNumberBoxWidth + 17
         
         // 代码行序号容器的样式
         rowNumberBox.frame = CGRect(x: 7 + codeScrollBox.frame.origin.x, y: 6 + codeScrollBox.frame.origin.y, width: rowNumberBoxWidth, height: codeScrollBox.frame.height - 12)

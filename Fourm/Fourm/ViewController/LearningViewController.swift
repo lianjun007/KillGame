@@ -6,9 +6,8 @@ class LearningViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         viewControllerInitialize(vc: self, navTitle: "开始学习")
-        print(safeAreaInsets)
         // 创建底层滚动视图
         let underlyScrollView = UIScrollView(frame: UIScreen.main.bounds)
         view.addSubview(underlyScrollView)

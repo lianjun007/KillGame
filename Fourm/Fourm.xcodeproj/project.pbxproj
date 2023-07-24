@@ -65,6 +65,7 @@
 		DA54BBC52A45AB1C0009BF68 /* File in Resources */ = {isa = PBXBuildFile; fileRef = DA54BBC42A45AB1C0009BF68 /* File */; };
 		DA54BBCA2A46109D0009BF68 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA54BBC92A46109D0009BF68 /* Media.xcassets */; };
 		DA5C73BB2A4B7CB500EC672A /* EssayControl copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C73BA2A4B7CB500EC672A /* EssayControl copy.swift */; };
+		DA6331D22A6E290C00563CFC /* iPhoneModle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6331D12A6E290C00563CFC /* iPhoneModle.swift */; };
 		DA6ED6A42A5B997200FB3524 /* SelectedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6ED6A32A5B997200FB3524 /* SelectedCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +119,7 @@
 		DA54BBC42A45AB1C0009BF68 /* File */ = {isa = PBXFileReference; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 		DA54BBC92A46109D0009BF68 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		DA5C73BA2A4B7CB500EC672A /* EssayControl copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EssayControl copy.swift"; sourceTree = "<group>"; };
+		DA6331D12A6E290C00563CFC /* iPhoneModle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhoneModle.swift; sourceTree = "<group>"; };
 		DA6ED6A32A5B997200FB3524 /* SelectedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				DA13A4F52A2E5DE4002F44AB /* BasicData.swift */,
+				DA6331D12A6E290C00563CFC /* iPhoneModle.swift */,
 				DA13A4F62A2E5DE4002F44AB /* ControlBuild.swift */,
 				DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */,
 				DA5C73BA2A4B7CB500EC672A /* EssayControl copy.swift */,
@@ -406,6 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA6331D22A6E290C00563CFC /* iPhoneModle.swift in Sources */,
 				DA13A4C42A2E5D52002F44AB /* SearchViewController.swift in Sources */,
 				DA13A4FE2A2E5DE4002F44AB /* DataInvoke.swift in Sources */,
 				DA13A48A2A2E5CE4002F44AB /* AppDelegate.swift in Sources */,
@@ -623,7 +627,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -651,7 +655,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

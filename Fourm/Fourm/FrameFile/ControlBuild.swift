@@ -163,7 +163,7 @@ func mediumControlBuild(origin: CGPoint, imageName: String, title: String, title
     return control
 }
 
-// type: 类型(滚动: custom, 开关: switch, 跳转: forward)
+// type: 类型(自定义: custom, 开关: switch, 跳转: forward)
 // rowTitle:
 // rowHeight: 行高(默认: default, 倍数)
 // title

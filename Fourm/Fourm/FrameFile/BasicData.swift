@@ -17,7 +17,6 @@ let ContentData = contentDataInitialize()
 let essayData: Dictionary<String, Dictionary<String, Any>> = ContentData["essay"]!
 let collectionData: Dictionary<String, Dictionary<String, Any>> = ContentData["collections"]!
 
-
 // 获取安全插值
 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
 let window = windowScene?.windows.first
@@ -35,14 +34,14 @@ func a(viewController: UIViewController) {
     }
 }
 
-enum Direction: String {
-  case screen  // 等价于 case east = "east"，
-  case west
-  case south
-  case north = "n"
+enum spacedEnumerate {
+    case screen
+    case control
+    case module
+    case navigation
 }
 // 各种间距边距
-func spaced(_ type: Direction) -> CGFloat {
+func spaced(_ type: spacedEnumerate) -> CGFloat {
     CGFloat(0)
 }
 
@@ -81,13 +80,13 @@ let titleFont3 = CGFloat(22) // 三级标题字体大小，例如展示文章的
 
 //// 判断字符串是否超出UILabel的范围
 //func isTruncated(_ label: UILabel) -> Bool {
-//    
+//
 //    let judgmentLabel = UILabel()
 //    judgmentLabel.text = label.text
 //    judgmentLabel.font = UIFont.systemFont(ofSize: CGFloat(titleFont3), weight: .bold)
 //    judgmentLabel.sizeToFit()
 //    return label.frame.width < judgmentLabel.frame.width
-//    
+//
 //}
 //
 //func navBar(_ navBar: UINavigationBar) -> CGFloat {
