@@ -3,31 +3,31 @@ import UIKit
 class LearningViewController: UIViewController {
     
     var featuredCollectionsRandomDataArray: Array<Dictionary<String, String>> = [] // 接收精选课程的随机数据
-    
+    let underlyScrollView = UIScrollView()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         viewControllerInitialize(vc: self, navTitle: "开始学习")
-        // 创建底层滚动视图
-        let underlyScrollView = UIScrollView(frame: UIScreen.main.bounds)
+        // 添加底层滚动视图
+        underlyScrollView.frame = UIScreen.main.bounds
         view.addSubview(underlyScrollView)
         
-        let moduleTitle1 = moduleTitleBuild("精选合集", underlyScrollView, spacedForNavigation, interaction: true)
+        let moduleTitle1 = moduleTitleBuild("精选合集", underlyScrollView, Spaced.navigation(), interaction: true)
         moduleTitle1.addTarget(self, action: #selector(clickModuleTitleControl), for: .touchUpInside)
         
         // 发送精选课程的随机数据
         featuredCollectionsRandomDataArray = arrayRandom(number: 7, array: featuredCollectionsDataArray) as! Array<Dictionary<String, String>>
 
         // 设置第一个模块的横向滚动视图，用来承载第一个模块“精选合集”
-        let moduleView = UIScrollView(frame: CGRect(x: 0, y: moduleTitle1.frame.maxY + spacedForControl, width: screenWidth, height: largeControlSize.height))
-        moduleView.contentSize = CGSize(width: largeControlSize.width * 7 + spacedForControl * 6 + spacedForScreen * 2, height: largeControlSize.height)
+        let moduleView = UIScrollView(frame: CGRect(x: 0, y: moduleTitle1.frame.maxY + Spaced.control(), width: Screen.width(), height: largeControlSize.height))
+        moduleView.contentSize = CGSize(width: largeControlSize.width * 7 + Spaced.control() * 6 + Spaced.screenAuto() * 2, height: largeControlSize.height)
         moduleView.showsHorizontalScrollIndicator = false
         moduleView.clipsToBounds = false
         underlyScrollView.addSubview(moduleView)
         // 创建7个精选合集框
         for i in 0 ... 6 {
             // 配置参数
-            let moduleControlOrigin = CGPoint(x: spacedForScreen + CGFloat(i) * (largeControlSize.width + spacedForControl), y: 0)
+            let moduleControlOrigin = CGPoint(x: Spaced.screen() + CGFloat(i) * (largeControlSize.width + Spaced.control()), y: 0)
             let featuredCourseBox = largeControlBuild(origin: moduleControlOrigin, imageName: featuredCollectionsRandomDataArray[i]["imageName"]!, title: featuredCollectionsRandomDataArray[i]["title"]!, title2: featuredCollectionsRandomDataArray[i]["author"]!)
             featuredCourseBox.tag = i
             featuredCourseBox.addTarget(self, action: #selector(clickCollectionControl), for: .touchUpInside)
@@ -37,7 +37,7 @@ class LearningViewController: UIViewController {
         }
         
         // Set the UILabel at the featuredCoursesBox tilte
-        let moduleTitle2 = moduleTitleBuild("精选文章", underlyScrollView, moduleView.frame.maxY + spacedForModule, interaction: true)
+        let moduleTitle2 = moduleTitleBuild("精选文章", underlyScrollView, moduleView.frame.maxY + Spaced.module(), interaction: true)
         moduleTitle2.addTarget(self, action: #selector(clickModuleTitleControl), for: .touchUpInside)
         
         var cellViewArray: Array<UIButton> = []
@@ -49,7 +49,7 @@ class LearningViewController: UIViewController {
                 direction = true
             }
             
-            let cellView = mediumControlBuild(origin: CGPoint(x: spacedForScreen, y: moduleTitle2.frame.maxY + spacedForControl + CGFloat(i) * (spacedForControl + mediumControlSize.height)), imageName: essayData["\(i + 1)"]?["cover"] as! String, title: essayData["\(i + 1)"]?["title"] as! String, title2: essayData["\(i + 1)"]?["author"] as! String, direction: direction)
+            let cellView = mediumControlBuild(origin: CGPoint(x: Spaced.screenAuto(), y: moduleTitle2.frame.maxY + Spaced.control() + CGFloat(i) * (Spaced.control() + 90)), imageName: essayData["\(i + 1)"]?["cover"] as! String, title: essayData["\(i + 1)"]?["title"] as! String, title2: essayData["\(i + 1)"]?["author"] as! String, direction: direction)
             
             cellView.tag = i + 1
             cellView.addTarget(self, action: #selector(clickEssayControl), for: .touchUpInside)
@@ -61,26 +61,24 @@ class LearningViewController: UIViewController {
 //                essayLabel.numberOfLines += 1
 //            }
 //            essayLabel.sizeToFit()
-//            essayLabel.frame.size.width = blurView.frame.width - spacedForControl * 2
+//            essayLabel.frame.size.width = blurView.frame.width - Spaced.control() * 2
 //            essayLabel.isUserInteractionEnabled = false
 //            cellView.addSubview(essayLabel)
 //
 //            // 根据字符串行数判断动态坐标
 //            if essayLabel.numberOfLines == 1 {
-//                essayLabel.frame.origin.y = (blurView.frame.height - essayLabel.frame.height * 2 - essayLabel2.frame.height - spacedForControl) / 2
-//                essayLabel2.frame.origin = CGPoint(x: blurView.frame.origin.x + spacedForControl, y: (blurView.frame.height - essayLabel.frame.height * 2 - essayLabel2.frame.height - spacedForControl) / 2 + essayLabel.frame.height * 2 + spacedForControl)
+//                essayLabel.frame.origin.y = (blurView.frame.height - essayLabel.frame.height * 2 - essayLabel2.frame.height - Spaced.control()) / 2
+//                essayLabel2.frame.origin = CGPoint(x: blurView.frame.origin.x + Spaced.control(), y: (blurView.frame.height - essayLabel.frame.height * 2 - essayLabel2.frame.height - Spaced.control()) / 2 + essayLabel.frame.height * 2 + Spaced.control())
 //            } else {
-//                essayLabel.frame.origin.y = (blurView.frame.height - essayLabel.frame.height - essayLabel2.frame.height - spacedForControl) / 2
-//                essayLabel2.frame.origin = CGPoint(x: blurView.frame.origin.x + spacedForControl, y: (blurView.frame.height - essayLabel.frame.height - essayLabel2.frame.height - spacedForControl) / 2 + essayLabel.frame.height + spacedForControl)
+//                essayLabel.frame.origin.y = (blurView.frame.height - essayLabel.frame.height - essayLabel2.frame.height - Spaced.control()) / 2
+//                essayLabel2.frame.origin = CGPoint(x: blurView.frame.origin.x + Spaced.control(), y: (blurView.frame.height - essayLabel.frame.height - essayLabel2.frame.height - Spaced.control()) / 2 + essayLabel.frame.height + Spaced.control())
 //            }
 //
             let interaction = UIContextMenuInteraction(delegate: self)
             cellView.addInteraction(interaction)
         }
         
-        underlyScrollView.contentSize = CGSize(width: screenWidth, height: cellViewArray[6].frame.maxY + spacedForControl)
-        
-        
+        underlyScrollView.contentSize = CGSize(width: Screen.width(), height: cellViewArray[6].frame.maxY + Spaced.module())
     }
     
     @objc func clickEssayControl(_ sender: UIButton) {
@@ -99,7 +97,41 @@ class LearningViewController: UIViewController {
         let VC = SelectedCollectionViewController()
         self.navigationController?.pushViewController(VC, animated: true)
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 
+        // 记录当前滚动视图的偏移量
+        var offset: CGPoint?
+        for subview in view.subviews {
+            if let underlyScrollView = subview as? UIScrollView {
+                offset = underlyScrollView.contentOffset
+                break
+            }
+        }
+
+        // 在屏幕旋转完成后刷新界面
+        coordinator.animate(alongsideTransition: nil) { _ in
+            // 移除旧的滚动视图
+            for subview in self.underlyScrollView.subviews {
+                subview.removeFromSuperview()
+            }
+
+            // 重新构建界面
+            self.viewDidLoad()
+
+            // 将新的滚动视图的偏移量设置为之前记录的值
+            if let offset = offset {
+                var newOffset = offset
+                if offset.y < -44 {
+                    newOffset.y = -(self.navigationController?.navigationBar.frame.height)!
+                } else if offset.y == -44 {
+                    newOffset.y = -((self.navigationController?.navigationBar.frame.height)! + Screen.safeAreaInsets().top)
+                }
+                self.underlyScrollView.setContentOffset(newOffset, animated: false)
+            }
+        }
+    }
 }
 
 extension LearningViewController: UIContextMenuInteractionDelegate {
@@ -114,53 +146,53 @@ extension LearningViewController: UIContextMenuInteractionDelegate {
             
             let previewControllerInstance = UIViewController()
             if identifier < 7 {
-                let image = UIImageView(frame: CGRect(x: spacedForScreen, y: spacedForScreen, width: previewControllerInstance.view.bounds.width - spacedForScreen * 2, height: previewControllerInstance.view.bounds.width - spacedForScreen * 2))
+                let image = UIImageView(frame: CGRect(x: Spaced.screen(), y: Spaced.screen(), width: previewControllerInstance.view.bounds.width - Spaced.screen() * 2, height: previewControllerInstance.view.bounds.width - Spaced.screen() * 2))
                 image.layer.cornerRadius = 10
                 image.clipsToBounds = true
                 image.image = UIImage(named: featuredCollectionsRandomDataArray[identifier]["imageName"]!)
                 previewControllerInstance.view.addSubview(image)
                 
                 // 设置精选课程的标题
-                let courseLabel = UILabel(frame: CGRect(x: spacedForScreen, y: image.frame.maxY + spacedForScreen, width: 0, height: 0))
+                let courseLabel = UILabel(frame: CGRect(x: Spaced.screen(), y: image.frame.maxY + Spaced.screen(), width: 0, height: 0))
                 courseLabel.text = featuredCollectionsRandomDataArray[identifier]["title"]
-                courseLabel.font = titleFont2
+                courseLabel.font = Font.title1()
                 courseLabel.sizeToFit()
                 courseLabel.isUserInteractionEnabled = false
                 previewControllerInstance.view.addSubview(courseLabel)
                 
                 // 设置精选课程的作者名
-                let courseLabel2 = UILabel(frame: CGRect(x: spacedForScreen, y: courseLabel.frame.maxY + spacedForControl, width: 0, height: 0))
+                let courseLabel2 = UILabel(frame: CGRect(x: Spaced.screen(), y: courseLabel.frame.maxY + Spaced.control(), width: 0, height: 0))
                 courseLabel2.text = featuredCollectionsRandomDataArray[identifier]["author"]
-                courseLabel2.font = UIFont.systemFont(ofSize: titleFont3, weight: .regular)
+                courseLabel2.font = Font.title2()
                 courseLabel2.sizeToFit()
                 courseLabel2.isUserInteractionEnabled = false
                 previewControllerInstance.view.addSubview(courseLabel2)
                 
-                previewControllerInstance.preferredContentSize = CGSize(width: previewControllerInstance.view.bounds.width, height: courseLabel2.frame.maxY + spacedForScreen)
+                previewControllerInstance.preferredContentSize = CGSize(width: previewControllerInstance.view.bounds.width, height: courseLabel2.frame.maxY + Spaced.screen())
             } else {
-                let image = UIImageView(frame: CGRect(x: spacedForScreen, y: spacedForScreen, width: previewControllerInstance.view.bounds.width - spacedForScreen * 2, height: previewControllerInstance.view.bounds.width - spacedForScreen * 2))
+                let image = UIImageView(frame: CGRect(x: Spaced.screen(), y: Spaced.screen(), width: previewControllerInstance.view.bounds.width - Spaced.screen() * 2, height: previewControllerInstance.view.bounds.width - Spaced.screen() * 2))
                 image.layer.cornerRadius = 10
                 image.clipsToBounds = true
                 image.image = UIImage(named: featuredCollectionsRandomDataArray[identifier - 7]["imageName"]!)
                 previewControllerInstance.view.addSubview(image)
                 
                 // 设置精选课程的标题
-                let courseLabel = UILabel(frame: CGRect(x: spacedForScreen, y: image.frame.maxY + spacedForScreen, width: 0, height: 0))
+                let courseLabel = UILabel(frame: CGRect(x: Spaced.screen(), y: image.frame.maxY + Spaced.screen(), width: 0, height: 0))
                 courseLabel.text = featuredCollectionsRandomDataArray[identifier - 7]["title"]
-                courseLabel.font = titleFont2
+                courseLabel.font = Font.title1()
                 courseLabel.sizeToFit()
                 courseLabel.isUserInteractionEnabled = false
                 previewControllerInstance.view.addSubview(courseLabel)
                 
                 // 设置精选课程的作者名
-                let courseLabel2 = UILabel(frame: CGRect(x: spacedForScreen, y: courseLabel.frame.maxY + spacedForControl, width: 0, height: 0))
+                let courseLabel2 = UILabel(frame: CGRect(x: Spaced.screen(), y: courseLabel.frame.maxY + Spaced.control(), width: 0, height: 0))
                 courseLabel2.text = featuredCollectionsRandomDataArray[identifier - 7]["author"]
-                courseLabel2.font = UIFont.systemFont(ofSize: titleFont3, weight: .regular)
+                courseLabel2.font = Font.title2()
                 courseLabel2.sizeToFit()
                 courseLabel2.isUserInteractionEnabled = false
                 previewControllerInstance.view.addSubview(courseLabel2)
                 
-                previewControllerInstance.preferredContentSize = CGSize(width: previewControllerInstance.view.bounds.width, height: courseLabel2.frame.maxY + spacedForScreen)
+                previewControllerInstance.preferredContentSize = CGSize(width: previewControllerInstance.view.bounds.width, height: courseLabel2.frame.maxY + Spaced.screenAuto())
             }
             
             return previewControllerInstance

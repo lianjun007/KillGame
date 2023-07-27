@@ -17,64 +17,78 @@ let ContentData = contentDataInitialize()
 let essayData: Dictionary<String, Dictionary<String, Any>> = ContentData["essay"]!
 let collectionData: Dictionary<String, Dictionary<String, Any>> = ContentData["collections"]!
 
-// 获取安全插值
-let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-let window = windowScene?.windows.first
-let safeAreaInsets = window?.safeAreaInsets ?? UIEdgeInsets.zero
+
 
 // 屏幕的基础属性
-let screenWidth = UIScreen.main.bounds.width // 与设备屏幕宽度一样宽
-let screenHeight = UIScreen.main.bounds.height // 与设备屏幕高度一样高
-
-func a(viewController: UIViewController) {
-    if viewController.traitCollection.userInterfaceStyle == .dark {
-        // User Interface is Dark
-    } else {
-        // User Interface is Light
+struct Screen {
+    static func safeAreaInsets() -> UIEdgeInsets {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        return window?.safeAreaInsets ?? UIEdgeInsets.zero
+    }
+    static func width() -> CGFloat {
+        UIScreen.main.bounds.width // 与设备屏幕宽度一样宽
+    }
+    static func height() -> CGFloat {
+        UIScreen.main.bounds.height // 与设备屏幕高度一样高
     }
 }
 
-enum spacedEnumerate {
-    case screen
-    case control
-    case module
-    case navigation
+// 选择间距相关的方法，返回CGFloat
+struct Spaced {
+    static func screen() -> CGFloat {
+        20 // 屏幕边框与内容之间的间距
+    }
+    static func screenAuto() -> CGFloat {
+        20 + Screen.safeAreaInsets().left // 屏幕边框与内容之间的间距，会根据安全区域自动调整
+    }
+    static func control() -> CGFloat {
+        10 // 各个相邻的控件之间的间距，也用做二级标题和模块之间的间距
+    }
+    static func module() -> CGFloat {
+        30 // 各个模块之间的间距
+    }
+    static func setting() -> CGFloat {
+        25 // 各个设置之间的间距
+    }
+    static func navigation() -> CGFloat {
+        18 // 导航栏与第一个模块之间的间距
+    }
 }
-// 各种间距边距
-func spaced(_ type: spacedEnumerate) -> CGFloat {
-    CGFloat(0)
+
+// 选择字体相关的方法，返回UIFont
+struct Font {
+    static func title() -> UIFont {
+        UIFont.boldSystemFont(ofSize: 34) // 大标题，largeTitle那种
+    }
+    static func title1() -> UIFont {
+        UIFont.boldSystemFont(ofSize: 28) // 一级标题，每个模块的标题，正文的一级标题
+    }
+    static func title2() -> UIFont {
+        UIFont.systemFont(ofSize: 22, weight: .medium) // 二级标题，正文的二级标题
+    }
+    static func title3() -> UIFont {
+        UIFont.systemFont(ofSize: 20, weight: .medium) // 三级标题，正文的二级标题
+    }
+    static func text() -> UIFont {
+        UIFont.systemFont(ofSize: 17, weight: .regular) // 正文字体
+    }
+    static func text(_ weight: UIFont.Weight) -> UIFont {
+        UIFont.systemFont(ofSize: 17, weight: weight) // 自定义字重的正文字体
+    }
+    static func smallText() -> UIFont {
+        UIFont.systemFont(ofSize: 16, weight: .regular) // 副文字体，比如表格等部分的显示字体
+    }
+    static func tips() -> UIFont {
+        UIFont.systemFont(ofSize: 12, weight: .regular) // 设置界面标注提示
+    }
+    static func code() -> UIFont {
+        UIFont(name: "Menlo", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .regular) // 代码块
+    }
 }
 
-let spacedForScreen = CGFloat(20) + safeAreaInsets.left
-let spacedForControl = CGFloat(10) // 各个相邻的控件之间的间距，也用做二级标题和模块之间的间距
-let spacedForModule = CGFloat(30) // 各个模块之间的间距
-let spacedForModule2 = CGFloat(25) // 各个模块之间的间距
-let spacedForNavigation = CGFloat(18) // 导航栏与第一个模块之间的间距
-
-// 控件尺寸
-
-let largeControl2Size = CGSize(width: screenWidth - spacedForScreen * 2, height: (screenWidth - spacedForScreen * 2) * 2 / 3) // 收藏界面的收藏夹展示框
-let largeControl2Size2 = CGSize(width: screenWidth - spacedForScreen * 2, height: (screenWidth - spacedForScreen * 2) * 2 / 3 + 100) // 收藏界面的收藏夹展示框的大框子，包含标题、数量、简介，暂未启用
 
 
-// 字体大小
-let basicFont = CGFloat(17) // 标准正文字体大小，还有作者名也使用
-let basicFont1 = UIFont.systemFont(ofSize: CGFloat(17)) // 小号正文字体大小
-let basicFont2 = UIFont.systemFont(ofSize: CGFloat(16)) // 小号正文字体大小
-let tipsFont = UIFont.systemFont(ofSize: CGFloat(12)) // 小号正文字体大小
-let codeFont = UIFont(name: "Menlo", size: 16)
-let titleFont = CGFloat(34) // 一级标题字体大小，largeTitle那种
-let titleFont2 = UIFont.systemFont(ofSize: CGFloat(26), weight: .bold) // 二级标题字体大小，例如每个模块的标题
-let titleFont3 = CGFloat(22) // 三级标题字体大小，例如展示文章的一些控件的标题
-
-//
-//func basicCornerRadius(_ size: CGSize) -> CGFloat {
-//    if size.width >= size.height {
-//        return (size.width * 0.04)
-//    } else {
-//        return (size.height * 0.04)
-//    }
-//} // 标准控件圆角
 
 
 
@@ -91,4 +105,12 @@ let titleFont3 = CGFloat(22) // 三级标题字体大小，例如展示文章的
 //
 //func navBar(_ navBar: UINavigationBar) -> CGFloat {
 //    navBar.frame.height
+//}
+
+//func a(viewController: UIViewController) {
+//    if viewController.traitCollection.userInterfaceStyle == .dark {
+//        // User Interface is Dark
+//    } else {
+//        // User Interface is Light
+//    }
 //}

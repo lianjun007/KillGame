@@ -1,3 +1,4 @@
+
 import Foundation
 
 // 随机取用数组方法

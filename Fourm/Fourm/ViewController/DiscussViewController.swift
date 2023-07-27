@@ -41,7 +41,7 @@ class DiscussViewController: UIViewController {
 //        navBarHeight = navBar(self.navigationController!.navigationBar) // 获取导航栏高度
 //        topHeight = statusBarHeight + navBarHeight // 导航栏加状态栏高度
 //        
-//        scrollViewNav.frame = CGRect(x: 0, y: topHeight, width: screenWidth, height: 44)
+//        scrollViewNav.frame = CGRect(x: 0, y: topHeight, width: Screen.width, height: 44)
 //        
 //        scrollViewNav.showsHorizontalScrollIndicator = false
 //        
@@ -57,7 +57,7 @@ class DiscussViewController: UIViewController {
 //        for i in 0 ... 11 {
 //            if 0 ... 5 ~= i {
 //
-//                let headerBtn = UIButton(frame: CGRect(x: CGFloat(i) * (spacedForControl + 100) + spacedForScreen, y: 0, width: 100, height: 33))
+//                let headerBtn = UIButton(frame: CGRect(x: CGFloat(i) * (Spaced.control() + 100) + Spaced.screenAuto(), y: 0, width: 100, height: 33))
 //                headerBtn.setTitle(array[i], for: .normal)
 //                headerBtn.setTitleColor(.black, for: .normal)
 //                headerBtn.tag = i
@@ -69,7 +69,7 @@ class DiscussViewController: UIViewController {
 //                scrollViewNav.addSubview(headerBtn)
 //            } else {
 //
-//                let headerBtn = UIButton(frame: CGRect(x: CGFloat(i) * (spacedForControl + 100) + spacedForScreen, y: 44, width: 100, height: 40))
+//                let headerBtn = UIButton(frame: CGRect(x: CGFloat(i) * (Spaced.control() + 100) + Spaced.screenAuto(), y: 44, width: 100, height: 40))
 //                headerBtn.setTitleColor(.black, for: .normal)
 //                if i == 6 {
 //                    headerBtn.frame.size.width = referenceLabel2.frame.width
@@ -84,7 +84,7 @@ class DiscussViewController: UIViewController {
 //
 //        }
 //        
-//        scrollViewNav.contentSize = CGSize(width: CGFloat(6) * (spacedForControl + 100) + spacedForScreen * 2 - spacedForControl, height: 44)
+//        scrollViewNav.contentSize = CGSize(width: CGFloat(6) * (Spaced.control() + 100) + Spaced.screenAuto() * 2 - Spaced.control(), height: 44)
 //
 //        collectionView.dataSource = self
 //        collectionView.delegate = self
@@ -102,7 +102,7 @@ class DiscussViewController: UIViewController {
 //    // 导航栏按钮点击事件
 //    @objc func navClicked(sender: UIButton) {
 //        
-//        collectionView.setContentOffset(CGPoint(x: Int(screenWidth) * sender.tag, y: 0), animated: true)
+//        collectionView.setContentOffset(CGPoint(x: Int(Screen.width) * sender.tag, y: 0), animated: true)
 //        switch sender.tag {
 //        case 0:
 //            sender.backgroundColor = .systemIndigo
@@ -206,7 +206,7 @@ class DiscussViewController: UIViewController {
 //        cellView.addSubview(imageView)
 //        
 //        // 设置精选文章的标题
-//        let essayLabel = UILabel(frame: CGRect(x: blurView.frame.origin.x + spacedForScreen, y: 0, width: blurView.frame.width - spacedForControl * 2, height: 0))
+//        let essayLabel = UILabel(frame: CGRect(x: blurView.frame.origin.x + Spaced.screenAuto(), y: 0, width: blurView.frame.width - Spaced.control() * 2, height: 0))
 //        essayLabel.text = index1[index]["title"]
 //        essayLabel.font = UIFont.systemFont(ofSize: CGFloat(titleFont3), weight: .bold)
 //        // 根据字符串长度赋予不同行数,最多为两行
@@ -214,15 +214,15 @@ class DiscussViewController: UIViewController {
 //            essayLabel.numberOfLines += 1
 //        }
 //        essayLabel.sizeToFit()
-//        essayLabel.frame.size.width = blurView.frame.width - spacedForControl * 2
+//        essayLabel.frame.size.width = blurView.frame.width - Spaced.control() * 2
 //        essayLabel.isUserInteractionEnabled = false
 //        cellView.addSubview(essayLabel)
 //        
 //        // 设置精选文章的作者名
 //        let essayLabel2 = UILabel()
-//        essayLabel2.frame.origin = CGPoint(x: blurView.frame.origin.x + spacedForControl, y: (blurView.frame.height - essayLabel.frame.height * 2 - essayLabel2.frame.height - spacedForControl) / 2 + essayLabel.frame.height * 2 + spacedForControl)
+//        essayLabel2.frame.origin = CGPoint(x: blurView.frame.origin.x + Spaced.control(), y: (blurView.frame.height - essayLabel.frame.height * 2 - essayLabel2.frame.height - Spaced.control()) / 2 + essayLabel.frame.height * 2 + Spaced.control())
 //        essayLabel2.text = index1[index]["author"]
-//        essayLabel2.font = UIFont.systemFont(ofSize: basicFont, weight: .regular)
+//        essayLabel2.font = font(.body)
 //        essayLabel2.sizeToFit()
 //        essayLabel2.isUserInteractionEnabled = false
 //        cellView.addSubview(essayLabel2)

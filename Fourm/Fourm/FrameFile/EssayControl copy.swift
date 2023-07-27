@@ -9,7 +9,7 @@ import UIKit
 //    }
 //}
 
-func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
+func essayInterfaceBuild(_ essayData: String, _ VC: UIViewController) -> UIScrollView {
     let essayDataArray = essayData.components(separatedBy: "\n")
     // 设置最底层的滚动视图，用来承载界面内的所有元素
     let underlyScrollView = UIScrollView(frame: VC.view.bounds)
@@ -37,12 +37,12 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             author = true
             pointY = authorModuleBuild(stringHandling(item), underlyScrollView)
             let horizontalLinePath = UIBezierPath()
-            let pointY = spacedForModule + spacedForControl / 2
+            let pointY = Spaced.module() * 2 - Spaced.control()
             horizontalLinePath.move(to: CGPoint(x: 0, y: pointY))
-            horizontalLinePath.addLine(to: CGPoint(x: screenWidth, y: pointY))
+            horizontalLinePath.addLine(to: CGPoint(x: Screen.width(), y: pointY))
             let horizontalLine = CAShapeLayer()
             horizontalLine.path = horizontalLinePath.cgPath
-            horizontalLine.strokeColor = settingEssayTitle2DisplayMode == 2 ? UIColor.systemIndigo.withAlphaComponent(0.2).cgColor: UIColor.black.withAlphaComponent(0.2).cgColor
+            horizontalLine.strokeColor = UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions" ? UIColor.systemIndigo.withAlphaComponent(0.2).cgColor: UIColor.black.withAlphaComponent(0.2).cgColor
             horizontalLine.lineWidth = 1
             underlyScrollView.layer.addSublayer(horizontalLine)
         }
@@ -53,27 +53,27 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
     if !author {
         pointY = authorModuleBuild("未知", underlyScrollView)
         let horizontalLinePath = UIBezierPath()
-        let pointY = spacedForModule + spacedForControl / 2
+        let pointY = Spaced.module() + Spaced.control() / 2
         horizontalLinePath.move(to: CGPoint(x: 0, y: pointY))
-        horizontalLinePath.addLine(to: CGPoint(x: screenWidth, y: pointY))
+        horizontalLinePath.addLine(to: CGPoint(x: Screen.width(), y: pointY))
         let horizontalLine = CAShapeLayer()
         horizontalLine.path = horizontalLinePath.cgPath
-        horizontalLine.strokeColor = settingEssayTitle2DisplayMode == 2 ? UIColor.systemIndigo.withAlphaComponent(0.3).cgColor: UIColor.black.withAlphaComponent(0.5).cgColor
+        horizontalLine.strokeColor = UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions" ? UIColor.systemIndigo.withAlphaComponent(0.3).cgColor: UIColor.black.withAlphaComponent(0.5).cgColor
         horizontalLine.lineWidth = 1
         underlyScrollView.layer.addSublayer(horizontalLine)
     }
-    pointY += spacedForControl * 3
+    pointY += Spaced.control() * 3
     for item in essayDataArray {
         text = false
         if item.hasPrefix("# ") {
-            pointY = title2ModuleBuild(stringHandling(item), underlyScrollView, originY: control ? pointY: spacedForControl * 2)
+            pointY = title1ModuleBuild(stringHandling(item), underlyScrollView, originY: control ? pointY: Spaced.module() + 10)
             control = true
         } else if item.hasPrefix("## ") {
             control = true
-            pointY = title3ModuleBuild(stringHandling(item), underlyScrollView, originY: pointY)
+            pointY = title2ModuleBuild(stringHandling(item), underlyScrollView, originY: pointY)
         } else if item.hasPrefix("### ") {
             control = true
-            pointY = title4ModuleBuild(stringHandling(item), underlyScrollView, originY: pointY)
+            pointY = title3ModuleBuild(stringHandling(item), underlyScrollView, originY: pointY)
         } else if item.hasPrefix("#img ") {
             control = true
             pointY = imageModuleBuild(stringHandling(item), underlyScrollView, originY: pointY)
@@ -85,9 +85,9 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
             paragraph = false
             for i in 0 ..< textArray.count {
                 if i == 1 {
-                    pointY = textModuleBuild(textArray[i], underlyScrollView, originY: pointY, spaced: true)
+                    pointY = textModuleBuild(textArray[i], underlyScrollView, originY: pointY, paragraph: true)
                 } else if i != 0 {
-                    pointY = textModuleBuild(textArray[i], underlyScrollView, originY: pointY, spaced: false)
+                    pointY = textModuleBuild(textArray[i], underlyScrollView, originY: pointY, paragraph: false)
                 }
             }
         } else if item.hasPrefix("#code") {
@@ -122,12 +122,14 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
         } else if paragraph {
             textArray.append(item)
         } else if text {
-            pointY = textModuleBuild(item, underlyScrollView, originY: pointY, spaced: true)
+            pointY = textModuleBuild(item, underlyScrollView, originY: pointY, paragraph: true)
         }
         
         
     }
-    underlyScrollView.contentSize = CGSize(width: screenWidth, height: pointY + spacedForControl)
+    underlyScrollView.contentSize = CGSize(width: Screen.width(), height: pointY + Spaced.module())
+    
+    return underlyScrollView
 }
 
 /// 处理文章内容的字符串
@@ -166,20 +168,20 @@ func stringHandling(_ string: String) -> String {
 /// - Parameter view: 底层视图
 func authorModuleBuild(_ string: String, _ view: UIView) -> CGFloat {
     let authorHeader = UILabel()
-    authorHeader.frame.size.width = screenWidth - spacedForScreen * 2
+    authorHeader.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
     authorHeader.text = "作者："
-    authorHeader.font = UIFont.systemFont(ofSize: basicFont, weight: .bold)
+    authorHeader.font = Font.text(.bold)
     authorHeader.sizeToFit()
-    authorHeader.frame.origin = CGPoint(x: spacedForScreen, y: spacedForControl - 2)
+    authorHeader.frame.origin = CGPoint(x: Spaced.screenAuto(), y: Spaced.control() - 2)
     authorHeader.layer.cornerRadius = 5
     view.addSubview(authorHeader)
     
     let author = UILabel()
-    author.frame.size.width = screenWidth - spacedForScreen * 2
+    author.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
     author.text = string
-    author.font = UIFont.systemFont(ofSize: basicFont, weight: .medium)
+    author.font = Font.text(.medium)
     author.sizeToFit()
-    author.frame.origin = CGPoint(x: authorHeader.frame.maxX, y: spacedForControl - 2)
+    author.frame.origin = CGPoint(x: authorHeader.frame.maxX, y: Spaced.control() - 2)
     author.layer.cornerRadius = 5
     author.frame.size.width += 7
     author.clipsToBounds = true
@@ -187,37 +189,36 @@ func authorModuleBuild(_ string: String, _ view: UIView) -> CGFloat {
     author.backgroundColor = UIColor.systemFill
     view.addSubview(author)
     
-    switch settingEssayTitle2DisplayMode {
-    case 1:
+    switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
+    case "lines":
         authorHeader.text = ""
         author.text = "作者：\(string)"
         author.sizeToFit()
-        author.frame.origin.x = spacedForScreen
+        author.frame.origin.x = Spaced.screenAuto()
         author.frame.size.width += 7
         author.textAlignment = .center
         author.backgroundColor = UIColor.systemGroupedBackground
         author.layer.borderWidth = 1
         author.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
-    case 2:
+    case "impressions":
         authorHeader.frame.origin.x += 10
         author.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
         author.frame.origin.x = authorHeader.frame.maxX
         
         let path = UIBezierPath()
-        path.move(to: CGPoint(x: spacedForScreen + 3, y: author.frame.minY + 1))
-        path.addLine(to: CGPoint(x: spacedForScreen + 3, y: author.frame.maxY - 1))
+        path.move(to: CGPoint(x: Spaced.screenAuto() + 3, y: author.frame.minY + 1))
+        path.addLine(to: CGPoint(x: Spaced.screenAuto() + 3, y: author.frame.maxY - 1))
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
         shapeLayer.strokeColor = UIColor.systemIndigo.withAlphaComponent(0.7).cgColor
         shapeLayer.lineWidth = 5.0
         view.layer.addSublayer(shapeLayer)
-    default:
-        break
+    default: break
     }
     return authorHeader.frame.maxY
 }
 
-/// 创建二级标题显示模块
+/// 创建一级标题显示模块
 ///
 /// 输入二级标题内容和底层视图后将自动创建一个显示二级标题的视图
 /// - Parameter string: 二级标题内容
@@ -225,32 +226,32 @@ func authorModuleBuild(_ string: String, _ view: UIView) -> CGFloat {
 /// - Parameter originY: 二级标题的Y轴坐标
 /// - Returns: 返回一个新的Y轴坐标
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
-func title2ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CGFloat {
+func title1ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CGFloat {
     var newOriginY = originY
     let title2 = UILabel()
-    title2.frame.size.width = screenWidth - spacedForScreen * 2
+    title2.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
     title2.text = string
     title2.numberOfLines = 0
-    title2.font = titleFont2
+    title2.font = Font.title1()
     title2.sizeToFit()
-    title2.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForModule)
+    title2.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + Spaced.module())
     view.addSubview(title2)
     newOriginY = title2.frame.maxY
     
-    switch settingEssayTitle2DisplayMode {
-    case 1:
+    switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
+    case "lines":
         let path = UIBezierPath()
-        path.move(to: CGPoint(x: spacedForScreen, y: title2.frame.maxY + 3))
-        path.addLine(to: CGPoint(x: screenWidth - spacedForScreen, y: title2.frame.maxY + 3))
+        path.move(to: CGPoint(x: Spaced.screenAuto(), y: title2.frame.maxY + 3))
+        path.addLine(to: CGPoint(x: Screen.width() - Spaced.screenAuto(), y: title2.frame.maxY + 3))
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
         shapeLayer.strokeColor = UIColor.black.withAlphaComponent(0.5).cgColor
         shapeLayer.lineWidth = 1.0
         view.layer.addSublayer(shapeLayer)
         newOriginY += 5
-    case 2:
+    case "impressions":
         let path = UIBezierPath()
-        path.move(to: CGPoint(x: spacedForScreen, y: title2.frame.maxY - 3))
+        path.move(to: CGPoint(x: Spaced.screenAuto(), y: title2.frame.maxY - 3))
         path.addLine(to: CGPoint(x: title2.frame.maxX, y: title2.frame.maxY - 3))
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
@@ -264,6 +265,47 @@ func title2ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CG
     return newOriginY
 }
 
+/// 创建二级标题显示模块
+///
+/// 输入三级标题内容和底层视图后将自动创建一个显示三级标题的视图
+/// - Parameter string: 三级标题内容
+/// - Parameter view: 底层视图
+/// - Parameter originY: 三级标题的Y轴坐标
+/// - Returns: 返回一个新的Y轴坐标
+/// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
+func title2ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CGFloat {
+    var newOriginY = originY
+    let title3 = UILabel()
+    title3.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+    title3.text = "· \(string)"
+    title3.font = Font.title2()
+    title3.sizeToFit()
+    title3.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + Spaced.navigation())
+    view.addSubview(title3)
+    
+    newOriginY = title3.frame.maxY
+    
+    switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
+    case "lines":
+        title3.text = "- \(string)"
+        title3.sizeToFit()
+    case "impressions":
+        title3.text = "\(string)"
+        title3.sizeToFit()
+        title3.frame.origin.x += 13
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: Spaced.screenAuto() + 5, y: title3.frame.minY + 3))
+        path.addLine(to: CGPoint(x: Spaced.screenAuto() + 5, y: title3.frame.maxY - 3))
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.strokeColor = UIColor.systemIndigo.withAlphaComponent(0.4).cgColor
+        shapeLayer.lineWidth = 5.0
+        view.layer.addSublayer(shapeLayer)
+    default: break
+    }
+    return newOriginY
+}
+
 /// 创建三级标题显示模块
 ///
 /// 输入三级标题内容和底层视图后将自动创建一个显示三级标题的视图
@@ -273,55 +315,13 @@ func title2ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CG
 /// - Returns: 返回一个新的Y轴坐标
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
 func title3ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CGFloat {
-    var newOriginY = originY
-    let title3 = UILabel()
-    title3.frame.size.width = screenWidth - spacedForScreen * 2
-    title3.text = "· \(string)"
-    title3.font = UIFont.systemFont(ofSize: titleFont3, weight: .medium)
-    title3.sizeToFit()
-    title3.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForNavigation)
-    view.addSubview(title3)
-    
-    newOriginY = title3.frame.maxY
-    
-    switch settingEssayTitle2DisplayMode {
-    case 1:
-        title3.text = "- \(string)"
-        title3.sizeToFit()
-    case 2:
-        title3.text = "\(string)"
-        title3.sizeToFit()
-        title3.frame.origin.x += 13
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: spacedForScreen + 5, y: title3.frame.minY + 3))
-        path.addLine(to: CGPoint(x: spacedForScreen + 5, y: title3.frame.maxY - 3))
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = path.cgPath
-        shapeLayer.strokeColor = UIColor.systemIndigo.withAlphaComponent(0.4).cgColor
-        shapeLayer.lineWidth = 5.0
-        view.layer.addSublayer(shapeLayer)
-    default:
-        break
-    }
-    return newOriginY
-}
-
-/// 创建四级标题显示模块
-///
-/// 输入三级标题内容和底层视图后将自动创建一个显示三级标题的视图
-/// - Parameter string: 三级标题内容
-/// - Parameter view: 底层视图
-/// - Parameter originY: 三级标题的Y轴坐标
-/// - Returns: 返回一个新的Y轴坐标
-/// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
-func title4ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CGFloat {
     let title4 = UILabel()
-    title4.frame.size.width = screenWidth - spacedForScreen * 2
+    title4.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
     title4.text = string
-    title4.font = UIFont.systemFont(ofSize: titleFont3 - 3, weight: .medium)
+    title4.font = Font.title2()
     title4.textColor = UIColor.black.withAlphaComponent(0.8)
     title4.sizeToFit()
-    title4.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForNavigation)
+    title4.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + Spaced.navigation())
     view.addSubview(title4)
     return title4.frame.maxY
 }
@@ -345,7 +345,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
     }
     
     // 创建底层的代码框的UIScrollView
-    let codeScrollBox = UIScrollView(frame: CGRect(x: spacedForScreen, y: pointY + spacedForControl, width: screenWidth - spacedForScreen * 2, height: 0))
+    let codeScrollBox = UIScrollView(frame: CGRect(x: Spaced.screenAuto(), y: pointY + Spaced.control(), width: Screen.width() - Spaced.screenAuto() * 2, height: 0))
     superView.addSubview(codeScrollBox)
     
     // 创建代码行序号的容器和对应的高斯模糊
@@ -372,7 +372,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
             break
         }
         codeRow.attributedText = newCodeString
-        codeRow.font = codeFont
+        codeRow.font = Font.code()
         codeRow.sizeToFit()
         if codeRow.frame.maxX > codeRowMaxX {
             codeRowMaxX = codeRow.frame.maxX
@@ -383,7 +383,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         // 代码行的序号部分
         let rowNumber = UILabel()
         rowNumber.frame.origin = CGPoint(x: codeScrollBox.frame.origin.x, y: i == 0 ? 10 + codeScrollBox.frame.origin.y: codeRow.frame.origin.y + codeScrollBox.frame.origin.y)
-        rowNumber.font = codeFont
+        rowNumber.font = Font.code()
         rowArray.append(rowNumber)
         superView.addSubview(rowNumber)
     }
@@ -416,8 +416,8 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
     codeScrollBox.alwaysBounceHorizontal = true
     
     // 主题相关样式的参数设置
-    switch settingEssayTitle2DisplayMode {
-    case 0:
+    switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
+    case "simple":
         // 设置代码行和序号的样式
         for (index, element) in rowArray.enumerated() {
             let rowNumber = (index - 1) / 2 + 1 // 代码行的序号的具体数字
@@ -471,7 +471,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         blurView.frame = CGRect(origin: CGPointZero, size: rowNumberBox.frame.size)
         rowNumberBox.backgroundColor = UIColor.white.withAlphaComponent(0)
         rowNumberBox.layer.masksToBounds = true
-    case 1:
+    case "lines":
         // 设置代码行和序号的样式
         for (index, element) in rowArray.enumerated() {
             let rowNumber = (index - 1) / 2 + 1 // 代码行的序号的具体数字
@@ -539,7 +539,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         verticalLine.lineWidth = 0.5
         verticalLine.strokeColor = UIColor.black.withAlphaComponent(0.5).cgColor
         superView.layer.addSublayer(verticalLine)
-    case 2:
+    case "impressions":
         // 设置代码行和序号的样式
         for (index, element) in rowArray.enumerated() {
             let rowNumber = (index - 1) / 2 + 1 // 代码行的序号的具体数字
@@ -660,14 +660,14 @@ func htmlCodeOptimize(attString: NSMutableAttributedString) -> NSMutableAttribut
 /// - Parameter originY: 代码块的Y轴坐标
 /// - Returns: 返回一个新的Y轴坐标
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
-func textModuleBuild(_ string: String, _ view: UIView, originY: CGFloat, spaced: Bool) -> CGFloat {
+func textModuleBuild(_ string: String, _ view: UIView, originY: CGFloat, paragraph: Bool) -> CGFloat {
     let text = UILabel()
-    text.frame.size.width = screenWidth - spacedForScreen * 2
+    text.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
     text.text = string
     text.numberOfLines = 0
-    text.font = UIFont.systemFont(ofSize: basicFont)
+    text.font = Font.text()
     text.sizeToFit()
-    text.frame.origin = CGPoint(x: spacedForScreen, y: originY + (spaced ? spacedForControl: 0))
+    text.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + (paragraph ? Spaced.control(): 0))
     view.addSubview(text)
     return text.frame.maxY
 }
@@ -686,9 +686,9 @@ func imageModuleBuild(_ imageName: String, _ view: UIView, originY: CGFloat) -> 
     imageView.contentMode = .scaleAspectFit
     imageView.sizeToFit()
     let proportion = imageView.frame.size.height / imageView.frame.size.width
-    imageView.frame.size.width = screenWidth - spacedForScreen * 2
+    imageView.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
     imageView.frame.size.height = imageView.frame.size.width * proportion
-    imageView.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForControl)
+    imageView.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + Spaced.control())
     view.addSubview(imageView)
     return imageView.frame.maxY
 }
@@ -720,11 +720,11 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
     underlyView.layer.cornerRadius = 4
     underlyView.backgroundColor = UIColor.systemGroupedBackground
     underlyView.bounces = false
-    underlyView.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForControl + 4)
-    if settingEssayTitle2DisplayMode == 1 {
+    underlyView.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + Spaced.control() + 4)
+    if UserDefaults.SettingInfo.string(forKey: .essayStyle) == "lines" {
         underlyView.backgroundColor = UIColor.systemBackground
         underlyView.layer.borderColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
-    } else if settingEssayTitle2DisplayMode == 2 {
+    } else if UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions" {
         lineWidth = CGFloat(3)
         boardWidth = CGFloat(0)
         rowHeight = CGFloat(30)
@@ -762,7 +762,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
             let cellString = cellString1.trimmingCharacters(in: .whitespacesAndNewlines)
             let labelFrame = UILabel()
             labelFrame.text = cellString
-            labelFrame.font = UIFont.systemFont(ofSize: basicFont - 1)
+            labelFrame.font = Font.smallText()
             labelFrame.sizeToFit()
             if columnMaxWidth < labelFrame.frame.size.width {
                 columnMaxWidth = labelFrame.frame.size.width
@@ -780,9 +780,9 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
         frameOriginX.append(frameWidth + 5)
         frameWidth += columnMaxWidthArray[i] + 10
     }
-    if frameWidth < screenWidth - spacedForScreen * 2 {
-        let difference = (screenWidth - spacedForScreen * 2) - frameWidth
-        frameWidth = screenWidth - spacedForScreen * 2
+    if frameWidth < Screen.width() - Spaced.screenAuto() * 2 {
+        let difference = (Screen.width() - Spaced.screenAuto() * 2) - frameWidth
+        frameWidth = Screen.width() - Spaced.screenAuto() * 2
         for i in 0 ..< columnCountMax {
             frameOriginX[i] += CGFloat(i * (Int(difference) / columnCountMax))
             columnMaxWidthArray[i] += difference / CGFloat(columnCountMax)
@@ -792,7 +792,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
     var cellViewArray: Array<UIView> = []
     for i in 0 ..< arrayData.count {
         let cellView = UIView(frame: CGRect(x: boardWidth - lineWidth / 2, y: boardWidth + rowHeight * CGFloat(i) - lineWidth / 2, width: frameWidth - boardWidth * 2, height: rowHeight))
-        if frameWidth == screenWidth - spacedForScreen * 2, settingEssayTitle2DisplayMode == 2 , i % 2 == 1 {
+        if frameWidth == Screen.width() - Spaced.screenAuto() * 2, UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions", i % 2 == 1 {
             cellView.frame.size.width += lineWidth / 2
         }
         // 绘制表格水平方向的分割线
@@ -803,12 +803,11 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
             horizontalLinePath.addLine(to: CGPoint(x: frameWidth - boardWidth, y: pointY))
             let horizontalLine = CAShapeLayer()
             horizontalLine.path = horizontalLinePath.cgPath
-            switch settingEssayTitle2DisplayMode {
-            case 0: horizontalLine.strokeColor = UIColor.black.cgColor
-            case 1: horizontalLine.strokeColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
-            case 2: horizontalLine.strokeColor = UIColor.systemBackground.cgColor
-            default:
-                break
+            switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
+            case "simple": horizontalLine.strokeColor = UIColor.black.cgColor
+            case "lines": horizontalLine.strokeColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
+            case "impressions": horizontalLine.strokeColor = UIColor.systemBackground.cgColor
+            default: break
             }
             horizontalLine.lineWidth = lineWidth
             underlyView.layer.addSublayer(horizontalLine)
@@ -831,10 +830,10 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 verticalLinePath.addLine(to: CGPoint(x: point, y: CGFloat(arrayData.count) * rowHeight + boardWidth))
                 let verticalLine = CAShapeLayer()
                 verticalLine.path = verticalLinePath.cgPath
-                switch settingEssayTitle2DisplayMode {
-                case 0: verticalLine.strokeColor = UIColor.black.cgColor
-                case 1: verticalLine.strokeColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
-                case 2: verticalLine.strokeColor = UIColor.systemBackground.cgColor
+                switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
+                case "simple": verticalLine.strokeColor = UIColor.black.cgColor
+                case "lines": verticalLine.strokeColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
+                case "impressions": verticalLine.strokeColor = UIColor.systemBackground.cgColor
                 default:
                     break
                 }
@@ -842,7 +841,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 underlyView.layer.addSublayer(verticalLine)
             }
             for item in 0 ..< columnCountMax {
-                if i % 2 == 1, item != 0, settingEssayTitle2DisplayMode == 2 {
+                if i % 2 == 1, item != 0, UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions" {
                     let verticalLinePath2 = UIBezierPath()
                     var point2 = frameOriginX[item] - 5 + boardWidth
                     if boardWidth == CGFloat(10), lineWidth == CGFloat(10) {
@@ -864,9 +863,9 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 label.backgroundColor = UIColor.systemGroupedBackground
                 label.lineBreakMode = .byClipping
                 
-                if settingEssayTitle2DisplayMode == 1 {
+                if UserDefaults.SettingInfo.string(forKey: .essayStyle) == "lines" {
                     label.backgroundColor = UIColor.systemBackground
-                } else if settingEssayTitle2DisplayMode == 2 {
+                } else if UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions" {
                     if i % 2 == 1 {
                         cellView.backgroundColor = UIColor(red: 222/255.0, green: 221/255.0, blue: 247/255.0, alpha: 1.000)
                         label.backgroundColor = UIColor(red: 222/255.0, green: 221/255.0, blue: 247/255.0, alpha: 1.000)
@@ -911,10 +910,10 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 } else {
                     label.text = trimmedString
                 }
-                label.font = UIFont.systemFont(ofSize: basicFont - 1)
+                label.font = Font.smallText()
                 label.frame.origin.y += (i == 0 ? boardWidth / 2: lineWidth / 2)
                 label.frame.size.height -= (i == 0 ? lineWidth / 2 + boardWidth / 2: lineWidth)
-                //                if settingEssayTitle2DisplayMode == 1 {
+                //                if UserDefaults.SettingInfo.string(forKey: .essayStyle) == "lines" {
                 //                    let canshu = 0.1165
                 //                    label.frame.origin.y += canshu
                 //                    label.frame.size.height -= canshu * 2
@@ -933,264 +932,261 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
         
         underlyView.addSubview(cellView)
     }
-    underlyView.frame.size = CGSize(width: screenWidth - spacedForScreen * 2, height: cellViewArray[arrayData.count - 1].frame.maxY + boardWidth - lineWidth / 2)
+    underlyView.frame.size = CGSize(width: Screen.width() - Spaced.screenAuto() * 2, height: cellViewArray[arrayData.count - 1].frame.maxY + boardWidth - lineWidth / 2)
     underlyView.contentSize.width = frameWidth - lineWidth
     view.addSubview(underlyView)
     return underlyView.frame.maxY
 }
 
-func essayInterfaceBuild(data: Dictionary<String, Any>, ViewController: UIViewController) {
-    // 设置最底层的滚动视图，用来承载界面内的所有元素
-    let underlyScrollView = UIScrollView(frame: ViewController.view.bounds)
-    ViewController.view.addSubview(underlyScrollView)
-    
-    var header: Array<String> = []
-    var content: Array<String> = []
-    let dataContent: Array<String> = data["content"] as! Array<String>
-    for i in 0 ..< dataContent.count {
-        if i % 2 == 0 {
-            header.append(dataContent[i])
-        } else {
-            content.append(dataContent[i])
-        }
-    }
-    
-    var originY = CGFloat(0)
-    ViewController.navigationItem.title = data["title"] as? String
-    
-    let author0 = UILabel()
-    author0.frame.size.width = screenWidth - spacedForScreen * 2
-    author0.text = "作者："
-    author0.font = UIFont.systemFont(ofSize: basicFont, weight: .bold)
-    author0.sizeToFit()
-    author0.frame.origin = CGPoint(x: spacedForScreen, y: spacedForControl - 2)
-    author0.layer.cornerRadius = 5
-    underlyScrollView.addSubview(author0)
-    
-    let author = UILabel()
-    author.frame.size.width = screenWidth - spacedForScreen * 2
-    author.text = data["author"] as? String
-    author.font = UIFont.systemFont(ofSize: basicFont, weight: .medium)
-    author.sizeToFit()
-    author.frame.origin = CGPoint(x: author0.frame.maxX, y: spacedForControl - 2)
-    author.layer.cornerRadius = 5
-    author.frame.size.width += 7
-    author.clipsToBounds = true
-    author.textAlignment = .center
-    author.backgroundColor = UIColor.systemFill
-    underlyScrollView.addSubview(author)
-    
-    switch settingEssayTitle2DisplayMode {
-    case 1:
-        author0.text = ""
-        author.text = "作者：\(String(describing: data["author"]!))"
-        author.sizeToFit()
-        author.frame.origin.x = spacedForScreen
-        author.frame.size.width += 7
-        author.textAlignment = .center
-        author.backgroundColor = UIColor.systemGroupedBackground
-        author.layer.borderWidth = 1
-        author.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
-    case 2:
-        author0.frame.origin.x += 10
-        author.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
-        author.frame.origin.x = author0.frame.maxX
-        
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: spacedForScreen + 3, y: author.frame.minY + 1))
-        path.addLine(to: CGPoint(x: spacedForScreen + 3, y: author.frame.maxY - 1))
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = path.cgPath
-        shapeLayer.strokeColor = UIColor.systemIndigo.withAlphaComponent(0.7).cgColor
-        shapeLayer.lineWidth = 5.0
-        underlyScrollView.layer.addSublayer(shapeLayer)
-    default:
-        break
-    }
-    
-    for i in 0 ..< content.count {
-        switch header[i] {
-        case "title2":
-            let title2 = UILabel()
-            title2.frame.size.width = screenWidth - spacedForScreen * 2
-            title2.text = content[i]
-            title2.font = titleFont2
-            title2.sizeToFit()
-            title2.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForModule)
-            underlyScrollView.addSubview(title2)
-            originY = title2.frame.maxY
-            
-            switch settingEssayTitle2DisplayMode {
-            case 1:
-                let path = UIBezierPath()
-                path.move(to: CGPoint(x: spacedForScreen, y: title2.frame.maxY + 3))
-                path.addLine(to: CGPoint(x: screenWidth - spacedForScreen, y: title2.frame.maxY + 3))
-                let shapeLayer = CAShapeLayer()
-                shapeLayer.path = path.cgPath
-                shapeLayer.strokeColor = UIColor.black.withAlphaComponent(0.5).cgColor
-                shapeLayer.lineWidth = 1.0
-                underlyScrollView.layer.addSublayer(shapeLayer)
-                originY += 5
-            case 2:
-                let path = UIBezierPath()
-                path.move(to: CGPoint(x: spacedForScreen, y: title2.frame.maxY - 3))
-                path.addLine(to: CGPoint(x: title2.frame.maxX, y: title2.frame.maxY - 3))
-                let shapeLayer = CAShapeLayer()
-                shapeLayer.path = path.cgPath
-                shapeLayer.strokeColor = UIColor.systemIndigo.withAlphaComponent(0.5).cgColor
-                shapeLayer.lineWidth = 9.0
-                underlyScrollView.layer.addSublayer(shapeLayer)
-                originY += 6
-            default:
-                break
-            }
-        case "title3":
-            let title3 = UILabel()
-            title3.frame.size.width = screenWidth - spacedForScreen * 2
-            title3.text = "· \(content[i])"
-            title3.font = UIFont.systemFont(ofSize: titleFont3, weight: .medium)
-            title3.sizeToFit()
-            title3.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForNavigation)
-            underlyScrollView.addSubview(title3)
-            
-            originY = title3.frame.maxY
-            
-            switch settingEssayTitle2DisplayMode {
-            case 1:
-                title3.text = "- \(content[i])"
-                title3.sizeToFit()
-            case 2:
-                title3.text = "\(content[i])"
-                title3.sizeToFit()
-                title3.frame.origin.x += 13
-                let path = UIBezierPath()
-                path.move(to: CGPoint(x: spacedForScreen + 5, y: title3.frame.minY + 3))
-                path.addLine(to: CGPoint(x: spacedForScreen + 5, y: title3.frame.maxY - 3))
-                let shapeLayer = CAShapeLayer()
-                shapeLayer.path = path.cgPath
-                shapeLayer.strokeColor = UIColor.systemIndigo.withAlphaComponent(0.7).cgColor
-                shapeLayer.lineWidth = 5.0
-                underlyScrollView.layer.addSublayer(shapeLayer)
-            default:
-                break
-            }
-        case "text":
-            let text = UILabel()
-            text.frame.size.width = screenWidth - spacedForScreen * 2
-            let string = content[i]
-            let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
-            text.text = trimmed
-            text.numberOfLines = 0
-            text.font = UIFont.systemFont(ofSize: basicFont)
-            text.sizeToFit()
-            text.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForControl)
-            underlyScrollView.addSubview(text)
-            originY = text.frame.maxY
-        case "image":
-            let imageView = UIImageView()
-            imageView.image = UIImage(named: content[i])
-            imageView.contentMode = .scaleAspectFit
-            imageView.sizeToFit()
-            let proportion = imageView.frame.size.height / imageView.frame.size.width
-            imageView.frame.size.width = screenWidth - spacedForScreen * 2
-            imageView.frame.size.height = imageView.frame.size.width * proportion
-            imageView.frame.origin = CGPoint(x: spacedForScreen, y: originY + spacedForControl)
-            underlyScrollView.addSubview(imageView)
-            originY = imageView.frame.maxY
-        case "code":
-            let codeScroll = UIScrollView(frame: CGRect(x: spacedForScreen, y: originY + spacedForControl, width: screenWidth - spacedForScreen * 2, height: 0))
-            codeScroll.backgroundColor = UIColor.systemFill
-            codeScroll.layer.cornerRadius = 5
-            codeScroll.alwaysBounceHorizontal = true
-            underlyScrollView.addSubview(codeScroll)
-            let lines = content[i].split(separator: "\n")
-            var codeArray: Array<UILabel> = []
-            var maxX = CGFloat(0)
-            for i in 0 ..< lines.count {
-                let code = UILabel()
-                code.frame.origin = CGPoint(x: 10, y: 10)
-                let attString = NSMutableAttributedString(string: String(lines[i]))
-                
-                if attString.string.count >= 5 {
-                    for index in 0 ..< attString.string.count - 4 {
-                        let strIndex = attString.string.index(attString.string.startIndex, offsetBy: index)
-                        let strIndex2 = attString.string.index(attString.string.startIndex, offsetBy: index + 1)
-                        let strIndex3 = attString.string.index(attString.string.startIndex, offsetBy: index + 2)
-                        let strIndex4 = attString.string.index(attString.string.startIndex, offsetBy: index + 3)
-                        let strIndex5 = attString.string.index(attString.string.startIndex, offsetBy: index + 4)
-                        if index % 4 == 0, attString.string[strIndex] == "p", attString.string[strIndex2] == "r", attString.string[strIndex3] == "i", index == 0, attString.string[strIndex4] == "n", attString.string[strIndex5] == "t" {
-                            attString.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: index, length: 5))
-                        } else if index % 4 == 0, attString.string[strIndex] == "g", attString.string[strIndex2] == "u", attString.string[strIndex3] == "a", index == 0, attString.string[strIndex4] == "r", attString.string[strIndex5] == "d" {
-                            attString.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: index, length: 5))
-                        }
-                    }
-                }
-                if attString.string.count >= 4 {
-                    for index in 0 ..< attString.string.count - 3 {
-                        let strIndex = attString.string.index(attString.string.startIndex, offsetBy: index)
-                        let strIndex2 = attString.string.index(attString.string.startIndex, offsetBy: index + 1)
-                        let strIndex3 = attString.string.index(attString.string.startIndex, offsetBy: index + 2)
-                        let strIndex4 = attString.string.index(attString.string.startIndex, offsetBy: index + 3)
-                        if attString.string[strIndex] == "f", attString.string[strIndex2] == "u", attString.string[strIndex3] == "n", index == 0, attString.string[strIndex4] == "c" {
-                            attString.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: index, length: 5))
-                        }
-                    }
-                }
-                if attString.string.count >= 3 {
-                    for index in 0 ..< attString.string.count - 2 {
-                        let strIndex = attString.string.index(attString.string.startIndex, offsetBy: index)
-                        let strIndex2 = attString.string.index(attString.string.startIndex, offsetBy: index + 1)
-                        let strIndex3 = attString.string.index(attString.string.startIndex, offsetBy: index + 2)
-                        if index % 4 == 3, attString.string[strIndex] == "v", attString.string[strIndex2] == "a", attString.string[strIndex3] == "r" {
-                            attString.addAttribute(.foregroundColor, value: UIColor.purple, range: NSRange(location: index, length: 3))
-                        } else if index % 4 == 3, attString.string[strIndex] == "l", attString.string[strIndex2] == "e", attString.string[strIndex3] == "t" {
-                            attString.addAttribute(.foregroundColor, value: UIColor.purple, range: NSRange(location: index, length: 3))
-                        }
-                    }
-                }
-                if attString.string.count >= 2 {
-                    for index in 0 ..< attString.string.count - 1 {
-                        let strIndex = attString.string.index(attString.string.startIndex, offsetBy: index)
-                        let strIndex2 = attString.string.index(attString.string.startIndex, offsetBy: index + 1)
-                        if attString.string[strIndex] == "/", attString.string[strIndex2] == "/" {
-                            attString.addAttribute(.foregroundColor, value: #colorLiteral(red: 0.1764705882, green: 0.5215686275, blue: 0.01568627451, alpha: 1), range: NSRange(location: index, length: attString.string.count - index))
-                        } else if index % 4 == 3, attString.string[strIndex] == "i", attString.string[strIndex2] == "f" {
-                            attString.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: index, length: 2))
-                        }
-                    }
-                }
-                code.attributedText = attString
-                code.font = UIFont(name: "Menlo", size: basicFont - 1)
-                code.sizeToFit()
-                if i != 0 {
-                    code.frame.origin.y = codeArray[i - 1].frame.maxY + 4
-                }
-                if code.frame.maxX > maxX {
-                    maxX = code.frame.maxX
-                }
-                codeArray.append(code)
-                codeScroll.addSubview(code)
-            }
-            
-            codeScroll.frame.size.height = codeArray[lines.count - 1].frame.maxY + 10
-            codeScroll.contentSize = CGSize(width: maxX + 10, height: codeArray[lines.count - 1].frame.maxY + 10)
-            
-            originY = codeScroll.frame.maxY
-            
-            switch settingEssayTitle2DisplayMode {
-            case 1:
-                codeScroll.backgroundColor = UIColor.systemGroupedBackground
-                codeScroll.layer.borderWidth = 1
-                codeScroll.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
-            case 2:
-                codeScroll.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
-            default:
-                break
-            }
-        default:
-            break
-        }
-        underlyScrollView.contentSize = CGSize(width: screenWidth, height: originY + spacedForScreen)
-    }
-}
+//func essayInterfaceBuild(data: Dictionary<String, Any>, ViewController: UIViewController) {
+//    // 设置最底层的滚动视图，用来承载界面内的所有元素
+//    let underlyScrollView = UIScrollView(frame: ViewController.view.bounds)
+//    ViewController.view.addSubview(underlyScrollView)
+//    
+//    var header: Array<String> = []
+//    var content: Array<String> = []
+//    let dataContent: Array<String> = data["content"] as! Array<String>
+//    for i in 0 ..< dataContent.count {
+//        if i % 2 == 0 {
+//            header.append(dataContent[i])
+//        } else {
+//            content.append(dataContent[i])
+//        }
+//    }
+//    
+//    var originY = CGFloat(0)
+//    ViewController.navigationItem.title = data["title"] as? String
+//    
+//    let author0 = UILabel()
+//    author0.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+//    author0.text = "作者："
+//    author0.font = font(.basic, weight: .bold)
+//    author0.sizeToFit()
+//    author0.frame.origin = CGPoint(x: Spaced.screenAuto(), y: Spaced.control() - 2)
+//    author0.layer.cornerRadius = 5
+//    underlyScrollView.addSubview(author0)
+//    
+//    let author = UILabel()
+//    author.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+//    author.text = data["author"] as? String
+//    author.font = font(.basic, weight: .medium)
+//    author.sizeToFit()
+//    author.frame.origin = CGPoint(x: author0.frame.maxX, y: Spaced.control() - 2)
+//    author.layer.cornerRadius = 5
+//    author.frame.size.width += 7
+//    author.clipsToBounds = true
+//    author.textAlignment = .center
+//    author.backgroundColor = UIColor.systemFill
+//    underlyScrollView.addSubview(author)
+//    
+//    switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
+//    case "lines":
+//        author0.text = ""
+//        author.text = "作者：\(String(describing: data["author"]!))"
+//        author.sizeToFit()
+//        author.frame.origin.x = Spaced.screenAuto()
+//        author.frame.size.width += 7
+//        author.textAlignment = .center
+//        author.backgroundColor = UIColor.systemGroupedBackground
+//        author.layer.borderWidth = 1
+//        author.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
+//    case "impressions":
+//        author0.frame.origin.x += 10
+//        author.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
+//        author.frame.origin.x = author0.frame.maxX
+//        
+//        let path = UIBezierPath()
+//        path.move(to: CGPoint(x: Spaced.screenAuto() + 3, y: author.frame.minY + 1))
+//        path.addLine(to: CGPoint(x: Spaced.screenAuto() + 3, y: author.frame.maxY - 1))
+//        let shapeLayer = CAShapeLayer()
+//        shapeLayer.path = path.cgPath
+//        shapeLayer.strokeColor = UIColor.systemIndigo.withAlphaComponent(0.7).cgColor
+//        shapeLayer.lineWidth = 5.0
+//        underlyScrollView.layer.addSublayer(shapeLayer)
+//    default:
+//        break
+//    }
+//    
+//    for i in 0 ..< content.count {
+//        switch header[i] {
+//        case "title2":
+//            let title2 = UILabel()
+//            title2.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+//            title2.text = content[i]
+//            title2.font = Font.title1()
+//            title2.font = Font.title1()
+//            title2.sizeToFit()
+//            title2.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + Spaced.module())
+//            underlyScrollView.addSubview(title2)
+//            originY = title2.frame.maxY
+//            
+//            switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
+//            case "lines":
+//                let path = UIBezierPath()
+//                path.move(to: CGPoint(x: Spaced.screenAuto(), y: title2.frame.maxY + 3))
+//                path.addLine(to: CGPoint(x: Screen.width() - Spaced.screenAuto(), y: title2.frame.maxY + 3))
+//                let shapeLayer = CAShapeLayer()
+//                shapeLayer.path = path.cgPath
+//                shapeLayer.strokeColor = UIColor.black.withAlphaComponent(0.5).cgColor
+//                shapeLayer.lineWidth = 1.0
+//                underlyScrollView.layer.addSublayer(shapeLayer)
+//                originY += 5
+//            case "impressions":
+//                let path = UIBezierPath()
+//                path.move(to: CGPoint(x: Spaced.screenAuto(), y: title2.frame.maxY - 3))
+//                path.addLine(to: CGPoint(x: title2.frame.maxX, y: title2.frame.maxY - 3))
+//                let shapeLayer = CAShapeLayer()
+//                shapeLayer.path = path.cgPath
+//                shapeLayer.strokeColor = UIColor.systemIndigo.withAlphaComponent(0.5).cgColor
+//                shapeLayer.lineWidth = 9.0
+//                underlyScrollView.layer.addSublayer(shapeLayer)
+//                originY += 6
+//            default: break
+//            }
+//        case "title3":
+//            let title3 = UILabel()
+//            title3.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+//            title3.text = "· \(content[i])"
+//            title3.font = font(title2)
+//            title3.sizeToFit()
+//            title3.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + Spaced.navigation())
+//            underlyScrollView.addSubview(title3)
+//            
+//            originY = title3.frame.maxY
+//            
+//            switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
+//            case "lines":
+//                title3.text = "- \(content[i])"
+//                title3.sizeToFit()
+//            case "impressions":
+//                title3.text = "\(content[i])"
+//                title3.sizeToFit()
+//                title3.frame.origin.x += 13
+//                let path = UIBezierPath()
+//                path.move(to: CGPoint(x: Spaced.screenAuto() + 5, y: title3.frame.minY + 3))
+//                path.addLine(to: CGPoint(x: Spaced.screenAuto() + 5, y: title3.frame.maxY - 3))
+//                let shapeLayer = CAShapeLayer()
+//                shapeLayer.path = path.cgPath
+//                shapeLayer.strokeColor = UIColor.systemIndigo.withAlphaComponent(0.7).cgColor
+//                shapeLayer.lineWidth = 5.0
+//                underlyScrollView.layer.addSublayer(shapeLayer)
+//            default: break
+//            }
+//        case "text":
+//            let text = UILabel()
+//            text.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+//            let string = content[i]
+//            let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
+//            text.text = trimmed
+//            text.numberOfLines = 0
+//            text.font = Font.basic(.basic)
+//            text.sizeToFit()
+//            text.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + Spaced.control())
+//            underlyScrollView.addSubview(text)
+//            originY = text.frame.maxY
+//        case "image":
+//            let imageView = UIImageView()
+//            imageView.image = UIImage(named: content[i])
+//            imageView.contentMode = .scaleAspectFit
+//            imageView.sizeToFit()
+//            let proportion = imageView.frame.size.height / imageView.frame.size.width
+//            imageView.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+//            imageView.frame.size.height = imageView.frame.size.width * proportion
+//            imageView.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + Spaced.control())
+//            underlyScrollView.addSubview(imageView)
+//            originY = imageView.frame.maxY
+//        case "code":
+//            let codeScroll = UIScrollView(frame: CGRect(x: Spaced.screenAuto(), y: originY + Spaced.control(), width: Screen.width() - Spaced.screenAuto() * 2, height: 0))
+//            codeScroll.backgroundColor = UIColor.systemFill
+//            codeScroll.layer.cornerRadius = 5
+//            codeScroll.alwaysBounceHorizontal = true
+//            underlyScrollView.addSubview(codeScroll)
+//            let lines = content[i].split(separator: "\n")
+//            var codeArray: Array<UILabel> = []
+//            var maxX = CGFloat(0)
+//            for i in 0 ..< lines.count {
+//                let code = UILabel()
+//                code.frame.origin = CGPoint(x: 10, y: 10)
+//                let attString = NSMutableAttributedString(string: String(lines[i]))
+//                
+//                if attString.string.count >= 5 {
+//                    for index in 0 ..< attString.string.count - 4 {
+//                        let strIndex = attString.string.index(attString.string.startIndex, offsetBy: index)
+//                        let strIndex2 = attString.string.index(attString.string.startIndex, offsetBy: index + 1)
+//                        let strIndex3 = attString.string.index(attString.string.startIndex, offsetBy: index + 2)
+//                        let strIndex4 = attString.string.index(attString.string.startIndex, offsetBy: index + 3)
+//                        let strIndex5 = attString.string.index(attString.string.startIndex, offsetBy: index + 4)
+//                        if index % 4 == 0, attString.string[strIndex] == "p", attString.string[strIndex2] == "r", attString.string[strIndex3] == "i", index == 0, attString.string[strIndex4] == "n", attString.string[strIndex5] == "t" {
+//                            attString.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: index, length: 5))
+//                        } else if index % 4 == 0, attString.string[strIndex] == "g", attString.string[strIndex2] == "u", attString.string[strIndex3] == "a", index == 0, attString.string[strIndex4] == "r", attString.string[strIndex5] == "d" {
+//                            attString.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: index, length: 5))
+//                        }
+//                    }
+//                }
+//                if attString.string.count >= 4 {
+//                    for index in 0 ..< attString.string.count - 3 {
+//                        let strIndex = attString.string.index(attString.string.startIndex, offsetBy: index)
+//                        let strIndex2 = attString.string.index(attString.string.startIndex, offsetBy: index + 1)
+//                        let strIndex3 = attString.string.index(attString.string.startIndex, offsetBy: index + 2)
+//                        let strIndex4 = attString.string.index(attString.string.startIndex, offsetBy: index + 3)
+//                        if attString.string[strIndex] == "f", attString.string[strIndex2] == "u", attString.string[strIndex3] == "n", index == 0, attString.string[strIndex4] == "c" {
+//                            attString.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: index, length: 5))
+//                        }
+//                    }
+//                }
+//                if attString.string.count >= 3 {
+//                    for index in 0 ..< attString.string.count - 2 {
+//                        let strIndex = attString.string.index(attString.string.startIndex, offsetBy: index)
+//                        let strIndex2 = attString.string.index(attString.string.startIndex, offsetBy: index + 1)
+//                        let strIndex3 = attString.string.index(attString.string.startIndex, offsetBy: index + 2)
+//                        if index % 4 == 3, attString.string[strIndex] == "v", attString.string[strIndex2] == "a", attString.string[strIndex3] == "r" {
+//                            attString.addAttribute(.foregroundColor, value: UIColor.purple, range: NSRange(location: index, length: 3))
+//                        } else if index % 4 == 3, attString.string[strIndex] == "l", attString.string[strIndex2] == "e", attString.string[strIndex3] == "t" {
+//                            attString.addAttribute(.foregroundColor, value: UIColor.purple, range: NSRange(location: index, length: 3))
+//                        }
+//                    }
+//                }
+//                if attString.string.count >= 2 {
+//                    for index in 0 ..< attString.string.count - 1 {
+//                        let strIndex = attString.string.index(attString.string.startIndex, offsetBy: index)
+//                        let strIndex2 = attString.string.index(attString.string.startIndex, offsetBy: index + 1)
+//                        if attString.string[strIndex] == "/", attString.string[strIndex2] == "/" {
+//                            attString.addAttribute(.foregroundColor, value: #colorLiteral(red: 0.1764705882, green: 0.5215686275, blue: 0.01568627451, alpha: 1), range: NSRange(location: index, length: attString.string.count - index))
+//                        } else if index % 4 == 3, attString.string[strIndex] == "i", attString.string[strIndex2] == "f" {
+//                            attString.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: index, length: 2))
+//                        }
+//                    }
+//                }
+//                code.attributedText = attString
+//                code.font = Font.code()
+//                code.sizeToFit()
+//                if i != 0 {
+//                    code.frame.origin.y = codeArray[i - 1].frame.maxY + 4
+//                }
+//                if code.frame.maxX > maxX {
+//                    maxX = code.frame.maxX
+//                }
+//                codeArray.append(code)
+//                codeScroll.addSubview(code)
+//            }
+//            
+//            codeScroll.frame.size.height = codeArray[lines.count - 1].frame.maxY + 10
+//            codeScroll.contentSize = CGSize(width: maxX + 10, height: codeArray[lines.count - 1].frame.maxY + 10)
+//            
+//            originY = codeScroll.frame.maxY
+//            
+//            switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
+//            case "lines":
+//                codeScroll.backgroundColor = UIColor.systemGroupedBackground
+//                codeScroll.layer.borderWidth = 1
+//                codeScroll.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
+//            case "impressions":
+//                codeScroll.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
+//            default: break
+//            }
+//        default: break
+//        }
+//        underlyScrollView.contentSize = CGSize(width: Screen.width(), height: originY + Spaced.screenAuto())
+//    }
+//}
 
