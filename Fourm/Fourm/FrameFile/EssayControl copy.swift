@@ -12,7 +12,7 @@ import UIKit
 func essayInterfaceBuild(_ essayData: String, _ VC: UIViewController) -> UIScrollView {
     let essayDataArray = essayData.components(separatedBy: "\n")
     // 设置最底层的滚动视图，用来承载界面内的所有元素
-    let underlyScrollView = UIScrollView(frame: VC.view.bounds)
+    let underlyScrollView = UIScrollView(frame: Screen.bounds())
     underlyScrollView.alwaysBounceVertical = true
     VC.view.addSubview(underlyScrollView)
     
@@ -53,9 +53,9 @@ func essayInterfaceBuild(_ essayData: String, _ VC: UIViewController) -> UIScrol
     if !author {
         pointY = authorModuleBuild("未知", underlyScrollView)
         let horizontalLinePath = UIBezierPath()
-        let pointY = Spaced.module() + Spaced.control() / 2
-        horizontalLinePath.move(to: CGPoint(x: 0, y: pointY))
-        horizontalLinePath.addLine(to: CGPoint(x: Screen.width(), y: pointY))
+        let pointY0 = Spaced.module() + Spaced.control() / 2
+        horizontalLinePath.move(to: CGPoint(x: 0, y: pointY0))
+        horizontalLinePath.addLine(to: CGPoint(x: Screen.width(), y: pointY0))
         let horizontalLine = CAShapeLayer()
         horizontalLine.path = horizontalLinePath.cgPath
         horizontalLine.strokeColor = UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions" ? UIColor.systemIndigo.withAlphaComponent(0.3).cgColor: UIColor.black.withAlphaComponent(0.5).cgColor
@@ -124,8 +124,6 @@ func essayInterfaceBuild(_ essayData: String, _ VC: UIViewController) -> UIScrol
         } else if text {
             pointY = textModuleBuild(item, underlyScrollView, originY: pointY, paragraph: true)
         }
-        
-        
     }
     underlyScrollView.contentSize = CGSize(width: Screen.width(), height: pointY + Spaced.module())
     
@@ -168,7 +166,7 @@ func stringHandling(_ string: String) -> String {
 /// - Parameter view: 底层视图
 func authorModuleBuild(_ string: String, _ view: UIView) -> CGFloat {
     let authorHeader = UILabel()
-    authorHeader.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+    authorHeader.frame.size.width = Screen.basicWidth()
     authorHeader.text = "作者："
     authorHeader.font = Font.text(.bold)
     authorHeader.sizeToFit()
@@ -177,7 +175,7 @@ func authorModuleBuild(_ string: String, _ view: UIView) -> CGFloat {
     view.addSubview(authorHeader)
     
     let author = UILabel()
-    author.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+    author.frame.size.width = Screen.basicWidth()
     author.text = string
     author.font = Font.text(.medium)
     author.sizeToFit()
@@ -229,7 +227,7 @@ func authorModuleBuild(_ string: String, _ view: UIView) -> CGFloat {
 func title1ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CGFloat {
     var newOriginY = originY
     let title2 = UILabel()
-    title2.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+    title2.frame.size.width = Screen.basicWidth()
     title2.text = string
     title2.numberOfLines = 0
     title2.font = Font.title1()
@@ -276,7 +274,7 @@ func title1ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CG
 func title2ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CGFloat {
     var newOriginY = originY
     let title3 = UILabel()
-    title3.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+    title3.frame.size.width = Screen.basicWidth()
     title3.text = "· \(string)"
     title3.font = Font.title2()
     title3.sizeToFit()
@@ -316,7 +314,7 @@ func title2ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CG
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
 func title3ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CGFloat {
     let title4 = UILabel()
-    title4.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+    title4.frame.size.width = Screen.basicWidth()
     title4.text = string
     title4.font = Font.title2()
     title4.textColor = UIColor.black.withAlphaComponent(0.8)
@@ -345,7 +343,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
     }
     
     // 创建底层的代码框的UIScrollView
-    let codeScrollBox = UIScrollView(frame: CGRect(x: Spaced.screenAuto(), y: pointY + Spaced.control(), width: Screen.width() - Spaced.screenAuto() * 2, height: 0))
+    let codeScrollBox = UIScrollView(frame: CGRect(x: Spaced.screenAuto(), y: pointY + Spaced.control(), width: Screen.basicWidth(), height: 0))
     superView.addSubview(codeScrollBox)
     
     // 创建代码行序号的容器和对应的高斯模糊
@@ -662,7 +660,7 @@ func htmlCodeOptimize(attString: NSMutableAttributedString) -> NSMutableAttribut
 /// - Note: 返回的Y轴坐标是用来给后续创建内容控件定位使用的，所以需要将返回值赋值给原Y轴坐标。
 func textModuleBuild(_ string: String, _ view: UIView, originY: CGFloat, paragraph: Bool) -> CGFloat {
     let text = UILabel()
-    text.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+    text.frame.size.width = Screen.basicWidth()
     text.text = string
     text.numberOfLines = 0
     text.font = Font.text()
@@ -686,7 +684,7 @@ func imageModuleBuild(_ imageName: String, _ view: UIView, originY: CGFloat) -> 
     imageView.contentMode = .scaleAspectFit
     imageView.sizeToFit()
     let proportion = imageView.frame.size.height / imageView.frame.size.width
-    imageView.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+    imageView.frame.size.width = Screen.basicWidth()
     imageView.frame.size.height = imageView.frame.size.width * proportion
     imageView.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + Spaced.control())
     view.addSubview(imageView)
@@ -780,9 +778,9 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
         frameOriginX.append(frameWidth + 5)
         frameWidth += columnMaxWidthArray[i] + 10
     }
-    if frameWidth < Screen.width() - Spaced.screenAuto() * 2 {
-        let difference = (Screen.width() - Spaced.screenAuto() * 2) - frameWidth
-        frameWidth = Screen.width() - Spaced.screenAuto() * 2
+    if frameWidth < Screen.basicWidth() {
+        let difference = (Screen.basicWidth()) - frameWidth
+        frameWidth = Screen.basicWidth()
         for i in 0 ..< columnCountMax {
             frameOriginX[i] += CGFloat(i * (Int(difference) / columnCountMax))
             columnMaxWidthArray[i] += difference / CGFloat(columnCountMax)
@@ -792,7 +790,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
     var cellViewArray: Array<UIView> = []
     for i in 0 ..< arrayData.count {
         let cellView = UIView(frame: CGRect(x: boardWidth - lineWidth / 2, y: boardWidth + rowHeight * CGFloat(i) - lineWidth / 2, width: frameWidth - boardWidth * 2, height: rowHeight))
-        if frameWidth == Screen.width() - Spaced.screenAuto() * 2, UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions", i % 2 == 1 {
+        if frameWidth == Screen.basicWidth(), UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions", i % 2 == 1 {
             cellView.frame.size.width += lineWidth / 2
         }
         // 绘制表格水平方向的分割线
@@ -932,7 +930,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
         
         underlyView.addSubview(cellView)
     }
-    underlyView.frame.size = CGSize(width: Screen.width() - Spaced.screenAuto() * 2, height: cellViewArray[arrayData.count - 1].frame.maxY + boardWidth - lineWidth / 2)
+    underlyView.frame.size = CGSize(width: Screen.basicWidth(), height: cellViewArray[arrayData.count - 1].frame.maxY + boardWidth - lineWidth / 2)
     underlyView.contentSize.width = frameWidth - lineWidth
     view.addSubview(underlyView)
     return underlyView.frame.maxY
@@ -958,7 +956,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
 //    ViewController.navigationItem.title = data["title"] as? String
 //    
 //    let author0 = UILabel()
-//    author0.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+//    author0.frame.size.width = Screen.basicWidth()
 //    author0.text = "作者："
 //    author0.font = font(.basic, weight: .bold)
 //    author0.sizeToFit()
@@ -967,7 +965,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
 //    underlyScrollView.addSubview(author0)
 //    
 //    let author = UILabel()
-//    author.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+//    author.frame.size.width = Screen.basicWidth()
 //    author.text = data["author"] as? String
 //    author.font = font(.basic, weight: .medium)
 //    author.sizeToFit()
@@ -1011,7 +1009,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
 //        switch header[i] {
 //        case "title2":
 //            let title2 = UILabel()
-//            title2.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+//            title2.frame.size.width = Screen.basicWidth()
 //            title2.text = content[i]
 //            title2.font = Font.title1()
 //            title2.font = Font.title1()
@@ -1045,7 +1043,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
 //            }
 //        case "title3":
 //            let title3 = UILabel()
-//            title3.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+//            title3.frame.size.width = Screen.basicWidth()
 //            title3.text = "· \(content[i])"
 //            title3.font = font(title2)
 //            title3.sizeToFit()
@@ -1074,7 +1072,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
 //            }
 //        case "text":
 //            let text = UILabel()
-//            text.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+//            text.frame.size.width = Screen.basicWidth()
 //            let string = content[i]
 //            let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
 //            text.text = trimmed
@@ -1090,13 +1088,13 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
 //            imageView.contentMode = .scaleAspectFit
 //            imageView.sizeToFit()
 //            let proportion = imageView.frame.size.height / imageView.frame.size.width
-//            imageView.frame.size.width = Screen.width() - Spaced.screenAuto() * 2
+//            imageView.frame.size.width = Screen.basicWidth()
 //            imageView.frame.size.height = imageView.frame.size.width * proportion
 //            imageView.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + Spaced.control())
 //            underlyScrollView.addSubview(imageView)
 //            originY = imageView.frame.maxY
 //        case "code":
-//            let codeScroll = UIScrollView(frame: CGRect(x: Spaced.screenAuto(), y: originY + Spaced.control(), width: Screen.width() - Spaced.screenAuto() * 2, height: 0))
+//            let codeScroll = UIScrollView(frame: CGRect(x: Spaced.screenAuto(), y: originY + Spaced.control(), width: Screen.basicWidth(), height: 0))
 //            codeScroll.backgroundColor = UIColor.systemFill
 //            codeScroll.layer.cornerRadius = 5
 //            codeScroll.alwaysBounceHorizontal = true

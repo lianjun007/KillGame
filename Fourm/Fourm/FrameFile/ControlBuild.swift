@@ -1,6 +1,10 @@
 import Foundation
 import UIKit
 
+
+
+
+
 // 视图控制器初始化的方法：传入视图控制器(一般为self)、导航栏标题名
 func viewControllerInitialize(vc: UIViewController, navTitle: String) {
     vc.view.backgroundColor = .systemBackground
@@ -10,8 +14,8 @@ func viewControllerInitialize(vc: UIViewController, navTitle: String) {
 
 // 创建模块标题的方法：传入父视图、模块标题名、Y轴坐标
 // 点击手势还是没有添加到此处，以后修改
-func moduleTitleBuild(_ title: String,_ superView: UIView,_ pointY: CGFloat,interaction: Bool) -> UIButton {
-    let moduleButton = UIButton(frame: CGRect(x: Spaced.screenAuto(), y: pointY, width: Screen.width() - Spaced.screenAuto() * 2, height: 0))
+func moduleTitleBuild(_ title: String,_ superView: UIView,_ pointY: CGFloat, interaction: Bool) -> UIButton {
+    let moduleButton = UIButton(frame: CGRect(x: Spaced.screenAuto(), y: pointY, width: Screen.basicWidth(), height: 0))
     
     // 创建标题
     let moduleTitle = UILabel(frame: CGRectZero)
@@ -115,7 +119,7 @@ func largeControlBuild(origin: CGPoint, imageName: String, title: String, title2
 
 
 func mediumControlBuild(origin: CGPoint, imageName: String, title: String, title2: String, direction: Bool) -> UIButton {
-    let mediumControlSize = CGSize(width: Screen.width() - Spaced.screenAuto() * 2, height: 90)
+    let mediumControlSize = CGSize(width: Screen.basicWidth(), height: 90)
     let mediumControlImageWidth = CGFloat(120)
     // 创建控件主体(一个UIButton)
     let control = UIButton(frame: CGRect(origin: origin, size: mediumControlSize))
@@ -123,10 +127,10 @@ func mediumControlBuild(origin: CGPoint, imageName: String, title: String, title
     // 裁剪和拼接控件的背景图片
     let image = UIImage(named: imageName)!
     let flippedImage = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: .upMirrored)
-    let imageSize = CGSize(width: Screen.width() - Spaced.screenAuto() * 2, height: image.size.height / image.size.width * mediumControlImageWidth)
+    let imageSize = CGSize(width: Screen.basicWidth(), height: image.size.height / image.size.width * mediumControlImageWidth)
     UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
-    image.draw(in: CGRect(x: direction ? 0: Screen.width() - Spaced.screenAuto() * 2 - mediumControlImageWidth, y: 0, width: mediumControlImageWidth, height: imageSize.height))
-    flippedImage.draw(in: CGRect(x: direction ? mediumControlImageWidth: 0, y: 0, width: Screen.width() - Spaced.screenAuto() * 2 - mediumControlImageWidth, height: imageSize.height))
+    image.draw(in: CGRect(x: direction ? 0: Screen.basicWidth() - mediumControlImageWidth, y: 0, width: mediumControlImageWidth, height: imageSize.height))
+    flippedImage.draw(in: CGRect(x: direction ? mediumControlImageWidth: 0, y: 0, width: Screen.basicWidth() - mediumControlImageWidth, height: imageSize.height))
     let finalImage = UIGraphicsGetImageFromCurrentImageContext()!
     UIGraphicsEndImageContext()
 
@@ -139,7 +143,7 @@ func mediumControlBuild(origin: CGPoint, imageName: String, title: String, title
     // 设置控件底部的高斯模糊
     let blurEffect = UIBlurEffect(style: .light)
     let blurView = UIVisualEffectView(effect: blurEffect)
-    blurView.frame = CGRect(x: !direction ? 0: mediumControlImageWidth, y: 0, width: Screen.width() - Spaced.screenAuto() * 2 - mediumControlImageWidth, height: mediumControlSize.height + 1)
+    blurView.frame = CGRect(x: !direction ? 0: mediumControlImageWidth, y: 0, width: Screen.basicWidth() - mediumControlImageWidth, height: mediumControlSize.height + 1)
     blurView.isUserInteractionEnabled = false
     blurView.backgroundColor = .white.withAlphaComponent(0.4)
     control.addSubview(blurView)
@@ -171,13 +175,13 @@ func mediumControlBuild(origin: CGPoint, imageName: String, title: String, title
 // title
 func settingControlBuild(title: String, tips: String, _ superView: UIView, _ pointY: CGFloat, parameter: Array<Dictionary<String, String>>) -> CGFloat {
     // 标题
-    let settingModuleTitle = UILabel(frame: CGRect(x: Spaced.screenAuto() + 18, y: pointY, width: Screen.width() - Spaced.screenAuto() * 2, height: 0))
+    let settingModuleTitle = UILabel(frame: CGRect(x: Spaced.screenAuto() + 18, y: pointY, width: Screen.basicWidth(), height: 0))
     if !title.isEmpty {
         settingModuleTitle.text = title
         settingModuleTitle.numberOfLines = 0
         settingModuleTitle.font = Font.tips()
         settingModuleTitle.sizeToFit()
-        settingModuleTitle.frame.size.width = Screen.width() - Spaced.screenAuto() * 2 - 36
+        settingModuleTitle.frame.size.width = Screen.basicWidth() - 36
         settingModuleTitle.textColor = UIColor.black.withAlphaComponent(0.6)
         superView.addSubview(settingModuleTitle)
     }
@@ -196,13 +200,13 @@ func settingControlBuild(title: String, tips: String, _ superView: UIView, _ poi
     }
     
     // 设置主体框
-    let settingModuleBox = UIView(frame: CGRect(x: Spaced.screenAuto(), y: settingModuleTitle.frame.maxY + 6, width: Screen.width() - Spaced.screenAuto() * 2, height: settingModuleHeight))
+    let settingModuleBox = UIView(frame: CGRect(x: Spaced.screenAuto(), y: settingModuleTitle.frame.maxY + 6, width: Screen.basicWidth(), height: settingModuleHeight))
     settingModuleBox.backgroundColor = UIColor.systemBackground
     settingModuleBox.layer.cornerRadius = 12
     settingModuleBox.clipsToBounds = true
     superView.addSubview(settingModuleBox)
     
-    let settingModuleTips = UILabel(frame: CGRect(x: Spaced.screenAuto() + 18, y: settingModuleBox.frame.maxY + 6, width: Screen.width() - Spaced.screenAuto() * 2, height: 0))
+    let settingModuleTips = UILabel(frame: CGRect(x: Spaced.screenAuto() + 18, y: settingModuleBox.frame.maxY + 6, width: Screen.basicWidth(), height: 0))
     if !tips.isEmpty {
         settingModuleTips.text = tips
         settingModuleTips.numberOfLines = 0

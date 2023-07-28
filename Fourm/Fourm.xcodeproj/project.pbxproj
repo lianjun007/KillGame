@@ -68,6 +68,7 @@
 		DA6ED6A42A5B997200FB3524 /* SelectedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6ED6A32A5B997200FB3524 /* SelectedCollectionViewController.swift */; };
 		DA7068612A7175C5000977E9 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7068602A7175C5000977E9 /* UserDefaults.swift */; };
 		DAF514182A72A84C009EC9B1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF514172A72A84C009EC9B1 /* SettingViewController.swift */; };
+		DAF5141A2A73CC68009EC9B1 /* ControlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF514192A73CC68009EC9B1 /* ControlExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		DA6ED6A32A5B997200FB3524 /* SelectedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCollectionViewController.swift; sourceTree = "<group>"; };
 		DA7068602A7175C5000977E9 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		DAF514172A72A84C009EC9B1 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		DAF514192A73CC68009EC9B1 /* ControlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				DA13A4F52A2E5DE4002F44AB /* BasicData.swift */,
+				DAF514192A73CC68009EC9B1 /* ControlExtension.swift */,
 				DA13A4F62A2E5DE4002F44AB /* ControlBuild.swift */,
 				DA7068602A7175C5000977E9 /* UserDefaults.swift */,
 				DA13A4F72A2E5DE4002F44AB /* DataInvoke.swift */,
@@ -421,6 +424,7 @@
 				DA7068612A7175C5000977E9 /* UserDefaults.swift in Sources */,
 				DA13A4DB2A2E5D86002F44AB /* ViewController.swift in Sources */,
 				DA13A4D32A2E5D52002F44AB /* CollectionViewController.swift in Sources */,
+				DAF5141A2A73CC68009EC9B1 /* ControlExtension.swift in Sources */,
 				DA13A4CD2A2E5D52002F44AB /* EssayViewController.swift in Sources */,
 				DA5C73BB2A4B7CB500EC672A /* EssayControl copy.swift in Sources */,
 				DA13A4FB2A2E5DE4002F44AB /* ControlBuild.swift in Sources */,
