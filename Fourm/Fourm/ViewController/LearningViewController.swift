@@ -3,27 +3,30 @@ import UIKit
 class LearningViewController: UIViewController {
     
     var featuredCollectionsRandomDataArray: Array<Dictionary<String, String>> = [] // 接收精选课程的随机数据
-    let underlyScrollView = UIScrollView()
+    let underlyView = UIScrollView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        Initialize.view(self, "推荐内容", mode: .basic)
         
-        viewControllerInitialize(vc: self, navTitle: "开始学习")
-        // 添加底层滚动视图
-        underlyScrollView.frame = UIScreen.main.bounds
-        view.addSubview(underlyScrollView)
+        /// 底层的滚动视图，最基础的界面
+        underlyView.frame = UIScreen.main.bounds
+        view.addSubview(underlyView)
         
-        let moduleTitle1 = moduleTitleBuild("精选合集", underlyScrollView, Spaced.navigation(), interaction: true)
+        /// 模块标题：精选合集
+        let moduleTitle1 = UIButton().moduleTitleMode("精选合集", originY: Spaced.navigation(), mode: .arrow)
+        underlyView.addSubview(moduleTitle1)
+        // 关联跳转方法
         moduleTitle1.addTarget(self, action: #selector(clickModuleTitleControl), for: .touchUpInside)
         
-        // 发送精选课程的随机数据
+        // 发送精选课程的随机数据（废弃⚠️）
         featuredCollectionsRandomDataArray = arrayRandom(number: 7, array: featuredCollectionsDataArray) as! Array<Dictionary<String, String>>
 
-        // 设置第一个模块的横向滚动视图，用来承载第一个模块“精选合集”
+        // 设置第一个模块的横向滚动视图，用来承载第一个模块“精选合集”（待修改⚠️）
         let moduleView = UIScrollView(frame: CGRect(x: 0, y: moduleTitle1.frame.maxY + Spaced.control(), width: Screen.width(), height: largeControlSize.height))
         moduleView.contentSize = CGSize(width: largeControlSize.width * 7 + Spaced.control() * 6 + Spaced.screenAuto() * 2, height: largeControlSize.height)
         moduleView.showsHorizontalScrollIndicator = false
         moduleView.clipsToBounds = false
-        underlyScrollView.addSubview(moduleView)
+        underlyView.addSubview(moduleView)
         // 创建7个精选合集框
         for i in 0 ... 6 {
             // 配置参数
@@ -36,8 +39,10 @@ class LearningViewController: UIViewController {
             featuredCourseBox.addInteraction(interaction)
         }
         
-        // Set the UILabel at the featuredCoursesBox tilte
-        let moduleTitle2 = moduleTitleBuild("精选文章", underlyScrollView, moduleView.frame.maxY + Spaced.module(), interaction: true)
+        /// 模块标题：精选文章
+        let moduleTitle2 = UIButton().moduleTitleMode("精选合集", originY: moduleView.frame.maxY + Spaced.module(), mode: .arrow)
+        underlyView.addSubview(moduleTitle2)
+        // 关联跳转方法
         moduleTitle2.addTarget(self, action: #selector(clickModuleTitleControl), for: .touchUpInside)
         
         var cellViewArray: Array<UIButton> = []
@@ -54,7 +59,7 @@ class LearningViewController: UIViewController {
             cellView.tag = i + 1
             cellView.addTarget(self, action: #selector(clickEssayControl), for: .touchUpInside)
             cellViewArray.append(cellView)
-            underlyScrollView.addSubview(cellView)
+            underlyView.addSubview(cellView)
 
 //            // 根据字符串长度赋予不同行数,最多为两行
 //            if isTruncated(essayLabel) {
@@ -78,7 +83,7 @@ class LearningViewController: UIViewController {
             cellView.addInteraction(interaction)
         }
         
-        underlyScrollView.contentSize = CGSize(width: Screen.width(), height: cellViewArray[6].frame.maxY + Spaced.module())
+        underlyView.contentSize = CGSize(width: Screen.width(), height: cellViewArray[6].frame.maxY + Spaced.module())
     }
     
     @objc func clickEssayControl(_ sender: UIButton) {
@@ -113,7 +118,7 @@ class LearningViewController: UIViewController {
         // 在屏幕旋转完成后刷新界面
         coordinator.animate(alongsideTransition: nil) { _ in
             // 移除旧的滚动视图
-            for subview in self.underlyScrollView.subviews {
+            for subview in self.underlyView.subviews {
                 subview.removeFromSuperview()
             }
 
@@ -128,7 +133,7 @@ class LearningViewController: UIViewController {
                 } else if offset.y == -44 {
                     newOffset.y = -((self.navigationController?.navigationBar.frame.height)! + Screen.safeAreaInsets().top)
                 }
-                self.underlyScrollView.setContentOffset(newOffset, animated: false)
+                self.underlyView.setContentOffset(newOffset, animated: false)
             }
         }
     }

@@ -7,18 +7,10 @@ class EssayViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if UserDefaults.SettingInfo.string(forKey: .essayStyle) == nil {
-            UserDefaults.SettingInfo.set(value: "simple", forKey: .essayStyle)
-        } // 默认文章显示模式为“simple”简约
+        Initialize.view(self, "文章加载失败", mode: .basic)
 
         // 在需要响应主题切换的地方添加观察者
-        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: ThemeDidChangeNotification, object: nil)
-        
-        view.backgroundColor = .systemBackground
-        navigationItem.title = "文章加载失败"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: changeThemeNotification, object: nil)
         
         let fileURL = Bundle.main.path(forResource: "File", ofType: "")
         let content = try! String(contentsOfFile: fileURL!, encoding: .utf8)

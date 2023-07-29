@@ -191,14 +191,19 @@ struct Color {
     static func text(_ weight: UIFont.Weight) -> UIFont {
         UIFont.systemFont(ofSize: 17, weight: weight)
     }
-    /// 副文字体，比如表格等部分的显示字体
-    static func smallText() -> UIFont {
-        UIFont.systemFont(ofSize: 16, weight: .regular)
-    }
-    /// 设置界面的说明（`caption`）和提示（`tips`）
-    static func setting() -> UIColor {
+    /// 标准界面的背景色
+    static func background() -> UIColor {
         UIColor.white
     }
+    /// 有默认分组控件界面的背景色（例如设置界面背景）
+    static func groupBackground() -> UIColor {
+        UIColor.systemGroupedBackground
+    }
+    /// 默认分组控件的主体色（例如设置界面控件）
+    static func control() -> UIColor {
+        UIColor.white
+    }
+    /// 设置控件的行间分隔线颜色
     static func segmentedLine() -> UIColor {
         UIColor.black.withAlphaComponent(0.2)
         

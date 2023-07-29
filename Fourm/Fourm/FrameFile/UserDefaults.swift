@@ -20,7 +20,22 @@ extension UserDefaults {
     // 设置信息
     struct SettingInfo: UserDefaultsSettable {
         enum defaultKeys: String {
-            case essayStyle
+            /// 阅读文章界面的主体风格设置（`textrue、style、gorgeous`）
+            case essayTheme
+            /// 阅读文章界面的代码块的序号行设置（`true、false`）
+            case essayCodeNumber
         }
+    }
+}
+
+/// 默认设置的初始化，放在第一个界面中调用即可
+func initializeUserDefaults() {
+    // 默认文章显示模式为“texture”，质感
+    if UserDefaults.SettingInfo.string(forKey: .essayTheme) == nil {
+        UserDefaults.SettingInfo.set(value: "texture", forKey: .essayTheme)
+    }
+    // 默认文章代码块显示模式为“true”，显示
+    if UserDefaults.SettingInfo.string(forKey: .essayCodeNumber) == nil {
+        UserDefaults.SettingInfo.set(value: "true", forKey: .essayCodeNumber)
     }
 }

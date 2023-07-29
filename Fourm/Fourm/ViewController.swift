@@ -15,11 +15,13 @@ class ViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initializeUserDefaults()
+        
         let viewControllers = [
-            UINavigationController(rootViewController: LearningViewController().withTabBarItem(title: "开始学习", image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))),
-//            UINavigationController(rootViewController: DiscussViewController().withTabBarItem(title: "发现更多", image: UIImage(systemName: "safari"), selectedImage: UIImage(systemName: "safari.fill"))),
-//            UINavigationController(rootViewController: CollectionViewController().withTabBarItem(title: "用户与收藏", image: UIImage(systemName: "star.square.on.square"), selectedImage: UIImage(systemName: "star.square.on.square.fill"))),
-            UINavigationController(rootViewController: SearchViewController().withTabBarItem(title: "搜索和更多", image: UIImage(systemName: "rectangle.and.hand.point.up.left"), selectedImage: UIImage(systemName: "rectangle.and.hand.point.up.left.fill")))
+            UINavigationController(rootViewController: LearningViewController().withTabBarItem(title: "推荐内容", image: UIImage(systemName: "books.vertical"), selectedImage: UIImage(systemName: "books.vertical.fill"))),
+            UINavigationController(rootViewController: DiscussViewController().withTabBarItem(title: "发现更多", image: UIImage(systemName: "safari"), selectedImage: UIImage(systemName: "safari.fill"))),
+            UINavigationController(rootViewController: CollectionViewController().withTabBarItem(title: "用户与收藏", image: UIImage(systemName: "star.square.on.square"), selectedImage: UIImage(systemName: "star.square.on.square.fill"))),
+            UINavigationController(rootViewController: SearchViewController().withTabBarItem(title: "搜索和设置", image: UIImage(systemName: "rectangle.and.hand.point.up.left"), selectedImage: UIImage(systemName: "rectangle.and.hand.point.up.left.fill")))
         ]
         self.viewControllers = viewControllers
     }

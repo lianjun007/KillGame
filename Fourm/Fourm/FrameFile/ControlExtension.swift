@@ -3,7 +3,7 @@
 import Foundation
 import UIKit
 
-// 扩展UILable
+// 扩展UILable的随字体大小自适应尺寸方法
 extension UILabel {
     /// `UILabel`随字体大小和内容自适应自己的`frame.size`属性
     ///
@@ -20,6 +20,7 @@ extension UILabel {
     /// ```
     ///
     /// # 如何使用
+    /// 用下列代码设置好文本本体后，还需要设置文本的原点（`origin`）。当然了，别忘了将它设置为目标视图的子视图
     /// ```swift
     /// let lable = UILabel().fontAdaptive(_ text: String, font: UIFont)
     /// ```
@@ -30,13 +31,13 @@ extension UILabel {
         let lable = UILabel()
         lable.text = text
         lable.font = font
-        lable.sizeToFit()
         lable.numberOfLines = 0
+        lable.sizeToFit()
         return lable
     }
 }
 
-// 扩展UIButton
+// 扩展UIButton的创建模块标题（一级标题）按钮方法
 extension UIButton {
     /// 普通界面模块标题（一级标题）的显示模式
     enum moduleTitleType {
@@ -51,8 +52,24 @@ extension UIButton {
     ///
     /// # 如何使用
     /// 标题本体一行代码直接搞定，不用设置其他东西。但是如果你需要跳转界面，那就需要`addTarget()`方法的帮助了。当然了，别忘了将它设置为目标视图的子视图
+    ///
+    /// ## 示例代码
+    /// 创建模块标题
     /// ```swift
-    /// let lable = UIButton().moduleTitleMode(_ text: String, originY: CGFloat, mode: moduleTitleMode)
+    /// let moduleTitleOriginY = CGFloat()
+    /// let moduleTitle = UIButton().moduleTitleMode("偏好设置", originY: moduleTitleOriginY, mode: .arrow)
+    /// superView.addSubview(moduleTitle)
+    /// ```
+    /// 关联跳转方法
+    /// ```swift
+    /// moduleTitle.addTarget(self, action: #selector(clicked), for: .touchUpInside)
+    /// ```
+    /// 跳转界面的方法
+    /// ```swift
+    /// @objc func clicked() {
+    ///     let VC = TargetViewController()
+    ///     self.navigationController?.pushViewController(VC, animated: true)
+    /// }
     /// ```
     ///
     /// - Parameter text: 标题内容
@@ -88,3 +105,4 @@ extension UIButton {
         return titleButton
     }
 }
+

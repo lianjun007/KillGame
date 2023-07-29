@@ -42,7 +42,7 @@ func essayInterfaceBuild(_ essayData: String, _ VC: UIViewController) -> UIScrol
             horizontalLinePath.addLine(to: CGPoint(x: Screen.width(), y: pointY))
             let horizontalLine = CAShapeLayer()
             horizontalLine.path = horizontalLinePath.cgPath
-            horizontalLine.strokeColor = UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions" ? UIColor.systemIndigo.withAlphaComponent(0.2).cgColor: UIColor.black.withAlphaComponent(0.2).cgColor
+            horizontalLine.strokeColor = UserDefaults.SettingInfo.string(forKey: .essayTheme) == "gorgeous" ? UIColor.systemIndigo.withAlphaComponent(0.2).cgColor: UIColor.black.withAlphaComponent(0.2).cgColor
             horizontalLine.lineWidth = 1
             underlyScrollView.layer.addSublayer(horizontalLine)
         }
@@ -58,7 +58,7 @@ func essayInterfaceBuild(_ essayData: String, _ VC: UIViewController) -> UIScrol
         horizontalLinePath.addLine(to: CGPoint(x: Screen.width(), y: pointY0))
         let horizontalLine = CAShapeLayer()
         horizontalLine.path = horizontalLinePath.cgPath
-        horizontalLine.strokeColor = UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions" ? UIColor.systemIndigo.withAlphaComponent(0.3).cgColor: UIColor.black.withAlphaComponent(0.5).cgColor
+        horizontalLine.strokeColor = UserDefaults.SettingInfo.string(forKey: .essayTheme) == "gorgeous" ? UIColor.systemIndigo.withAlphaComponent(0.3).cgColor: UIColor.black.withAlphaComponent(0.5).cgColor
         horizontalLine.lineWidth = 1
         underlyScrollView.layer.addSublayer(horizontalLine)
     }
@@ -187,8 +187,8 @@ func authorModuleBuild(_ string: String, _ view: UIView) -> CGFloat {
     author.backgroundColor = UIColor.systemFill
     view.addSubview(author)
     
-    switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
-    case "lines":
+    switch UserDefaults.SettingInfo.string(forKey: .essayTheme) {
+    case "style":
         authorHeader.text = ""
         author.text = "作者：\(string)"
         author.sizeToFit()
@@ -198,7 +198,7 @@ func authorModuleBuild(_ string: String, _ view: UIView) -> CGFloat {
         author.backgroundColor = UIColor.systemGroupedBackground
         author.layer.borderWidth = 1
         author.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
-    case "impressions":
+    case "gorgeous":
         authorHeader.frame.origin.x += 10
         author.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
         author.frame.origin.x = authorHeader.frame.maxX
@@ -236,8 +236,8 @@ func title1ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CG
     view.addSubview(title2)
     newOriginY = title2.frame.maxY
     
-    switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
-    case "lines":
+    switch UserDefaults.SettingInfo.string(forKey: .essayTheme) {
+    case "style":
         let path = UIBezierPath()
         path.move(to: CGPoint(x: Spaced.screenAuto(), y: title2.frame.maxY + 3))
         path.addLine(to: CGPoint(x: Screen.width() - Spaced.screenAuto(), y: title2.frame.maxY + 3))
@@ -247,7 +247,7 @@ func title1ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CG
         shapeLayer.lineWidth = 1.0
         view.layer.addSublayer(shapeLayer)
         newOriginY += 5
-    case "impressions":
+    case "gorgeous":
         let path = UIBezierPath()
         path.move(to: CGPoint(x: Spaced.screenAuto(), y: title2.frame.maxY - 3))
         path.addLine(to: CGPoint(x: title2.frame.maxX, y: title2.frame.maxY - 3))
@@ -283,11 +283,11 @@ func title2ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CG
     
     newOriginY = title3.frame.maxY
     
-    switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
-    case "lines":
+    switch UserDefaults.SettingInfo.string(forKey: .essayTheme) {
+    case "style":
         title3.text = "- \(string)"
         title3.sizeToFit()
-    case "impressions":
+    case "gorgeous":
         title3.text = "\(string)"
         title3.sizeToFit()
         title3.frame.origin.x += 13
@@ -352,7 +352,10 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
     let blurView = UIVisualEffectView(effect: blurEffect)
     blurView.isUserInteractionEnabled = false
     rowNumberBox.addSubview(blurView)
-    superView.addSubview(rowNumberBox)
+    if UserDefaults.SettingInfo.string(forKey: .essayCodeNumber)! == "true" {
+        // 根据设置判断是否显示代码块序号的底层半透明框
+        superView.addSubview(rowNumberBox)
+    }
     
     // 处理代码行和行序号
     var rowArray: Array<UILabel> = []
@@ -378,12 +381,15 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         rowArray.append(codeRow)
         codeScrollBox.addSubview(codeRow)
         
-        // 代码行的序号部分
+        /// 代码行的序号部分
         let rowNumber = UILabel()
         rowNumber.frame.origin = CGPoint(x: codeScrollBox.frame.origin.x, y: i == 0 ? 10 + codeScrollBox.frame.origin.y: codeRow.frame.origin.y + codeScrollBox.frame.origin.y)
         rowNumber.font = Font.code()
         rowArray.append(rowNumber)
-        superView.addSubview(rowNumber)
+        if UserDefaults.SettingInfo.string(forKey: .essayCodeNumber)! == "true" {
+            // 根据设置判断是否显示代码块序号的底层半透明框
+            superView.addSubview(rowNumber)
+        }
     }
     
     // 获取代码行数的位数
@@ -414,8 +420,8 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
     codeScrollBox.alwaysBounceHorizontal = true
     
     // 主题相关样式的参数设置
-    switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
-    case "simple":
+    switch UserDefaults.SettingInfo.string(forKey: .essayTheme) {
+    case "texture":
         // 设置代码行和序号的样式
         for (index, element) in rowArray.enumerated() {
             let rowNumber = (index - 1) / 2 + 1 // 代码行的序号的具体数字
@@ -469,7 +475,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         blurView.frame = CGRect(origin: CGPointZero, size: rowNumberBox.frame.size)
         rowNumberBox.backgroundColor = UIColor.white.withAlphaComponent(0)
         rowNumberBox.layer.masksToBounds = true
-    case "lines":
+    case "style":
         // 设置代码行和序号的样式
         for (index, element) in rowArray.enumerated() {
             let rowNumber = (index - 1) / 2 + 1 // 代码行的序号的具体数字
@@ -537,7 +543,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         verticalLine.lineWidth = 0.5
         verticalLine.strokeColor = UIColor.black.withAlphaComponent(0.5).cgColor
         superView.layer.addSublayer(verticalLine)
-    case "impressions":
+    case "gorgeous":
         // 设置代码行和序号的样式
         for (index, element) in rowArray.enumerated() {
             let rowNumber = (index - 1) / 2 + 1 // 代码行的序号的具体数字
@@ -719,10 +725,10 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
     underlyView.backgroundColor = UIColor.systemGroupedBackground
     underlyView.bounces = false
     underlyView.frame.origin = CGPoint(x: Spaced.screenAuto(), y: originY + Spaced.control() + 4)
-    if UserDefaults.SettingInfo.string(forKey: .essayStyle) == "lines" {
+    if UserDefaults.SettingInfo.string(forKey: .essayTheme) == "style" {
         underlyView.backgroundColor = UIColor.systemBackground
         underlyView.layer.borderColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
-    } else if UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions" {
+    } else if UserDefaults.SettingInfo.string(forKey: .essayTheme) == "gorgeous" {
         lineWidth = CGFloat(3)
         boardWidth = CGFloat(0)
         rowHeight = CGFloat(30)
@@ -790,7 +796,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
     var cellViewArray: Array<UIView> = []
     for i in 0 ..< arrayData.count {
         let cellView = UIView(frame: CGRect(x: boardWidth - lineWidth / 2, y: boardWidth + rowHeight * CGFloat(i) - lineWidth / 2, width: frameWidth - boardWidth * 2, height: rowHeight))
-        if frameWidth == Screen.basicWidth(), UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions", i % 2 == 1 {
+        if frameWidth == Screen.basicWidth(), UserDefaults.SettingInfo.string(forKey: .essayTheme) == "gorgeous", i % 2 == 1 {
             cellView.frame.size.width += lineWidth / 2
         }
         // 绘制表格水平方向的分割线
@@ -801,10 +807,10 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
             horizontalLinePath.addLine(to: CGPoint(x: frameWidth - boardWidth, y: pointY))
             let horizontalLine = CAShapeLayer()
             horizontalLine.path = horizontalLinePath.cgPath
-            switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
-            case "simple": horizontalLine.strokeColor = UIColor.black.cgColor
-            case "lines": horizontalLine.strokeColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
-            case "impressions": horizontalLine.strokeColor = UIColor.systemBackground.cgColor
+            switch UserDefaults.SettingInfo.string(forKey: .essayTheme) {
+            case "texture": horizontalLine.strokeColor = UIColor.black.cgColor
+            case "style": horizontalLine.strokeColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
+            case "gorgeous": horizontalLine.strokeColor = UIColor.systemBackground.cgColor
             default: break
             }
             horizontalLine.lineWidth = lineWidth
@@ -828,10 +834,10 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 verticalLinePath.addLine(to: CGPoint(x: point, y: CGFloat(arrayData.count) * rowHeight + boardWidth))
                 let verticalLine = CAShapeLayer()
                 verticalLine.path = verticalLinePath.cgPath
-                switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
-                case "simple": verticalLine.strokeColor = UIColor.black.cgColor
-                case "lines": verticalLine.strokeColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
-                case "impressions": verticalLine.strokeColor = UIColor.systemBackground.cgColor
+                switch UserDefaults.SettingInfo.string(forKey: .essayTheme) {
+                case "texture": verticalLine.strokeColor = UIColor.black.cgColor
+                case "style": verticalLine.strokeColor = UIColor(red: 146/255.0, green: 146/255.0, blue: 148/255.0, alpha: 1.000).cgColor
+                case "gorgeous": verticalLine.strokeColor = UIColor.systemBackground.cgColor
                 default:
                     break
                 }
@@ -839,7 +845,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 underlyView.layer.addSublayer(verticalLine)
             }
             for item in 0 ..< columnCountMax {
-                if i % 2 == 1, item != 0, UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions" {
+                if i % 2 == 1, item != 0, UserDefaults.SettingInfo.string(forKey: .essayTheme) == "gorgeous" {
                     let verticalLinePath2 = UIBezierPath()
                     var point2 = frameOriginX[item] - 5 + boardWidth
                     if boardWidth == CGFloat(10), lineWidth == CGFloat(10) {
@@ -861,9 +867,9 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 label.backgroundColor = UIColor.systemGroupedBackground
                 label.lineBreakMode = .byClipping
                 
-                if UserDefaults.SettingInfo.string(forKey: .essayStyle) == "lines" {
+                if UserDefaults.SettingInfo.string(forKey: .essayTheme) == "style" {
                     label.backgroundColor = UIColor.systemBackground
-                } else if UserDefaults.SettingInfo.string(forKey: .essayStyle) == "impressions" {
+                } else if UserDefaults.SettingInfo.string(forKey: .essayTheme) == "gorgeous" {
                     if i % 2 == 1 {
                         cellView.backgroundColor = UIColor(red: 222/255.0, green: 221/255.0, blue: 247/255.0, alpha: 1.000)
                         label.backgroundColor = UIColor(red: 222/255.0, green: 221/255.0, blue: 247/255.0, alpha: 1.000)
@@ -911,7 +917,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
                 label.font = Font.smallText()
                 label.frame.origin.y += (i == 0 ? boardWidth / 2: lineWidth / 2)
                 label.frame.size.height -= (i == 0 ? lineWidth / 2 + boardWidth / 2: lineWidth)
-                //                if UserDefaults.SettingInfo.string(forKey: .essayStyle) == "lines" {
+                //                if UserDefaults.SettingInfo.string(forKey: .essayTheme) == "style" {
                 //                    let canshu = 0.1165
                 //                    label.frame.origin.y += canshu
                 //                    label.frame.size.height -= canshu * 2
@@ -977,8 +983,8 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
 //    author.backgroundColor = UIColor.systemFill
 //    underlyScrollView.addSubview(author)
 //    
-//    switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
-//    case "lines":
+//    switch UserDefaults.SettingInfo.string(forKey: .essayTheme) {
+//    case "style":
 //        author0.text = ""
 //        author.text = "作者：\(String(describing: data["author"]!))"
 //        author.sizeToFit()
@@ -988,7 +994,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
 //        author.backgroundColor = UIColor.systemGroupedBackground
 //        author.layer.borderWidth = 1
 //        author.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
-//    case "impressions":
+//    case "gorgeous":
 //        author0.frame.origin.x += 10
 //        author.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
 //        author.frame.origin.x = author0.frame.maxX
@@ -1018,8 +1024,8 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
 //            underlyScrollView.addSubview(title2)
 //            originY = title2.frame.maxY
 //            
-//            switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
-//            case "lines":
+//            switch UserDefaults.SettingInfo.string(forKey: .essayTheme) {
+//            case "style":
 //                let path = UIBezierPath()
 //                path.move(to: CGPoint(x: Spaced.screenAuto(), y: title2.frame.maxY + 3))
 //                path.addLine(to: CGPoint(x: Screen.width() - Spaced.screenAuto(), y: title2.frame.maxY + 3))
@@ -1029,7 +1035,7 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
 //                shapeLayer.lineWidth = 1.0
 //                underlyScrollView.layer.addSublayer(shapeLayer)
 //                originY += 5
-//            case "impressions":
+//            case "gorgeous":
 //                let path = UIBezierPath()
 //                path.move(to: CGPoint(x: Spaced.screenAuto(), y: title2.frame.maxY - 3))
 //                path.addLine(to: CGPoint(x: title2.frame.maxX, y: title2.frame.maxY - 3))
@@ -1052,11 +1058,11 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
 //            
 //            originY = title3.frame.maxY
 //            
-//            switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
-//            case "lines":
+//            switch UserDefaults.SettingInfo.string(forKey: .essayTheme) {
+//            case "style":
 //                title3.text = "- \(content[i])"
 //                title3.sizeToFit()
-//            case "impressions":
+//            case "gorgeous":
 //                title3.text = "\(content[i])"
 //                title3.sizeToFit()
 //                title3.frame.origin.x += 13
@@ -1173,12 +1179,12 @@ func tableModuleBuild(_ array: Array<String>, _ view: UIView, originY: CGFloat, 
 //            
 //            originY = codeScroll.frame.maxY
 //            
-//            switch UserDefaults.SettingInfo.string(forKey: .essayStyle) {
-//            case "lines":
+//            switch UserDefaults.SettingInfo.string(forKey: .essayTheme) {
+//            case "style":
 //                codeScroll.backgroundColor = UIColor.systemGroupedBackground
 //                codeScroll.layer.borderWidth = 1
 //                codeScroll.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
-//            case "impressions":
+//            case "gorgeous":
 //                codeScroll.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.2)
 //            default: break
 //            }

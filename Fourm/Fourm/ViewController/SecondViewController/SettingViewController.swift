@@ -1,255 +1,163 @@
-
+// 偏好设置界面
 import UIKit
 
 class SettingViewController: UIViewController {
-
+    /// 接收模块`1`控件`1`（偏好设置模块）的主题切换按钮，目的是为了当主题切换后可以定位到具体按钮然后切换复选框
+    var buttonArray: Array<UIButton> = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewControllerInitialize(vc: self, navTitle: "偏好设置")
+        Initialize.view(self, "偏好设置", mode: .group)
         
-
-    }
-
-}
-
-
-//        // 通过方法moduleTitleBuild创建模块标题（该方法后期修改为结构体）
-//        let moduleTitle = moduleTitleBuild(title, settingModule, 0, interaction: false)
-
-
-
-
-/// 创建设置模块的单个控件的结构体
-///
-/// 单个设置的控件由说明、控件和提示组成，`Setting`依靠下面这个方法来生成设置控件
-/// ```swift
-/// controlBuild(caption: String, control: Array<controlMode>, tips: String) -> Array<UIView>
-/// ```
-///
-/// - Note: `controlBuild(caption: String, control: Array<controlMode>, tips: String) -> Array<UIView>`有三个重载方法，分别可以省略`caption`、`tips`、`control`和`tips`
-struct Setting {
-    /// 设置行的类型枚举值
-    enum controlMode: Int {
-        // 继承Int协议目的是让custom1、custom2、custom3、custom4分别有对应的rawValue来判断高度倍数，切记顺序不可打乱
-        /// 自定义设置行，`custom`后的数字对应高度倍数（44pt的倍数）
-        case custom, custom1, custom2, custom3, custom4
-        case forward, toggle
-    }
-    
-    /// 创建设置模块的单个控件的结构体的传参方法
-    ///
-    /// # 使用方法
-    /// 暂无
-    ///
-    /// 通过引用其他方法来创建整个设置模块，需要传递一个该设置模块的标题以及若干个说明和提示
-    /// - Parameter caption: `String`，说明，显示在控件的上方
-    /// - Parameter control: `Array<controlMode>`，控件主体，数组内是一个枚举值，`forward`表示跳转类型设置，`toggle`表示开关设置（传出标准尺寸的开关设置行），`custom`表示自定义设置
-    /// - Parameter tips: `String`，提示，显示在控件的下方
-    ///
-    /// - Note: 整个控件的主体部分的行数为`control`参数的元素数。返回值的数组的第`0`个元素为整个控件的`UIView`，其余按顺序为各行
-    ///
-    /// - Returns: `Array<UIView>`
-    ///
-    /// # 返回值介绍
-    /// **整个控件**：`UIView`，一般在外界设置这个`UIView`的原点`UIView.frame.origin`
-    ///
-    /// **forward**：`UIButton`，标准尺寸跳转行的整行，一般调用`UIButton`的`setTitle()`方法添加内容，并且用`addTarget()`关联上跳转界面的方法
-    ///
-    /// **toggle**：`UIButton`，标准尺寸的开关设置行的整行，一般调用`UIButton`的`setTitle()`方法添加内容，然后遍历其子视图找到`UISwitch`并且关联上方法
-    ///
-    /// **custom**：`UIView`，自定义设置块的整个视图，在这个`UIView`上做手脚
-    static func controlBuild(caption: String, control: Array<controlMode>, tips: String) -> Array<UIView> {
-        controlBuildCenter(caption, control, tips)
-    }
-    
-    /// 创建设置模块的单个控件的结构体的传参方法（不含提示`tips`）
-    ///
-    /// # 使用方法
-    /// 暂无
-    ///
-    /// 通过引用其他方法来创建整个设置模块，需要传递一个该设置模块的标题以及若干个说明和提示
-    /// - Parameter caption: `String`，说明，显示在控件的上方
-    /// - Parameter control: `Array<controlMode>`，控件主体，数组内是一个枚举值，`forward`表示跳转类型设置，`toggle`表示开关设置（传出标准尺寸的开关设置行），`custom`表示自定义设置
-    ///
-    /// - Note: 整个控件的主体部分的行数为`control`参数的元素数。返回值的数组的第`0`个元素为整个控件的`UIView`，其余按顺序为各行
-    ///
-    /// - Returns: `Array<UIView>`
-    ///
-    /// # 返回值介绍
-    /// **整个控件**：`UIView`，一般在外界设置这个`UIView`的原点`UIView.frame.origin`
-    ///
-    /// **forward**：`UIButton`，标准尺寸跳转行的整行，一般调用`UIButton`的`setTitle()`方法添加内容，并且用`addTarget()`关联上跳转界面的方法
-    ///
-    /// **toggle**：`UIButton`，标准尺寸的开关设置行的整行，一般调用`UIButton`的`setTitle()`方法添加内容，然后遍历其子视图找到`UISwitch`并且关联上方法
-    ///
-    /// **custom**：`UIView`，自定义设置块的整个视图，在这个`UIView`上做手脚
-    static func controlBuild(caption: String, control: Array<controlMode>) -> Array<UIView> {
-        controlBuildCenter(caption, control, "")
-    }
-    
-    /// 创建设置模块的单个控件的结构体的传参方法（不含说明`caption`）
-    ///
-    /// # 使用方法
-    /// 暂无
-    ///
-    /// 通过引用其他方法来创建整个设置模块，需要传递一个该设置模块的标题以及若干个说明和提示
-    /// - Parameter control: `Array<controlMode>`，控件主体，数组内是一个枚举值，`forward`表示跳转类型设置，`toggle`表示开关设置（传出标准尺寸的开关设置行），`custom`表示自定义设置
-    /// - Parameter tips: `String`，提示，显示在控件的下方
-    ///
-    /// - Note: 整个控件的主体部分的行数为`control`参数的元素数。返回值的数组的第`0`个元素为整个控件的`UIView`，其余按顺序为各行
-    ///
-    /// - Returns: `Array<UIView>`
-    ///
-    /// # 返回值介绍
-    /// **整个控件**：`UIView`，一般在外界设置这个`UIView`的原点`UIView.frame.origin`
-    ///
-    /// **forward**：`UIButton`，标准尺寸跳转行的整行，一般调用`UIButton`的`setTitle()`方法添加内容，并且用`addTarget()`关联上跳转界面的方法
-    ///
-    /// **toggle**：`UIButton`，标准尺寸的开关设置行的整行，一般调用`UIButton`的`setTitle()`方法添加内容，然后遍历其子视图找到`UISwitch`并且关联上方法
-    ///
-    /// **custom**：`UIView`，自定义设置块的整个视图，在这个`UIView`上做手脚
-    static func controlBuild(control: Array<controlMode>, tips: String) -> Array<UIView> {
-        controlBuildCenter("", control, tips)
-    }
-    
-    /// 创建设置模块的单个控件的结构体的传参方法（只有控件主体`control`）
-    ///
-    /// # 使用方法
-    /// 暂无
-    ///
-    /// 通过引用其他方法来创建整个设置模块，需要传递一个该设置模块的标题以及若干个说明和提示
-    /// - Parameter control: `Array<controlMode>`，控件主体，数组内是一个枚举值，`forward`表示跳转类型设置，`toggle`表示开关设置（传出标准尺寸的开关设置行），`custom`表示自定义设置
-    ///
-    /// - Note: 整个控件的主体部分的行数为`control`参数的元素数。返回值的数组的第`0`个元素为整个控件的`UIView`，其余按顺序为各行
-    ///
-    /// - Returns: `Array<UIView>`
-    ///
-    /// # 返回值介绍
-    /// **整个控件**：`UIView`，一般在外界设置这个`UIView`的原点`UIView.frame.origin`
-    ///
-    /// **forward**：`UIButton`，标准尺寸跳转行的整行，一般调用`UIButton`的`setTitle()`方法添加内容，并且用`addTarget()`关联上跳转界面的方法
-    ///
-    /// **toggle**：`UIButton`，标准尺寸的开关设置行的整行，一般调用`UIButton`的`setTitle()`方法添加内容，然后遍历其子视图找到`UISwitch`并且关联上方法
-    ///
-    /// **custom**：`UIView`，自定义设置块的整个视图，在这个`UIView`上做手脚
-    static func controlBuild(control: Array<controlMode>) -> Array<UIView> {
-        controlBuildCenter("", control, "")
-    }
-}
-
-// Setting的扩展，扩展内的都是私有属性或方法(或者是不建议外部使用)
-extension Setting {
-    /// 创建设置模块的单个控件的结构体的枢纽方法
-    private static func controlBuildCenter(_ caption: String,_ control: Array<controlMode>,_ tips: String) -> Array<UIView> {
-        /// 作为返回值的数组（`returnArray`），接收所有返回值
-        var returnArray: Array<UIView> = []
+        /// 底层的滚动视图，最基础的界面
+        let underlyView = UIScrollView()
+        underlyView.frame = Screen.bounds()
+        view.addSubview(underlyView)
         
-        /// 设置控件最底层的`UIView`
-        let settingControl = UIView()
-        settingControl.frame.origin = CGPointZero
-        settingControl.frame.size.width = Screen.basicWidth()
-        returnArray.append(settingControl) // 添加到返回值的数组(returnArray)
+        /// 排序相关的设置控件（对应的字典）
+        let module0ControlDictionary = Setting.controlBuild(control: [.forward])
+        module0ControlDictionary["view"]!.frame.origin = CGPoint(x: Spaced.screenAuto(), y: Spaced.navigation())
+        underlyView.addSubview(module0ControlDictionary["view"]!)
+        // 配置左侧文本内容
+        (module0ControlDictionary["label1"] as! UILabel).text = "调整设置项顺序"
         
-        /// 控件上方的说明（`caption`）部分
-        let captionLabel = UILabel().fontAdaptive(caption, font: Font.tips())
-        if !caption.isEmpty {
-            captionLabel.frame.origin = CGPoint(x: Spaced.screen(), y: 0)
-            captionLabel.frame.size.width = Screen.basicWidth() - Spaced.screen() * 2
-            captionLabel.textColor = UIColor.black.withAlphaComponent(0.6)
-            settingControl.addSubview(captionLabel)
-        }
+        /// 模块标题`1`：显示与排版
+        let moduleTitle1 = UIButton().moduleTitleMode("显示与排版", originY: module0ControlDictionary["view"]!.frame.maxY + Spaced.module(), mode: .basic)
+        underlyView.addSubview(moduleTitle1)
         
-        /// 设置控件主体的`UIView`
-        let settingTable = UIView()
-        settingTable.frame.origin = CGPoint(x: 0, y: caption.isEmpty ? 0: captionLabel.frame.maxY + 6)
-        settingTable.frame.size.width = Screen.basicWidth()
-        settingTable.backgroundColor = Color.setting()
-        settingTable.layer.cornerRadius = 12
-        settingControl.addSubview(settingTable)
-
-        // 通过循环创建每一行设置
-        for (index, item) in control.enumerated() {
-            var row = UIView()
-            switch item {
-            case .forward: row = forward() // 跳转界面类型的设置行
-            case .toggle: row = toggle() // 开关类型的设置行
-            case .custom: break
-            default: row = custom(item) // 自定义设置行
-            }
-            // 配置这些行的通用参数
-            row.frame.origin = CGPoint(x: 0, y: returnArray[index].frame.maxY)
-            row.frame.size.width = Screen.basicWidth()
-            settingTable.addSubview(row)
-            returnArray.append(row) // 添加到返回值的数组(returnArray)
+        /// 显示与排版（模块`1`）的设置控件`1`（对应的字典）
+        let module1Control1Dictionary = Setting.controlBuild(caption: "设置阅读文章时的主题风格", control: [.custom3, .forward])
+        module1Control1Dictionary["view"]!.frame.origin = CGPoint(x: Spaced.screenAuto(), y: moduleTitle1.frame.maxY + Spaced.control())
+        underlyView.addSubview(module1Control1Dictionary["view"]!)
+        // 配置每一行的左侧文本内容
+        (module1Control1Dictionary["label1"] as! UILabel).text = ""
+        (module1Control1Dictionary["label2"] as! UILabel).text = "高级阅读设置"
+        
+        // 重载界面的时候清空数组防止元素索引值紊乱
+        buttonArray = []
+        
+        /// 模块`1`控件`1`的第一行设置（设置阅读主题行）的辅助X轴原点坐标值（确保三个图标平均分布）数组
+        let module1Control1OriginXArray: Array<CGFloat> = [(Screen.basicWidth() - 180) / 4, (Screen.basicWidth() - 180) / 2 + 60, (Screen.basicWidth() - 180) / 4 * 3 + 120]
+        // 自定义设置控件（阅读主题切换）
+        for i in 0 ... 2 {
+            /// 上方的图片按钮
+            let imageButton = UIButton()
+            imageButton.frame.size = CGSize(width: 60, height: 60)
+            imageButton.frame.origin = CGPoint(x: module1Control1OriginXArray[i], y: 15)
             
-            // 创建各个设置行之间的分割线
-            if index != 0 {
-                // 固定Y轴的值
-                let pointY = returnArray[index].frame.maxY - 0.25
-                // 创建线条的首尾点
-                let segmentedLinePath = UIBezierPath()
-                segmentedLinePath.move(to: CGPoint(x: 20, y: pointY))
-                segmentedLinePath.addLine(to: CGPoint(x: Screen.basicWidth(), y: pointY))
-                // 创建线条并且设置相关属性
-                let segmentedLine = CAShapeLayer()
-                segmentedLine.path = segmentedLinePath.cgPath
-                segmentedLine.strokeColor = Color.segmentedLine().cgColor
-                segmentedLine.lineWidth = 0.5
-                settingTable.layer.addSublayer(segmentedLine)
+            /// 下方的文字复选框按钮
+            let button = UIButton()
+            buttonArray.append(button)
+            
+            // 给按钮加上图片和图标
+            switch i {
+            case 0:
+                imageButton.setBackgroundImage(UIImage(named: "theme.texture"), for: .normal)
+                button.setTitle("质感", for: .normal)
+            case 1:
+                imageButton.setBackgroundImage(UIImage(named: "theme.style"), for: .normal)
+                button.setTitle("格调", for: .normal)
+            case 2:
+                imageButton.setBackgroundImage(UIImage(named: "theme.gorgeous"), for: .normal)
+                button.setTitle("绚烂", for: .normal)
+            default: break
+            }
+            
+            // 配置文字复选框按钮的基础参数
+            button.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+            button.sizeToFit()
+            button.frame.origin = CGPoint(x: module1Control1OriginXArray[i], y: imageButton.frame.maxY + 15)
+            button.setTitleColor(UIColor.black, for: .normal)
+            
+            // 设置两个按钮的其他参数
+            imageButton.tag = i
+            imageButton.addTarget(self, action: #selector(click), for: .touchUpInside)
+            module1Control1Dictionary["control1"]!.addSubview(imageButton)
+            button.tag = i
+            button.addTarget(self, action: #selector(click), for: .touchUpInside)
+            module1Control1Dictionary["control1"]!.addSubview(button)
+        }
+        
+        // 根据当前主题设置复选框样式
+        switch UserDefaults.SettingInfo.string(forKey: .essayTheme) {
+        case "texture": buttonArray[0].setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        case "style": buttonArray[1].setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        case "grogeous": buttonArray[2].setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        default: break
+        }
+        
+        /// 显示与排版（模块`1`）的设置控件`2`（对应的字典）
+        let module1Control2Dictionary = Setting.controlBuild(control: [.custom3, .toggle, .forward, .toggle])
+        module1Control2Dictionary["view"]!.frame.origin = CGPoint(x: Spaced.screenAuto(), y: module1Control1Dictionary["view"]!.frame.maxY + Spaced.setting())
+        underlyView.addSubview(module1Control2Dictionary["view"]!)
+        // 配置每一行的左侧文本内容
+        let module1Control2LabelArray = ["选择主题色", "深色模式跟随系统", "设置字体", "字体样式跟随系统"]
+        for i in 1 ... module1Control2LabelArray.count {
+            (module1Control2Dictionary["label\(i)"] as! UILabel).text = module1Control2LabelArray[i - 1]
+        }
+        
+        /// 模块标题`2`：通知与推荐
+        let moduleTitle2 = UIButton().moduleTitleMode("通知与推送", originY: module1Control2Dictionary["view"]!.frame.maxY + Spaced.module(), mode: .basic)
+        underlyView.addSubview(moduleTitle2)
+        
+        /// 通知与推送（模块`2`）的设置控件`1`（对应的字典）
+        let module2Control1Dictionary = Setting.controlBuild(control: [.toggle, .forward], tips: "需要先在系统设置中打开消息通知总开关")
+        module2Control1Dictionary["view"]!.frame.origin = CGPoint(x: Spaced.screenAuto(), y: moduleTitle2.frame.maxY + Spaced.control())
+        underlyView.addSubview(module2Control1Dictionary["view"]!)
+        // 配置每一行的左侧文本内容
+        let module2Control1LabelArray = ["消息通知", "配置消息通知"]
+        for i in 1 ... module2Control1LabelArray.count {
+            (module2Control1Dictionary["label\(i)"] as! UILabel).text = module2Control1LabelArray[i - 1]
+        }
+        
+        /// 通知与推送（模块`2`）的设置控件`2`（对应的字典）
+        let module2Control2Dictionary = Setting.controlBuild(control: [.toggle, .forward, .toggle, .forward], tips: """
+        打开个性化内容推送会不定期收到你可能感兴趣的内容推送，你也可以配置推送时间与内容范围
+        需要先在系统设置中打开消息通知总开关
+        """)
+        module2Control2Dictionary["view"]!.frame.origin = CGPoint(x: Spaced.screenAuto(), y: module2Control1Dictionary["view"]!.frame.maxY + Spaced.setting())
+        underlyView.addSubview(module2Control2Dictionary["view"]!)
+        // 配置每一行的左侧文本内容
+        let module2Control2LabelArray = ["个性化推荐", "配置个性化标识", "个性化内容推送", "配置推送内容"]
+        for i in 1 ... module2Control2LabelArray.count {
+            (module2Control2Dictionary["label\(i)"] as! UILabel).text = module2Control2LabelArray[i - 1]
+        }
+        
+        /// 通知与推送（模块`2`）的设置控件`3`（对应的字典）
+        let module2Control3Dictionary = Setting.controlBuild(control: [.toggle, .toggle, .forward])
+        module2Control3Dictionary["view"]!.frame.origin = CGPoint(x: Spaced.screenAuto(), y: module2Control2Dictionary["view"]!.frame.maxY + Spaced.setting())
+        underlyView.addSubview(module2Control3Dictionary["view"]!)
+        // 配置每一行的左侧文本内容
+        let module2Control3LabelArray = ["广告", "广告标识推荐", "配置广告显示"]
+        for i in 1 ... module2Control3LabelArray.count {
+            (module2Control3Dictionary["label\(i)"] as! UILabel).text = module2Control3LabelArray[i - 1]
+        }
+        
+        // 配置底层视图的内容尺寸
+        underlyView.contentSize = CGSize(width: Screen.width(), height: module2Control3Dictionary["view"]!.frame.maxY + Spaced.module())
+    }
+}
+
+// 扩展，放置设置控件对应的点击、切换等事件（非跳转界面事件）
+extension SettingViewController {
+    /// 搜索界面文章主题切换按钮对应的点击方法，作用是切换文章的阅读主题
+    @objc func click(sender: UIButton) {
+        switch sender.tag {
+        case 0: UserDefaults.SettingInfo.set(value: "texture", forKey: .essayTheme)
+        case 1: UserDefaults.SettingInfo.set(value: "style", forKey: .essayTheme)
+        case 2: UserDefaults.SettingInfo.set(value: "gorgeous", forKey: .essayTheme)
+        default: break
+        }
+        
+        for i in 0 ... 2 {
+            if i == sender.tag {
+                buttonArray[sender.tag].setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            } else {
+                buttonArray[i].setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
             }
         }
         
-        /// 控件下方的提示（`tips`）部分
-        let tipsLabel = UILabel().fontAdaptive(caption, font: Font.tips())
-        if !caption.isEmpty {
-            tipsLabel.frame.origin = CGPoint(x: Spaced.screen(), y: returnArray[control.count].frame.maxY + 6)
-            captionLabel.frame.size.width = Screen.basicWidth() - Spaced.screen() * 2
-            captionLabel.textColor = UIColor.black.withAlphaComponent(0.6)
-            settingControl.addSubview(captionLabel)
-        }
-        
-        // 设置底层和主体试图的height
-        settingTable.frame.size.height = returnArray[control.count].frame.maxY
-        settingControl.frame.size.height = tipsLabel.frame.maxY
-        
-        return returnArray
-    }
-    
-    /// 创建设置控件的单行（跳转界面类型）
-    private static func forward() -> UIButton {
-        /// 设置控件的单行
-        let row = UIButton()
-        row.frame.size.height = 44
-        
-        /// 设置控件跳转类型行的跳转箭头图标
-        let rowIcon = UIImageView(frame: CGRect(x: Screen.basicWidth() - 25, y: 14, width: 10, height: 16))
-        rowIcon.image = UIImage(systemName: "chevron.forward", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
-        rowIcon.tintColor = UIColor.black.withAlphaComponent(0.5)
-        row.addSubview(rowIcon)
-        
-        return row
-    }
-    /// 创建设置控件的单行（开关类型）
-    private static func toggle() -> UIButton {
-        /// 设置控件的单行
-        let row = UIButton()
-        row.frame.size.height = 44
-        
-        /// 设置控件开关类型行的开关
-        let rowSwitch = UISwitch()
-        rowSwitch.frame.origin = CGPoint(x: Screen.basicWidth() - 67, y: 7)
-        row.addSubview(rowSwitch)
-        
-        return row
-    }
-    private static func custom(_ sender: Setting.controlMode) -> UIView {
-        /// 匹配`custom`的原始值来判断高度倍数
-        let parameter: CGFloat = CGFloat(sender.rawValue)
-        
-        /// 设置控件的单行
-        let row = UIView()
-        row.frame.size.height = 44 * parameter
-        
-        return row
+        // 在需要切换主题的地方发送通知
+        NotificationCenter.default.post(name: changeThemeNotification, object: nil)
     }
 }

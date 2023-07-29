@@ -6,9 +6,7 @@ class CourseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .systemBackground
-        viewControllerInitialize(vc: self, navTitle: "精选课程标题")
+        Initialize.view(self, "精选课程标题", mode: .group)
 
         let collectionView = UITableView(frame: view.bounds, style: .insetGrouped)
         view.addSubview(collectionView)
