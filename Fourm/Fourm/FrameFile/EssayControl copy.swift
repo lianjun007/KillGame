@@ -336,7 +336,37 @@ func title3ModuleBuild(_ string: String, _ view: UIView, originY: CGFloat) -> CG
 func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY: CGFloat, language codeLanguage: String) -> CGFloat {
     // 对空行进行处理
     var codeStringArray = stringArray
+    
+    // 根据是否去除前后空行的设置判断
+    if UserDefaults.SettingInfo.string(forKey: .essayCodeFristAndList)! == "true" {
+        // 去除前面的空行
+        for (index, element) in codeStringArray.enumerated() {
+            if !element.isEmpty {
+                codeStringArray.removeFirst(index)
+                break
+            }
+        }
+        // 去除后面的空行
+        var last = 0
+        var lastBool = false
+        for item in codeStringArray {
+            last += 1
+            if !item.isEmpty, lastBool {
+                lastBool = !lastBool
+                last = 0
+            } else if item.isEmpty, !lastBool {
+                lastBool = !lastBool
+                last = 0
+            }
+        }
+        if codeStringArray[codeStringArray.count - 1].isEmpty {
+            codeStringArray.removeLast(last + 1)
+        }
+    }
+    
+    // 保留中间的空行
     for (index, element) in codeStringArray.enumerated() {
+        
         if element.isEmpty {
             codeStringArray[index] = "    "
         }
@@ -360,11 +390,10 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
     // 处理代码行和行序号
     var rowArray: Array<UILabel> = []
     var codeRowMaxX = CGFloat(0) // 接收所有代码行的最大X轴坐标的属性
-    let rowSpacing = CGFloat(4) // 代码行之间的间距属性
     for i in 0 ..< codeStringArray.count {
         // 代码行部分
         let codeRow = UILabel()
-        codeRow.frame.origin.y = i == 0 ? 10: rowArray[(i - 1) * 2].frame.maxY + rowSpacing
+        codeRow.frame.origin.y = i == 0 ? 10: rowArray[(i - 1) * 2].frame.maxY + Spaced.codeRow()
         var newCodeString = NSMutableAttributedString(string: codeStringArray[i])
         switch codeLanguage {
         case "Swift": newCodeString = swiftCodeOptimize(attString: newCodeString)
@@ -426,8 +455,12 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         for (index, element) in rowArray.enumerated() {
             let rowNumber = (index - 1) / 2 + 1 // 代码行的序号的具体数字
             if index % 2 == 0 {
-                // 代码行部分
-                element.frame.origin.x = rowNumberBoxWidth + 10
+                // 代码行部分，判断是否有代码行前的序号以此来决定原点的X轴坐标值
+                if UserDefaults.SettingInfo.string(forKey: .essayCodeNumber) == "true" {
+                    element.frame.origin.x = rowNumberBoxWidth + 10
+                } else {
+                    element.frame.origin.x = 8
+                }
             } else {
                 // 代码行的序号部分
                 switch rowNumberDigits {
@@ -462,7 +495,12 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         
         // 设置代码(滚动)块的样式
         codeScrollBox.backgroundColor = UIColor.systemFill
-        codeScrollBox.contentSize.width = codeRowMaxX + rowNumberBoxWidth + 15
+        // 根据是否有代码块行前序号来判断代码块的contentSize
+        if UserDefaults.SettingInfo.string(forKey: .essayCodeNumber) == "true" {
+            codeScrollBox.contentSize.width = codeRowMaxX + rowNumberBoxWidth + 15
+        } else {
+            codeScrollBox.contentSize.width = codeRowMaxX + 16
+        }
         
         // 代码行序号容器的样式
         rowNumberBox.frame = CGRect(x: codeScrollBox.frame.origin.x, y: codeScrollBox.frame.origin.y, width: rowNumberBoxWidth + 5, height: codeScrollBox.frame.height)
@@ -480,8 +518,12 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         for (index, element) in rowArray.enumerated() {
             let rowNumber = (index - 1) / 2 + 1 // 代码行的序号的具体数字
             if index % 2 == 0 {
-                // 代码行部分
-                element.frame.origin.x = rowNumberBoxWidth + 5
+                // 代码行部分，判断是否有代码行前的序号以此来决定原点的X轴坐标值
+                if UserDefaults.SettingInfo.string(forKey: .essayCodeNumber) == "true" {
+                    element.frame.origin.x = rowNumberBoxWidth + 5
+                } else {
+                    element.frame.origin.x = 8
+                }
             } else {
                 // 代码行的序号部分
                 element.frame.origin.x += 0
@@ -519,7 +561,12 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         codeScrollBox.backgroundColor = UIColor(red: 242/255.0, green: 242/255.0, blue: 247/255.0, alpha: 1.000)
         codeScrollBox.layer.borderWidth = 1
         codeScrollBox.layer.borderColor = UIColor(red: 138/255.0, green: 138/255.0, blue: 141/255.0, alpha: 1.000).cgColor
-        codeScrollBox.contentSize.width = codeRowMaxX + rowNumberBoxWidth + 10
+        // 根据是否有代码块行前序号来判断代码块的contentSize
+        if UserDefaults.SettingInfo.string(forKey: .essayCodeNumber) == "true" {
+            codeScrollBox.contentSize.width = codeRowMaxX + rowNumberBoxWidth + 10
+        } else {
+            codeScrollBox.contentSize.width = codeRowMaxX + 16
+        }
         
         // 代码行序号容器的样式
         rowNumberBox.frame = CGRect(x: codeScrollBox.frame.origin.x + 1, y: codeScrollBox.frame.origin.y + 1, width: rowNumberBoxWidth - 0.5, height: codeScrollBox.frame.height - 2)
@@ -533,23 +580,29 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         rowNumberBox.backgroundColor = UIColor.white.withAlphaComponent(0)
         rowNumberBox.layer.masksToBounds = true
         
-        // 线条主题代码块中序号的分割竖线
-        let verticalLinePath = UIBezierPath()
-        let anchor = rowNumberBoxWidth + codeScrollBox.frame.origin.x
-        verticalLinePath.move(to: CGPoint(x: anchor, y: codeScrollBox.frame.origin.y))
-        verticalLinePath.addLine(to: CGPoint(x: anchor, y: codeScrollBox.frame.maxY))
-        let verticalLine = CAShapeLayer()
-        verticalLine.path = verticalLinePath.cgPath
-        verticalLine.lineWidth = 0.5
-        verticalLine.strokeColor = UIColor.black.withAlphaComponent(0.5).cgColor
-        superView.layer.addSublayer(verticalLine)
+        if UserDefaults.SettingInfo.string(forKey: .essayCodeNumber) == "true" {
+            // 线条主题代码块中序号的分割竖线，根据是否显示代码行设置来判断
+            let verticalLinePath = UIBezierPath()
+            let anchor = rowNumberBoxWidth + codeScrollBox.frame.origin.x
+            verticalLinePath.move(to: CGPoint(x: anchor, y: codeScrollBox.frame.origin.y))
+            verticalLinePath.addLine(to: CGPoint(x: anchor, y: codeScrollBox.frame.maxY))
+            let verticalLine = CAShapeLayer()
+            verticalLine.path = verticalLinePath.cgPath
+            verticalLine.lineWidth = 0.5
+            verticalLine.strokeColor = UIColor.black.withAlphaComponent(0.5).cgColor
+            superView.layer.addSublayer(verticalLine)
+        }
     case "gorgeous":
         // 设置代码行和序号的样式
         for (index, element) in rowArray.enumerated() {
             let rowNumber = (index - 1) / 2 + 1 // 代码行的序号的具体数字
             if index % 2 == 0 {
-                // 代码行部分
-                element.frame.origin.x = rowNumberBoxWidth + 12
+                // 代码行部分，判断是否有代码行前的序号以此来决定原点的X轴坐标值
+                if UserDefaults.SettingInfo.string(forKey: .essayCodeNumber) == "true" {
+                    element.frame.origin.x = rowNumberBoxWidth + 12
+                } else {
+                    element.frame.origin.x = 8
+                }
             } else {
                 // 代码行的序号部分
                 element.frame.origin.x += 7
@@ -585,7 +638,12 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         
         // 设置代码(滚动)块的样式
         codeScrollBox.backgroundColor = UIColor(red: 222/255.0, green: 221/255.0, blue: 247/255.0, alpha: 1.000)
-        codeScrollBox.contentSize.width = codeRowMaxX + rowNumberBoxWidth + 17
+        // 根据是否有代码块行前序号来判断代码块的contentSize
+        if UserDefaults.SettingInfo.string(forKey: .essayCodeNumber) == "true" {
+            codeScrollBox.contentSize.width = codeRowMaxX + rowNumberBoxWidth + 17
+        } else {
+            codeScrollBox.contentSize.width = codeRowMaxX + 16
+        }
         
         // 代码行序号容器的样式
         rowNumberBox.frame = CGRect(x: 7 + codeScrollBox.frame.origin.x, y: 6 + codeScrollBox.frame.origin.y, width: rowNumberBoxWidth, height: codeScrollBox.frame.height - 12)
@@ -593,8 +651,7 @@ func codeModuleBuild(_ stringArray: Array<String>, _ superView: UIView,_ pointY:
         rowNumberBox.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.25)
         rowNumberBox.layer.cornerRadius = 5
         rowNumberBox.layer.masksToBounds = true
-    default:
-        break
+    default: break
     }
     
     return codeScrollBox.frame.maxY

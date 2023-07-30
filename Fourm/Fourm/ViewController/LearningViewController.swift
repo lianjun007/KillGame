@@ -2,8 +2,11 @@ import UIKit
 
 class LearningViewController: UIViewController {
     
-    var featuredCollectionsRandomDataArray: Array<Dictionary<String, String>> = [] // 接收精选课程的随机数据
+    // 发送精选课程的随机数据（废弃⚠️）
+    var featuredCollectionsRandomDataArray = arrayRandom(number: 7, array: featuredCollectionsDataArray) as! Array<Dictionary<String, String>>
+    
     let underlyView = UIScrollView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Initialize.view(self, "推荐内容", mode: .basic)
@@ -17,9 +20,6 @@ class LearningViewController: UIViewController {
         underlyView.addSubview(moduleTitle1)
         // 关联跳转方法
         moduleTitle1.addTarget(self, action: #selector(clickModuleTitleControl), for: .touchUpInside)
-        
-        // 发送精选课程的随机数据（废弃⚠️）
-        featuredCollectionsRandomDataArray = arrayRandom(number: 7, array: featuredCollectionsDataArray) as! Array<Dictionary<String, String>>
 
         // 设置第一个模块的横向滚动视图，用来承载第一个模块“精选合集”（待修改⚠️）
         let moduleView = UIScrollView(frame: CGRect(x: 0, y: moduleTitle1.frame.maxY + Spaced.control(), width: Screen.width(), height: largeControlSize.height))
@@ -40,7 +40,7 @@ class LearningViewController: UIViewController {
         }
         
         /// 模块标题：精选文章
-        let moduleTitle2 = UIButton().moduleTitleMode("精选合集", originY: moduleView.frame.maxY + Spaced.module(), mode: .arrow)
+        let moduleTitle2 = UIButton().moduleTitleMode("精选文章", originY: moduleView.frame.maxY + Spaced.module(), mode: .arrow)
         underlyView.addSubview(moduleTitle2)
         // 关联跳转方法
         moduleTitle2.addTarget(self, action: #selector(clickModuleTitleControl), for: .touchUpInside)
@@ -109,33 +109,37 @@ class LearningViewController: UIViewController {
         // 记录当前滚动视图的偏移量
         var offset: CGPoint?
         for subview in view.subviews {
-            if let underlyScrollView = subview as? UIScrollView {
-                offset = underlyScrollView.contentOffset
+            if let scrollView = subview as? UIScrollView {
+                offset = scrollView.contentOffset
                 break
             }
         }
-
-        // 在屏幕旋转完成后刷新界面
-        coordinator.animate(alongsideTransition: nil) { _ in
-            // 移除旧的滚动视图
-            for subview in self.underlyView.subviews {
-                subview.removeFromSuperview()
-            }
-
-            // 重新构建界面
-            self.viewDidLoad()
-
-            // 将新的滚动视图的偏移量设置为之前记录的值
-            if let offset = offset {
-                var newOffset = offset
-                if offset.y < -44 {
-                    newOffset.y = -(self.navigationController?.navigationBar.frame.height)!
-                } else if offset.y == -44 {
-                    newOffset.y = -((self.navigationController?.navigationBar.frame.height)! + Screen.safeAreaInsets().top)
-                }
-                self.underlyView.setContentOffset(newOffset, animated: false)
-            }
+        
+        // 屏幕旋转中触发的方法
+        coordinator.animate { [self] _ in // 先进行一遍重新绘制充当过渡动画
+            transitionAnimate(offset ?? CGPoint(x: 0, y: 0))
+        } completion: { [self] _ in
+            transitionAnimate(offset ?? CGPoint(x: 0, y: 0))
         }
+    }
+    
+    func transitionAnimate(_ offset: CGPoint) {
+        // 移除旧的滚动视图
+        for subview in self.underlyView.subviews {
+            subview.removeFromSuperview()
+        }
+        
+        // 重新构建界面
+        viewDidLoad()
+
+        // 将新的滚动视图的偏移量设置为之前记录的值
+        var newOffset = offset
+        if offset.y < -44 {
+            newOffset.y = -(self.navigationController?.navigationBar.frame.height)!
+        } else if offset.y == -44 {
+            newOffset.y = -((self.navigationController?.navigationBar.frame.height)! + Screen.safeAreaInsets().top)
+        }
+        self.underlyView.setContentOffset(newOffset, animated: false)
     }
 }
 

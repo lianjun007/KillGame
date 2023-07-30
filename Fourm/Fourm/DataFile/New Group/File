@@ -9,6 +9,8 @@
 @backDeployed要求当前所在类型与修饰内容的访问权限不低于public。
 @backDeployed适用于计算属性与方法。
 #code Swift
+
+
 import Foundation
 import UIKit
 
@@ -30,6 +32,11 @@ func essayInterfaceBuild0(_ essayData: String, _ VC: UIViewController) {
         underlyScrollView.contentSize = CGSize(width: screenWidth, height: originY + spacedForScreen)
     }
 }
+
+
+
+
+
 
 
 ##code

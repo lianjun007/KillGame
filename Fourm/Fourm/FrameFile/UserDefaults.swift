@@ -24,6 +24,8 @@ extension UserDefaults {
             case essayTheme
             /// 阅读文章界面的代码块的序号行设置（`true、false`）
             case essayCodeNumber
+            /// 阅读文章界面的代码块的前后空行是否去除功能（`true、false`）
+            case essayCodeFristAndList
         }
     }
 }
@@ -37,5 +39,9 @@ func initializeUserDefaults() {
     // 默认文章代码块显示模式为“true”，显示
     if UserDefaults.SettingInfo.string(forKey: .essayCodeNumber) == nil {
         UserDefaults.SettingInfo.set(value: "true", forKey: .essayCodeNumber)
+    }
+    // 默认文章代码块前后空行是否去除为“true”，去除
+    if UserDefaults.SettingInfo.string(forKey: .essayCodeFristAndList) == nil {
+        UserDefaults.SettingInfo.set(value: "true", forKey: .essayCodeFristAndList)
     }
 }

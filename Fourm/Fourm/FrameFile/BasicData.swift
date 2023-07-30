@@ -10,6 +10,9 @@ struct Screen {
         let window = windowScene?.windows.first
         return window?.safeAreaInsets ?? UIEdgeInsets.zero
     }
+    static func nativeHeight() -> CGFloat {
+        UIScreen.main.nativeBounds.height // 与设备屏幕宽度一样宽(物理)
+    }
     static func width() -> CGFloat {
         UIScreen.main.bounds.width // 与设备屏幕宽度一样宽
     }
@@ -29,23 +32,33 @@ struct Screen {
 
 /// 选择间距相关的方法，返回CGFloat
 struct Spaced {
+    /// 屏幕边框与内容之间的间距
     static func screen() -> CGFloat {
-        20 // 屏幕边框与内容之间的间距
+        20
     }
+    /// 屏幕边框与内容之间的间距，会根据安全区域自动调整
     static func screenAuto() -> CGFloat {
-        20 + Screen.safeAreaInsets().left // 屏幕边框与内容之间的间距，会根据安全区域自动调整
+        20 + Screen.safeAreaInsets().left
     }
+    /// 各个相邻的控件之间的间距，也用做二级标题和模块之间的间距/
     static func control() -> CGFloat {
-        10 // 各个相邻的控件之间的间距，也用做二级标题和模块之间的间距
+        10
     }
+    /// 各个模块之间的间距/
     static func module() -> CGFloat {
-        30 // 各个模块之间的间距
+        30
     }
+    /// 各个设置之间的间距
     static func setting() -> CGFloat {
-        25 // 各个设置之间的间距
+        25
     }
+    /// 导航栏与第一个模块之间的间距
     static func navigation() -> CGFloat {
-        18 // 导航栏与第一个模块之间的间距
+        18
+    }
+    /// 代码块的代码行间距
+    static func codeRow() -> CGFloat {
+        4
     }
 }
 

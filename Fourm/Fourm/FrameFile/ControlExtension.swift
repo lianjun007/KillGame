@@ -27,11 +27,12 @@ extension UILabel {
     ///
     /// - Parameter text: 内容
     /// - Parameter font: 字体大小
-    func fontAdaptive(_ text: String, font: UIFont) -> UILabel {
+    func fontAdaptive(_ text: String, font: UIFont, width: CGFloat) -> UILabel {
         let lable = UILabel()
         lable.text = text
         lable.font = font
         lable.numberOfLines = 0
+        lable.frame.size.width = width
         lable.sizeToFit()
         return lable
     }

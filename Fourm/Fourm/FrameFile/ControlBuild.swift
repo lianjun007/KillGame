@@ -151,10 +151,9 @@ extension Setting {
         returnDictionary["view"] = settingControl
         
         /// 控件上方的说明（`caption`）部分
-        let captionLabel = UILabel().fontAdaptive(caption, font: Font.tips())
+        let captionLabel = UILabel().fontAdaptive(caption, font: Font.tips(), width: Screen.basicWidth() - Spaced.screen() * 2)
         if !caption.isEmpty {
             captionLabel.frame.origin = CGPoint(x: Spaced.screen(), y: 0)
-            captionLabel.frame.size.width = Screen.basicWidth() - Spaced.screen() * 2
             captionLabel.textColor = UIColor.black.withAlphaComponent(0.6)
             settingControl.addSubview(captionLabel)
         }
@@ -217,10 +216,9 @@ extension Setting {
         }
         
         /// 控件下方的提示（`tips`）部分
-        let tipsLabel = UILabel().fontAdaptive(tips, font: Font.tips())
+        let tipsLabel = UILabel().fontAdaptive(tips, font: Font.tips(), width: Screen.basicWidth() - Spaced.screen() * 2)
         if !tips.isEmpty {
-            tipsLabel.frame.origin = CGPoint(x: Spaced.screen(), y: returnDictionary["\(control.count)"]!.frame.maxY + 6)
-            tipsLabel.frame.size.width = Screen.basicWidth() - Spaced.screen() * 2
+            tipsLabel.frame.origin = CGPoint(x: Spaced.screen(), y: returnDictionary["\(control.count)"]!.frame.maxY + captionLabel.frame.maxY + 6)
             tipsLabel.textColor = UIColor.black.withAlphaComponent(0.6)
             settingControl.addSubview(tipsLabel)
         }

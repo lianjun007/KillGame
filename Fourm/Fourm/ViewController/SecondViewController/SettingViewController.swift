@@ -5,12 +5,14 @@ class SettingViewController: UIViewController {
     /// 接收模块`1`控件`1`（偏好设置模块）的主题切换按钮，目的是为了当主题切换后可以定位到具体按钮然后切换复选框
     var buttonArray: Array<UIButton> = []
     
+    /// 底层的滚动视图，最基础的界面
+    let underlyView = UIScrollView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Initialize.view(self, "偏好设置", mode: .group)
         
-        /// 底层的滚动视图，最基础的界面
-        let underlyView = UIScrollView()
+        // 添加底层视图
         underlyView.frame = Screen.bounds()
         view.addSubview(underlyView)
         
@@ -96,8 +98,18 @@ class SettingViewController: UIViewController {
             (module1Control2Dictionary["label\(i)"] as! UILabel).text = module1Control2LabelArray[i - 1]
         }
         
+        /// 显示与排版（模块`1`）的设置控件`3`（对应的字典）
+        let module1Control3Dictionary = Setting.controlBuild(caption: "界面显示方向设置", control: [.toggle, .forward], tips: "标准模式下阅读界面的方向跟随系统方向，其余界面保持竖向。")
+        module1Control3Dictionary["view"]!.frame.origin = CGPoint(x: Spaced.screenAuto(), y: module1Control2Dictionary["view"]!.frame.maxY + Spaced.setting())
+        underlyView.addSubview(module1Control3Dictionary["view"]!)
+        // 配置每一行的左侧文本内容
+        let module1Control3LabelArray = ["标准模式", "更多显示方向设置"]
+        for i in 1 ... module1Control3LabelArray.count {
+            (module1Control3Dictionary["label\(i)"] as! UILabel).text = module1Control3LabelArray[i - 1]
+        }
+        
         /// 模块标题`2`：通知与推荐
-        let moduleTitle2 = UIButton().moduleTitleMode("通知与推送", originY: module1Control2Dictionary["view"]!.frame.maxY + Spaced.module(), mode: .basic)
+        let moduleTitle2 = UIButton().moduleTitleMode("通知与推送", originY: module1Control3Dictionary["view"]!.frame.maxY + Spaced.module(), mode: .basic)
         underlyView.addSubview(moduleTitle2)
         
         /// 通知与推送（模块`2`）的设置控件`1`（对应的字典）
@@ -159,5 +171,48 @@ extension SettingViewController {
         
         // 在需要切换主题的地方发送通知
         NotificationCenter.default.post(name: changeThemeNotification, object: nil)
+    }
+}
+
+// 扩展，放置界面显示效果修改后执行的所有方法
+extension SettingViewController {
+    /// 当屏幕旋转时触发的方法
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        // 记录当前滚动视图的偏移量
+        var offset: CGPoint?
+        for subview in view.subviews {
+            if let scrollView = subview as? UIScrollView {
+                offset = scrollView.contentOffset
+                break
+            }
+        }
+        
+        // 屏幕旋转中触发的方法
+        coordinator.animate { [self] _ in // 先进行一遍重新绘制充当过渡动画
+            transitionAnimate(offset ?? CGPoint(x: 0, y: 0))
+        } completion: { [self] _ in
+            transitionAnimate(offset ?? CGPoint(x: 0, y: 0))
+        }
+    }
+    
+    func transitionAnimate(_ offset: CGPoint) {
+        // 移除旧的滚动视图
+        for subview in self.underlyView.subviews {
+            subview.removeFromSuperview()
+        }
+        
+        // 重新构建界面
+        viewDidLoad()
+
+        // 将新的滚动视图的偏移量设置为之前记录的值
+        var newOffset = offset
+        if offset.y < -44 {
+            newOffset.y = -(self.navigationController?.navigationBar.frame.height)!
+        } else if offset.y == -44 {
+            newOffset.y = -((self.navigationController?.navigationBar.frame.height)! + Screen.safeAreaInsets().top)
+        }
+        self.underlyView.setContentOffset(newOffset, animated: false)
     }
 }

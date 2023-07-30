@@ -1,15 +1,19 @@
-////
-////  CourseViewController.swift
-////  CodeForum
-////
-////  Created by QHuiYan on 2023/5/22.
-////let array = ["收藏夹", "合集", "文章", "闲聊杂谈", "用户", "官方公示"]
 //
-import UIKit
-class CollectionViewController: UIViewController {
-    
-}
+//  CourseViewController.swift
+//  CodeForum
+//
+//  Created by QHuiYan on 2023/5/22.
+//let array = ["收藏夹", "合集", "文章", "闲聊杂谈", "用户", "官方公示"]
 
+import UIKit
+
+class CollectionViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        Initialize.view(self, "我的收藏", mode: .basic)
+    }
+}
+//
 //var index2: Array<Dictionary<String, String>> = []
 //
 //class CollectionViewController: UIViewController, UIContextMenuInteractionDelegate {
@@ -26,7 +30,7 @@ class CollectionViewController: UIViewController {
 //            let previewControllerInstance = UIViewController()
 //            if identifier < 7 {
 //                let image = UIImageView(frame: CGRect(x: Spaced.screenAuto(), y: Spaced.screenAuto(), width: previewControllerInstance.view.bounds.width - Spaced.screenAuto() * 2, height: previewControllerInstance.view.bounds.width - Spaced.screenAuto() * 2))
-//                image.layer.cornerRadius = basicCornerRadius(image.frame.size) * 0.5
+//                image.layer.cornerRadius = 15
 //                image.clipsToBounds = true
 //                image.image = UIImage(named: index2[identifier]["imageName"]!)
 //                previewControllerInstance.view.addSubview(image)
@@ -42,7 +46,7 @@ class CollectionViewController: UIViewController {
 //                // 设置精选课程的作者名
 //                let courseLabel2 = UILabel(frame: CGRect(x: Spaced.screenAuto(), y: courseLabel.frame.maxY + Spaced.control(), width: 0, height: 0))
 //                courseLabel2.text = index2[identifier]["author"]
-//                courseLabel2.font = UIFont.systemFont(ofSize: CGFloat(titleFont3), weight: .regular)
+//                courseLabel2.font = Font.title3()
 //                courseLabel2.sizeToFit()
 //                courseLabel2.isUserInteractionEnabled = false
 //                previewControllerInstance.view.addSubview(courseLabel2)
@@ -50,7 +54,7 @@ class CollectionViewController: UIViewController {
 //                previewControllerInstance.preferredContentSize = CGSize(width: previewControllerInstance.view.bounds.width, height: courseLabel2.frame.maxY + Spaced.screenAuto())
 //            } else {
 //                let image = UIImageView(frame: CGRect(x: Spaced.screenAuto(), y: Spaced.screenAuto(), width: previewControllerInstance.view.bounds.width - Spaced.screenAuto() * 2, height: previewControllerInstance.view.bounds.width - Spaced.screenAuto() * 2))
-//                image.layer.cornerRadius = basicCornerRadius(image.frame.size) * 0.5
+//                image.layer.cornerRadius = 20
 //                image.clipsToBounds = true
 //                image.image = UIImage(named: index2[identifier - 7]["name"]!)
 //                previewControllerInstance.view.addSubview(image)
@@ -58,7 +62,7 @@ class CollectionViewController: UIViewController {
 //                // 设置精选课程的标题
 //                let courseLabel = UILabel(frame: CGRect(x: Spaced.screenAuto(), y: image.frame.maxY + Spaced.screenAuto(), width: 0, height: 0))
 //                courseLabel.text = index2[identifier - 7]["name"]
-//                courseLabel.font = titleFont2
+//                courseLabel.font = Font.title2()
 //                courseLabel.sizeToFit()
 //                courseLabel.isUserInteractionEnabled = false
 //                previewControllerInstance.view.addSubview(courseLabel)
@@ -66,7 +70,7 @@ class CollectionViewController: UIViewController {
 //                // 设置精选课程的作者名
 //                let courseLabel2 = UILabel(frame: CGRect(x: Spaced.screenAuto(), y: courseLabel.frame.maxY + Spaced.control(), width: 0, height: 0))
 //                courseLabel2.text = index2[identifier - 7]["author"]
-//                courseLabel2.font = UIFont.systemFont(ofSize: CGFloat(titleFont3), weight: .regular)
+//                courseLabel2.font = Font.title3()
 //                courseLabel2.sizeToFit()
 //                courseLabel2.isUserInteractionEnabled = false
 //                previewControllerInstance.view.addSubview(courseLabel2)
@@ -109,18 +113,18 @@ class CollectionViewController: UIViewController {
 //        
 //        // Set the UIScrollView at the underlying of the interface
 //        let mainScrollView = UIScrollView(frame: UIScreen.main.bounds)
-//        mainScrollView.contentSize = CGSize(width: Screen.width, height: screenHeight * 2)
+//        mainScrollView.contentSize = CGSize(width: Screen.width, height: Screen.height() * 2)
 //        view.addSubview(mainScrollView)
 //        
 //        // Set the UILabel at the featuredCoursesBox tilte
-//        let featuredCourseLable = UILabel(frame: CGRect(x: Spaced.screenAuto(), y: Spaced.module()2, width: 0, height: 0))
+//        let featuredCourseLable = UILabel(frame: CGRect(x: Spaced.screenAuto(), y: Spaced.module(), width: 0, height: 0))
 //        featuredCourseLable.text = "收藏夹"
 //        featuredCourseLable.font = titleFont2
 //        featuredCourseLable.sizeToFit()
 //        mainScrollView.addSubview(featuredCourseLable)
 //        
 //        // Set a UIScrollView of featuredCourses at the top of the interface
-//        let headerScrollView = UIScrollView(frame: CGRect(x: 0, y: featuredCourseLable.frame.maxY + Spaced.control(), width: Screen.width, height: largeControlSize.height))
+//        let headerScrollView = UIScrollView(frame: CGRect(x: 0, y: featuredCourseLable.frame.maxY + Spaced.control(), width: Screen.width(), height: largeControlSize.height))
 //        headerScrollView.contentSize = CGSize(width: largeControlSize.width * 7 + Spaced.control() * 6 + Spaced.screenAuto() * 2, height: largeControlSize.height)
 //        headerScrollView.showsHorizontalScrollIndicator = false
 //        headerScrollView.clipsToBounds = false
@@ -129,7 +133,7 @@ class CollectionViewController: UIViewController {
 //        // Set the UILabel at the featuredCoursesBox tilte
 //        let featuredCourseLable1 = UILabel(frame: CGRect(x: Spaced.screenAuto(), y: Spaced.module()2 + headerScrollView.frame.height + Spaced.module() * 2, width: 0, height: 0))
 //        featuredCourseLable1.text = "收藏的合集"
-//        featuredCourseLable1.font = titleFont2
+//        featuredCourseLable1.font = Font.title2()
 //        featuredCourseLable1.sizeToFit()
 //        mainScrollView.addSubview(featuredCourseLable1)
 //        

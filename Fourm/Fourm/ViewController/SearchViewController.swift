@@ -16,7 +16,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         Initialize.view(self, "搜索与设置", mode: .group)
         
-        // 添加底层试图
+        // 添加底层视图
         underlyView.frame = Screen.bounds()
         view.addSubview(underlyView)
         
@@ -197,32 +197,36 @@ extension SearchViewController {
         // 记录当前滚动视图的偏移量
         var offset: CGPoint?
         for subview in view.subviews {
-            if let scroll = subview as? UIScrollView {
-                offset = scroll.contentOffset
+            if let scrollView = subview as? UIScrollView {
+                offset = scrollView.contentOffset
                 break
             }
         }
-
-        // 在屏幕旋转完成后刷新界面
-        coordinator.animate(alongsideTransition: nil) { _ in
-            // 移除旧的滚动视图
-            for subview in self.underlyView.subviews {
-                subview.removeFromSuperview()
-            }
-
-            // 重新构建界面
-            self.viewDidLoad()
-
-            // 将新的滚动视图的偏移量设置为之前记录的值
-            if let offset = offset {
-                var newOffset = offset
-                if offset.y < -44 {
-                    newOffset.y = -(self.navigationController?.navigationBar.frame.height)!
-                } else if offset.y == -44 {
-                    newOffset.y = -((self.navigationController?.navigationBar.frame.height)! + Screen.safeAreaInsets().top)
-                }
-                self.underlyView.setContentOffset(newOffset, animated: false)
-            }
+        
+        // 屏幕旋转中触发的方法
+        coordinator.animate { [self] _ in // 先进行一遍重新绘制充当过渡动画
+            transitionAnimate(offset ?? CGPoint(x: 0, y: 0))
+        } completion: { [self] _ in
+            transitionAnimate(offset ?? CGPoint(x: 0, y: 0))
         }
+    }
+    
+    func transitionAnimate(_ offset: CGPoint) {
+        // 移除旧的滚动视图
+        for subview in self.underlyView.subviews {
+            subview.removeFromSuperview()
+        }
+        
+        // 重新构建界面
+        viewDidLoad()
+
+        // 将新的滚动视图的偏移量设置为之前记录的值
+        var newOffset = offset
+        if offset.y < -44 {
+            newOffset.y = -(self.navigationController?.navigationBar.frame.height)!
+        } else if offset.y == -44 {
+            newOffset.y = -((self.navigationController?.navigationBar.frame.height)! + Screen.safeAreaInsets().top)
+        }
+        self.underlyView.setContentOffset(newOffset, animated: false)
     }
 }
